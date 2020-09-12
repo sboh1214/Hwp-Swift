@@ -1,3 +1,3 @@
 # HwpKit
 
-A description of this package.
+HWP file reader.
