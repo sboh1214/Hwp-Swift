@@ -13,8 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install Swift on Linux
-      uses: sersoft-gmbh/SwiftyActions@v1.0
+    - name: Setup Swift
+      uses: fwal/setup-swift@v1.2.0
+      with:
+        swift-version: "5.3"
     - name: Build
       run: swift build -v
     - name: Run tests
