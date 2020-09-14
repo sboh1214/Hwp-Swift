@@ -9,13 +9,13 @@ final class HwpKitTests: XCTestCase {
         .appendingPathComponent("blank.hwp")
     
     func testOpen() throws {
-        let hwp = try HKHwpFile(filePath: positiveURL.path)
+        let hwp = try HwpFile(filePath: positiveURL.path)
         XCTAssertNotNil(hwp.ole)
         XCTAssertNotNil(hwp.fileHeader)
     }
     
     func testSignature() throws {
-        let hwp = try HKHwpFile(filePath: positiveURL.path)
+        let hwp = try HwpFile(filePath: positiveURL.path)
         dump(hwp.fileHeader.data)
         dump(hwp.fileHeader.build)
         print(hwp.fileHeader.signature)

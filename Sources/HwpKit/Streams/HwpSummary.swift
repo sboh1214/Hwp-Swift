@@ -1,6 +1,6 @@
 import Foundation
 
-struct HKSummary {
+struct HwpSummary {
     let title:String
     let subject:String
 }

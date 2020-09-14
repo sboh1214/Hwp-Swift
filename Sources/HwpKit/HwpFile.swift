@@ -1,8 +1,8 @@
 import OLEKit
 
-public struct HKHwpFile {
+public struct HwpFile {
     let ole:OLEFile
-    let fileHeader : HKFileHeader
+    let fileHeader : HwpFileHeader
 //    let previewText : HKPreviewText
     
     init(filePath:String) throws {
@@ -10,17 +10,17 @@ public struct HKHwpFile {
             ole = try OLEFile(filePath)
         }
         catch {
-            throw HKError.InvalidFilePath(path: filePath)
+            throw HwpError.InvalidFilePath(path: filePath)
         }
         
         do {
             guard let fileHeaderStream = ole.root.children.first(where: { $0.name == HKStreamName.FileHeader.rawValue }) else {
-                throw HKError.StreamDoesNotExist(name: HKStreamName.FileHeader)
+                throw HwpError.StreamDoesNotExist(name: HKStreamName.FileHeader)
             }
-            fileHeader = HKFileHeader(dataReader: try ole.stream(fileHeaderStream))
+            fileHeader = HwpFileHeader(dataReader: try ole.stream(fileHeaderStream))
         }
         catch {
-            throw HKError.InvalidFilePath(path: filePath)
+            throw HwpError.InvalidFilePath(path: filePath)
         }
         
 //        do {

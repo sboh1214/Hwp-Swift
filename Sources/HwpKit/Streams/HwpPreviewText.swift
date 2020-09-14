@@ -1,7 +1,7 @@
 import Foundation
 import OLEKit
 
-struct HKPreviewText {
+struct HwpPreviewText {
     let text:String
     
     init(dataReader: DataReader) {

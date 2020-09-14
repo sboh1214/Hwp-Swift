@@ -1,6 +1,6 @@
 import Foundation
 
-struct HKHwpVersion {
+struct HwpVersion {
     let major:Int
     let minor:Int
     let build:Int

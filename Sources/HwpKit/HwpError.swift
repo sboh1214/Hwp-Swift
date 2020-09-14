@@ -1,6 +1,6 @@
 import Foundation
 
-public enum HKError: Error, Equatable, CustomStringConvertible {
+public enum HwpError: Error, Equatable, CustomStringConvertible {
     case InvalidFilePath(path: String)
     case StreamDoesNotExist(name: HKStreamName)
     
