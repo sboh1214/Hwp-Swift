@@ -1,6 +1,6 @@
 import Foundation
 
 struct HwpSummary {
-    let title:String
-    let subject:String
+    let title: String
+    let subject: String
 }
