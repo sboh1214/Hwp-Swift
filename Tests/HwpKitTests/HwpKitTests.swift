@@ -13,10 +13,9 @@ final class HwpKitTests: XCTestCase {
         XCTAssertNotNil(hwp.ole)
         XCTAssertNotNil(hwp.fileHeader)
     }
-
+    
     func testSignature() throws {
         let hwp = try HwpFile(filePath: positiveURL.path)
-        dump(hwp.fileHeader.data)
         dump(hwp.fileHeader.build)
         print(hwp.fileHeader.signature)
         //B4 A5 00
@@ -29,6 +28,7 @@ final class HwpKitTests: XCTestCase {
         let fileHeaderStream = ole.root.children.first(where: { $0.name == "FileHeader"})!
         let reader = try ole.stream(fileHeaderStream)
         let data = reader.readDataToEnd()
+        dump(data)
 
     }
 

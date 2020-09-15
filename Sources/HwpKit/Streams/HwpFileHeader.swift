@@ -13,11 +13,8 @@ struct HwpFileHeader {
     let revision: UInt8
     let build: UInt8
 
-    let data: Data
-
     init(dataReader: DataReader) {
-        data = dataReader.readDataToEnd()
-        signature = String(data: dataReader.readData(ofLength: 32), encoding: .utf16LittleEndian) ?? "Error"
+        signature = String(data: dataReader.readData(ofLength: 32), encoding: .ascii) ?? "Error"
         revision = dataReader.read()
         build = dataReader.read()
     }
