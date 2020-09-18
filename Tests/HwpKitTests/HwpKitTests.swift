@@ -12,28 +12,31 @@ final class HwpKitTests: XCTestCase {
 
     func testOpen() throws {
         let hwp = try openHwp()
-        XCTAssertNotNil(hwp.ole)
         XCTAssertNotNil(hwp.fileHeader)
     }
 
     func testSignature() throws {
         let hwp = try openHwp()
-        dump(hwp.fileHeader.signature)
-        XCTAssertNotEqual(hwp.fileHeader.signature, "Error")
-        //B4 A5 00
+        XCTAssertEqual(hwp.fileHeader.signature, "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
     }
 
     func testHwpVersion() throws {
         let hwp = try openHwp()
-        XCTAssertEqual(hwp.fileHeader.major, 5)
-        XCTAssertEqual(hwp.fileHeader.minor, 0)
-        XCTAssertEqual(hwp.fileHeader.build, 3)
-        XCTAssertEqual(hwp.fileHeader.revision, 4)
+        XCTAssertEqual(hwp.fileHeader.version.major, 5)
+        XCTAssertEqual(hwp.fileHeader.version.minor, 0)
+        XCTAssertEqual(hwp.fileHeader.version.build, 3)
+        XCTAssertEqual(hwp.fileHeader.version.revision, 4)
+    }
+
+    func testEncryptVersion() throws {
+        let hwp = try openHwp()
+        XCTAssertEqual(hwp.fileHeader.encryptVersion, 4)
     }
 
     static var allTests = [
         ("testOpen", testOpen),
         ("testSignature", testSignature),
-        ("testHwpVersion", testHwpVersion)
+        ("testHwpVersion", testHwpVersion),
+        ("testEncryptVersion", testEncryptVersion)
     ]
 }
