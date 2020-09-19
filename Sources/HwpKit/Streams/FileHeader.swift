@@ -5,7 +5,7 @@ struct HwpFileHeader: Stream {
     let version: HwpVersion
 
     let encryptVersion: UInt32
-    let 공공누리: UInt8
+    let koreaOpenLicense: UInt8 //공공누리 Korea Open Government License
 
     init(dataReader: DataReader) {
         signature = String(data: dataReader.readData(ofLength: 32), encoding: .ascii) ?? "Error"
@@ -18,6 +18,6 @@ struct HwpFileHeader: Stream {
         let _:UInt32 = dataReader.read()
         let _:UInt32 = dataReader.read()
         encryptVersion = dataReader.read()
-        공공누리 = dataReader.read()
+        koreaOpenLicense = dataReader.read()
     }
 }
