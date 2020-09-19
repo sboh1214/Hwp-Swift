@@ -14,14 +14,33 @@ extension Array where Element == UInt8 {
     }
 }
 
-// get a Bit array from a byte
-func bits(fromByte byte: UInt8) -> [Bit] {
+func bitsFromData(data: Data) -> [Bool] {
+    return data.reduce([Bool]()) {$0 + bitsFromUInt8($1)}
+}
+
+func bitsFromUInt8(_ byte: UInt8) -> [Bool] {
     var byte = byte
-    var bits = [Bit](repeating: .zero, count: 8)
+    var bits = [Bool](repeating: false, count: 8)
     for i in 0..<8 {
         let currentBit = byte & 0x01
         if currentBit != 0 {
-            bits[i] = .one
+            bits[i] = true
+        }
+
+        byte >>= 1
+    }
+
+    return bits
+}
+
+// get a Bit array from a byte
+func bitsFromUInt32(_ byte: UInt32) -> [Bool] {
+    var byte = byte
+    var bits = [Bool](repeating: false, count: 32)
+    for i in 0..<32 {
+        let currentBit = byte & 0x01
+        if currentBit != 0 {
+            bits[i] = true
         }
 
         byte >>= 1
@@ -32,16 +51,3 @@ func bits(fromByte byte: UInt8) -> [Bit] {
 
 //let byte: UInt8 = 0x1f
 //print(bits(fromByte: byte))
-
-enum Bit: UInt8, CustomStringConvertible {
-    case zero, one
-
-    var description: String {
-        switch self {
-        case .one:
-            return "1"
-        case .zero:
-            return "0"
-        }
-    }
-}
