@@ -4,6 +4,7 @@ public enum HwpError: Error {
     case invalidReport(report: HwpReportable)
     case invalidFilePath(path: String)
     case streamDoesNotExist(name: HwpStreamName)
+    case invalidDataForString(data: Data, name: String)
 }
 
 extension HwpError: CustomStringConvertible {
@@ -15,6 +16,13 @@ extension HwpError: CustomStringConvertible {
             return "Invalid File Path '\(path)'"
         case let .streamDoesNotExist(name):
             return "Stream '\(name)' does not exist"
+        case let .invalidDataForString(data, name):
+            return
+                """
+               Cannot covert data to utf16le string
+               data: '\(data)'
+               name: '\(name)'
+               """
         }
     }
 }

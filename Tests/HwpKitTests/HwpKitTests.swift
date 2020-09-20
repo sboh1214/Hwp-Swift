@@ -17,6 +17,7 @@ final class HwpKitTests: XCTestCase {
     
     func testSignature() throws {
         let hwp = try openHwp()
+        dump(hwp.fileHeader.signature)
         XCTAssertEqual(hwp.fileHeader.signature, "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
     }
     

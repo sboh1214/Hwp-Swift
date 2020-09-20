@@ -1,5 +1,5 @@
 import Foundation
 
-struct HwpReport {
-    let type:HwpReportType
+public protocol HwpReportable {
+
 }

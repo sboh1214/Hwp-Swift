@@ -1,10 +1,12 @@
 import Foundation
-import OLEKit
 
-struct HwpPreviewText {
+struct HwpPreviewText: HwpStream {
     let text: String
-
-    init(dataReader: DataReader) {
-        text = String(data: dataReader.readDataToEnd(), encoding: .utf8) ?? "Error"
+    
+    init(_ data: Data, _ report: (HwpReportable) throws -> Void) throws {
+        guard let text = String(data: data, encoding: .utf16LittleEndian) else {
+            throw HwpError.invalidDataForString(data: data, name: "PreviewText")
+        }
+        self.text = text
     }
 }

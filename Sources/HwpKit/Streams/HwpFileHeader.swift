@@ -19,17 +19,23 @@ public struct HwpFileHeader: HwpStream {
 
     /**
      EncryptVersion
-     § 0 : None
-     § 1 : (한글 2.5 버전 이하)
-     § 2 : (한글 3.0 버전 Enhanced)
-     § 3 : (한글 3.0 버전 Old)
-     § 4 : (한글 7.0 버전 이후)
+     - 0 : None
+     - 1 : (한글 2.5 버전 이하)
+     - 2 : (한글 3.0 버전 Enhanced)
+     - 3 : (한글 3.0 버전 Old)
+     - 4 : (한글 7.0 버전 이후)
      */
-    // let encryptVersion: UInt32
+    let encryptVersion: UInt32
     let koreaOpenLicense: UInt8 //공공누리 Korea Open Government License
 
-    init(_ data: Data) {
-        signature = String(data: data[0...32], encoding: .ascii) ?? "Error"
+    init(_ data: Data, _ report: (HwpReportable)throws->Void) throws {
+        guard let signature = data[0..<32].stringASCII else {
+            throw HwpError.invalidDataForString(data: data[0..<32], name: "signature")
+        }
+        self.signature = signature
+        if (signature != "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0") {
+            try report(HwpWarning.invalidFileHeaderSignature(signature: signature))
+        }
 
         let revision: UInt8 = data[32]
         let build: UInt8 = data[33]
@@ -37,15 +43,15 @@ public struct HwpFileHeader: HwpStream {
         let major: UInt8 = data[35]
         version = HwpVersion(major: major, minor: minor, build: build, revision: revision)
         
-        let bits1 = data[36...40].toBits()
+        let bits1 = data[36..<40].toBits()
         isCompressed = bits1[0]
         isEncrypted = bits1[1]
         
-        let bits2 = data[40...44].toBits()
+        let bits2 = data[40..<44].toBits()
         isHavekoreaOpenLicense = bits2[0]
         
         
-        //encryptVersion = UInt32(data[44...48])
+        encryptVersion = data[44..<48].uint32
         koreaOpenLicense = UInt8(data[48])
     }
 }

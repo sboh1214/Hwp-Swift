@@ -1,7 +1,9 @@
-struct Record {
-    children: HWPRecord[] = []
-    payload: ArrayBuffer
-    tagID: Int
-    size: Int
-    parentTagID: Int
+import Foundation
+
+struct HwpRecord {
+    let children: [HwpRecord] = []
+    let payload: [BYTE]
+    let tagID: Int
+    let size: Int
+    let parentTagID: Int
 }
