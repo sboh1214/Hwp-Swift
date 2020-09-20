@@ -5,6 +5,7 @@ public enum HwpError: Error {
     case invalidFilePath(path: String)
     case streamDoesNotExist(name: HwpStreamName)
     case invalidDataForString(data: Data, name: String)
+    case bigRecordNotSuppoted(tagId: UInt32, level: UInt32)
 }
 
 extension HwpError: CustomStringConvertible {
@@ -18,11 +19,17 @@ extension HwpError: CustomStringConvertible {
             return "Stream '\(name)' does not exist"
         case let .invalidDataForString(data, name):
             return
-                """
+               """
                Cannot covert data to utf16le string
                data: '\(data)'
                name: '\(name)'
                """
+        case let .bigRecordNotSuppoted(tagId, level):
+            return
+                """
+                Currently big record is not supported to parse
+                tagId: '\(tagId)', level: '\(level)'
+                """
         }
     }
 }

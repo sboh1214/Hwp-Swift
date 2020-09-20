@@ -24,17 +24,26 @@ extension Data {
     var bytes: [UInt8] {
         return [UInt8](self)
     }
-    
-    func toBits() -> [Bool] {
-        return self.reduce([Bool]()) {$0 + $1.toBits()}
+
+    var bits: [Bool] {
+        get {
+            return self.reduce([Bool]()) {$0 + $1.toBits()}
+        }
+
     }
-    
+
+    var uint16: UInt16 {
+        get {
+            return self.withUnsafeBytes {$0.load(as: UInt16.self)}
+        }
+    }
+
     var uint32: UInt32 {
         get {
             return self.withUnsafeBytes { $0.load(as: UInt32.self) }
         }
     }
-    
+
     var stringASCII: String? {
         get {
             return String(data: self, encoding: .ascii)
@@ -44,7 +53,7 @@ extension Data {
 
 extension Array where Element == Data {
     func toBits() -> [Bool] {
-        return self.reduce([Bool]()) {$0 + $1.toBits()}
+        return self.reduce([Bool]()) {$0 + $1.bits}
     }
 }
 
@@ -64,13 +73,13 @@ extension UInt8 {
             if currentBit != 0 {
                 bits[i] = true
             }
-            
+
             byte >>= 1
         }
-        
+
         return bits
     }
-    
+
 }
 
 extension UInt32 {
@@ -82,11 +91,10 @@ extension UInt32 {
             if currentBit != 0 {
                 bits[i] = true
             }
-            
+
             byte >>= 1
         }
-        
+
         return bits
     }
 }
-
