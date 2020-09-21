@@ -28,7 +28,7 @@ public struct HwpFileHeader: HwpStream {
     let encryptVersion: UInt32
     let koreaOpenLicense: UInt8 // 공공누리 Korea Open Government License
 
-    init(_ data: Data, _ report: (HwpReportable) -> Void) throws {
+    internal init(_ data: Data, _ report: (HwpReportable) -> Void) throws {
         guard let signature = data[0 ..< 32].stringASCII else {
             throw HwpError.invalidDataForString(data: data[0 ..< 32], name: "signature")
         }

@@ -6,6 +6,7 @@ public enum HwpError: Error {
     case streamDoesNotExist(name: HwpStreamName)
     case invalidDataForString(data: Data, name: String)
     case bigRecordNotSuppoted(tagId: UInt32, level: UInt32)
+    case recordDoesNotExist(tag: UInt32)
 }
 
 extension HwpError: CustomStringConvertible {
@@ -30,6 +31,8 @@ extension HwpError: CustomStringConvertible {
                 Currently big record is not supported to parse
                 tagId: '\(tagId)', level: '\(level)'
                 """
+        case let .recordDoesNotExist(tag):
+            return "Record '\(tag)' does not exist."
         }
     }
 }
