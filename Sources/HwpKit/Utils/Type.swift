@@ -22,36 +22,36 @@ typealias HWPUNIT16 = Int16
 // Data to [bytes]
 extension Data {
     var bytes: [UInt8] {
-        return [UInt8](self)
+        [UInt8](self)
     }
 
     var bits: [Bool] {
-        return reduce([Bool]()) { $0 + $1.toBits() }
+        reduce([Bool]()) { $0 + $1.toBits() }
     }
 
     var uint16: UInt16 {
-        return withUnsafeBytes { $0.load(as: UInt16.self) }
+        withUnsafeBytes { $0.load(as: UInt16.self) }
     }
 
     var uint32: UInt32 {
-        return withUnsafeBytes { $0.load(as: UInt32.self) }
+        withUnsafeBytes { $0.load(as: UInt32.self) }
     }
 
     var stringASCII: String? {
-        return String(data: self, encoding: .ascii)
+        String(data: self, encoding: .ascii)
     }
 }
 
 extension Array where Element == Data {
     func toBits() -> [Bool] {
-        return reduce([Bool]()) { $0 + $1.bits }
+        reduce([Bool]()) { $0 + $1.bits }
     }
 }
 
 // [bytes] to Data
 extension Array where Element == UInt8 {
     var data: Data {
-        return Data(self)
+        Data(self)
     }
 }
 

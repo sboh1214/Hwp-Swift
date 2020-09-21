@@ -17,10 +17,10 @@ struct DataReader {
     }
 
     mutating func readUInt16() -> UInt16 {
-        return readBytes(2).uint16
+        readBytes(2).uint16
     }
 
     mutating func readUInt32() -> UInt32 {
-        return readBytes(4).uint32
+        readBytes(4).uint32
     }
 }

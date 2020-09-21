@@ -4,17 +4,17 @@ public struct HwpDocInfo: HwpStream {
     let record: HwpRecord
     let documentProperties: HwpDocumentProperties
 
-    internal init(_ data: Data, _ report: (HwpReportable) -> Void) throws {
+    internal init(_ data: Data, _: (HwpReportable) -> Void) throws {
         record = try parseRecordTree(data: data)
 
-        guard let documentProperties = record.children.first(where: {$0.tagID == HwpDocInfoTag.DOCUMENT_PROPERTIES})
+        guard let documentProperties = record.children.first(where: { $0.tagID == HwpDocInfoTag.DOCUMENT_PROPERTIES })
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.DOCUMENT_PROPERTIES)
         }
         self.documentProperties = HwpDocInfo.visitDocumentPropertes(documentProperties)
     }
 
-    static private func visitDocumentPropertes(_ record: HwpRecord) -> HwpDocumentProperties {
+    private static func visitDocumentPropertes(_ record: HwpRecord) -> HwpDocumentProperties {
         var reader = DataReader(record.payload)
         let sectionSize = reader.readUInt16()
         return HwpDocumentProperties(sectionSize: sectionSize)

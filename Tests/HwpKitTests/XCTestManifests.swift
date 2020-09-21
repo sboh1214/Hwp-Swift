@@ -2,8 +2,10 @@ import XCTest
 
 #if !canImport(ObjectiveC)
     public func allTests() -> [XCTestCaseEntry] {
-        return [
-            testCase(HwpKitTests.allTests),
+        [
+            testCase(BasicTests.allTests),
+            testCase(VersionTests.allTests),
+            testCase(HwpUtilTests.allTests),
         ]
     }
 #endif

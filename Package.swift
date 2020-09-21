@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -29,7 +29,11 @@ let package = Package(
         ),
         .testTarget(
             name: "HwpKitTests",
-            dependencies: ["HwpKit"]
+            dependencies: ["HwpKit"],
+            resources: [
+                .copy("Basic/blank.hwp"),
+                .copy("Versions/2014VP.hwp"),
+            ]
         ),
     ]
 )
