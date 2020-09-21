@@ -8,11 +8,19 @@ struct DataReader {
         self.data = data
     }
 
-    mutating func readUInt16() -> UInt16 {
-        precondition(offset+2<data.count)
+    mutating func readBytes(_ length: Int) -> Data {
+        precondition(offset + length < data.count)
         defer {
-            offset += 2
+            offset += length
         }
-        return data[offset..<offset+2].uint16
+        return data[offset ..< offset + length]
+    }
+
+    mutating func readUInt16() -> UInt16 {
+        return readBytes(2).uint16
+    }
+
+    mutating func readUInt32() -> UInt32 {
+        return readBytes(4).uint32
     }
 }

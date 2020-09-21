@@ -1,5 +1,5 @@
-import XCTest
 @testable import HwpKit
+import XCTest
 
 final class HwpUtilTests: XCTestCase {
     func testBitsFromInt8() {
@@ -9,6 +9,6 @@ final class HwpUtilTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testBitsFromInt8", testBitsFromInt8)
+        ("testBitsFromInt8", testBitsFromInt8),
     ]
 }

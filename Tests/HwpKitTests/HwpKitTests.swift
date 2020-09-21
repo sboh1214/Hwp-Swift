@@ -1,5 +1,5 @@
-import XCTest
 @testable import HwpKit
+import XCTest
 
 final class HwpKitTests: XCTestCase {
     func openHwp() throws -> HwpFile {
@@ -38,6 +38,6 @@ final class HwpKitTests: XCTestCase {
         ("testOpen", testOpen),
         ("testSignature", testSignature),
         ("testHwpVersion", testHwpVersion),
-        ("testEncryptVersion", testEncryptVersion)
+        ("testEncryptVersion", testEncryptVersion),
     ]
 }

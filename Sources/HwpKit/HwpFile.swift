@@ -2,10 +2,10 @@ import OLEKit
 
 public struct HwpFile {
     let fileHeader: HwpFileHeader
-    //let previewText : HKPreviewText
+    // let previewText : HKPreviewText
     var directories: [DirectoryEntry] = []
 
-    init(filePath: String, report: (HwpReportable) throws -> Void = { _ in }) throws {
+    init(filePath: String, report: (HwpReportable) -> Void = { _ in }) throws {
         let ole: OLEFile
         do {
             ole = try OLEFile(filePath)

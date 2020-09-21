@@ -1,5 +1,3 @@
 import Foundation
 
-public protocol HwpReportable {
-
-}
+public protocol HwpReportable {}

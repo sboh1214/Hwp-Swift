@@ -19,11 +19,11 @@ extension HwpError: CustomStringConvertible {
             return "Stream '\(name)' does not exist"
         case let .invalidDataForString(data, name):
             return
-               """
-               Cannot covert data to utf16le string
-               data: '\(data)'
-               name: '\(name)'
-               """
+                """
+                Cannot covert data to utf16le string
+                data: '\(data)'
+                name: '\(name)'
+                """
         case let .bigRecordNotSuppoted(tagId, level):
             return
                 """
