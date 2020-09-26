@@ -4,15 +4,19 @@ on: [ push, pull_request ]
 
 jobs:
   test:
-
-    runs-on: ubuntu-latest
+    name: Test on ${{ matrix.os }} and swift ${{ matrix.swift }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest, ubuntu-latest]
+        swift: ["4.2", "5.0", "5.1", "5.2", "5.3"]
 
     steps:
     - uses: actions/checkout@v2
     - name: Setup Swift
       uses: fwal/setup-swift@v1.2.0
       with:
-        swift-version: "5.2.2"
+        swift-version: ${{ matrix.swift }}
     - name: Build
       run: swift build -v
     - name: Run tests
