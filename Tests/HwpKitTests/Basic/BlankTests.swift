@@ -1,7 +1,7 @@
 @testable import HwpKit
 import XCTest
 
-final class BasicTests: XCTestCase {
+final class BlankTests: XCTestCase {
     func openHwp() throws -> HwpFile {
         let url = URL(fileURLWithPath: #file)
             .deletingLastPathComponent()

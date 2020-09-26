@@ -1,5 +1,5 @@
 import Foundation
 
-protocol HwpStream {
+protocol HwpData {
     init(_ data: Data, _ report: (HwpReportable) -> Void) throws
 }
