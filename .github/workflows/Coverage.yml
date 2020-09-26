@@ -1,6 +1,9 @@
-name: Test-macOS
+name: Coverage
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   test:
