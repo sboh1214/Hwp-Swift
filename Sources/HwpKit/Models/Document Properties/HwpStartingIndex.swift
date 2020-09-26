@@ -1,6 +1,6 @@
 import Foundation
 
-struct HwpStartingIndex {
+struct HwpStartingIndex: HwpData {
     let page:UInt16
     let footnote: UInt16
     let endnote:UInt16
@@ -8,7 +8,7 @@ struct HwpStartingIndex {
     let table: UInt16
     let equation: UInt16
     
-    init(_ data:Data) {
+    init(_ data:Data, _ report: (HwpReportable)->Void) {
         var reader = DataReader(data)
         page = reader.readUInt16()
         footnote = reader.readUInt16()

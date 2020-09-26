@@ -1,6 +1,6 @@
 import Foundation
 
-struct HwpPreviewText: HwpStream {
+struct HwpPreviewText: HwpData {
     let text: String
 
     init(_ data: Data, _: (HwpReportable) -> Void) throws {

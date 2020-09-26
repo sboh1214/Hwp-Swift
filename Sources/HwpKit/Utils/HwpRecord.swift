@@ -16,17 +16,16 @@ func parseRecordTree(data: Data) throws -> HwpRecord {
 
         let tagId = value & 0x3FF
         let level = (value >> 10) & 0x3FF
-        let size = (value >> 20) & 0xFFF
+        var size = (value >> 20) & 0xFFF
         if size == 0xFFF {
-            throw HwpError.bigRecordNotSuppoted(tagId: tagId, level: level)
+            size = reader.readUInt32()
         }
 
         var parent = root
         let payload = reader.readBytes(Int(size))
 
         for _ in 0 ..< level {
-            // parent = parent.children.slice(-1).pop()!
-            parent = parent.children.remove(at: 0)
+            parent = parent.children[-1]
         }
         let child = HwpRecord(payload: payload, tagID: tagId, size: size, parentTagID: parent.tagID)
         parent.children.append(child)

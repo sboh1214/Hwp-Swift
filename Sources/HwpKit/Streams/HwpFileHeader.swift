@@ -4,7 +4,7 @@ import Foundation
  파일 인식 정보
  한글의 문서 파일이라는 것을 나타내기 위해 ‘파일 인식 정보’가 저장된다.
  */
-public struct HwpFileHeader: HwpStream {
+public struct HwpFileHeader: HwpData {
     /** signature. 문서 파일은 "HWP Document File" */
     public let signature: String
     public let version: HwpVersion
@@ -29,7 +29,9 @@ public struct HwpFileHeader: HwpStream {
     let koreaOpenLicense: UInt8 // 공공누리 Korea Open Government License
 
     internal init(_ data: Data, _ report: (HwpReportable) -> Void) throws {
-        guard let signature = data[0 ..< 32].stringASCII else {
+        var reader = DataReader(data)
+        
+        guard let signature = reader.readBytes(32).stringASCII else {
             throw HwpError.invalidDataForString(data: data[0 ..< 32], name: "signature")
         }
         self.signature = signature
@@ -37,20 +39,16 @@ public struct HwpFileHeader: HwpStream {
             report(HwpWarning.invalidFileHeaderSignature(signature: signature))
         }
 
-        let revision: UInt8 = data[32]
-        let build: UInt8 = data[33]
-        let minor: UInt8 = data[34]
-        let major: UInt8 = data[35]
-        version = HwpVersion(major: major, minor: minor, build: build, revision: revision)
+        version = HwpVersion(reader.readBytes(4), report)
 
-        let bits1 = data[36 ..< 40].bits
+        let bits1 = reader.readBytes(4).bits
         isCompressed = bits1[0]
         isEncrypted = bits1[1]
 
-        let bits2 = data[40 ..< 44].bits
+        let bits2 = reader.readBytes(4).bits
         isHavekoreaOpenLicense = bits2[0]
 
-        encryptVersion = data[44 ..< 48].uint32
-        koreaOpenLicense = UInt8(data[48])
+        encryptVersion = reader.readUInt32()
+        koreaOpenLicense = reader.readUInt8()
     }
 }

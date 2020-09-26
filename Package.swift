@@ -17,7 +17,7 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(
             url: "https://github.com/CoreOffice/OLEKit.git",
-            .revision("6a809b91a9a524594c02d990dbce157d7e9cb447")
+            .revision("14c4e245519cfd9b822f7e365734b6e08e092503")
         ),
     ],
     targets: [
@@ -32,6 +32,7 @@ let package = Package(
             dependencies: ["HwpKit"],
             resources: [
                 .copy("Basic/blank.hwp"),
+                .copy("Basic/noori.hwp"),
                 .copy("Versions/2014VP.hwp"),
             ]
         ),
