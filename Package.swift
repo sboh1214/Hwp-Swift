@@ -32,8 +32,7 @@ let package = Package(
             dependencies: ["HwpKit"],
             resources: [
                 .copy("Basic/blank.hwp"),
-                .copy("Basic/noori.hwp"),
-                .copy("Versions/2014VP.hwp")
+                .copy("Basic/content.hwp")
             ]
         )
     ]

@@ -2,6 +2,9 @@
 
 let BEGIN: UInt32 = 0x10
 
+/**
+ ’문서 정보’의 데이터 레코드
+ */
 final class HwpDocInfoTag {
     static let DOCUMENT_PROPERTIES: UInt32 = BEGIN
     static let ID_MAPPINGS: UInt32 = BEGIN + 1
@@ -26,6 +29,9 @@ final class HwpDocInfoTag {
     static let TRACK_CHANGE_AUTHOR: UInt32 = BEGIN + 81
 }
 
+/**
+ ‘본문’의 데이터 레코드
+ */
 final class HwpSectionTag {
     static let PARA_HEADER: UInt32 = BEGIN + 50
     static let PARA_TEXT: UInt32 = BEGIN + 51

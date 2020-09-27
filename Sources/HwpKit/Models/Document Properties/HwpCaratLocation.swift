@@ -1,6 +1,6 @@
 import Foundation
 
-struct HwpCaratLocation: HwpData {
+public struct HwpCaratLocation: HwpData {
     let listId: UInt32
     let paragraphId: UInt32
     let charIndex: UInt32

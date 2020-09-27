@@ -12,7 +12,10 @@ typealias DWORD = UInt32
  */
 typealias WCHAR = UniChar
 /**
- HWPUNIT과 SHWPUNIT는 문자의 크기, 그림의 크기, 용지 여백 등, 문서를 구성하는 요소들의 크기를 표현하기 위한 자료형이다. 문서 출력 장치의 해상도는 가변적이기 때문에, 크기 정보를 점(도트)의 수로 표현할 수는 없다. 따라서 일정한 단위를 기준으로 해야 하는데, 한글에서는 1/7200인치를 기본 단위로 사용한다. 예를 들어 [가로 2 인치 x 세로 1 인치]짜리 그림의 크기를 HWPUNIT 형으로 표현하면 각각 14400 x 7200이 된다.
+ HWPUNIT과 SHWPUNIT는 문자의 크기, 그림의 크기, 용지 여백 등, 문서를 구성하는 요소들의 크기를 표현하기 위한 자료형이다.
+ 문서 출력 장치의 해상도는 가변적이기 때문에, 크기 정보를 점(도트)의 수로 표현할 수는 없다.
+ 따라서 일정한 단위를 기준으로 해야 하는데, 한글에서는 1/7200인치를 기본 단위로 사용한다.
+ 예를 들어 [가로 2 인치 x 세로 1 인치]짜리 그림의 크기를 HWPUNIT 형으로 표현하면 각각 14400 x 7200이 된다.
  */
 typealias HWPUNIT = UInt32
 /** 1/7200인치로 표현된 한글 내부 단위 */
@@ -38,11 +41,8 @@ extension Data {
         withUnsafeBytes { $0.load(as: UInt16.self) }
     }
 
-//    var uint32: UInt32 {
-//        withUnsafeBytes {$0.load(as: UInt32.self)}
-//    }
-
     var uint32: UInt32 {
+        precondition(self.count == 4)
         let start = self.startIndex
         return (UInt32(self[start + 3]) << 24)
               + (UInt32(self[start + 2]) << 16)
@@ -72,10 +72,10 @@ extension UInt8 {
     func toBits() -> [Bool] {
         var byte = self
         var bits = [Bool](repeating: false, count: 8)
-        for i in 0 ..< 8 {
+        for index in 0 ..< 8 {
             let currentBit = byte & 0x01
             if currentBit != 0 {
-                bits[i] = true
+                bits[index] = true
             }
 
             byte >>= 1
@@ -89,10 +89,10 @@ extension UInt32 {
     func toBits() -> [Bool] {
         var byte = self
         var bits = [Bool](repeating: false, count: 32)
-        for i in 0 ..< 32 {
+        for index in 0 ..< 32 {
             let currentBit = byte & 0x01
             if currentBit != 0 {
-                bits[i] = true
+                bits[index] = true
             }
 
             byte >>= 1

@@ -1,11 +1,11 @@
-@testable import HwpKit
+import HwpKit
 import XCTest
 
 final class ContentTests: XCTestCase {
     func openHwp() throws -> HwpFile {
         let url = URL(fileURLWithPath: #file)
             .deletingLastPathComponent()
-            .appendingPathComponent("noori.hwp")
+            .appendingPathComponent("content.hwp")
         return try HwpFile(filePath: url.path)
     }
 

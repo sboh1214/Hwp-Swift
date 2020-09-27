@@ -1,14 +1,18 @@
 import Foundation
 
+/**
+ 문서 정보
+ 
+ 본문에 사용 중인 글꼴, 글자 속성, 문단 속성, 탭, 스타일 등에 문서 내 공통으로 사용되는 세부 정보를 담고 있다.
+ */
 public struct HwpDocInfo: HwpData {
 
-    let record: HwpRecord
-    let documentProperties: HwpDocumentProperties
+    public let documentProperties: HwpDocumentProperties
 
     init(_ data: Data) throws {
-        record = try parseRecordTree(data: data)
+        let records = try parseRecordTree(data: data)
 
-        guard let documentProperties = record.children.first(where: { $0.tagID == HwpDocInfoTag.DOCUMENT_PROPERTIES })
+        guard let documentProperties = records.first(where: { $0.tagId == HwpDocInfoTag.DOCUMENT_PROPERTIES })
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.DOCUMENT_PROPERTIES)
         }

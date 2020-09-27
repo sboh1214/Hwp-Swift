@@ -1,11 +1,12 @@
+import Foundation
 import OLEKit
 
 public struct HwpFile {
-    let fileHeader: HwpFileHeader
-    let docInfo: HwpDocInfo
-    let previewText: HwpPreviewText
+    public let fileHeader: HwpFileHeader
+    public let docInfo: HwpDocInfo
+    public let previewText: HwpPreviewText
 
-    init(filePath: String) throws {
+    public init(filePath: String) throws {
         let ole: OLEFile
         do {
             ole = try OLEFile(filePath)
@@ -25,7 +26,16 @@ public struct HwpFile {
             throw HwpError.streamDoesNotExist(name: HwpStreamName.docInfo)
         }
         let docInfoReader = try ole.stream(docInfoStream)
-        docInfo = try HwpDocInfo(docInfoReader.readDataToEnd())
+        let docInfoData = docInfoReader.readDataToEnd() as NSData
+        if fileHeader.isCompressed {
+            if #available(OSX 10.15, *) {
+                docInfo = try HwpDocInfo(docInfoData.decompressed(using: .zlib) as Data)
+            } else {
+                throw HwpError.notSupportedOS
+            }
+        } else {
+            docInfo = try HwpDocInfo(docInfoData as Data)
+        }
 
         guard let previewTextStream = streams[HwpStreamName.previewText.rawValue] else {
             throw HwpError.streamDoesNotExist(name: HwpStreamName.previewText)

@@ -1,9 +1,9 @@
 import Foundation
 
 public struct HwpDocumentProperties: HwpData {
-    let sectionSize: UInt16
-    let startingIndex: HwpStartingIndex
-    let caratLocation: HwpCaratLocation
+    public let sectionSize: UInt16
+    public let startingIndex: HwpStartingIndex
+    public let caratLocation: HwpCaratLocation
 
     init(_ data: Data) {
         var reader = DataReader(data)
