@@ -9,7 +9,8 @@ struct HwpRecord {
 }
 
 func parseRecordTree(data: Data) throws -> HwpRecord {
-    let root = HwpRecord(payload: Data(), tagID: 0, size: 0, parentTagID: 0)
+    var parent = HwpRecord(payload: Data(), tagID: 0, size: 0, parentTagID: 0)
+
     var reader = DataReader(data)
     while reader.offset < data.count {
         let value = reader.readUInt32()
@@ -21,14 +22,13 @@ func parseRecordTree(data: Data) throws -> HwpRecord {
             size = reader.readUInt32()
         }
 
-        var parent = root
         let payload = reader.readBytes(Int(size))
 
         for _ in 0 ..< level {
-            parent = parent.children[-1]
+            parent = parent.children.reversed()[0]
         }
         let child = HwpRecord(payload: payload, tagID: tagId, size: size, parentTagID: parent.tagID)
         parent.children.append(child)
     }
-    return root
+    return parent
 }

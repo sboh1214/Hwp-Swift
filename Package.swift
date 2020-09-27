@@ -10,7 +10,7 @@ let package = Package(
         .library(
             name: "HwpKit",
             targets: ["HwpKit"]
-        ),
+        )
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -18,7 +18,7 @@ let package = Package(
         .package(
             url: "https://github.com/CoreOffice/OLEKit.git",
             .revision("14c4e245519cfd9b822f7e365734b6e08e092503")
-        ),
+        )
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -33,8 +33,8 @@ let package = Package(
             resources: [
                 .copy("Basic/blank.hwp"),
                 .copy("Basic/noori.hwp"),
-                .copy("Versions/2014VP.hwp"),
+                .copy("Versions/2014VP.hwp")
             ]
-        ),
+        )
     ]
 )

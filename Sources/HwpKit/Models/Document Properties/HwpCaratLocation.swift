@@ -1,11 +1,11 @@
 import Foundation
 
 struct HwpCaratLocation: HwpData {
-    let listId:UInt32
-    let paragraphId:UInt32
-    let charIndex:UInt32
-    
-    init(_ data: Data, _ report: (HwpReportable) -> Void) {
+    let listId: UInt32
+    let paragraphId: UInt32
+    let charIndex: UInt32
+
+    init(_ data: Data) {
         var reader = DataReader(data)
         listId = reader.readUInt32()
         paragraphId = reader.readUInt32()

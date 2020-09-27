@@ -17,8 +17,8 @@ public struct HwpVersion: HwpData {
     public let minor: UInt8
     public let build: UInt8
     public let revision: UInt8
-    
-    init(_ data: Data, _ report: (HwpReportable) -> Void) {
+
+    init(_ data: Data) {
         var reader = DataReader(data)
         revision = reader.readUInt8()
         build = reader.readUInt8()

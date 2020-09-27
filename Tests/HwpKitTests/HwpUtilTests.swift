@@ -9,6 +9,6 @@ final class HwpUtilTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testBitsFromInt8", testBitsFromInt8),
+        ("testBitsFromInt8", testBitsFromInt8)
     ]
 }

@@ -3,34 +3,35 @@ import OLEKit
 public struct HwpFile {
     let fileHeader: HwpFileHeader
     let docInfo: HwpDocInfo
-    // let previewText : HKPreviewText
-    
-    init(filePath: String, report: (HwpReportable) -> Void = { _ in }) throws {
+    let previewText: HwpPreviewText
+
+    init(filePath: String) throws {
         let ole: OLEFile
         do {
             ole = try OLEFile(filePath)
         } catch {
             throw HwpError.invalidFilePath(path: filePath)
         }
-        
-        guard let fileHeaderStream = ole.root.children.first(where: { $0.name == HwpStreamName.fileHeader.rawValue }) else {
+
+        let streams = Dictionary(uniqueKeysWithValues: ole.root.children.map { ($0.name, $0 ) })
+
+        guard let fileHeaderStream = streams[HwpStreamName.fileHeader.rawValue] else {
             throw HwpError.streamDoesNotExist(name: HwpStreamName.fileHeader)
         }
         let fileHeaderReader = try ole.stream(fileHeaderStream)
-        fileHeader = try HwpFileHeader(fileHeaderReader.readDataToEnd(), report)
-        
-        guard let docInfoStream = ole.root.children.first(where: {$0.name == HwpStreamName.docInfo.rawValue}) else {
+        fileHeader = try HwpFileHeader(fileHeaderReader.readDataToEnd())
+
+        guard let docInfoStream = streams[HwpStreamName.docInfo.rawValue] else {
             throw HwpError.streamDoesNotExist(name: HwpStreamName.docInfo)
         }
         let docInfoReader = try ole.stream(docInfoStream)
-        docInfo = try HwpDocInfo(docInfoReader.readDataToEnd(), report)
-        
-        //        do {
-        //            guard let previewTextStream = ole.root.children.first(where: {$0.name == HKStreamName.PreviewText.rawValue}) else {
-        //                throw HKError.StreamDoesNotExist(name: HKStreamName.PreviewText)
-        //            }
-        //            previewText = HKPreviewText(dataReader: try ole.stream(previewTextStream))
-        //        }
+        docInfo = try HwpDocInfo(docInfoReader.readDataToEnd())
+
+        guard let previewTextStream = streams[HwpStreamName.previewText.rawValue] else {
+            throw HwpError.streamDoesNotExist(name: HwpStreamName.previewText)
+        }
+        let previewTextReader = try ole.stream(previewTextStream)
+        previewText = try HwpPreviewText(previewTextReader.readDataToEnd())
     }
 }
 

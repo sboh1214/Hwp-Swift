@@ -18,6 +18,6 @@ final class VersionTests: XCTestCase {
     }
 
     static var allTests = [
-        ("test2014VP", test2014VP),
+        ("test2014VP", test2014VP)
     ]
 }

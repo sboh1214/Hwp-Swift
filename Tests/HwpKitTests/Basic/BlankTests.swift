@@ -37,6 +37,6 @@ final class BlankTests: XCTestCase {
         ("testOpen", testOpen),
         ("testSignature", testSignature),
         ("testHwpVersion", testHwpVersion),
-        ("testEncryptVersion", testEncryptVersion),
+        ("testEncryptVersion", testEncryptVersion)
     ]
 }

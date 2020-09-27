@@ -25,23 +25,23 @@ extension Data {
     var bytes: [UInt8] {
         [UInt8](self)
     }
-    
+
     var bits: [Bool] {
         reduce([Bool]()) { $0 + $1.toBits() }
     }
-    
+
     var uint8: UInt8 {
         withUnsafeBytes {$0.load(as: UInt8.self)}
     }
-    
+
     var uint16: UInt16 {
         withUnsafeBytes { $0.load(as: UInt16.self) }
     }
-    
+
 //    var uint32: UInt32 {
 //        withUnsafeBytes {$0.load(as: UInt32.self)}
 //    }
-    
+
     var uint32: UInt32 {
         let start = self.startIndex
         return (UInt32(self[start + 3]) << 24)
@@ -49,7 +49,7 @@ extension Data {
               + (UInt32(self[start + 1]) << 8)
               + UInt32(self[start])
     }
-    
+
     var stringASCII: String? {
         String(data: self, encoding: .ascii)
     }
@@ -77,10 +77,10 @@ extension UInt8 {
             if currentBit != 0 {
                 bits[i] = true
             }
-            
+
             byte >>= 1
         }
-        
+
         return bits
     }
 }
@@ -94,10 +94,10 @@ extension UInt32 {
             if currentBit != 0 {
                 bits[i] = true
             }
-            
+
             byte >>= 1
         }
-        
+
         return bits
     }
 }

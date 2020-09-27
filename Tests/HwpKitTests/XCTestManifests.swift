@@ -5,7 +5,7 @@ import XCTest
         [
             testCase(BasicTests.allTests),
             testCase(VersionTests.allTests),
-            testCase(HwpUtilTests.allTests),
+            testCase(HwpUtilTests.allTests)
         ]
     }
 #endif

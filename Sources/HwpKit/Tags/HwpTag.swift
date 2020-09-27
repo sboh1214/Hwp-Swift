@@ -1,3 +1,5 @@
+// swiftlint:disable identifier_name
+
 let BEGIN: UInt32 = 0x10
 
 final class HwpDocInfoTag {

@@ -1,18 +1,17 @@
 import Foundation
 
 public enum HwpError: Error {
-    case invalidReport(report: HwpReportable)
     case invalidFilePath(path: String)
     case streamDoesNotExist(name: HwpStreamName)
     case invalidDataForString(data: Data, name: String)
     case recordDoesNotExist(tag: UInt32)
+    case invalidFileHeaderSignature(signature: String)
+    case unidentifiedTag(tagId: UInt32)
 }
 
 extension HwpError: CustomStringConvertible {
     public var description: String {
         switch self {
-        case let .invalidReport(report):
-            return "Invalid HwpReportable '\(report)'"
         case let .invalidFilePath(path):
             return "Invalid File Path '\(path)'"
         case let .streamDoesNotExist(name):
@@ -26,6 +25,10 @@ extension HwpError: CustomStringConvertible {
                 """
         case let .recordDoesNotExist(tag):
             return "Record '\(tag)' does not exist."
+        case let .invalidFileHeaderSignature(signature):
+            return "Invalid signature in FileHeader stream : get'\(signature)'"
+        case let .unidentifiedTag(tagId):
+            return "Cannot Read HwpRecord Tag : '\(tagId)'"
         }
     }
 }

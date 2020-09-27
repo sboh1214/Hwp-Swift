@@ -8,13 +8,13 @@ final class ContentTests: XCTestCase {
             .appendingPathComponent("noori.hwp")
         return try HwpFile(filePath: url.path)
     }
-    
+
     func testSection() throws {
         let hwp = try openHwp()
         XCTAssertEqual(hwp.docInfo.documentProperties.sectionSize, 1)
     }
 
     static var allTests = [
-        ("testSection", testSection),
+        ("testSection", testSection)
     ]
 }

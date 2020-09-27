@@ -28,18 +28,18 @@ public struct HwpFileHeader: HwpData {
     let encryptVersion: UInt32
     let koreaOpenLicense: UInt8 // 공공누리 Korea Open Government License
 
-    internal init(_ data: Data, _ report: (HwpReportable) -> Void) throws {
+    internal init(_ data: Data) throws {
         var reader = DataReader(data)
-        
+
         guard let signature = reader.readBytes(32).stringASCII else {
             throw HwpError.invalidDataForString(data: data[0 ..< 32], name: "signature")
         }
         self.signature = signature
         if signature != "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0" {
-            report(HwpWarning.invalidFileHeaderSignature(signature: signature))
+            throw HwpError.invalidFileHeaderSignature(signature: signature)
         }
 
-        version = HwpVersion(reader.readBytes(4), report)
+        version = HwpVersion(reader.readBytes(4))
 
         let bits1 = reader.readBytes(4).bits
         isCompressed = bits1[0]
