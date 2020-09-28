@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "HwpKit",
+    platforms: [
+        .macOS(.v10_11)
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -18,6 +21,10 @@ let package = Package(
         .package(
             url: "https://github.com/CoreOffice/OLEKit.git",
             .revision("14c4e245519cfd9b822f7e365734b6e08e092503")
+        ),
+        .package(
+            url: "https://github.com/mw99/DataCompression.git",
+            .exact("3.6.0")
         )
     ],
     targets: [
@@ -25,14 +32,16 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "HwpKit",
-            dependencies: ["OLEKit"]
+            dependencies: ["OLEKit", "DataCompression"]
         ),
         .testTarget(
             name: "HwpKitTests",
             dependencies: ["HwpKit"],
             resources: [
                 .copy("Basic/blank.hwp"),
-                .copy("Basic/content.hwp")
+                .copy("Basic/content.hwp"),
+                .copy("Version/2007.hwp"),
+                .copy("Version/2014VP.hwp")
             ]
         )
     ]

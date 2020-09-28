@@ -1,11 +1,12 @@
 import Foundation
 import OLEKit
+import DataCompression
 
-public struct HwpFile {
+public class HwpFile {
     public let fileHeader: HwpFileHeader
     public let docInfo: HwpDocInfo
     public let previewText: HwpPreviewText
-
+    
     public init(filePath: String) throws {
         let ole: OLEFile
         do {
@@ -13,35 +14,51 @@ public struct HwpFile {
         } catch {
             throw HwpError.invalidFilePath(path: filePath)
         }
-
         let streams = Dictionary(uniqueKeysWithValues: ole.root.children.map { ($0.name, $0 ) })
-
-        guard let fileHeaderStream = streams[HwpStreamName.fileHeader.rawValue] else {
-            throw HwpError.streamDoesNotExist(name: HwpStreamName.fileHeader)
-        }
-        let fileHeaderReader = try ole.stream(fileHeaderStream)
-        fileHeader = try HwpFileHeader(fileHeaderReader.readDataToEnd())
-
-        guard let docInfoStream = streams[HwpStreamName.docInfo.rawValue] else {
-            throw HwpError.streamDoesNotExist(name: HwpStreamName.docInfo)
-        }
-        let docInfoReader = try ole.stream(docInfoStream)
-        let docInfoData = docInfoReader.readDataToEnd() as NSData
-        if fileHeader.isCompressed {
-            if #available(OSX 10.15, *) {
-                docInfo = try HwpDocInfo(docInfoData.decompressed(using: .zlib) as Data)
-            } else {
-                throw HwpError.notSupportedOS
-            }
-        } else {
-            docInfo = try HwpDocInfo(docInfoData as Data)
-        }
-
+        let test = Test(ole, streams)
+        
+        fileHeader = try HwpFileHeader(test.getDataFromStream(.fileHeader, false))
+        
+        docInfo = try HwpDocInfo(test.getDataFromStream(.docInfo, fileHeader.isCompressed))
+        
         guard let previewTextStream = streams[HwpStreamName.previewText.rawValue] else {
             throw HwpError.streamDoesNotExist(name: HwpStreamName.previewText)
         }
         let previewTextReader = try ole.stream(previewTextStream)
         previewText = try HwpPreviewText(previewTextReader.readDataToEnd())
+    }
+    
+    
+}
+
+fileprivate struct Test {
+    private let ole: OLEFile
+    private let streams: [String: DirectoryEntry]
+    
+    init(_ ole: OLEFile, _ streams: [String: DirectoryEntry]) {
+        self.ole = ole
+        self.streams = streams
+    }
+    
+    fileprivate func getDataFromStream(_ streamName: HwpStreamName, _ isCompressed: Bool) throws -> Data {
+        guard let stream = streams[streamName.rawValue] else {
+            throw HwpError.streamDoesNotExist(name: streamName)
+        }
+        let reader = try ole.stream(stream)
+        let data =  reader.readDataToEnd()
+        if isCompressed {
+            if #available(OSX 10.15, *) {
+                return try (data as NSData).decompressed(using: .zlib) as Data
+            } else {
+                guard let decompressedData = data.decompress(withAlgorithm: .zlib) else {
+                    throw HwpError.streamDecompressFailed(name: streamName)
+                }
+                return decompressedData
+            }
+            
+        } else {
+            return data
+        }
     }
 }
 
