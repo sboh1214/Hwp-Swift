@@ -1,45 +1,71 @@
+import Foundation
 import OLEKit
+import DataCompression
 
-public struct HwpFile {
-    let fileHeader: HwpFileHeader
-    //let previewText : HKPreviewText
-    var directories: [DirectoryEntry] = []
+public class HwpFile {
+    public let fileHeader: HwpFileHeader
+    public let docInfo: HwpDocInfo
+    public let previewText: HwpPreviewText
     
-    var warnings: [HwpWarning] = []
-    
-    init(filePath: String) throws {
+    public init(filePath: String) throws {
         let ole: OLEFile
         do {
             ole = try OLEFile(filePath)
         } catch {
             throw HwpError.invalidFilePath(path: filePath)
         }
+        let streams = Dictionary(uniqueKeysWithValues: ole.root.children.map { ($0.name, $0 ) })
+        let test = Test(ole, streams)
         
-        do {
-            guard let fileHeaderStream = ole.root.children.first(where: { $0.name == HwpStreamName.fileHeader.rawValue }) else {
-                throw HwpError.streamDoesNotExist(name: HwpStreamName.fileHeader)
-            }
-            fileHeader = HwpFileHeader(dataReader: try ole.stream(fileHeaderStream))
-            
-        } catch {
-            throw HwpError.invalidFilePath(path: filePath)
+        fileHeader = try HwpFileHeader(test.getDataFromStream(.fileHeader, false))
+        
+        docInfo = try HwpDocInfo(test.getDataFromStream(.docInfo, fileHeader.isCompressed))
+        
+        guard let previewTextStream = streams[HwpStreamName.previewText.rawValue] else {
+            throw HwpError.streamDoesNotExist(name: HwpStreamName.previewText)
         }
-        
-        //        do {
-        //            guard let previewTextStream = ole.root.children.first(where: {$0.name == HKStreamName.PreviewText.rawValue}) else {
-        //                throw HKError.StreamDoesNotExist(name: HKStreamName.PreviewText)
-        //            }
-        //            previewText = HKPreviewText(dataReader: try ole.stream(previewTextStream))
-        //        }
+        let previewTextReader = try ole.stream(previewTextStream)
+        previewText = try HwpPreviewText(previewTextReader.readDataToEnd())
     }
     
-    func report(report: inout HwpReportable) throws -> Void {
-        
+    
+}
+
+fileprivate struct Test {
+    private let ole: OLEFile
+    private let streams: [String: DirectoryEntry]
+    
+    init(_ ole: OLEFile, _ streams: [String: DirectoryEntry]) {
+        self.ole = ole
+        self.streams = streams
+    }
+    
+    fileprivate func getDataFromStream(_ streamName: HwpStreamName, _ isCompressed: Bool) throws -> Data {
+        guard let stream = streams[streamName.rawValue] else {
+            throw HwpError.streamDoesNotExist(name: streamName)
+        }
+        let reader = try ole.stream(stream)
+        let data =  reader.readDataToEnd()
+        if isCompressed {
+            if #available(OSX 10.15, *) {
+                return try (data as NSData).decompressed(using: .zlib) as Data
+            } else {
+                guard let decompressedData = data.decompress(withAlgorithm: .zlib) else {
+                    throw HwpError.streamDecompressFailed(name: streamName)
+                }
+                return decompressedData
+            }
+            
+        } else {
+            return data
+        }
     }
 }
 
 public enum HwpStreamName: String {
     case fileHeader = "FileHeader"
+    case docInfo = "DocInfo"
     case summary = "\005HwpSummaryInformation"
     case previewText = "PrvText"
+    case previewImage = "PrvImage"
 }

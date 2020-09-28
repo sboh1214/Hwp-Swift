@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;if which swiftlint &gt;/dev/null; then&#10;  swiftlint&#10;else&#10;  echo &quot;warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint&quot;&#10;fi&#10;">
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;if which swiftlint &gt;/dev/null; then&#10;  say &quot;Pre build scripts running.&quot;&#10;  exec &gt; &quot;${PROJECT_DIR}/prebuild.log&quot; 2&gt;&amp;1&#10;  echo &quot;Starting build scheme Pre-actions&quot;&#10;  &quot;${PROJECT_DIR}/Build-Phases/That_pre-action_script.sh&quot;&#10;  echo `swiftlint autocorrect`&#10;  echo `swiftlint`&#10;else&#10;  echo &quot;warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint&quot;&#10;fi&#10;">
             </ActionContent>
          </ExecutionAction>
       </PreActions>
