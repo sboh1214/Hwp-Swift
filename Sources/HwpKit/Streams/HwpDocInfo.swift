@@ -8,15 +8,21 @@ import Foundation
 public struct HwpDocInfo: HwpData {
 
     public let documentProperties: HwpDocumentProperties
+    public var binDataArray: [HwpBinData]
 
     init(_ data: Data) throws {
         let records = try parseRecordTree(data: data)
 
-        guard let documentProperties = records.first(where: { $0.tagId == HwpDocInfoTag.DOCUMENT_PROPERTIES })
+        guard let documentProperties = records
+                .first(where: {$0.tagId == HwpDocInfoTag.DOCUMENT_PROPERTIES})
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.DOCUMENT_PROPERTIES)
         }
         self.documentProperties = HwpDocInfo.visitDocumentPropertes(documentProperties)
+
+        binDataArray = try records
+            .filter {$0.tagId == HwpDocInfoTag.BIN_DATA}
+            .map {try HwpBinData($0.payload)}
     }
 
     private static func visitDocumentPropertes(_ record: HwpRecord) -> HwpDocumentProperties {

@@ -13,9 +13,17 @@ struct DataReader {
         defer {
             offset += length
         }
-        // The indices of a Data value (or of collections in general) are not necessarily zero-based.
+        // The indices of a Data value are not necessarily zero-based.
         // A slice shares the indices with the originating data.
         return data[(offset+data.startIndex) ..< (offset+data.startIndex) + length]
+    }
+
+    mutating func readWCHAR(_ length: Int) -> [WCHAR] {
+        var array = [WCHAR]()
+        for _ in 0..<length {
+            array.append(readWCHAR())
+        }
+        return array
     }
 
     mutating func readUInt8() -> UInt8 {
@@ -24,6 +32,14 @@ struct DataReader {
 
     mutating func readUInt16() -> UInt16 {
         return readBytes(2).uint16
+    }
+
+    mutating func readWord() -> WORD {
+        return readUInt16()
+    }
+
+    mutating func readWCHAR() -> WCHAR {
+        return readUInt16()
     }
 
     mutating func readUInt32() -> UInt32 {
