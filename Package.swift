@@ -18,7 +18,7 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(
             url: "https://github.com/CoreOffice/OLEKit.git",
-            .revision("14c4e245519cfd9b822f7e365734b6e08e092503")
+            .exact("0.2.0")
         ),
         .package(
             url: "https://github.com/mw99/DataCompression.git",
