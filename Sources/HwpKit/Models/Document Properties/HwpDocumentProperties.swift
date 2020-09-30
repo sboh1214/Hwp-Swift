@@ -7,7 +7,7 @@ public struct HwpDocumentProperties: HwpData {
 
     init(_ data: Data) {
         var reader = DataReader(data)
-        sectionSize = reader.readUInt16()
+        sectionSize = reader.read(UInt16.self)
         startingIndex = HwpStartingIndex(reader.readBytes(12))
         caratLocation = HwpCaratLocation(reader.readBytes(12))
     }

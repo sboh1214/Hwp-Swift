@@ -59,13 +59,6 @@
             BlueprintName = "HwpKit"
             ReferencedContainer = "container:">
          </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "HwpKitTests"
-            BuildableName = "HwpKitTests"
-            BlueprintName = "HwpKitTests"
-            ReferencedContainer = "container:">
-         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference

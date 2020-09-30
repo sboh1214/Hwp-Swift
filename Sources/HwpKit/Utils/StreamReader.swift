@@ -1,5 +1,6 @@
 import Foundation
 import OLEKit
+import DataCompression
 
 struct StreamReader {
     private let ole: OLEFile
@@ -17,15 +18,10 @@ struct StreamReader {
         let reader = try ole.stream(stream)
         let data =  reader.readDataToEnd()
         if isCompressed {
-            if #available(OSX 10.15, *) {
-                return try (data as NSData).decompressed(using: .zlib) as Data
-            } else {
-                guard let decompressedData = data.decompress(withAlgorithm: .zlib) else {
-                    throw HwpError.streamDecompressFailed(name: streamName)
-                }
-                return decompressedData
+            guard let decompressedData = data.decompress(withAlgorithm: .zlib) else {
+                throw HwpError.streamDecompressFailed(name: streamName)
             }
-
+            return decompressedData
         } else {
             return data
         }

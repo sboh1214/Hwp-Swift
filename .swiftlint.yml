@@ -4,6 +4,9 @@ excluded:
 
 line_length: 100
 
+disabled_rules:
+  - todo
+
 type_body_length:
   warning: 300
   error: 400

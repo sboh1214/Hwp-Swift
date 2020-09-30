@@ -1,6 +1,5 @@
 import Foundation
 import OLEKit
-import DataCompression
 
 public class HwpFile {
     public let fileHeader: HwpFileHeader
@@ -19,7 +18,8 @@ public class HwpFile {
 
         fileHeader = try HwpFileHeader(reader.getDataFromStream(.fileHeader, false))
 
-        docInfo = try HwpDocInfo(reader.getDataFromStream(.docInfo, fileHeader.isCompressed))
+        let docInfoData = try reader.getDataFromStream(.docInfo, fileHeader.isCompressed)
+        docInfo = try HwpDocInfo(docInfoData, fileHeader.version)
 
         guard let previewTextStream = streams[HwpStreamName.previewText.rawValue] else {
             throw HwpError.streamDoesNotExist(name: HwpStreamName.previewText)

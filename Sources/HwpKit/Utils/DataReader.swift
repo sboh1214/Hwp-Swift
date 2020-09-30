@@ -1,13 +1,17 @@
 import Foundation
 
 struct DataReader {
-    let data: Data
-    var offset: Int = 0
-    
+    private let data: Data
+    private var offset: Int = 0
+
     init(_ data: Data) {
         self.data = data
     }
-    
+
+    func isEOF() -> Bool {
+        return offset == data.count
+    }
+
     mutating func readBytes(_ length: Int) -> Data {
         precondition(offset + length < data.count + 1)
         defer {
@@ -17,36 +21,37 @@ struct DataReader {
         // A slice shares the indices with the originating data.
         return data[(offset+data.startIndex) ..< (offset+data.startIndex) + length]
     }
-    
-    mutating func readWCHAR(_ length: Int) -> [WCHAR] {
-        var array = [WCHAR]()
+
+    mutating func readToEnd() -> Data {
+        readBytes(data.count - offset)
+    }
+
+    mutating func read<T>(_ type: T.Type) -> T {
+        let length: Int
+        switch type {
+        case is UInt8.Type, is Int8.Type:
+            length = 1
+        case is UInt16.Type:
+            length = 2
+        case is UInt32.Type, is Int32.Type:
+            length = 4
+        default:
+            precondition(false)
+            length = 4
+        }
+        let value = [UInt8](readBytes(length))
+        return value.withUnsafeBufferPointer {
+            $0.baseAddress!.withMemoryRebound(to: T.self, capacity: 1) {
+                $0.pointee
+            }
+        }
+    }
+
+    mutating func read<T>(_ type: T.Type, _ length: Int) -> [T] {
+        var array = [T]()
         for _ in 0..<length {
-            array.append(readWCHAR())
+            array.append(read(T.self))
         }
         return array
-    }
-    
-    mutating func readUInt8() -> UInt8 {
-        return readBytes(1).uint8
-    }
-    
-    mutating func readUInt16() -> UInt16 {
-        return readBytes(2).uint16
-    }
-    
-    mutating func readUInt32() -> UInt32 {
-        return readBytes(4).uint32
-    }
-    
-    mutating func readBYTE() -> BYTE {
-        return readUInt8()
-    }
-    
-    mutating func readWord() -> WORD {
-        return readUInt16()
-    }
-    
-    mutating func readWCHAR() -> WCHAR {
-        return readUInt16()
     }
 }

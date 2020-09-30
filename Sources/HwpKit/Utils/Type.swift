@@ -23,38 +23,16 @@ public typealias SHWPUNIT = Int32
 /** INT16 과 같다. */
 public typealias HWPUNIT16 = Int16
 
-public typealias COLORREF = UInt32
-
 // Data to [bytes]
 extension Data {
     var bytes: [UInt8] {
         [UInt8](self)
     }
-    
+
     var bits: [Bool] {
         reduce([Bool]()) { $0 + $1.bits }
     }
-    
-    var uint8: UInt8 {
-        withUnsafeBytes {$0.load(as: UInt8.self)}
-    }
-    
-    var uint16: UInt16 {
-        precondition(self.count == 2)
-        let start = self.startIndex
-        return (UInt16(self[start + 1]) << 8)
-        + UInt16(self[start])
-    }
-    
-    var uint32: UInt32 {
-        precondition(self.count == 4)
-        let start = self.startIndex
-        return (UInt32(self[start + 3]) << 24)
-            + (UInt32(self[start + 2]) << 16)
-            + (UInt32(self[start + 1]) << 8)
-            + UInt32(self[start])
-    }
-    
+
     var stringASCII: String? {
         String(data: self, encoding: .ascii)
     }
@@ -63,6 +41,12 @@ extension Data {
 extension Array where Element == Data {
     func toBits() -> [Bool] {
         reduce([Bool]()) { $0 + $1.bits }
+    }
+}
+
+extension Array where Element == WCHAR {
+    public func toString() -> String {
+        reduce("") {result, current in result + String(Character(UnicodeScalar(current)!))}
     }
 }
 
@@ -82,10 +66,10 @@ extension UInt8 {
             if currentBit != 0 {
                 bits[index] = true
             }
-            
+
             byte >>= 1
         }
-        
+
         return bits
     }
 }
@@ -99,10 +83,10 @@ extension UInt32 {
             if currentBit != 0 {
                 bits[index] = true
             }
-            
+
             byte >>= 1
         }
-        
+
         return bits
     }
 }
