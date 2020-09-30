@@ -1,5 +1,5 @@
 import Foundation
 
-protocol HwpData {
+protocol HwpData: Codable {
     init(_ data: Data) throws
 }

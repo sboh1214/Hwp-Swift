@@ -9,6 +9,7 @@ public struct HwpDocInfo: HwpData {
 
     public let documentProperties: HwpDocumentProperties
     public var binDataArray: [HwpBinData]
+    public var faceNameArray: [HwpFaceName]
 
     init(_ data: Data) throws {
         let records = try parseRecordTree(data: data)
@@ -23,6 +24,10 @@ public struct HwpDocInfo: HwpData {
         binDataArray = try records
             .filter {$0.tagId == HwpDocInfoTag.BIN_DATA}
             .map {try HwpBinData($0.payload)}
+        
+        faceNameArray = try records
+            .filter {$0.tagId == HwpDocInfoTag.FACE_NAME}
+            .map {try HwpFaceName($0.payload)}
     }
 
     private static func visitDocumentPropertes(_ record: HwpRecord) -> HwpDocumentProperties {
