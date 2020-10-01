@@ -10,11 +10,11 @@ public struct HwpStartingIndex: HwpData {
 
     init(_ data: Data) {
         var reader = DataReader(data)
-        page = reader.readUInt16()
-        footnote = reader.readUInt16()
-        endnote = reader.readUInt16()
-        picture = reader.readUInt16()
-        table = reader.readUInt16()
-        equation = reader.readUInt16()
+        page = reader.read(UInt16.self)
+        footnote = reader.read(UInt16.self)
+        endnote = reader.read(UInt16.self)
+        picture = reader.read(UInt16.self)
+        table = reader.read(UInt16.self)
+        equation = reader.read(UInt16.self)
     }
 }

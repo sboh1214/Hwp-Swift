@@ -5,9 +5,10 @@
 ![Test](https://github.com/sboh1214/HwpKit/workflows/Test/badge.svg)
 ![Coverage](https://github.com/sboh1214/HwpKit/workflows/Coverage/badge.svg)
 ![Documentation](https://github.com/sboh1214/HwpKit/workflows/Documentation/badge.svg)
+![Lint](https://github.com/sboh1214/HwpKit/workflows/Lint/badge.svg)
 [![codecov](https://codecov.io/gh/sboh1214/HwpKit/branch/master/graph/badge.svg)](https://codecov.io/gh/sboh1214/HwpKit)
 
-HWP file reader.
+Swift Package for Reading & Writing HWP File
 
 ## Install
 

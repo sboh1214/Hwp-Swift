@@ -12,7 +12,7 @@ import Foundation
  - rr: Record에 정보들이 추가된 것을 나타냄. 숫자가 달라
  도 구 버전과 호환 가능.
  */
-public struct HwpVersion: HwpData {
+public struct HwpVersion: HwpData, Comparable {
     public let major: UInt8
     public let minor: UInt8
     public let build: UInt8
@@ -20,9 +20,41 @@ public struct HwpVersion: HwpData {
 
     init(_ data: Data) {
         var reader = DataReader(data)
-        revision = reader.readUInt8()
-        build = reader.readUInt8()
-        minor = reader.readUInt8()
-        major = reader.readUInt8()
+        revision = reader.read(UInt8.self)
+        build = reader.read(UInt8.self)
+        minor = reader.read(UInt8.self)
+        major = reader.read(UInt8.self)
+    }
+
+    init(_ major: Int, _ minor: Int, _ build: Int, _ revision: Int) {
+        self.major = UInt8(major)
+        self.minor = UInt8(minor)
+        self.build = UInt8(build)
+        self.revision = UInt8(revision)
+    }
+
+    public static func < (lhs: HwpVersion, rhs: HwpVersion) -> Bool {
+        if lhs.major < rhs.major {
+            return true
+        }
+        if lhs.major > rhs.major {
+            return false
+        }
+        if lhs.minor < rhs.minor {
+            return true
+        }
+        if lhs.minor > rhs.minor {
+            return false
+        }
+        if lhs.build < rhs.build {
+            return true
+        }
+        if lhs.build > rhs.build {
+            return false
+        }
+        if lhs.revision < rhs.revision {
+            return true
+        }
+        return false
     }
 }

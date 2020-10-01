@@ -30,14 +30,14 @@ func parseRecordTree(data: Data) throws -> [HwpRecord] {
     var records = [HwpRecord]()
 
     var reader = DataReader(data)
-    while reader.offset < data.count {
-        let value = reader.readUInt32()
+    while !reader.isEOF() {
+        let value = reader.read(UInt32.self)
 
         let tagId = value & 0x3FF
         let level = (value >> 10) & 0x3FF
         var size = (value >> 20) & 0xFFF
         if size == 0xFFF {
-            size = reader.readUInt32()
+            size = reader.read(UInt32.self)
         }
         print(tagId, level, size)
 

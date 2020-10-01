@@ -5,18 +5,52 @@ import Foundation
  
  본문에 사용 중인 글꼴, 글자 속성, 문단 속성, 탭, 스타일 등에 문서 내 공통으로 사용되는 세부 정보를 담고 있다.
  */
-public struct HwpDocInfo: HwpData {
+public struct HwpDocInfo: HwpDataWithVersion {
 
     public let documentProperties: HwpDocumentProperties
+    public var binDataArray: [HwpBinData]
+    public var faceNameArray: [HwpFaceName]
+    public var borderFillArray: [HwpBorderFill]
+    public var charShapeArray: [HwpCharShape]
+    // TODO HWPTAG_TAB_DEF
+    // TODO HWPTAG_NUMBERING
+    // TODO HWPTAG_BULLET
+    public var paraShapeArray: [HwpParaShape]
+    // TODO HWPTAG_STYLE
+    // TODO HWPTAG_DOC_DATA
+    // HWPTAG_DISTRIBUTE_DOC_DATA
+    // TODO HWPTAG_COMPATIBLE_DOCUMENT
+    // TODO HWPTAG_LAYOUT_COMPATIBILITY
 
-    init(_ data: Data) throws {
+    init(_ data: Data, _ version: HwpVersion) throws {
         let records = try parseRecordTree(data: data)
 
-        guard let documentProperties = records.first(where: { $0.tagId == HwpDocInfoTag.DOCUMENT_PROPERTIES })
+        guard let documentProperties = records
+                .first(where: {$0.tagId == HwpDocInfoTag.DOCUMENT_PROPERTIES})
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.DOCUMENT_PROPERTIES)
         }
         self.documentProperties = HwpDocInfo.visitDocumentPropertes(documentProperties)
+
+        binDataArray = try records
+            .filter {$0.tagId == HwpDocInfoTag.BIN_DATA}
+            .map {try HwpBinData($0.payload)}
+
+        faceNameArray = try records
+            .filter {$0.tagId == HwpDocInfoTag.FACE_NAME}
+            .map {try HwpFaceName($0.payload)}
+
+        borderFillArray = try records
+            .filter {$0.tagId == HwpDocInfoTag.BORDER_FILL}
+            .map {try HwpBorderFill($0.payload)}
+
+        charShapeArray = try records
+            .filter {$0.tagId == HwpDocInfoTag.CHAR_SHAPE}
+            .map {try HwpCharShape($0.payload, version)}
+        
+        paraShapeArray = try records
+            .filter {$0.tagId == HwpDocInfoTag.PARA_SHAPE}
+            .map {try HwpParaShape($0.payload, version)}
     }
 
     private static func visitDocumentPropertes(_ record: HwpRecord) -> HwpDocumentProperties {
