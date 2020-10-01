@@ -12,10 +12,15 @@ public struct HwpDocInfo: HwpDataWithVersion {
     public var faceNameArray: [HwpFaceName]
     public var borderFillArray: [HwpBorderFill]
     public var charShapeArray: [HwpCharShape]
-    // HWPTAG_TAB_DEF
-    // HWPTAG_NUMBERING
-    // HWPTAG_BULLET
+    // TODO HWPTAG_TAB_DEF
+    // TODO HWPTAG_NUMBERING
+    // TODO HWPTAG_BULLET
     public var paraShapeArray: [HwpParaShape]
+    // TODO HWPTAG_STYLE
+    // TODO HWPTAG_DOC_DATA
+    // HWPTAG_DISTRIBUTE_DOC_DATA
+    // TODO HWPTAG_COMPATIBLE_DOCUMENT
+    // TODO HWPTAG_LAYOUT_COMPATIBILITY
 
     init(_ data: Data, _ version: HwpVersion) throws {
         let records = try parseRecordTree(data: data)
