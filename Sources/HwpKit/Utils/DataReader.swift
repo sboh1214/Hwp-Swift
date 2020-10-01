@@ -31,7 +31,7 @@ struct DataReader {
         switch type {
         case is UInt8.Type, is Int8.Type:
             length = 1
-        case is UInt16.Type:
+        case is UInt16.Type, is Int16.Type:
             length = 2
         case is UInt32.Type, is Int32.Type:
             length = 4

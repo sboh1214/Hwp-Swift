@@ -12,6 +12,10 @@ public struct HwpDocInfo: HwpDataWithVersion {
     public var faceNameArray: [HwpFaceName]
     public var borderFillArray: [HwpBorderFill]
     public var charShapeArray: [HwpCharShape]
+    // HWPTAG_TAB_DEF
+    // HWPTAG_NUMBERING
+    // HWPTAG_BULLET
+    public var paraShapeArray: [HwpParaShape]
 
     init(_ data: Data, _ version: HwpVersion) throws {
         let records = try parseRecordTree(data: data)
@@ -38,6 +42,10 @@ public struct HwpDocInfo: HwpDataWithVersion {
         charShapeArray = try records
             .filter {$0.tagId == HwpDocInfoTag.CHAR_SHAPE}
             .map {try HwpCharShape($0.payload, version)}
+        
+        paraShapeArray = try records
+            .filter {$0.tagId == HwpDocInfoTag.PARA_SHAPE}
+            .map {try HwpParaShape($0.payload, version)}
     }
 
     private static func visitDocumentPropertes(_ record: HwpRecord) -> HwpDocumentProperties {
