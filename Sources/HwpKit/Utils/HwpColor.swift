@@ -1,11 +1,9 @@
 import Foundation
 
 public struct HwpColor: Codable, Equatable {
-    // swiftlint:disable identifier_name
     public let red: Int
     public let green: Int
     public let blue: Int
-    // swiftlint:enable identifier_name
 
     public init(_ data: UInt32) {
         red = getBitValue(Int(data), 0, 7)

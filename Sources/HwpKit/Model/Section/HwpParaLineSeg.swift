@@ -6,7 +6,7 @@ import Foundation
  Tag ID : HWPTAG_PARA_LINE_SEG
  문단의 각 줄을 출력할 때 사용한 Cache 정보이며, 문단 정보의 ‘각 줄에 대한 align에 대한 정보 수’만큼 반복한다.
  */
-public struct HwpParaLineSeg: HwpData{
+public struct HwpParaLineSeg: HwpData {
     /**텍스트 시작 위치*/
     public let textStartingIndex: UInt32
     /**줄의 세로 위치*/
@@ -36,14 +36,14 @@ public struct HwpParaLineSeg: HwpData{
      - bit 31 : 구현상의 편의를 위한 property
      */
     public let property: UInt32
-    
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         print(data.count)
         defer {
             // precondition(reader.isEOF())
         }
-        
+
         textStartingIndex = reader.read(UInt32.self)
         lineLocation = reader.read(Int32.self)
         lineHeight = reader.read(Int32.self)

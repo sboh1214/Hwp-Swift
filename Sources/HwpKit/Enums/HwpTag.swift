@@ -11,11 +11,11 @@ final class HwpDocInfoTag {
     static let borderFill: UInt32 = BEGIN + 4
     static let charShape: UInt32 = BEGIN + 5
     static let tabDef: UInt32 = BEGIN + 6
-    static let NUMBERING: UInt32 = BEGIN + 7
-    static let BULLET: UInt32 = BEGIN + 8
+    static let numbering: UInt32 = BEGIN + 7
+    static let bullet: UInt32 = BEGIN + 8
     static let paraShape: UInt32 = BEGIN + 9
-    static let STYLE: UInt32 = BEGIN + 10
-    static let DOC_DATA: UInt32 = BEGIN + 11
+    static let style: UInt32 = BEGIN + 10
+    static let docData: UInt32 = BEGIN + 11
     static let DISTRIBUTE_DOC_DATA: UInt32 = BEGIN + 12
     static let RESERVED: UInt32 = BEGIN + 13
     static let COMPATIBLE_DOCUMENT: UInt32 = BEGIN + 14

@@ -10,13 +10,13 @@ public struct HwpParaCharShape: HwpData {
     public var startingIndex: [UInt32]
     /**글자 모양 ID*/
     public var shapeId: [UInt32]
-    
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         defer {
             precondition(reader.isEOF())
         }
-        
+
         var startingIndex = [UInt32]()
         var shapeId = [UInt32]()
         while !reader.isEOF() {
