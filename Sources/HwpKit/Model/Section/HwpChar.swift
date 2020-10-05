@@ -1,6 +1,6 @@
 import Foundation
 
 public struct HwpChar: Codable {
-    let type: HwpCharType
-    let value: WCHAR
+    public let type: HwpCharType
+    public let value: WCHAR
 }

@@ -1,5 +1,10 @@
 import Foundation
 
+/**
+ 문단의 글자 모양
+ 
+ Tag ID : HWPTAG_PARA_CHAR_SHAPE
+ */
 public struct HwpParaCharShape: HwpData {
     /**글자 모양이 바뀌는 시작 위치*/
     public var startingIndex: [UInt32]

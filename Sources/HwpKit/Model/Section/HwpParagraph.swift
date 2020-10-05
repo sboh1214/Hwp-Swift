@@ -4,6 +4,8 @@ public struct HwpParagraph: HwpRecordWithVersion {
     public let paraHeader: HwpParaHeader
     public var paraText: HwpParaText? = nil
     public var paraCharShape: HwpParaCharShape? = nil
+    
+    public var paraLineSeg: [HwpParaLineSeg]? = nil
 
     init(_ record: HwpTreeRecord, _ version: HwpVersion) throws {
         paraHeader = try HwpParaHeader(record.payload, version)
@@ -19,5 +21,9 @@ public struct HwpParagraph: HwpRecordWithVersion {
         {
             self.paraCharShape = try HwpParaCharShape(paraCharShape.payload)
         }
+        
+        paraLineSeg = try record.children
+            .filter {$0.tagId == HwpSectionTag.paraLineSeg}
+            .map {try HwpParaLineSeg($0.payload)}
     }
 }
