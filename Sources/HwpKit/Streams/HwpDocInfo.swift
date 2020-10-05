@@ -23,33 +23,33 @@ public struct HwpDocInfo: HwpDataWithVersion {
     // TODO HWPTAG_LAYOUT_COMPATIBILITY
 
     init(_ data: Data, _ version: HwpVersion) throws {
-        let records = try parseRecordTree(data: data)
+        let records = try parseRecordArray(data: data)
 
         guard let documentProperties = records
-                .first(where: {$0.tagId == HwpDocInfoTag.DOCUMENT_PROPERTIES})
+                .first(where: {$0.tagId == HwpDocInfoTag.documentProperties})
         else {
-            throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.DOCUMENT_PROPERTIES)
+            throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.documentProperties)
         }
         self.documentProperties = HwpDocInfo.visitDocumentPropertes(documentProperties)
 
         binDataArray = try records
-            .filter {$0.tagId == HwpDocInfoTag.BIN_DATA}
+            .filter {$0.tagId == HwpDocInfoTag.binData}
             .map {try HwpBinData($0.payload)}
 
         faceNameArray = try records
-            .filter {$0.tagId == HwpDocInfoTag.FACE_NAME}
+            .filter {$0.tagId == HwpDocInfoTag.faceName}
             .map {try HwpFaceName($0.payload)}
 
         borderFillArray = try records
-            .filter {$0.tagId == HwpDocInfoTag.BORDER_FILL}
+            .filter {$0.tagId == HwpDocInfoTag.borderFill}
             .map {try HwpBorderFill($0.payload)}
 
         charShapeArray = try records
-            .filter {$0.tagId == HwpDocInfoTag.CHAR_SHAPE}
+            .filter {$0.tagId == HwpDocInfoTag.charShape}
             .map {try HwpCharShape($0.payload, version)}
-        
+
         paraShapeArray = try records
-            .filter {$0.tagId == HwpDocInfoTag.PARA_SHAPE}
+            .filter {$0.tagId == HwpDocInfoTag.paraShape}
             .map {try HwpParaShape($0.payload, version)}
     }
 

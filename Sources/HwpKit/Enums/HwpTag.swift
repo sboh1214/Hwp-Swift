@@ -1,21 +1,19 @@
-// swiftlint:disable identifier_name
-
 let BEGIN: UInt32 = 0x10
 
 /**
  ’문서 정보’의 데이터 레코드
  */
 final class HwpDocInfoTag {
-    static let DOCUMENT_PROPERTIES: UInt32 = BEGIN
-    static let ID_MAPPINGS: UInt32 = BEGIN + 1
-    static let BIN_DATA: UInt32 = BEGIN + 2
-    static let FACE_NAME: UInt32 = BEGIN + 3
-    static let BORDER_FILL: UInt32 = BEGIN + 4
-    static let CHAR_SHAPE: UInt32 = BEGIN + 5
-    static let TAB_DEF: UInt32 = BEGIN + 6
+    static let documentProperties: UInt32 = BEGIN
+    static let idMappings: UInt32 = BEGIN + 1
+    static let binData: UInt32 = BEGIN + 2
+    static let faceName: UInt32 = BEGIN + 3
+    static let borderFill: UInt32 = BEGIN + 4
+    static let charShape: UInt32 = BEGIN + 5
+    static let tabDef: UInt32 = BEGIN + 6
     static let NUMBERING: UInt32 = BEGIN + 7
     static let BULLET: UInt32 = BEGIN + 8
-    static let PARA_SHAPE: UInt32 = BEGIN + 9
+    static let paraShape: UInt32 = BEGIN + 9
     static let STYLE: UInt32 = BEGIN + 10
     static let DOC_DATA: UInt32 = BEGIN + 11
     static let DISTRIBUTE_DOC_DATA: UInt32 = BEGIN + 12
@@ -33,18 +31,18 @@ final class HwpDocInfoTag {
  ‘본문’의 데이터 레코드
  */
 final class HwpSectionTag {
-    static let PARA_HEADER: UInt32 = BEGIN + 50
-    static let PARA_TEXT: UInt32 = BEGIN + 51
-    static let PARA_CHAR_SHAPE: UInt32 = BEGIN + 52
-    static let PARA_LINE_SEG: UInt32 = BEGIN + 53
-    static let PARA_RANGE_TAG: UInt32 = BEGIN + 54
-    static let CTRL_HEADER: UInt32 = BEGIN + 55
-    static let LIST_HEADER: UInt32 = BEGIN + 56
-    static let PAGE_DEF: UInt32 = BEGIN + 57
-    static let FOOTNOTE_SHAPE: UInt32 = BEGIN + 58
+    static let paraHeader: UInt32 = BEGIN + 50
+    static let paraText: UInt32 = BEGIN + 51
+    static let paraCharShape: UInt32 = BEGIN + 52
+    static let paraLineSeg: UInt32 = BEGIN + 53
+    static let paraRangeTag: UInt32 = BEGIN + 54
+    static let ctrlHeader: UInt32 = BEGIN + 55
+    static let listHeader: UInt32 = BEGIN + 56
+    static let pageDef: UInt32 = BEGIN + 57
+    static let footnoteShape: UInt32 = BEGIN + 58
     static let PAGE_BORDER_FILL: UInt32 = BEGIN + 59
     static let SHAPE_COMPONENT: UInt32 = BEGIN + 60
-    static let TABLE: UInt32 = BEGIN + 61
+    static let table: UInt32 = BEGIN + 61
     static let SHAPE_COMPONENT_LINE: UInt32 = BEGIN + 62
     static let SHAPE_COMPONENT_RECTANGLE: UInt32 = BEGIN + 63
     static let SHAPE_COMPONENT_ELLIPSE: UInt32 = BEGIN + 64

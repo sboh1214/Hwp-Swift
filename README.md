@@ -8,6 +8,9 @@
 ![Lint](https://github.com/sboh1214/HwpKit/workflows/Lint/badge.svg)
 [![codecov](https://codecov.io/gh/sboh1214/HwpKit/branch/master/graph/badge.svg)](https://codecov.io/gh/sboh1214/HwpKit)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sboh1214_HwpKit&metric=alert_status)](https://sonarcloud.io/dashboard?id=sboh1214_HwpKit)
+[![CodeFactor](https://www.codefactor.io/repository/github/sboh1214/hwpkit/badge)](https://www.codefactor.io/repository/github/sboh1214/hwpkit)
+
 Swift Package for Reading & Writing HWP File
 
 ## Install
