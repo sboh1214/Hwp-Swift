@@ -7,6 +7,8 @@
 ![Documentation](https://github.com/sboh1214/HwpKit/workflows/Documentation/badge.svg)
 ![Lint](https://github.com/sboh1214/HwpKit/workflows/Lint/badge.svg)
 
+[![Discord](https://img.shields.io/discord/761775951012692018?label=Discord)](https://discord.gg/rV6d5JX)
+
 Swift Package for Reading & Writing HWP File
 
 ## Install
