@@ -21,8 +21,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install SwiftEnv
       run: brew install kylef/formulae/swiftenv
-    - name: Install Swift ${{ matrix.swift }}
-      run: swiftenv install ${{ matrix.swift }}
     - name: Set Swift ${{ matrix.swift }}
       run: swiftenv global ${{ matrix.swift }}
     - name: Build
