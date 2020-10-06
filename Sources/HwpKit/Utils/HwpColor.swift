@@ -1,22 +1,20 @@
 import Foundation
 
 public struct HwpColor: Codable, Equatable {
-    // swiftlint:disable identifier_name
-    public let r: Int
-    public let g: Int
-    public let b: Int
-    // swiftlint:enable identifier_name
+    public let red: Int
+    public let green: Int
+    public let blue: Int
 
     public init(_ data: UInt32) {
-        r = getBitValue(Int(data), 0, 7)
-        g = getBitValue(Int(data), 0, 7)
-        b = getBitValue(Int(data), 0, 7)
+        red = getBitValue(Int(data), 0, 7)
+        green = getBitValue(Int(data), 0, 7)
+        blue = getBitValue(Int(data), 0, 7)
     }
 
     public init(_ red: Int, _ green: Int, _ blue: Int) {
-        self.r = red
-        self.g = green
-        self.b = blue
+        self.red = red
+        self.green = green
+        self.blue = blue
     }
 }
 

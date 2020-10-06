@@ -12,7 +12,7 @@ struct DataReader {
         return offset == data.count
     }
 
-    mutating func readBytes(_ length: Int) -> Data {
+    @discardableResult mutating func readBytes(_ length: Int) -> Data {
         precondition(offset + length < data.count + 1)
         defer {
             offset += length

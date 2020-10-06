@@ -1,6 +1,7 @@
 excluded:
   - Carthage
   - Pods
+  - .build
 
 line_length: 100
 

@@ -1,7 +1,7 @@
 import HwpKit
 import XCTest
 
-final class NooriTests: XCTestCase {
+final class NooriDocInfoTests: XCTestCase {
     func openHwp() throws -> HwpFile {
         let url = URL(fileURLWithPath: #file)
             .deletingLastPathComponent()
@@ -63,25 +63,25 @@ final class NooriTests: XCTestCase {
         let border = hwp.docInfo.borderFillArray
         XCTAssertEqual(border[0].borderColor[0], HwpColor(0, 0, 0))
     }
-    
+
     func testCharShape() throws {
         let hwp = try openHwp()
         let char = hwp.docInfo.charShapeArray
         XCTAssertEqual(char[0].property, 0)
-        XCTAssertEqual(char[0].faceColor, HwpColor(0,0,0))
+        XCTAssertEqual(char[0].faceColor, HwpColor(0, 0, 0))
         XCTAssertEqual(char[0].borderFillId, 2)
-        XCTAssertEqual(char[0].faceId, [5,5,5,5,5,5,5])
-        XCTAssertEqual(char[0].faceLocation, [0,0,0,0,0,0,0])
+        XCTAssertEqual(char[0].faceId, [5, 5, 5, 5, 5, 5, 5])
+        XCTAssertEqual(char[0].faceLocation, [0, 0, 0, 0, 0, 0, 0])
         XCTAssertEqual(char[0].faceRelativeSize, Array(repeating: 100, count: 7))
         XCTAssertEqual(char[0].faceScaleX, Array(repeating: 100, count: 7))
-        XCTAssertEqual(char[0].shadeColor, HwpColor(255,255,255))
-        XCTAssertEqual(char[0].shadowColor, HwpColor(178,178,178))
-        XCTAssertEqual(char[0].underlineColor, HwpColor(0,0,0))
-        XCTAssertEqual(char[0].strikethroughColor!, HwpColor(0,0,0))
-        
+        XCTAssertEqual(char[0].shadeColor, HwpColor(255, 255, 255))
+        XCTAssertEqual(char[0].shadowColor, HwpColor(178, 178, 178))
+        XCTAssertEqual(char[0].underlineColor, HwpColor(0, 0, 0))
+        XCTAssertEqual(char[0].strikethroughColor!, HwpColor(0, 0, 0))
+
         XCTAssertEqual(char[58].property, 2)
     }
-    
+
     func testTabDef() throws {
         let hwp = try openHwp()
         let shape = hwp.docInfo.paraShapeArray
@@ -89,10 +89,20 @@ final class NooriTests: XCTestCase {
         XCTAssertEqual(shape[46].property1, 268)
     }
 
+    func testCtrlHeader() throws {
+        let hwp = try openHwp()
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].ctrlId, 1885826672)
+    }
+
     static var allTests = [
         ("testSectionSize", testSectionSize),
         ("testStartingIndex", testStartingIndex),
         ("testCaratLocation", testCaratLocation),
-        ("testBinData", testBinData)
+        ("testBinData", testBinData),
+        ("testFaceName", testFaceName),
+        ("testBorderFill", testBorderFill),
+        ("testCharShape", testCharShape),
+        ("testTabDef", testTabDef),
+        ("testCtrlHeader", testCtrlHeader)
     ]
 }
