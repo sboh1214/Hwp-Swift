@@ -39,7 +39,6 @@ public struct HwpParaLineSeg: HwpData {
 
     init(_ data: Data) throws {
         var reader = DataReader(data)
-        print(data.count)
         defer {
             // precondition(reader.isEOF())
         }
