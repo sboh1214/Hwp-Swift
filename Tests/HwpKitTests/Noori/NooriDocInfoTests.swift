@@ -91,7 +91,7 @@ final class NooriDocInfoTests: XCTestCase {
 
     func testCtrlHeader() throws {
         let hwp = try openHwp()
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].id, 1885826672)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].ctrlId, 1885826672)
     }
 
     static var allTests = [

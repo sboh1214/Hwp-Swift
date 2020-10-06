@@ -7,10 +7,10 @@ import Foundation
  Tag ID : HWPTAG_CTRL_HEADER
  */
 public struct HwpCtrlHeader: HwpData {
-    public let id: UInt32
+    public let ctrlId: UInt32
 
     init(_ data: Data) throws {
         var reader = DataReader(data)
-        id = reader.read(UInt32.self)
+        ctrlId = reader.read(UInt32.self)
     }
 }
