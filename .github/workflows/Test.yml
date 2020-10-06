@@ -15,14 +15,16 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest]
-        swift: ["5.1", "5.2"]
+        swift: ["5.1", "5.2", "5.3"]
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup Swift
-      uses: fwal/setup-swift@v1.3.0
-      with:
-        swift-version: ${{ matrix.swift }}
+    - name: Install SwiftEnv
+      run: brew install kylef/formulae/swiftenv
+    - name: Install Swift ${{ matrix.swift }}
+      run: swiftenv install ${{ matrix.swift }}
+    - name: Set Swift ${{ matrix.swift }}
+      run: swiftenv global ${{ matrix.swift }}
     - name: Build
       run: swift build -v
     - name: Run tests
