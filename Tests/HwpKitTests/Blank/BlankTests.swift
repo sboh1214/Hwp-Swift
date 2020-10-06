@@ -31,11 +31,4 @@ final class BlankTests: XCTestCase {
         let hwp = try openHwp()
         XCTAssertEqual(hwp.fileHeader.encryptVersion, 4)
     }
-
-    static var allTests = [
-        ("testOpen", testOpen),
-        ("testSignature", testSignature),
-        ("testHwpVersion", testHwpVersion),
-        ("testEncryptVersion", testEncryptVersion)
-    ]
 }

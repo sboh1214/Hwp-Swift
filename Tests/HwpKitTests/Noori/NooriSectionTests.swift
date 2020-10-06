@@ -53,11 +53,4 @@ final class NooriSectionTests: XCTestCase {
 
         XCTAssertNotNil(hwp.sectionArray[0].paragraph[20].paraLineSegArray![0])
     }
-
-    static var allTests = [
-        ("testParagraph", testParagraph),
-        ("testParaText", testParaText),
-        ("testParaCharShape", testParaCharShape),
-        ("testParaLineSeg", testParaLineSeg)
-    ]
 }

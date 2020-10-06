@@ -93,16 +93,4 @@ final class NooriDocInfoTests: XCTestCase {
         let hwp = try openHwp()
         XCTAssertEqual(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].ctrlId, 1885826672)
     }
-
-    static var allTests = [
-        ("testSectionSize", testSectionSize),
-        ("testStartingIndex", testStartingIndex),
-        ("testCaratLocation", testCaratLocation),
-        ("testBinData", testBinData),
-        ("testFaceName", testFaceName),
-        ("testBorderFill", testBorderFill),
-        ("testCharShape", testCharShape),
-        ("testTabDef", testTabDef),
-        ("testCtrlHeader", testCtrlHeader)
-    ]
 }
