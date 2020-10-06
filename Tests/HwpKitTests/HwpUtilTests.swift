@@ -7,8 +7,4 @@ final class HwpUtilTests: XCTestCase {
         let bits = [false, true, false, false, true, false, true, false].reversed() as [Bool]
         XCTAssertEqual(bits, byte.bits)
     }
-
-    static var allTests = [
-        ("testBitsFromInt8", testBitsFromInt8)
-    ]
 }

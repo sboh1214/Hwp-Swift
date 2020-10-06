@@ -1,22 +1,29 @@
 name: Test
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }} and swift ${{ matrix.swift }}
-    runs-on: ${{ matrix.os }}
+    name: Test on Xcode ${{ matrix.xcode }}
+    runs-on: macos-latest
     strategy:
       matrix:
-        os: [macOS-latest]
-        swift: ["5.1", "5.2"]
+        xcode: ["11.7", "11.3.1"]
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup Swift
-      uses: fwal/setup-swift@v1.2.0
-      with:
-        swift-version: ${{ matrix.swift }}
+    - name: Set Xcode version
+      run: |
+        sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app/
+        export TOOLCHAINS=swift
+    - name: Get Swift version
+      run:  swift --version
     - name: Build
       run: swift build -v
     - name: Run tests
