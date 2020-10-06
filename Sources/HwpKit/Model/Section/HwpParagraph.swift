@@ -5,8 +5,10 @@ public struct HwpParagraph: HwpRecordWithVersion {
     public var paraText: HwpParaText?
     public var paraCharShape: HwpParaCharShape?
 
-    public var paraLineSeg: [HwpParaLineSeg]?
-    public var paraRangeTag: [HwpParaRangeTag]?
+    public var paraLineSegArray: [HwpParaLineSeg]?
+    public var paraRangeTagArray: [HwpParaRangeTag]?
+    public var ctrlHeaderArray: [HwpCtrlHeader]?
+    public var listHeaderArray: [HwpListHeader]?
 
     init(_ record: HwpTreeRecord, _ version: HwpVersion) throws {
         paraHeader = try HwpParaHeader(record.payload, version)
@@ -21,12 +23,20 @@ public struct HwpParagraph: HwpRecordWithVersion {
             self.paraCharShape = try HwpParaCharShape(paraCharShape.payload)
         }
 
-        paraLineSeg = try record.children
+        paraLineSegArray = try record.children
             .filter {$0.tagId == HwpSectionTag.paraLineSeg}
             .map {try HwpParaLineSeg($0.payload)}
 
-        paraRangeTag = try record.children
+        paraRangeTagArray = try record.children
             .filter {$0.tagId == HwpSectionTag.paraRangeTag}
             .map {try HwpParaRangeTag($0.payload)}
+
+        ctrlHeaderArray = try record.children
+            .filter {$0.tagId == HwpSectionTag.ctrlHeader}
+            .map {try HwpCtrlHeader($0.payload)}
+
+        listHeaderArray = try record.children
+            .filter {$0.tagId == HwpSectionTag.listHeader}
+            .map { try HwpListHeader($0.payload)}
     }
 }

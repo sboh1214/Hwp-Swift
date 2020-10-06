@@ -41,7 +41,7 @@ final class NooriSectionTests: XCTestCase {
 
     func testParaLineSeg() throws {
         let hwp = try openHwp()
-        let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSeg![0]
+        let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSegArray![0]
         XCTAssertEqual(seg0.textStartingIndex, 0)
         XCTAssertEqual(seg0.lineLocation, 0)
         XCTAssertEqual(seg0.lineHeight, 6134)
@@ -51,7 +51,7 @@ final class NooriSectionTests: XCTestCase {
         XCTAssertEqual(seg0.startingLocation, 0)
         XCTAssertEqual(seg0.width, 48188)
 
-        XCTAssertNotNil(hwp.sectionArray[0].paragraph[20].paraLineSeg![0])
+        XCTAssertNotNil(hwp.sectionArray[0].paragraph[20].paraLineSegArray![0])
     }
 
     static var allTests = [

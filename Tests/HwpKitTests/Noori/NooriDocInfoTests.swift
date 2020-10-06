@@ -89,6 +89,11 @@ final class NooriDocInfoTests: XCTestCase {
         XCTAssertEqual(shape[46].property1, 268)
     }
 
+    func testCtrlHeader() throws {
+        let hwp = try openHwp()
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].id, 1885826672)
+    }
+
     static var allTests = [
         ("testSectionSize", testSectionSize),
         ("testStartingIndex", testStartingIndex),
@@ -97,6 +102,7 @@ final class NooriDocInfoTests: XCTestCase {
         ("testFaceName", testFaceName),
         ("testBorderFill", testBorderFill),
         ("testCharShape", testCharShape),
-        ("testTabDef", testTabDef)
+        ("testTabDef", testTabDef),
+        ("testCtrlHeader", testCtrlHeader)
     ]
 }
