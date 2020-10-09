@@ -7,7 +7,7 @@ import Foundation
  문단은 최소 하나의 문자 Shape buffer가 존재하며, 첫 번째 pos가 반드시 0이어야 한다.
  텍스트 문자 Shape 레코드를 글자 모양 정보 수(Character Shapes)만큼 읽는다.
  */
-public struct HwpParaText: HwpData {
+public struct HwpParaText: HwpFromData {
     /**문자수만큼의 텍스트*/
     public var charArray: [HwpChar]
 

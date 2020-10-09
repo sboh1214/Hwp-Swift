@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpCharShape: HwpDataWithVersion {
+public struct HwpCharShape: HwpFromDataWithVersion {
     /**언어별 글꼴 ID(FaceID) 참조 값*/
     public let faceId: [WORD]
     /**언어별 장평, 50%~200%(*/

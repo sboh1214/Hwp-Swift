@@ -6,7 +6,7 @@ import Foundation
  Tag ID : HWPTAG_PARA_HEADER
  텍스트의 수가 1 이상이면 문자 수만큼 텍스트를 로드하고 그렇지 않을 경우 PARA_BREAK로 문단을 생성한다.
  */
-public struct HwpParaHeader: HwpDataWithVersion {
+public struct HwpParaHeader: HwpFromDataWithVersion {
     /**if (nchars & 0x80000000) { nchars &= 0x7fffffff;}*/
     public let isLastInList: Bool
     /**text(=chars)*/

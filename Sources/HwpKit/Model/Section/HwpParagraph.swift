@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpParagraph: HwpRecordWithVersion {
+public struct HwpParagraph: HwpFromRecordWithVersion {
     public let paraHeader: HwpParaHeader
     public var paraText: HwpParaText?
     public var paraCharShape: HwpParaCharShape?

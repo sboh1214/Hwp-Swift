@@ -7,7 +7,7 @@ import Foundation
  글자 모양과는 달리 각 영역은 서로 겹칠 수 있다.(형광펜, 교정 부호 등)
  Tag ID : HWPTAG_PARA_RANGE_TAG
  */
-public struct HwpParaRangeTag: HwpData {
+public struct HwpParaRangeTag: HwpFromData {
     /**영역 시작*/
     public let start: UInt32
     /**영역 끝*/

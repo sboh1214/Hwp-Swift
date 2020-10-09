@@ -5,7 +5,7 @@ import Foundation
  
  Tag ID : HWPTAG_LIST_HEADER
  */
-public struct HwpListHeader: HwpData {
+public struct HwpListHeader: HwpFromData {
     /**
      문단 수
      

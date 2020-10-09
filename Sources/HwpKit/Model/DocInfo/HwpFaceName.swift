@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpFaceName: HwpData {
+public struct HwpFaceName: HwpFromData {
     public let property: BYTE
     public let faceNameLength: WORD
     public let faceName: [WCHAR]

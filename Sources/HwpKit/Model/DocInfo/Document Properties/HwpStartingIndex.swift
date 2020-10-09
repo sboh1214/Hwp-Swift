@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpStartingIndex: HwpData {
+public struct HwpStartingIndex: HwpFromData {
     public let page: UInt16
     public let footnote: UInt16
     public let endnote: UInt16

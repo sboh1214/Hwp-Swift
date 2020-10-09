@@ -3,7 +3,7 @@ import Foundation
 /**
  본문
  */
-public struct HwpSection: HwpDataWithVersion {
+public struct HwpSection: HwpFromDataWithVersion {
     public var paragraph: [HwpParagraph]
 
     init(_ data: Data, _ version: HwpVersion) throws {

@@ -5,7 +5,7 @@ import Foundation
  
  한글의 문서 파일이라는 것을 나타내기 위해 ‘파일 인식 정보’가 저장된다.
  */
-public struct HwpFileHeader: HwpData {
+public struct HwpFileHeader: HwpFromData {
     /** signature. 문서 파일은 "HWP Document File" */
     public let signature: String
     public let version: HwpVersion

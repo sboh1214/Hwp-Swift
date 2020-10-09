@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpBorderFill: HwpData {
+public struct HwpBorderFill: HwpFromData {
     public let property: UInt16
     public let borderType: [UInt8]
     public let borderThickness: [UInt8]

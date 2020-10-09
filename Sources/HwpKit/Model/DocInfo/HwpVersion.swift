@@ -12,7 +12,7 @@ import Foundation
  - rr: Record에 정보들이 추가된 것을 나타냄. 숫자가 달라
  도 구 버전과 호환 가능.
  */
-public struct HwpVersion: HwpData, Comparable {
+public struct HwpVersion: HwpFromData, Comparable {
     public let major: UInt8
     public let minor: UInt8
     public let build: UInt8

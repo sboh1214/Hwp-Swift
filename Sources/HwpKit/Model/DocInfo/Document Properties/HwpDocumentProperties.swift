@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpDocumentProperties: HwpData {
+public struct HwpDocumentProperties: HwpFromData {
     public let sectionSize: UInt16
     public let startingIndex: HwpStartingIndex
     public let caratLocation: HwpCaratLocation

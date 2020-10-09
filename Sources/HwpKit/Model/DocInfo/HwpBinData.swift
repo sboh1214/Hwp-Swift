@@ -5,7 +5,7 @@ import Foundation
  
  Tag ID : HWPTAG_BIN_DATA
  */
-public struct HwpBinData: HwpData {
+public struct HwpBinData: HwpFromData {
     /**속성 -> type*/
     public let type: HwpBinDataType
 

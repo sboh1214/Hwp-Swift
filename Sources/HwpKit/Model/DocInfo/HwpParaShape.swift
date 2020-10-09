@@ -5,7 +5,7 @@ import Foundation
  
  Tag ID : HWPTAG_PARA_SHAPE
  */
-public struct HwpParaShape: HwpDataWithVersion {
+public struct HwpParaShape: HwpFromDataWithVersion {
     /**속성 1*/
     public let property1: UInt32
     /**왼쪽 여백*/
