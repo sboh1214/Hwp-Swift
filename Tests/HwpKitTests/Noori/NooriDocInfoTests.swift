@@ -93,4 +93,15 @@ final class NooriDocInfoTests: XCTestCase {
         let hwp = try openHwp()
         XCTAssertEqual(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].ctrlId, 1885826672)
     }
+    
+    func testCompatibleDocument() throws {
+        let hwp = try openHwp()
+        let compatible = hwp.docInfo.compatibleDocument
+        XCTAssertEqual(compatible!.targetDocument, 0)
+        XCTAssertEqual(compatible!.layoutCompatibility!.char, 0)
+        XCTAssertEqual(compatible!.layoutCompatibility!.paragraph, 0)
+        XCTAssertEqual(compatible!.layoutCompatibility!.section, 0)
+        XCTAssertEqual(compatible!.layoutCompatibility!.object, 0)
+        XCTAssertEqual(compatible!.layoutCompatibility!.field, 0)
+    }
 }
