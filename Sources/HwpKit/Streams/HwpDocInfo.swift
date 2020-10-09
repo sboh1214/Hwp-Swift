@@ -23,37 +23,33 @@ public struct HwpDocInfo: HwpDataWithVersion {
     // TODO HWPTAG_LAYOUT_COMPATIBILITY
 
     init(_ data: Data, _ version: HwpVersion) throws {
-        let records = try parseRecordArray(data: data)
+        let record = try parseTreeRecord(data: data)
 
-        guard let documentProperties = records
+        guard let documentProperties = record.children
                 .first(where: {$0.tagId == HwpDocInfoTag.documentProperties})
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.documentProperties)
         }
-        self.documentProperties = HwpDocInfo.visitDocumentPropertes(documentProperties)
+        self.documentProperties = HwpDocumentProperties(documentProperties.payload)
 
-        binDataArray = try records
+        binDataArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.binData}
             .map {try HwpBinData($0.payload)}
 
-        faceNameArray = try records
+        faceNameArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.faceName}
             .map {try HwpFaceName($0.payload)}
 
-        borderFillArray = try records
+        borderFillArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.borderFill}
             .map {try HwpBorderFill($0.payload)}
 
-        charShapeArray = try records
+        charShapeArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.charShape}
             .map {try HwpCharShape($0.payload, version)}
 
-        paraShapeArray = try records
+        paraShapeArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.paraShape}
             .map {try HwpParaShape($0.payload, version)}
-    }
-
-    private static func visitDocumentPropertes(_ record: HwpRecord) -> HwpDocumentProperties {
-        return HwpDocumentProperties(record.payload)
     }
 }
