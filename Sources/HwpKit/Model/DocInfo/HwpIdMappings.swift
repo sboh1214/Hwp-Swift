@@ -11,7 +11,7 @@ public struct HwpIdMappings: HwpFromRecordWithVersion {
     // TODO HWPTAG_BULLET
     public var paraShapeArray: [HwpParaShape]
     
-    init(_ record: HwpTreeRecord, _ version: HwpVersion) throws {
+    init(_ record: HwpRecord, _ version: HwpVersion) throws {
         binDataArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.binData}
             .map {try HwpBinData($0.payload)}

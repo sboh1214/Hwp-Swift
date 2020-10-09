@@ -9,9 +9,9 @@ protocol HwpFromDataWithVersion: Codable {
 }
 
 protocol HwpFromRecord: Codable {
-    init(_ record: HwpTreeRecord) throws 
+    init(_ record: HwpRecord) throws 
 }
 
 protocol HwpFromRecordWithVersion: Codable {
-    init(_ record: HwpTreeRecord, _ version: HwpVersion) throws
+    init(_ record: HwpRecord, _ version: HwpVersion) throws
 }

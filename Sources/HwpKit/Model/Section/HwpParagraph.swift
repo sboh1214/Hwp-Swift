@@ -10,7 +10,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
     public var ctrlHeaderArray: [HwpCtrlHeader]?
     public var listHeaderArray: [HwpListHeader]?
 
-    init(_ record: HwpTreeRecord, _ version: HwpVersion) throws {
+    init(_ record: HwpRecord, _ version: HwpVersion) throws {
         paraHeader = try HwpParaHeader(record.payload, version)
 
         if let paraText = record.children
