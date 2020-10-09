@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpColor: Codable, Equatable {
+public struct HwpColor: HwpPrimitive {
     public let red: Int
     public let green: Int
     public let blue: Int
