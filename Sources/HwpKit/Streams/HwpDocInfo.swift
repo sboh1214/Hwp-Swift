@@ -9,13 +9,12 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
 
     public let documentProperties: HwpDocumentProperties
     public let idMappings: HwpIdMappings
-    
+
     // TODO HWPTAG_STYLE
     // TODO HWPTAG_DOC_DATA
     // HWPTAG_DISTRIBUTE_DOC_DATA
     // public var compatibleDocument
     // TODO HWPTAG_LAYOUT_COMPATIBILITY
-    
 
     init(_ data: Data, _ version: HwpVersion) throws {
         let record = parseTreeRecord(data: data)
@@ -26,7 +25,7 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.documentProperties)
         }
         self.documentProperties = HwpDocumentProperties(documentProperties.payload)
-        
+
         guard let idMappings = record.children
                 .first(where: {$0.tagId == HwpDocInfoTag.idMappings})
         else {

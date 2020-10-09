@@ -11,7 +11,7 @@ protocol HwpFromDataWithVersion: HwpPrimitive {
 }
 
 protocol HwpFromRecord: HwpPrimitive {
-    init(_ record: HwpRecord) throws 
+    init(_ record: HwpRecord) throws
 }
 
 protocol HwpFromRecordWithVersion: HwpPrimitive {

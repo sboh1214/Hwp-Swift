@@ -7,7 +7,7 @@ import Foundation
  */
 public struct HwpIdMappings: HwpFromRecordWithVersion {
     /**바이너리 데이터*/
-    private let binaryDataCount : Int32
+    private let binaryDataCount: Int32
     /**영어 글꼴*/
     private let englishFaceCount: Int32
     /**한자 글꼴*/
@@ -35,11 +35,11 @@ public struct HwpIdMappings: HwpFromRecordWithVersion {
     /**스타일*/
     private let styleCount: Int32
     /**메모 모양 (5.0.2.1 이상)*/
-    private var memoShapeCount: Int32? = nil
+    private var memoShapeCount: Int32?
     /**변경추적 (5.0.3.2 이상)*/
-    private var changeTraceCount: Int32? = nil
+    private var changeTraceCount: Int32?
     /**변경추적 사용자 (5.0.3.2 이상)*/
-    private var changeTraceUserCount: Int32? = nil
+    private var changeTraceUserCount: Int32?
 
     public var binDataArray: [HwpBinData]
     public var faceNameArray: [HwpFaceName]
@@ -49,7 +49,7 @@ public struct HwpIdMappings: HwpFromRecordWithVersion {
     // TODO HWPTAG_NUMBERING
     // TODO HWPTAG_BULLET
     public var paraShapeArray: [HwpParaShape]
-    
+
     init(_ record: HwpRecord, _ version: HwpVersion) throws {
         var reader = DataReader(record.payload)
         defer {
@@ -72,27 +72,27 @@ public struct HwpIdMappings: HwpFromRecordWithVersion {
         if version >= HwpVersion(5, 0, 2, 1) {
             memoShapeCount = reader.read(Int32.self)
         }
-        if version >= HwpVersion(5,0,3,2) {
+        if version >= HwpVersion(5, 0, 3, 2) {
             changeTraceCount = reader.read(Int32.self)
             changeTraceUserCount = reader.read(Int32.self)
         }
-        
+
         binDataArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.binData}
             .map {try HwpBinData($0.payload)}
-        
+
         faceNameArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.faceName}
             .map {try HwpFaceName($0.payload)}
-        
+
         borderFillArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.borderFill}
             .map {try HwpBorderFill($0.payload)}
-        
+
         charShapeArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.charShape}
             .map {try HwpCharShape($0.payload, version)}
-        
+
         paraShapeArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.paraShape}
             .map {try HwpParaShape($0.payload, version)}
