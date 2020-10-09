@@ -13,7 +13,7 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
     // TODO HWPTAG_STYLE
     // TODO HWPTAG_DOC_DATA
     // HWPTAG_DISTRIBUTE_DOC_DATA
-    // public var compatibleDocument
+    public var compatibleDocument: HwpCompatibleDocument?
     // TODO HWPTAG_LAYOUT_COMPATIBILITY
 
     init(_ data: Data, _ version: HwpVersion) throws {
@@ -32,5 +32,10 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.idMappings)
         }
         self.idMappings = try HwpIdMappings(idMappings, version)
+
+        if let compatibleDocument = record.children
+                .first(where: {$0.tagId == HwpDocInfoTag.compatibleDocument}) {
+            self.compatibleDocument = try HwpCompatibleDocument(compatibleDocument)
+        }
     }
 }
