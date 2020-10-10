@@ -5,7 +5,7 @@ import Foundation
  
  한글의 문서 파일이라는 것을 나타내기 위해 ‘파일 인식 정보’가 저장된다.
  */
-public struct HwpFileHeader: HwpData {
+public struct HwpFileHeader: HwpFromData {
     /** signature. 문서 파일은 "HWP Document File" */
     public let signature: String
     public let version: HwpVersion
@@ -29,7 +29,17 @@ public struct HwpFileHeader: HwpData {
     public let encryptVersion: UInt32
     public let koreaOpenLicense: UInt8 // 공공누리 Korea Open Government License
 
-    internal init(_ data: Data) throws {
+    init() {
+        signature = "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+        version = HwpVersion()
+        isCompressed = true
+        isEncrypted = true
+        isHavekoreaOpenLicense = false
+        encryptVersion = 0
+        koreaOpenLicense = 0
+    }
+
+    init(_ data: Data) throws {
         var reader = DataReader(data)
         defer {
             precondition(reader.isEOF())

@@ -6,8 +6,12 @@ import Foundation
  컨트롤 문자가 존재하면 컨트롤 문자로부터 존재하는 컨트롤 정보를 생성한다.
  Tag ID : HWPTAG_CTRL_HEADER
  */
-public struct HwpCtrlHeader: HwpData {
+public struct HwpCtrlHeader: HwpFromData {
     public let ctrlId: UInt32
+
+    init() {
+        ctrlId = 0
+    }
 
     init(_ data: Data) throws {
         var reader = DataReader(data)

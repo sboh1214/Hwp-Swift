@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpFaceName: HwpData {
+public struct HwpFaceName: HwpFromData {
     public let property: BYTE
     public let faceNameLength: WORD
     public let faceName: [WCHAR]
@@ -10,6 +10,18 @@ public struct HwpFaceName: HwpData {
     public var faceTypeInfo: [BYTE]?
     public var defaultFaceNameLength: WORD?
     public var defaultFaceName: [WCHAR]?
+
+    init() {
+        property = 0
+        faceNameLength = 0
+        faceName = [WCHAR]()
+        alternativeFaceType = nil
+        alternativeFaceNameLength = nil
+        alternativeFaceName = nil
+        faceTypeInfo = nil
+        defaultFaceNameLength = nil
+        defaultFaceName = nil
+    }
 
     init(_ data: Data) throws {
         var reader = DataReader(data)

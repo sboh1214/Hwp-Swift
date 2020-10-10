@@ -1,11 +1,18 @@
 import Foundation
 import OLEKit
 
-public class HwpFile {
+public struct HwpFile: HwpPrimitive {
     public let fileHeader: HwpFileHeader
     public let docInfo: HwpDocInfo
-    public let previewText: HwpPreviewText
     public let sectionArray: [HwpSection]
+    public let previewText: HwpPreviewText
+
+    public init() {
+        fileHeader = HwpFileHeader()
+        docInfo = HwpDocInfo()
+        previewText = HwpPreviewText()
+        sectionArray = [HwpSection]()
+    }
 
     public init(filePath: String) throws {
         let ole: OLEFile

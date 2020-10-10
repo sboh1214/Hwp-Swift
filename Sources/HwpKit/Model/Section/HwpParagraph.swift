@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpParagraph: HwpRecordWithVersion {
+public struct HwpParagraph: HwpFromRecordWithVersion {
     public let paraHeader: HwpParaHeader
     public var paraText: HwpParaText?
     public var paraCharShape: HwpParaCharShape?
@@ -10,7 +10,17 @@ public struct HwpParagraph: HwpRecordWithVersion {
     public var ctrlHeaderArray: [HwpCtrlHeader]?
     public var listHeaderArray: [HwpListHeader]?
 
-    init(_ record: HwpTreeRecord, _ version: HwpVersion) throws {
+    init() {
+        paraHeader =  HwpParaHeader()
+        paraText =  nil
+        paraCharShape =  nil
+        paraLineSegArray =  nil
+        paraRangeTagArray =  nil
+        ctrlHeaderArray =  nil
+        listHeaderArray =  nil
+    }
+
+    init(_ record: HwpRecord, _ version: HwpVersion) throws {
         paraHeader = try HwpParaHeader(record.payload, version)
 
         if let paraText = record.children

@@ -5,7 +5,7 @@ import Foundation
  
  Tag ID : HWPTAG_BIN_DATA
  */
-public struct HwpBinData: HwpData {
+public struct HwpBinData: HwpFromData {
     /**속성 -> type*/
     public let type: HwpBinDataType
 
@@ -31,6 +31,17 @@ public struct HwpBinData: HwpData {
      OLE의 경우 ole
      */
     public var extensionName: [WCHAR]?
+
+    init() {
+        type = .embedding
+        absolutePathLength = nil
+        absolutePath = nil
+        relativePathLength = nil
+        relativePath = nil
+        streamId = nil
+        extensionLength = nil
+        extensionName = nil
+    }
 
     init(_ data: Data) throws {
         var reader = DataReader(data)

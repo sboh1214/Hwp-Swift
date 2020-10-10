@@ -1,12 +1,21 @@
 import Foundation
 
-public struct HwpStartingIndex: HwpData {
+public struct HwpStartingIndex: HwpFromData {
     public let page: UInt16
     public let footnote: UInt16
     public let endnote: UInt16
     public let picture: UInt16
     public let table: UInt16
     public let equation: UInt16
+
+    init() {
+        page = 0
+        footnote = 0
+        endnote = 0
+        picture = 0
+        table = 0
+        equation = 0
+    }
 
     init(_ data: Data) {
         var reader = DataReader(data)

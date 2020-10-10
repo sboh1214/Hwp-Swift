@@ -5,7 +5,7 @@ import Foundation
  
  Tag ID : HWPTAG_LIST_HEADER
  */
-public struct HwpListHeader: HwpData {
+public struct HwpListHeader: HwpFromData {
     /**
      문단 수
      
@@ -13,6 +13,11 @@ public struct HwpListHeader: HwpData {
      */
     public let paragraphCount: Int32
     public let property: UInt32
+
+    init() {
+        paragraphCount = 0
+        property = 0
+    }
 
     init(_ data: Data) throws {
         var reader = DataReader(data)

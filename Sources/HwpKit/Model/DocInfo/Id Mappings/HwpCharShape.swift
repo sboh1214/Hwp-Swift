@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HwpCharShape: HwpDataWithVersion {
+public struct HwpCharShape: HwpFromDataWithVersion {
     /**언어별 글꼴 ID(FaceID) 참조 값*/
     public let faceId: [WORD]
     /**언어별 장평, 50%~200%(*/
@@ -31,6 +31,24 @@ public struct HwpCharShape: HwpDataWithVersion {
     public var borderFillId: UInt16?
     /**취소선 색 (5.0.3.0 이상)*/
     public var strikethroughColor: HwpColor?
+
+    init() {
+        faceId = [0]
+        faceScaleX = [0]
+        faceSpacing = [0]
+        faceRelativeSize = [0]
+        faceLocation = [0]
+        baseSize = 0
+        property = 0
+        shadowInterval = 0
+        shadowInterval2 = 0
+        faceColor = HwpColor()
+        underlineColor = HwpColor()
+        shadeColor = HwpColor()
+        shadowColor = HwpColor()
+        borderFillId = nil
+        strikethroughColor = nil
+    }
 
     init(_ data: Data, _ version: HwpVersion) throws {
         var reader = DataReader(data)
