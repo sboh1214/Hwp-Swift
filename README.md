@@ -30,13 +30,12 @@ dependencies: [
 
 ### Code Quality
 
-[![codecov](https://codecov.io/gh/sboh1214/HwpKit/branch/master/graph/badge.svg)](https://codecov.io/gh/sboh1214/HwpKit)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6950359f807606deb022/maintainability)](https://codeclimate.com/github/sboh1214/HwpKit/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/6950359f807606deb022/test_coverage)](https://codeclimate.com/github/sboh1214/HwpKit/test_coverage)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=sboh1214_HwpKit&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=sboh1214_HwpKit)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=sboh1214_HwpKit&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=sboh1214_HwpKit)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=sboh1214_HwpKit&metric=security_rating)](https://sonarcloud.io/dashboard?id=sboh1214_HwpKit)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/6950359f807606deb022/maintainability)](https://codeclimate.com/github/sboh1214/HwpKit/maintainability)
 
 ### Test on Linux
 
