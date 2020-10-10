@@ -12,6 +12,6 @@ final class CreateTests: XCTestCase {
     }
 
     func testCreate() throws {
-        let (expected, actual) = try createHwp()
+        let (_, _) = try createHwp()
     }
 }
