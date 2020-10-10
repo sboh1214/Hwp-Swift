@@ -19,10 +19,10 @@ public struct HwpVersion: HwpFromData, Comparable {
     public let revision: UInt8
 
     init() {
-        major = 0
-        minor = 0
+        major = 5
+        minor = 1
         build = 0
-        revision = 0
+        revision = 1
     }
 
     init(_ data: Data) {

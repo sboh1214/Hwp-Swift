@@ -8,10 +8,11 @@ import Foundation
 public struct HwpCompatibleDocument: HwpFromRecord {
     /**대상 프로그램*/
     public let targetDocument: UInt32
-    public var layoutCompatibility: HwpLayoutCompatibility?
+    public let layoutCompatibility: HwpLayoutCompatibility?
 
     init() {
         targetDocument = 0
+        layoutCompatibility = HwpLayoutCompatibility()
     }
 
     init(_ record: HwpRecord) throws {
@@ -24,6 +25,8 @@ public struct HwpCompatibleDocument: HwpFromRecord {
         if let layoutCompatibility = record.children
             .first(where: {$0.tagId == HwpDocInfoTag.layoutCompatibility}) {
             self.layoutCompatibility = try HwpLayoutCompatibility(layoutCompatibility.payload)
+        } else {
+            layoutCompatibility = nil
         }
     }
 }
