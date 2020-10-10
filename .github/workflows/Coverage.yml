@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   coverage:
-
     runs-on: macos-latest
 
     steps:
@@ -18,7 +20,7 @@ jobs:
       run: swift test -v --enable-code-coverage
     - name: Prepare Codecov
       run: xcrun llvm-cov export -format="lcov" .build/debug/HwpKitPackageTests.xctest/Contents/MacOS/HwpKitPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
-    - name: Upload to Codecov
-      run: bash <(curl https://codecov.io/bash)
+    - name: Code Climate Coverage Action
+      uses: paambaati/codeclimate-action@v2.7.4
       env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
