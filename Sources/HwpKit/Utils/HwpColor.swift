@@ -5,6 +5,12 @@ public struct HwpColor: HwpPrimitive {
     public let green: Int
     public let blue: Int
 
+    init() {
+        red = 0
+        green = 0
+        blue = 0
+    }
+
     public init(_ data: UInt32) {
         red = getBitValue(Int(data), 0, 7)
         green = getBitValue(Int(data), 0, 7)

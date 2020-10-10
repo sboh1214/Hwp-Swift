@@ -14,6 +14,11 @@ public struct HwpListHeader: HwpFromData {
     public let paragraphCount: Int32
     public let property: UInt32
 
+    init() {
+        paragraphCount = 0
+        property = 0
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         defer {

@@ -1,9 +1,21 @@
 import Foundation
 
+/**
+ 문서 내 캐럿의 위치 정보
+ */
 public struct HwpCaratLocation: HwpFromData {
-    public let listId: UInt32
-    public let paragraphId: UInt32
-    public let charIndex: UInt32
+    /**리스트 아이디*/
+    public var listId: UInt32
+    /**문단 아이디*/
+    public var paragraphId: UInt32
+    /**문단 내에서의 글자 단위 위치*/
+    public var charIndex: UInt32
+
+    init() {
+        listId = 0
+        paragraphId = 0
+        charIndex = 0
+    }
 
     init(_ data: Data) {
         var reader = DataReader(data)

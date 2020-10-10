@@ -32,6 +32,24 @@ public struct HwpCharShape: HwpFromDataWithVersion {
     /**취소선 색 (5.0.3.0 이상)*/
     public var strikethroughColor: HwpColor?
 
+    init() {
+        faceId = [0]
+        faceScaleX = [0]
+        faceSpacing = [0]
+        faceRelativeSize = [0]
+        faceLocation = [0]
+        baseSize = 0
+        property = 0
+        shadowInterval = 0
+        shadowInterval2 = 0
+        faceColor = HwpColor()
+        underlineColor = HwpColor()
+        shadeColor = HwpColor()
+        shadowColor = HwpColor()
+        borderFillId = nil
+        strikethroughColor = nil
+    }
+
     init(_ data: Data, _ version: HwpVersion) throws {
         var reader = DataReader(data)
         defer {

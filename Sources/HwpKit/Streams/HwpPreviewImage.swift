@@ -8,6 +8,10 @@ import Foundation
 struct HwpPreviewImage: HwpFromData {
     let image: Data
 
+    init() {
+        image = Data()
+    }
+
     init(_ data: Data) throws {
         image = data
     }

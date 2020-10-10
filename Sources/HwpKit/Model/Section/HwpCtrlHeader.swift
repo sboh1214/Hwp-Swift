@@ -9,6 +9,10 @@ import Foundation
 public struct HwpCtrlHeader: HwpFromData {
     public let ctrlId: UInt32
 
+    init() {
+        ctrlId = 0
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         ctrlId = reader.read(UInt32.self)

@@ -8,6 +8,10 @@ import Foundation
 public struct HwpPreviewText: HwpFromData {
     let text: String
 
+    init() {
+        text = ""
+    }
+
     init(_ data: Data) throws {
         guard let text = String(data: data, encoding: .utf16LittleEndian) else {
             throw HwpError.invalidDataForString(data: data, name: "PreviewText")

@@ -10,6 +10,16 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
     public var ctrlHeaderArray: [HwpCtrlHeader]?
     public var listHeaderArray: [HwpListHeader]?
 
+    init() {
+        paraHeader =  HwpParaHeader()
+        paraText =  nil
+        paraCharShape =  nil
+        paraLineSegArray =  nil
+        paraRangeTagArray =  nil
+        ctrlHeaderArray =  nil
+        listHeaderArray =  nil
+    }
+
     init(_ record: HwpRecord, _ version: HwpVersion) throws {
         paraHeader = try HwpParaHeader(record.payload, version)
 

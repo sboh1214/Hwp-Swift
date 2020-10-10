@@ -41,6 +41,26 @@ public struct HwpParaShape: HwpFromDataWithVersion {
     /**줄 간격(5.0.2.5 버전 이상)*/
     public var lineSpacing2: UInt32?
 
+    init() {
+        property1 = 0
+        marginLeft = 0
+        marginRight = 0
+        indent = 0
+        paragraphSpacingTop = 0
+        paragraphSpacingBottom = 0
+        lineSpacing = 0
+        tabDefId = 0
+        numberingOrBulletId = 0
+        borderFillId = 0
+        borderSpacingLeft = 0
+        borderSpacingRight = 0
+        borderSpacingTop = 0
+        borderSpacingBottom = 0
+        property2 = nil
+        property3 = nil
+        lineSpacing2 = nil
+    }
+
     init(_ data: Data, _ version: HwpVersion) throws {
         var reader = DataReader(data)
         defer {

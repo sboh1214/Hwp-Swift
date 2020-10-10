@@ -19,6 +19,12 @@ public struct HwpParaRangeTag: HwpFromData {
      */
     public let tag: UInt32
 
+    init() {
+        start = 0
+        end = 0
+        tag = 0
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         defer {

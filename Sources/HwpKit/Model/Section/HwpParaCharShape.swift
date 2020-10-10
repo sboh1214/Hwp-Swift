@@ -11,6 +11,11 @@ public struct HwpParaCharShape: HwpFromData {
     /**글자 모양 ID*/
     public var shapeId: [UInt32]
 
+    init() {
+        startingIndex = [0]
+        shapeId = [0]
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         defer {

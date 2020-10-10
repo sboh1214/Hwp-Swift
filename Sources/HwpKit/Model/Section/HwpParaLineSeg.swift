@@ -37,6 +37,18 @@ public struct HwpParaLineSeg: HwpFromData {
      */
     public let property: UInt32
 
+    init() {
+        textStartingIndex = 0
+        lineLocation = 0
+        lineHeight = 0
+        textHeight = 0
+        baselineDistance = 0
+        lineSpacing = 0
+        startingLocation = 0
+        width = 0
+        property = 0
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         defer {

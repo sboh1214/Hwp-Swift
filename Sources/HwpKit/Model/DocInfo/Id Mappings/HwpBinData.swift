@@ -32,6 +32,17 @@ public struct HwpBinData: HwpFromData {
      */
     public var extensionName: [WCHAR]?
 
+    init() {
+        type = .embedding
+        absolutePathLength = nil
+        absolutePath = nil
+        relativePathLength = nil
+        relativePath = nil
+        streamId = nil
+        extensionLength = nil
+        extensionName = nil
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         let property = reader.read(UInt16.self)

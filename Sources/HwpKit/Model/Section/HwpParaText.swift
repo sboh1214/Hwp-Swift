@@ -11,6 +11,10 @@ public struct HwpParaText: HwpFromData {
     /**문자수만큼의 텍스트*/
     public var charArray: [HwpChar]
 
+    init() {
+        charArray = [HwpChar]()
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         var array = [HwpChar]()

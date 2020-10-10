@@ -29,7 +29,17 @@ public struct HwpFileHeader: HwpFromData {
     public let encryptVersion: UInt32
     public let koreaOpenLicense: UInt8 // 공공누리 Korea Open Government License
 
-    internal init(_ data: Data) throws {
+    init() {
+        signature = "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+        version = HwpVersion()
+        isCompressed = true
+        isEncrypted = true
+        isHavekoreaOpenLicense = false
+        encryptVersion = 0
+        koreaOpenLicense = 0
+    }
+
+    init(_ data: Data) throws {
         var reader = DataReader(data)
         defer {
             precondition(reader.isEOF())

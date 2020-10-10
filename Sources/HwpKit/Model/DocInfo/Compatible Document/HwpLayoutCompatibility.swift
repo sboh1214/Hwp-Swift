@@ -17,6 +17,14 @@ public struct HwpLayoutCompatibility: HwpFromData {
     /**필드 단위 서식*/
     public let field: UInt32
 
+    init() {
+        char = 0
+        paragraph = 0
+        section = 0
+        object = 0
+        field = 0
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
         defer {

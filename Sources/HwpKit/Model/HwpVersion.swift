@@ -18,6 +18,13 @@ public struct HwpVersion: HwpFromData, Comparable {
     public let build: UInt8
     public let revision: UInt8
 
+    init() {
+        major = 0
+        minor = 0
+        build = 0
+        revision = 0
+    }
+
     init(_ data: Data) {
         var reader = DataReader(data)
         revision = reader.read(UInt8.self)

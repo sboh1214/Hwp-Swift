@@ -8,6 +8,15 @@ public struct HwpStartingIndex: HwpFromData {
     public let table: UInt16
     public let equation: UInt16
 
+    init() {
+        page = 0
+        footnote = 0
+        endnote = 0
+        picture = 0
+        table = 0
+        equation = 0
+    }
+
     init(_ data: Data) {
         var reader = DataReader(data)
         page = reader.read(UInt16.self)

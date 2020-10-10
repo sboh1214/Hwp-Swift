@@ -50,6 +50,29 @@ public struct HwpIdMappings: HwpFromRecordWithVersion {
     // TODO HWPTAG_BULLET
     public var paraShapeArray: [HwpParaShape]
 
+    init() {
+        binaryDataCount = 0
+        englishFaceCount = 0
+        chineseFaceCount = 0
+        japaneseFaceCount = 0
+        etcFaceCount = 0
+        symbolFaceCount = 0
+        userFaceCount = 0
+        borderFillCount = 0
+        charShapeCount = 0
+        tabDefCount = 0
+        paraNumberingCount = 0
+        paraHeadCount = 0
+        paraShapeCount = 0
+        styleCount = 0
+
+        binDataArray = [HwpBinData]()
+        faceNameArray = [HwpFaceName]()
+        borderFillArray = [HwpBorderFill]()
+        charShapeArray = [HwpCharShape]()
+        paraShapeArray = [HwpParaShape]()
+    }
+
     init(_ record: HwpRecord, _ version: HwpVersion) throws {
         var reader = DataReader(record.payload)
         defer {

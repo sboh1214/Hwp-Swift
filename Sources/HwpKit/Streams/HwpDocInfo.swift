@@ -6,7 +6,6 @@ import Foundation
  본문에 사용 중인 글꼴, 글자 속성, 문단 속성, 탭, 스타일 등에 문서 내 공통으로 사용되는 세부 정보를 담고 있다.
  */
 public struct HwpDocInfo: HwpFromDataWithVersion {
-
     public let documentProperties: HwpDocumentProperties
     public let idMappings: HwpIdMappings
 
@@ -15,6 +14,12 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
     // HWPTAG_DISTRIBUTE_DOC_DATA
     public var compatibleDocument: HwpCompatibleDocument?
     // TODO HWPTAG_LAYOUT_COMPATIBILITY
+
+    init() {
+        documentProperties = HwpDocumentProperties()
+        idMappings = HwpIdMappings()
+        compatibleDocument = HwpCompatibleDocument()
+    }
 
     init(_ data: Data, _ version: HwpVersion) throws {
         let record = parseTreeRecord(data: data)

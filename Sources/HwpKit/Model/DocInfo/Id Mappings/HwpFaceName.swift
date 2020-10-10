@@ -11,6 +11,18 @@ public struct HwpFaceName: HwpFromData {
     public var defaultFaceNameLength: WORD?
     public var defaultFaceName: [WCHAR]?
 
+    init() {
+        property = 0
+        faceNameLength = 0
+        faceName = [WCHAR]()
+        alternativeFaceType = nil
+        alternativeFaceNameLength = nil
+        alternativeFaceName = nil
+        faceTypeInfo = nil
+        defaultFaceNameLength = nil
+        defaultFaceName = nil
+    }
+
     init(_ data: Data) throws {
         var reader = DataReader(data)
 
