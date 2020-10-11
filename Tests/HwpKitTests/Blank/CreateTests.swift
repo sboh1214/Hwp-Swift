@@ -14,19 +14,19 @@ final class CreateTests: XCTestCase {
     func testCreate() throws {
         let (_, _) = try createHwp()
     }
-    
+
     func testfileHeader() throws {
         let (expected, actual) = try createHwp()
         XCTAssertEqual(expected.fileHeader, actual.fileHeader)
     }
-    
+
     func testDocInfo() throws {
         let (expected, actual) = try createHwp()
-        
+
         XCTAssertEqual(expected.docInfo.documentProperties, actual.docInfo.documentProperties)
         XCTAssertEqual(expected.docInfo.compatibleDocument, actual.docInfo.compatibleDocument)
         XCTAssertEqual(expected.docInfo.idMappings, actual.docInfo.idMappings)
-        
+
         XCTAssertEqual(expected.docInfo, actual.docInfo)
     }
 }
