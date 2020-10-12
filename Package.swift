@@ -25,7 +25,7 @@ let package = Package(
             dependencies: ["OLEKit", "DataCompression"]
         ),
         .testTarget(
-            name: "HwpKitTests",
+            name: "HwpKitFrameworkTests",
             dependencies: ["HwpKitFramework"]
         )
     ]

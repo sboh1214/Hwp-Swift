@@ -1,8 +1,8 @@
 import XCTest
 
-import HwpKitTests
+import HwpKitFrameworkTests
 
 var tests = [XCTestCaseEntry]()
-tests += HwpKitTests.__allTests()
+tests += HwpKitFrameworkTests.__allTests()
 
 XCTMain(tests)

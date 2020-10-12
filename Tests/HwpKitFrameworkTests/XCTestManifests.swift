@@ -9,7 +9,7 @@ extension BlankTests {
         ("testEncryptVersion", testEncryptVersion),
         ("testHwpVersion", testHwpVersion),
         ("testOpen", testOpen),
-        ("testSignature", testSignature)
+        ("testSignature", testSignature),
     ]
 }
 
@@ -21,7 +21,7 @@ extension CreateTests {
         ("testCreate", testCreate),
         ("testDocInfo", testDocInfo),
         ("testfileHeader", testfileHeader),
-        ("testSectionArray", testSectionArray)
+        ("testSectionArray", testSectionArray),
     ]
 }
 
@@ -30,7 +30,7 @@ extension HwpUtilTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__HwpUtilTests = [
-        ("testBitsFromInt8", testBitsFromInt8)
+        ("testBitsFromInt8", testBitsFromInt8),
     ]
 }
 
@@ -48,7 +48,7 @@ extension NooriDocInfoTests {
         ("testFaceName", testFaceName),
         ("testSectionSize", testSectionSize),
         ("testStartingIndex", testStartingIndex),
-        ("testTabDef", testTabDef)
+        ("testTabDef", testTabDef),
     ]
 }
 
@@ -60,7 +60,7 @@ extension NooriSectionTests {
         ("testParaCharShape", testParaCharShape),
         ("testParagraph", testParagraph),
         ("testParaLineSeg", testParaLineSeg),
-        ("testParaText", testParaText)
+        ("testParaText", testParaText),
     ]
 }
 
@@ -70,7 +70,7 @@ extension VersionTests {
     // to regenerate.
     static let __allTests__VersionTests = [
         ("test2007", test2007),
-        ("test2014VP", test2014VP)
+        ("test2014VP", test2014VP),
     ]
 }
 
@@ -81,7 +81,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(HwpUtilTests.__allTests__HwpUtilTests),
         testCase(NooriDocInfoTests.__allTests__NooriDocInfoTests),
         testCase(NooriSectionTests.__allTests__NooriSectionTests),
-        testCase(VersionTests.__allTests__VersionTests)
+        testCase(VersionTests.__allTests__VersionTests),
     ]
 }
 #endif
