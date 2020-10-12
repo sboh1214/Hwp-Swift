@@ -5,8 +5,5 @@ template: |
   ## API changes
   *
   
-  ## Closed issues
-  $CHANGES
-  
-  ## Merged pull requests
+  ## Closed Issues & Merged PRs
   $CHANGES
