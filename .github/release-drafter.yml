@@ -1,12 +1,9 @@
 template: |
   ## Breaking changes
-  $CHANGES
+  *
   
   ## API changes
-  $CHANGES
-  
-  ## Internal changes
-  $CHANGES
+  *
   
   ## Closed issues
   $CHANGES
