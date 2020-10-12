@@ -12,12 +12,12 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
 
     init() {
         paraHeader =  HwpParaHeader()
-        paraText =  nil
-        paraCharShape =  nil
-        paraLineSegArray =  nil
-        paraRangeTagArray =  nil
-        ctrlHeaderArray =  nil
-        listHeaderArray =  nil
+        paraText =  HwpParaText()
+        paraCharShape =  HwpParaCharShape()
+        paraLineSegArray =  [HwpParaLineSeg()]
+        paraRangeTagArray =  [HwpParaRangeTag]()
+        ctrlHeaderArray =  [HwpCtrlHeader(1936024420), HwpCtrlHeader(1668246628)]
+        listHeaderArray =  [HwpListHeader]()
     }
 
     init(_ record: HwpRecord, _ version: HwpVersion) throws {

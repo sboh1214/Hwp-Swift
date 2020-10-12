@@ -10,8 +10,8 @@ public struct HwpFile: HwpPrimitive {
     public init() {
         fileHeader = HwpFileHeader()
         docInfo = HwpDocInfo()
+        sectionArray = [HwpSection()]
         previewText = HwpPreviewText()
-        sectionArray = [HwpSection]()
     }
 
     public init(filePath: String) throws {

@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		36710E4125333572005BAF5E /* ExcludeEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36710E4025333572005BAF5E /* ExcludeEquatable.swift */; };
 		OBJ_106 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* Package.swift */; };
 		OBJ_112 /* HwpBorderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* HwpBorderType.swift */; };
 		OBJ_113 /* HwpCharType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* HwpCharType.swift */; };
@@ -88,6 +89,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		36710E3225332581005BAF5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "HwpKit::HwpKitTests";
+			remoteInfo = HwpKitTests;
+		};
 		36CF09472532BA45003894A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -126,6 +134,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36710E3725332FA0005BAF5E /* blank-mac2014vp.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "blank-mac2014vp.hwp"; sourceTree = "<group>"; };
+		36710E4025333572005BAF5E /* ExcludeEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludeEquatable.swift; sourceTree = "<group>"; };
 		"DataCompression::DataCompression::Product" /* DataCompression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataCompression.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"HwpKit::HwpKit::Product" /* HwpKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HwpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"HwpKit::HwpKitTests::Product" /* HwpKitTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = HwpKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,8 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_17 /* DocInfo */,
-				OBJ_32 /* HwpVersion.swift */,
 				OBJ_33 /* Section */,
+				OBJ_32 /* HwpVersion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -244,10 +254,10 @@
 		OBJ_17 /* DocInfo */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_18 /* Compatible Document */,
 				OBJ_21 /* Document Properties */,
 				OBJ_25 /* HwpIdMappings.swift */,
 				OBJ_26 /* Id Mappings */,
+				OBJ_18 /* Compatible Document */,
 			);
 			path = DocInfo;
 			sourceTree = "<group>";
@@ -286,6 +296,7 @@
 		OBJ_33 /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_42 /* HwpParagraph.swift */,
 				OBJ_34 /* HwpChar.swift */,
 				OBJ_35 /* HwpCtrlHeader.swift */,
 				OBJ_36 /* HwpListHeader.swift */,
@@ -294,7 +305,6 @@
 				OBJ_39 /* HwpParaLineSeg.swift */,
 				OBJ_40 /* HwpParaRangeTag.swift */,
 				OBJ_41 /* HwpParaText.swift */,
-				OBJ_42 /* HwpParagraph.swift */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -313,7 +323,7 @@
 			path = Streams;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -325,7 +335,6 @@
 				OBJ_92 /* LICENSE */,
 				OBJ_93 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_51 /* Utils */ = {
@@ -337,6 +346,7 @@
 				OBJ_55 /* HwpRecord.swift */,
 				OBJ_56 /* StreamReader.swift */,
 				OBJ_57 /* Type.swift */,
+				36710E4025333572005BAF5E /* ExcludeEquatable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -353,9 +363,9 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_60 /* Blank */,
-				OBJ_63 /* HwpUtilTests.swift */,
 				OBJ_64 /* Noori */,
 				OBJ_67 /* Versions */,
+				OBJ_63 /* HwpUtilTests.swift */,
 			);
 			name = HwpKitTests;
 			path = Tests/HwpKitTests;
@@ -364,6 +374,7 @@
 		OBJ_60 /* Blank */ = {
 			isa = PBXGroup;
 			children = (
+				36710E3725332FA0005BAF5E /* blank-mac2014vp.hwp */,
 				OBJ_61 /* BlankTests.swift */,
 				OBJ_62 /* CreateTests.swift */,
 			);
@@ -451,11 +462,11 @@
 		OBJ_8 /* HwpKit */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* Enums */,
-				OBJ_14 /* HwpError.swift */,
 				OBJ_15 /* HwpFile.swift */,
-				OBJ_16 /* Model */,
+				OBJ_14 /* HwpError.swift */,
 				OBJ_43 /* Streams */,
+				OBJ_16 /* Model */,
+				OBJ_9 /* Enums */,
 				OBJ_51 /* Utils */,
 			);
 			name = HwpKit;
@@ -615,7 +626,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_86 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -648,7 +659,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint autocorrect && swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -665,6 +676,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				36710E4125333572005BAF5E /* ExcludeEquatable.swift in Sources */,
 				OBJ_112 /* HwpBorderType.swift in Sources */,
 				OBJ_113 /* HwpCharType.swift in Sources */,
 				OBJ_114 /* HwpStreamName.swift in Sources */,
@@ -777,7 +789,7 @@
 		OBJ_168 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "HwpKit::HwpKitTests" /* HwpKitTests */;
-			targetProxy = "HwpKit::HwpKitTests" /* HwpKitTests */;
+			targetProxy = 36710E3225332581005BAF5E /* PBXContainerItemProxy */;
 		};
 		OBJ_184 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

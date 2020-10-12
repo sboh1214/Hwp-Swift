@@ -12,7 +12,10 @@ public struct HwpParaText: HwpFromData {
     public var charArray: [HwpChar]
 
     init() {
-        charArray = [HwpChar]()
+        let char0 = HwpChar(type: .extended, value: 2)
+        let char1 = HwpChar(type: .extended, value: 2)
+        let char2 = HwpChar(type: .char, value: 13)
+        charArray = [char0, char1, char2]
     }
 
     init(_ data: Data) throws {
