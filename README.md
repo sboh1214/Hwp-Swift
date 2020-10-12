@@ -28,6 +28,19 @@ dependencies: [
 
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=sboh1214_HwpKit&metric=ncloc)](https://sonarcloud.io/dashboard?id=sboh1214_HwpKit)
 
+### Coding Style
+
+This project uses [SwiftLint](https://github.com/realm/SwiftLint) and [pre-commit](https://pre-commit.com/) to
+enforce formatting and coding style.
+```
+brew install swiftlint
+brew install pre-commit
+pre-commit install 
+```
+(Optional) We recommend opening ```HwpKit.xcodeproj``` in order to run script phase 'swiftlint'.
+
+SwiftLint also run on CI for every PR.
+
 ### Code Quality
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/6950359f807606deb022/maintainability)](https://codeclimate.com/github/sboh1214/HwpKit/maintainability)
@@ -40,12 +53,6 @@ dependencies: [
 ### Test on Linux
 
 Currently, this project does not support Linux due to dependency [DataCompression](https://github.com/mw99/DataCompression).
-You should install [Sourcery](https://github.com/krzysztofzablocki/Sourcery) to create LinuxMain.swift and test.
-
-```bash
-$ sourcery --sources Tests --templates Tests/LinuxMain.stencil
-$ swift test
-```
 
 ## License
 

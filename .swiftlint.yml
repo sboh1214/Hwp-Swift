@@ -1,7 +1,13 @@
+included: # paths to include during linting. `--path` is ignored if present.
+  - Sources
+  - Tests
+  - Package.swift
+
 excluded:
   - Carthage
   - Pods
   - .build
+  - Tests/HwpKitFrameworkTests/XCTestManifests.swift
 
 line_length: 100
 

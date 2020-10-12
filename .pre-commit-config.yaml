@@ -1,0 +1,24 @@
+repos:
+  - repo: local
+    hooks:
+      - id: lint
+        name: swiftlint
+        entry: swiftlint autocorrect && swiftlint
+        language: system
+        files: '\.swift$'
+        pass_filenames: false
+
+      - id: generate
+        name: swift-generate
+        entry: swift test --generate-linuxmain
+        language: system
+        files: '\.swift$'
+        pass_filenames: false
+        modifiable: true
+
+      - id: test
+        name: swift-test
+        entry: swift test
+        language: system
+        files: '\.swift$'
+        pass_filenames: false
