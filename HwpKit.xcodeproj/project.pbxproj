@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3682A22F2534868C00465BF3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3682A22E2534868C00465BF3 /* Utils.swift */; };
 		OBJ_118 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* Argument.swift */; };
 		OBJ_119 /* ArgumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* ArgumentParser.swift */; };
 		OBJ_120 /* ArgumentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* ArgumentProtocol.swift */; };
@@ -179,6 +180,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3682A21E253484C000465BF3 /* blank-mac2014vp.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "blank-mac2014vp.hwp"; sourceTree = "<group>"; };
+		3682A21F253484C700465BF3 /* blank-win2018.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "blank-win2018.hwp"; sourceTree = "<group>"; };
+		3682A220253484D700465BF3 /* noori.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = noori.hwp; sourceTree = "<group>"; };
+		3682A221253484E400465BF3 /* 2007.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2007.hwp; sourceTree = "<group>"; };
+		3682A222253484F700465BF3 /* 2014VP.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2014VP.hwp; sourceTree = "<group>"; };
+		3682A22E2534868C00465BF3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		"Commandant::Commandant::Product" /* Commandant.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Commandant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"DataCompression::DataCompression::Product" /* DataCompression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataCompression.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"HwpKit::HwpKitFramework::Product" /* HwpKitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HwpKitFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -413,7 +420,7 @@
 			path = Streams;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -425,7 +432,6 @@
 				OBJ_111 /* LICENSE */,
 				OBJ_112 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_51 /* Utils */ = {
@@ -467,6 +473,7 @@
 				OBJ_67 /* Noori */,
 				OBJ_70 /* Versions */,
 				OBJ_72 /* XCTestManifests.swift */,
+				3682A22E2534868C00465BF3 /* Utils.swift */,
 			);
 			name = HwpKitFrameworkTests;
 			path = Tests/HwpKitFrameworkTests;
@@ -475,6 +482,8 @@
 		OBJ_63 /* Blank */ = {
 			isa = PBXGroup;
 			children = (
+				3682A21F253484C700465BF3 /* blank-win2018.hwp */,
+				3682A21E253484C000465BF3 /* blank-mac2014vp.hwp */,
 				OBJ_64 /* BlankTests.swift */,
 				OBJ_65 /* CreateTests.swift */,
 			);
@@ -484,6 +493,7 @@
 		OBJ_67 /* Noori */ = {
 			isa = PBXGroup;
 			children = (
+				3682A220253484D700465BF3 /* noori.hwp */,
 				OBJ_68 /* NooriDocInfoTests.swift */,
 				OBJ_69 /* NooriSectionTests.swift */,
 			);
@@ -502,6 +512,8 @@
 		OBJ_70 /* Versions */ = {
 			isa = PBXGroup;
 			children = (
+				3682A222253484F700465BF3 /* 2014VP.hwp */,
+				3682A221253484E400465BF3 /* 2007.hwp */,
 				OBJ_71 /* VersionTests.swift */,
 			);
 			path = Versions;
@@ -795,7 +807,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_103 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -953,6 +965,7 @@
 				OBJ_209 /* NooriSectionTests.swift in Sources */,
 				OBJ_210 /* VersionTests.swift in Sources */,
 				OBJ_211 /* XCTestManifests.swift in Sources */,
+				3682A22F2534868C00465BF3 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
