@@ -1,0 +1,16 @@
+repos:
+  - repo: local
+    hooks:
+      - id: lint
+        name: swiftlint
+        entry: swiftlint autocorrect && swiftlint
+        language: system
+        files: '\.swift$'
+        pass_filenames: false
+
+      - id: test
+        name: swift-test
+        entry: swift test
+        language: system
+        files: '\.swift$'
+        pass_filenames: false
