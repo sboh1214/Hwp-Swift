@@ -1,7 +1,11 @@
 import HwpKitFramework
 import XCTest
 
-final class CreateTests: XCTestCase {
+/**
+ doc version : unknown
+ program version : 10.30.3(2478)
+ */
+final class Create2014Tests: XCTestCase {
     let (expected, actual) = createHwp(#file, "blank-mac2014vp")
 
     func testCreate() throws {
