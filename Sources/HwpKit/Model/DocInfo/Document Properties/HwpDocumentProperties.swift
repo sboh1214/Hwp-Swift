@@ -12,7 +12,7 @@ public struct HwpDocumentProperties: HwpFromData {
     public let caratLocation: HwpCaratLocation
 
     init() {
-        sectionSize = 0
+        sectionSize = 1
         startingIndex = HwpStartingIndex()
         caratLocation = HwpCaratLocation()
     }

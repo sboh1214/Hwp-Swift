@@ -33,9 +33,9 @@ public struct HwpFileHeader: HwpFromData {
         signature = "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
         version = HwpVersion()
         isCompressed = true
-        isEncrypted = true
+        isEncrypted = false
         isHavekoreaOpenLicense = false
-        encryptVersion = 0
+        encryptVersion = 4
         koreaOpenLicense = 0
     }
 

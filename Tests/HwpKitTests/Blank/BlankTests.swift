@@ -5,7 +5,7 @@ final class BlankTests: XCTestCase {
     func openHwp() throws -> HwpFile {
         let url = URL(fileURLWithPath: #file)
             .deletingLastPathComponent()
-            .appendingPathComponent("blank.hwp")
+            .appendingPathComponent("blank-mac2014vp.hwp")
         return try HwpFile(filePath: url.path)
     }
 
@@ -22,9 +22,9 @@ final class BlankTests: XCTestCase {
     func testHwpVersion() throws {
         let hwp = try openHwp()
         XCTAssertEqual(hwp.fileHeader.version.major, 5)
-        XCTAssertEqual(hwp.fileHeader.version.minor, 0)
-        XCTAssertEqual(hwp.fileHeader.version.build, 3)
-        XCTAssertEqual(hwp.fileHeader.version.revision, 4)
+        XCTAssertEqual(hwp.fileHeader.version.minor, 1)
+        XCTAssertEqual(hwp.fileHeader.version.build, 0)
+        XCTAssertEqual(hwp.fileHeader.version.revision, 1)
     }
 
     func testEncryptVersion() throws {

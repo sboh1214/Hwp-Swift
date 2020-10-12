@@ -1,6 +1,6 @@
 import Foundation
 
-protocol HwpPrimitive: Hashable, Codable {}
+public typealias HwpPrimitive = Hashable & Codable
 
 protocol HwpFromData: HwpPrimitive {
     init()

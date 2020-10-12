@@ -9,12 +9,12 @@ public struct HwpStartingIndex: HwpFromData {
     public let equation: UInt16
 
     init() {
-        page = 0
-        footnote = 0
-        endnote = 0
-        picture = 0
-        table = 0
-        equation = 0
+        page = 1
+        footnote = 1
+        endnote = 1
+        picture = 1
+        table = 1
+        equation = 1
     }
 
     init(_ data: Data) {

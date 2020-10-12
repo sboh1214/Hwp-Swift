@@ -40,13 +40,13 @@ public struct HwpParaLineSeg: HwpFromData {
     init() {
         textStartingIndex = 0
         lineLocation = 0
-        lineHeight = 0
-        textHeight = 0
-        baselineDistance = 0
-        lineSpacing = 0
+        lineHeight = 1000
+        textHeight = 1000
+        baselineDistance = 850
+        lineSpacing = 600
         startingLocation = 0
-        width = 0
-        property = 0
+        width = 42520
+        property = 393216
     }
 
     init(_ data: Data) throws {

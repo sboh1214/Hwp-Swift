@@ -14,7 +14,7 @@ public struct HwpCaratLocation: HwpFromData {
     init() {
         listId = 0
         paragraphId = 0
-        charIndex = 0
+        charIndex = 16
     }
 
     init(_ data: Data) {

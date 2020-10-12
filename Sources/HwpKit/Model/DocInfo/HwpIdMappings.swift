@@ -52,19 +52,19 @@ public struct HwpIdMappings: HwpFromRecordWithVersion {
 
     init() {
         binaryDataCount = 0
-        englishFaceCount = 0
-        chineseFaceCount = 0
-        japaneseFaceCount = 0
-        etcFaceCount = 0
-        symbolFaceCount = 0
-        userFaceCount = 0
-        borderFillCount = 0
-        charShapeCount = 0
-        tabDefCount = 0
-        paraNumberingCount = 0
-        paraHeadCount = 0
+        englishFaceCount = 2
+        chineseFaceCount = 2
+        japaneseFaceCount = 2
+        etcFaceCount = 2
+        symbolFaceCount = 2
+        userFaceCount = 2
+        borderFillCount = 2
+        charShapeCount = 2
+        tabDefCount = 7
+        paraNumberingCount = 3
+        paraHeadCount = 1
         paraShapeCount = 0
-        styleCount = 0
+        styleCount = 19
 
         binDataArray = [HwpBinData]()
         faceNameArray = [HwpFaceName]()

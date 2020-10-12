@@ -31,22 +31,23 @@ public struct HwpParaHeader: HwpFromDataWithVersion {
     /**각 줄에 대한 align에 대한 정보 수*/
     public let alignInfoCount: UInt16
     /**문단 Instance ID (unique ID)*/
-    public let paraId: UInt32
+    @ExcludeEquatable
+    public var paraId: UInt32
     /**변경추적 병합 문단여부. (5.0.3.2 버전 이상)*/
     public var isTraceChange: UInt16?
 
     init() {
-        isLastInList = false
-        charCount = 0
-        controlMask = 0
+        isLastInList = true
+        charCount = 17
+        controlMask = 4
         paraShapeId = 0
         paraStyleId = 0
-        columnType = 0
-        charShapeInfoCount = 0
+        columnType = 3
+        charShapeInfoCount = 1
         rangeTagInfoCount = 0
-        alignInfoCount = 0
+        alignInfoCount = 1
         paraId = 0
-        isTraceChange = nil
+        isTraceChange = 0
     }
 
         init(_ data: Data, _ version: HwpVersion) throws {

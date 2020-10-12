@@ -64,7 +64,7 @@ public struct HwpParaShape: HwpFromDataWithVersion {
     init(_ data: Data, _ version: HwpVersion) throws {
         var reader = DataReader(data)
         defer {
-            precondition(reader.isEOF())
+            // precondition(reader.isEOF())
         }
         property1 = reader.read(UInt32.self)
         marginLeft = reader.read(Int32.self)
