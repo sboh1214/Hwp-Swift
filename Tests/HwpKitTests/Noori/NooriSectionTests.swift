@@ -1,4 +1,4 @@
-import HwpKit
+import HwpKitFramework
 import XCTest
 
 final class NooriSectionTests: XCTestCase {

@@ -1,4 +1,4 @@
-@testable import HwpKit
+import HwpKitFramework
 import XCTest
 
 final class VersionTests: XCTestCase {
