@@ -3,7 +3,7 @@ import XCTest
 
 final class VersionTests: XCTestCase {
     func test2007() throws {
-        let hwp = try openHwp(#file, "2007")
+        let hwp = openHwp(#file, "2007")
         XCTAssertEqual(hwp.fileHeader.version.major, 5)
         XCTAssertEqual(hwp.fileHeader.version.minor, 0)
         XCTAssertEqual(hwp.fileHeader.version.build, 2)
@@ -11,7 +11,7 @@ final class VersionTests: XCTestCase {
     }
 
     func test2014VP() throws {
-        let hwp = try openHwp(#file, "2014VP")
+        let hwp = openHwp(#file, "2014VP")
         XCTAssertEqual(hwp.fileHeader.version.major, 5)
         XCTAssertEqual(hwp.fileHeader.version.minor, 0)
         XCTAssertEqual(hwp.fileHeader.version.build, 5)
