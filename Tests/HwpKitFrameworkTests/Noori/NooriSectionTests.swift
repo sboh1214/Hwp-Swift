@@ -2,22 +2,15 @@ import HwpKitFramework
 import XCTest
 
 final class NooriSectionTests: XCTestCase {
-    func openHwp() throws -> HwpFile {
-        let url = URL(fileURLWithPath: #file)
-            .deletingLastPathComponent()
-            .appendingPathComponent("noori.hwp")
-        return try HwpFile(filePath: url.path)
-    }
+    let hwp = openHwp(#file, "noori")
 
     func testParagraph() throws {
-        let hwp = try openHwp()
         for index in 0...20 {
             XCTAssertNotNil(hwp.sectionArray[0].paragraph[index])
         }
     }
 
     func testParaText() throws {
-        let hwp = try openHwp()
         let text = hwp.sectionArray[0].paragraph[0].paraText
         XCTAssertEqual(text!.charArray[0].type, .extended)
         XCTAssertEqual(text!.charArray[3].type, .char)
@@ -32,7 +25,6 @@ final class NooriSectionTests: XCTestCase {
     }
 
     func testParaCharShape() throws {
-        let hwp = try openHwp()
         XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape?.startingIndex[0], 0)
         XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape?.shapeId[0], 19)
         XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape?.startingIndex[0], 0)
@@ -40,7 +32,6 @@ final class NooriSectionTests: XCTestCase {
     }
 
     func testParaLineSeg() throws {
-        let hwp = try openHwp()
         let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSegArray![0]
         XCTAssertEqual(seg0.textStartingIndex, 0)
         XCTAssertEqual(seg0.lineLocation, 0)

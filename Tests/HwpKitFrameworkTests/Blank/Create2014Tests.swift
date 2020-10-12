@@ -1,29 +1,22 @@
 import HwpKitFramework
 import XCTest
 
-final class CreateTests: XCTestCase {
-    func createHwp() throws -> (HwpFile, HwpFile) {
-        let url = URL(fileURLWithPath: #file)
-            .deletingLastPathComponent()
-            .appendingPathComponent("blank-mac2014vp.hwp")
-        let expected =  try HwpFile(filePath: url.path)
-        let actual = HwpFile()
-        return (expected, actual)
-    }
+/**
+ doc version : unknown
+ program version : 10.30.3(2478)
+ */
+final class Create2014Tests: XCTestCase {
+    let (expected, actual) = createHwp(#file, "blank-mac2014vp")
 
     func testCreate() throws {
-        let (_, _) = try createHwp()
         // XCTAssertEqual(expected, actual)
     }
 
     func testfileHeader() throws {
-        let (expected, actual) = try createHwp()
         XCTAssertEqual(expected.fileHeader, actual.fileHeader)
     }
 
     func testDocInfo() throws {
-        let (expected, actual) = try createHwp()
-
         XCTAssertEqual(expected.docInfo.documentProperties, actual.docInfo.documentProperties)
         XCTAssertEqual(expected.docInfo.compatibleDocument, actual.docInfo.compatibleDocument)
         // XCTAssertEqual(expected.docInfo.idMappings, actual.docInfo.idMappings)
@@ -32,8 +25,6 @@ final class CreateTests: XCTestCase {
     }
 
     func testSectionArray() throws {
-        let (expected, actual) = try createHwp()
-
         XCTAssertEqual(expected.sectionArray.count, actual.sectionArray.count)
 
         XCTAssertEqual(expected.sectionArray, actual.sectionArray)
