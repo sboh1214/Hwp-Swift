@@ -14,8 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
+    - uses: fwal/setup-swift@v1
+      with:
+        swift-version: "5.3"
     - name: Run tests
       run: swift test -v --enable-code-coverage
     - name: Prepare Codecov
