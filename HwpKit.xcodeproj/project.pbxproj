@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3601507C2535D39100565F29 /* HwpTabDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3601507B2535D39100565F29 /* HwpTabDef.swift */; };
+		3601509F2535D5E100565F29 /* HwpTabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3601509E2535D5E100565F29 /* HwpTabInfo.swift */; };
 		360ADFDB253489A7001F32CD /* Create2018Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360ADFDA253489A7001F32CD /* Create2018Tests.swift */; };
 		3682A22F2534868C00465BF3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3682A22E2534868C00465BF3 /* Utils.swift */; };
 		OBJ_118 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* Argument.swift */; };
@@ -180,6 +182,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3601507B2535D39100565F29 /* HwpTabDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HwpTabDef.swift; sourceTree = "<group>"; };
+		3601509E2535D5E100565F29 /* HwpTabInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HwpTabInfo.swift; sourceTree = "<group>"; };
 		360ADFDA253489A7001F32CD /* Create2018Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create2018Tests.swift; sourceTree = "<group>"; };
 		3682A21F253484C700465BF3 /* blank-win2018.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "blank-win2018.hwp"; sourceTree = "<group>"; };
 		3682A220253484D700465BF3 /* noori.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = noori.hwp; sourceTree = "<group>"; };
@@ -338,23 +342,23 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_16 /* Model */ = {
+		OBJ_16 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_21 /* Document Properties */,
 				OBJ_17 /* DocInfo */,
 				OBJ_32 /* HwpVersion.swift */,
 				OBJ_33 /* Section */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		OBJ_17 /* DocInfo */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_18 /* Compatible Document */,
-				OBJ_21 /* Document Properties */,
 				OBJ_25 /* HwpIdMappings.swift */,
 				OBJ_26 /* Id Mappings */,
+				OBJ_18 /* Compatible Document */,
 			);
 			path = DocInfo;
 			sourceTree = "<group>";
@@ -371,9 +375,9 @@
 		OBJ_21 /* Document Properties */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_22 /* HwpCaratLocation.swift */,
 				OBJ_23 /* HwpDocumentProperties.swift */,
 				OBJ_24 /* HwpStartingIndex.swift */,
+				OBJ_22 /* HwpCaratLocation.swift */,
 			);
 			path = "Document Properties";
 			sourceTree = "<group>";
@@ -382,9 +386,11 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_27 /* HwpBinData.swift */,
+				OBJ_30 /* HwpFaceName.swift */,
 				OBJ_28 /* HwpBorderFill.swift */,
 				OBJ_29 /* HwpCharShape.swift */,
-				OBJ_30 /* HwpFaceName.swift */,
+				3601507B2535D39100565F29 /* HwpTabDef.swift */,
+				3601509E2535D5E100565F29 /* HwpTabInfo.swift */,
 				OBJ_31 /* HwpParaShape.swift */,
 			);
 			path = "Id Mappings";
@@ -562,7 +568,7 @@
 				OBJ_9 /* Enums */,
 				OBJ_14 /* HwpError.swift */,
 				OBJ_15 /* HwpFile.swift */,
-				OBJ_16 /* Model */,
+				OBJ_16 /* Models */,
 				OBJ_43 /* Streams */,
 				OBJ_51 /* Utils */,
 			);
@@ -931,6 +937,7 @@
 				OBJ_171 /* HwpChar.swift in Sources */,
 				OBJ_172 /* HwpCtrlHeader.swift in Sources */,
 				OBJ_173 /* HwpListHeader.swift in Sources */,
+				3601507C2535D39100565F29 /* HwpTabDef.swift in Sources */,
 				OBJ_174 /* HwpParaCharShape.swift in Sources */,
 				OBJ_175 /* HwpParaHeader.swift in Sources */,
 				OBJ_176 /* HwpParaLineSeg.swift in Sources */,
@@ -938,6 +945,7 @@
 				OBJ_178 /* HwpParaText.swift in Sources */,
 				OBJ_179 /* HwpParagraph.swift in Sources */,
 				OBJ_180 /* HwpBinaryData.swift in Sources */,
+				3601509F2535D5E100565F29 /* HwpTabInfo.swift in Sources */,
 				OBJ_181 /* HwpDocInfo.swift in Sources */,
 				OBJ_182 /* HwpFileHeader.swift in Sources */,
 				OBJ_183 /* HwpPreviewImage.swift in Sources */,

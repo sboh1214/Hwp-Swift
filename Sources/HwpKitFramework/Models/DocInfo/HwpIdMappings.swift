@@ -45,7 +45,7 @@ public struct HwpIdMappings {
     public var faceNameArray: [HwpFaceName]
     public var borderFillArray: [HwpBorderFill]
     public var charShapeArray: [HwpCharShape]
-    // TODO HWPTAG_TAB_DEF
+    public var tabDefArray: [HwpTabDef]
     // TODO HWPTAG_NUMBERING
     // TODO HWPTAG_BULLET
     public var paraShapeArray: [HwpParaShape]
@@ -90,6 +90,8 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         let charShape6 = HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1600, faceColor: HwpColor(46, 46, 46))
         let charShape7 = HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1100, faceColor: HwpColor())
         charShapeArray = [charShape1, charShape2, charShape3, charShape4, charShape5, charShape6, charShape7]
+
+        tabDefArray = [HwpTabDef(property: 0), HwpTabDef(property: 1), HwpTabDef(property: 2)]
 
         let paraShape1 = HwpParaShape(property1: 384, marginLeft: 0, paragraphSpacingBottom: 0, tabDefId: 0)
         let paraShape2 = HwpParaShape(property1: 384, marginLeft: 3000, paragraphSpacingBottom: 0, tabDefId: 0)
@@ -139,6 +141,10 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         charShapeArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.charShape}
             .map {try HwpCharShape($0.payload, version)}
+
+        tabDefArray = try record.children
+            .filter {$0.tagId == HwpDocInfoTag.tabDef}
+            .map {try HwpTabDef($0.payload)}
 
         paraShapeArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.paraShape}
