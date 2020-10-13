@@ -27,24 +27,24 @@ final class NooriDocInfoTests: XCTestCase {
 
     func testBinData() throws {
         let bin = hwp.docInfo.idMappings.binDataArray
-        XCTAssertEqual(bin[0].extensionName!.toString(), "jpg")
-        XCTAssertEqual(bin[1].extensionName!.toString(), "bmp")
-        XCTAssertEqual(bin[2].extensionName!.toString(), "bmp")
-        XCTAssertEqual(bin[3].extensionName!.toString(), "jpg")
+        XCTAssertEqual(bin[0].extensionName!.string, "jpg")
+        XCTAssertEqual(bin[1].extensionName!.string, "bmp")
+        XCTAssertEqual(bin[2].extensionName!.string, "bmp")
+        XCTAssertEqual(bin[3].extensionName!.string, "jpg")
     }
 
     func testFaceName() throws {
         let face = hwp.docInfo.idMappings.faceNameArray
-        XCTAssertEqual(face[0].faceName.toString(), "굴림")
+        XCTAssertEqual(face[0].faceName, "굴림")
         XCTAssertEqual(face[0].alternativeFaceName, nil)
-        XCTAssertEqual(face[0].defaultFaceName!.toString(), "Gulim")
+        XCTAssertEqual(face[0].defaultFaceName!, "Gulim")
 
-        XCTAssertEqual(face[1].faceName.toString(), "굴림체")
+        XCTAssertEqual(face[1].faceName, "굴림체")
         XCTAssertEqual(face[1].alternativeFaceName, nil)
-        XCTAssertEqual(face[1].defaultFaceName!.toString(), "GulimChe")
+        XCTAssertEqual(face[1].defaultFaceName!, "GulimChe")
 
-        XCTAssertEqual(face[72].faceName.toString(), "Myeongjo")
-        XCTAssertEqual(face[72].alternativeFaceName!.toString(), "명조")
+        XCTAssertEqual(face[72].faceName, "Myeongjo")
+        XCTAssertEqual(face[72].alternativeFaceName!, "명조")
         XCTAssertEqual(face[72].defaultFaceName, nil)
     }
 

@@ -1,6 +1,11 @@
 import Foundation
 
-public struct HwpCharShape: HwpFromDataWithVersion {
+/**
+ 글자 모양
+ 
+ Tag ID : HWPTAG_CHAR_SHAPE
+ */
+public struct HwpCharShape {
     /**언어별 글꼴 ID(FaceID) 참조 값*/
     public let faceId: [WORD]
     /**언어별 장평, 50%~200%(*/
@@ -31,7 +36,10 @@ public struct HwpCharShape: HwpFromDataWithVersion {
     public var borderFillId: UInt16?
     /**취소선 색 (5.0.3.0 이상)*/
     public var strikethroughColor: HwpColor?
+}
 
+extension HwpCharShape: HwpFromDataWithVersion {
+    @available(*, deprecated)
     init() {
         faceId = [0]
         faceScaleX = [0]
@@ -74,5 +82,25 @@ public struct HwpCharShape: HwpFromDataWithVersion {
         if version >= HwpVersion(5, 0, 3, 0) {
             strikethroughColor = HwpColor(reader.read(UInt32.self))
         }
+    }
+}
+
+extension HwpCharShape {
+    init(faceId: [WORD], faceSpacing: [Int8], baseSize: Int32, faceColor: HwpColor) {
+        self.faceId = faceId
+        self.faceScaleX = [100, 100, 100, 100, 100, 100, 100]
+        self.faceSpacing = faceSpacing
+        self.faceRelativeSize = [100, 100, 100, 100, 100, 100, 100]
+        self.faceLocation = [0, 0, 0, 0, 0, 0, 0]
+        self.baseSize = baseSize
+        self.property = 0
+        self.shadowInterval = 10
+        self.shadowInterval2 = 10
+        self.faceColor = faceColor
+        self.underlineColor = HwpColor()
+        self.shadeColor = HwpColor(255, 255, 255)
+        self.shadowColor = HwpColor(192, 192, 192)
+        self.borderFillId = 2
+        self.strikethroughColor = HwpColor()
     }
 }

@@ -45,8 +45,17 @@ extension Array where Element == Data {
 }
 
 extension Array where Element == WCHAR {
+    @available(*, deprecated, renamed: "string")
     public func toString() -> String {
         reduce("") {result, current in result + String(Character(UnicodeScalar(current)!))}
+    }
+
+    public var string: String {
+        reduce("") {result, current in result + String(Character(UnicodeScalar(current)!))}
+    }
+
+    public init(_ string: String) {
+        self = string.utf16.map {$0}
     }
 }
 
