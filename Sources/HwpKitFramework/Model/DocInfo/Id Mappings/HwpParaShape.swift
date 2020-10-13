@@ -5,7 +5,7 @@ import Foundation
  
  Tag ID : HWPTAG_PARA_SHAPE
  */
-public struct HwpParaShape: HwpFromDataWithVersion {
+public struct HwpParaShape {
     /**속성 1*/
     public let property1: UInt32
     /**왼쪽 여백*/
@@ -40,7 +40,9 @@ public struct HwpParaShape: HwpFromDataWithVersion {
     public var property3: UInt32?
     /**줄 간격(5.0.2.5 버전 이상)*/
     public var lineSpacing2: UInt32?
+}
 
+extension HwpParaShape: HwpFromDataWithVersion {
     init() {
         property1 = 0
         marginLeft = 0
@@ -87,5 +89,27 @@ public struct HwpParaShape: HwpFromDataWithVersion {
             property3 = reader.read(UInt32.self)
             lineSpacing2 = reader.read(UInt32.self)
         }
+    }
+}
+
+extension HwpParaShape {
+    init(property1: UInt32, marginLeft: Int32, indent: Int32 = 0, paragraphSpacingTop: Int32 = 0, paragraphSpacingBottom: Int32, lineSpacing: Int32 = 160, tabDefId: UInt16, lineSpacing2: UInt32? = 160) {
+        self.property1 = property1
+        self.marginLeft = marginLeft
+        self.marginRight = 0
+        self.indent = indent
+        self.paragraphSpacingTop = paragraphSpacingTop
+        self.paragraphSpacingBottom = paragraphSpacingBottom
+        self.lineSpacing = lineSpacing
+        self.tabDefId = tabDefId
+        self.numberingOrBulletId = 0
+        self.borderFillId = 2
+        self.borderSpacingLeft = 0
+        self.borderSpacingRight = 0
+        self.borderSpacingTop = 0
+        self.borderSpacingBottom = 0
+        self.property2 = 0
+        self.property3 = 0
+        self.lineSpacing2 = lineSpacing2
     }
 }

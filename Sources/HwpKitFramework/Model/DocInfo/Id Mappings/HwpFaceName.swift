@@ -1,20 +1,22 @@
 import Foundation
 
-public struct HwpFaceName: HwpFromData {
+public struct HwpFaceName {
     public let property: BYTE
     public let faceNameLength: WORD
-    public let faceName: [WCHAR]
+    public let faceName: String?
     public var alternativeFaceType: BYTE?
     public var alternativeFaceNameLength: WORD?
-    public var alternativeFaceName: [WCHAR]?
+    public var alternativeFaceName: String?
     public var faceTypeInfo: [BYTE]?
     public var defaultFaceNameLength: WORD?
-    public var defaultFaceName: [WCHAR]?
+    public var defaultFaceName: String?
+}
 
+extension HwpFaceName: HwpFromData {
     init() {
         property = 0
         faceNameLength = 0
-        faceName = [WCHAR]()
+        faceName = ""
         alternativeFaceType = nil
         alternativeFaceNameLength = nil
         alternativeFaceName = nil
@@ -32,19 +34,33 @@ public struct HwpFaceName: HwpFromData {
         let hasDefault = property.bits[5]
 
         faceNameLength = reader.read(WORD.self)
-        faceName = reader.read(WCHAR.self, Int(faceNameLength))
+        faceName = reader.read(WCHAR.self, Int(faceNameLength)).string
 
         if hasAlternative {
             alternativeFaceType = reader.read(BYTE.self)
             alternativeFaceNameLength = reader.read(WORD.self)
-            alternativeFaceName = reader.read(WCHAR.self, Int(alternativeFaceNameLength!))
+            alternativeFaceName = reader.read(WCHAR.self, Int(alternativeFaceNameLength!)).string
         }
         if hasInfo {
             faceTypeInfo = reader.readBytes(10).bytes
         }
         if hasDefault {
             defaultFaceNameLength = reader.read(WORD.self)
-            defaultFaceName = reader.read(WCHAR.self, Int(defaultFaceNameLength!))
+            defaultFaceName = reader.read(WCHAR.self, Int(defaultFaceNameLength!)).string
         }
+    }
+}
+
+extension HwpFaceName {
+    init(_ faceName: String, _ faceTypeInfo: [BYTE], _ defaultFaceName: String) {
+        self.property = 97
+        self.faceNameLength = WORD(faceName.count)
+        self.faceName = faceName
+        self.alternativeFaceType = nil
+        self.alternativeFaceNameLength = nil
+        self.alternativeFaceName = nil
+        self.faceTypeInfo = faceTypeInfo
+        self.defaultFaceNameLength = WORD(defaultFaceName.count)
+        self.defaultFaceName = defaultFaceName
     }
 }

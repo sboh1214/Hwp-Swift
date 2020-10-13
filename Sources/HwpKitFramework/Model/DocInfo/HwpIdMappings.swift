@@ -5,7 +5,7 @@ import Foundation
  
  Tag ID : HWPTAG_ID_MAPPINGS
  */
-public struct HwpIdMappings: HwpFromRecordWithVersion {
+public struct HwpIdMappings {
     /**바이너리 데이터*/
     private let binaryDataCount: Int32
     /**영어 글꼴*/
@@ -49,7 +49,9 @@ public struct HwpIdMappings: HwpFromRecordWithVersion {
     // TODO HWPTAG_NUMBERING
     // TODO HWPTAG_BULLET
     public var paraShapeArray: [HwpParaShape]
+}
 
+extension HwpIdMappings: HwpFromRecordWithVersion {
     init() {
         binaryDataCount = 0
         englishFaceCount = 2
@@ -65,12 +67,34 @@ public struct HwpIdMappings: HwpFromRecordWithVersion {
         paraHeadCount = 1
         paraShapeCount = 0
         styleCount = 19
+        memoShapeCount = 21
+        changeTraceCount = 0
+        changeTraceUserCount = 0
 
         binDataArray = [HwpBinData]()
-        faceNameArray = [HwpFaceName]()
-        borderFillArray = [HwpBorderFill]()
-        charShapeArray = [HwpCharShape]()
-        paraShapeArray = [HwpParaShape]()
+
+        // swiftlint:disable line_length
+        let dotum = HwpFaceName("함초롬돋움", [2, 11, 6, 4, 0, 1, 1, 1, 1, 1], "HCR Dotum")
+        let batang = HwpFaceName("함초롬바탕", [2, 3, 6, 4, 0, 1, 1, 1, 1, 1], "HCR Batang")
+        faceNameArray = [dotum, batang, dotum, batang, dotum, batang, dotum, batang, dotum, batang, dotum, batang, dotum, batang]
+
+        let borderFill1 = HwpBorderFill(fillInfo: [0, 0, 0, 0, 0, 0, 0, 0])
+        let borderFill2 = HwpBorderFill(fillInfo: [1, 0, 0, 0, 255, 255, 255, 255, 153, 153, 153, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0])
+        borderFillArray = [borderFill1, borderFill2]
+
+        let charShape1 = HwpCharShape(faceId: [1, 1, 1, 1, 1, 1, 1], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1000, faceColor: HwpColor())
+        let charShape2 = HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1000, faceColor: HwpColor())
+        let charShape3 = HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 900, faceColor: HwpColor())
+        let charShape4 = HwpCharShape(faceId: [1, 1, 1, 1, 1, 1, 1], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 900, faceColor: HwpColor())
+        let charShape5 = HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [-5, -5, -5, -5, -5, -5, -5], baseSize: 900, faceColor: HwpColor())
+        let charShape6 = HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1600, faceColor: HwpColor(46, 46, 46))
+        let charShape7 = HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1100, faceColor: HwpColor())
+        charShapeArray = [charShape1, charShape2, charShape3, charShape4, charShape5, charShape6, charShape7]
+
+        let paraShape1 = HwpParaShape(property1: 384, marginLeft: 0, paragraphSpacingBottom: 0, tabDefId: 0)
+        let paraShape2 = HwpParaShape(property1: 384, marginLeft: 3000, paragraphSpacingBottom: 0, tabDefId: 0)
+        paraShapeArray = [paraShape1, paraShape2, HwpParaShape(property1: 8399232, marginLeft: 2000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 41953664, marginLeft: 4000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 75508096, marginLeft: 6000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 109062528, marginLeft: 8000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 142616960, marginLeft: 10000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 176171392, marginLeft: 12000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 209725824, marginLeft: 14000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 256, marginLeft: 0, paragraphSpacingBottom: 0, lineSpacing: 150, tabDefId: 0, lineSpacing2: Optional(150)), HwpParaShape(property1: 384, marginLeft: 0, indent: -2620, paragraphSpacingBottom: 0, lineSpacing: 130, tabDefId: 0, lineSpacing2: Optional(130)), HwpParaShape(property1: 260, marginLeft: 0, paragraphSpacingBottom: 0, lineSpacing: 130, tabDefId: 0, lineSpacing2: Optional(130)), HwpParaShape(property1: 10500, marginLeft: 0, paragraphSpacingTop: 2400, paragraphSpacingBottom: 600, tabDefId: 1), HwpParaShape(property1: 260, marginLeft: 0, paragraphSpacingBottom: 1400, tabDefId: 2), HwpParaShape(property1: 260, marginLeft: 2200, paragraphSpacingBottom: 1400, tabDefId: 2), HwpParaShape(property1: 260, marginLeft: 4400, paragraphSpacingBottom: 1400, tabDefId: 2), HwpParaShape(property1: 209715584, marginLeft: 18000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 209715584, marginLeft: 20000, paragraphSpacingBottom: 0, tabDefId: 1), HwpParaShape(property1: 209715584, marginLeft: 16000, paragraphSpacingBottom: 0, tabDefId: 1)]
+        // swiftlint:enable line_length
     }
 
     init(_ record: HwpRecord, _ version: HwpVersion) throws {
