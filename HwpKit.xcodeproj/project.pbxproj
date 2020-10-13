@@ -24,6 +24,7 @@
 		3601507C2535D39100565F29 /* HwpTabDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3601507B2535D39100565F29 /* HwpTabDef.swift */; };
 		3601509F2535D5E100565F29 /* HwpTabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3601509E2535D5E100565F29 /* HwpTabInfo.swift */; };
 		360ADFDB253489A7001F32CD /* Create2018Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360ADFDA253489A7001F32CD /* Create2018Tests.swift */; };
+		3652EFA7253602620002CC32 /* HwpBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3652EFA6253602620002CC32 /* HwpBullet.swift */; };
 		3682A22F2534868C00465BF3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3682A22E2534868C00465BF3 /* Utils.swift */; };
 		36BE16762535DE8300BF858C /* HwpNumbering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BE16752535DE8300BF858C /* HwpNumbering.swift */; };
 		36BE16832535E1C500BF858C /* HwpNumberingFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BE16822535E1C500BF858C /* HwpNumberingFormat.swift */; };
@@ -187,6 +188,7 @@
 		3601507B2535D39100565F29 /* HwpTabDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HwpTabDef.swift; sourceTree = "<group>"; };
 		3601509E2535D5E100565F29 /* HwpTabInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HwpTabInfo.swift; sourceTree = "<group>"; };
 		360ADFDA253489A7001F32CD /* Create2018Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create2018Tests.swift; sourceTree = "<group>"; };
+		3652EFA6253602620002CC32 /* HwpBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HwpBullet.swift; sourceTree = "<group>"; };
 		3682A21F253484C700465BF3 /* blank-win2018.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "blank-win2018.hwp"; sourceTree = "<group>"; };
 		3682A220253484D700465BF3 /* noori.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = noori.hwp; sourceTree = "<group>"; };
 		3682A221253484E400465BF3 /* 2007.hwp */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2007.hwp; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				36BE16752535DE8300BF858C /* HwpNumbering.swift */,
 				36BE16822535E1C500BF858C /* HwpNumberingFormat.swift */,
 				OBJ_31 /* HwpParaShape.swift */,
+				3652EFA6253602620002CC32 /* HwpBullet.swift */,
 			);
 			path = "Id Mappings";
 			sourceTree = "<group>";
@@ -935,6 +938,7 @@
 				OBJ_162 /* HwpDocumentProperties.swift in Sources */,
 				OBJ_163 /* HwpStartingIndex.swift in Sources */,
 				OBJ_164 /* HwpIdMappings.swift in Sources */,
+				3652EFA7253602620002CC32 /* HwpBullet.swift in Sources */,
 				OBJ_165 /* HwpBinData.swift in Sources */,
 				OBJ_166 /* HwpBorderFill.swift in Sources */,
 				OBJ_167 /* HwpCharShape.swift in Sources */,
