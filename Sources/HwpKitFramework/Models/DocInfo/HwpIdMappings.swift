@@ -46,7 +46,7 @@ public struct HwpIdMappings {
     public var borderFillArray: [HwpBorderFill]
     public var charShapeArray: [HwpCharShape]
     public var tabDefArray: [HwpTabDef]
-    // TODO HWPTAG_NUMBERING
+    public var numberingArray: [HwpNumbering]
     // TODO HWPTAG_BULLET
     public var paraShapeArray: [HwpParaShape]
 }
@@ -92,6 +92,8 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         charShapeArray = [charShape1, charShape2, charShape3, charShape4, charShape5, charShape6, charShape7]
 
         tabDefArray = [HwpTabDef(property: 0), HwpTabDef(property: 1), HwpTabDef(property: 2)]
+
+        numberingArray = [HwpNumbering(formatArray: [HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^1."), HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^2."), HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^3)"), HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^4)"), HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 4, format: "(^5)"), HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 4, format: "(^6)"), HwpNumberingFormat(property: [44, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 2, format: "^7")], startingIndex: 0, startingIndexArray: Optional([1, 1, 1, 1, 1, 1, 1]), extendedFormatArray: Optional([HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: ""), HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: ""), HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: "")]), extendedStartingIndexArray: Optional([1, 1, 1]))]
 
         let paraShape1 = HwpParaShape(property1: 384, marginLeft: 0, paragraphSpacingBottom: 0, tabDefId: 0)
         let paraShape2 = HwpParaShape(property1: 384, marginLeft: 3000, paragraphSpacingBottom: 0, tabDefId: 0)
@@ -145,6 +147,10 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         tabDefArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.tabDef}
             .map {try HwpTabDef($0.payload)}
+
+        numberingArray = try record.children
+            .filter {$0.tagId == HwpDocInfoTag.numbering}
+            .map {try HwpNumbering($0.payload, version)}
 
         paraShapeArray = try record.children
             .filter {$0.tagId == HwpDocInfoTag.paraShape}

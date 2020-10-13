@@ -31,6 +31,7 @@ class Create2018Tests: XCTestCase {
         XCTAssertEqual(expectedMappings.borderFillArray, actualMappings.borderFillArray)
         XCTAssertEqual(expectedMappings.charShapeArray, actualMappings.charShapeArray)
         XCTAssertEqual(expectedMappings.tabDefArray, actualMappings.tabDefArray)
+        XCTAssertEqual(expectedMappings.numberingArray, actualMappings.numberingArray)
         XCTAssertEqual(expectedMappings.paraShapeArray, actualMappings.paraShapeArray)
 
         XCTAssertEqual(expected.docInfo, actual.docInfo)
