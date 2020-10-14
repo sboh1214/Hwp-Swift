@@ -34,12 +34,11 @@ extension HwpNumbering: HwpFromDataWithVersion {
         defer {
             precondition(reader.isEOF())
         }
-        //headerInfo = reader.readBytes(12).bytes
         formatArray = [HwpNumberingFormat]()
         for _ in 1...7 {
             let bytes = reader.readBytes(12).bytes
             let length = reader.read(WORD.self)
-            let format = reader.read(WCHAR.self, Int(length)).string
+            let format = reader.read(WCHAR.self, length).string
             formatArray.append(HwpNumberingFormat(bytes, length, format))
         }
         startingIndex = reader.read(UInt16.self)
@@ -54,7 +53,7 @@ extension HwpNumbering: HwpFromDataWithVersion {
             for _ in 8...10 {
                 let bytes = reader.readBytes(12).bytes
                 let length = reader.read(WORD.self)
-                let format = reader.read(WCHAR.self, Int(length)).string
+                let format = reader.read(WCHAR.self, length).string
                 extendedFormatArray?.append(HwpNumberingFormat(bytes, length, format))
             }
             extendedStartingIndexArray = [UInt32]()

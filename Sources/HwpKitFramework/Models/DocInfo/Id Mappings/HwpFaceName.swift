@@ -34,19 +34,19 @@ extension HwpFaceName: HwpFromData {
         let hasDefault = property.bits[5]
 
         faceNameLength = reader.read(WORD.self)
-        faceName = reader.read(WCHAR.self, Int(faceNameLength)).string
+        faceName = reader.read(WCHAR.self, faceNameLength).string
 
         if hasAlternative {
             alternativeFaceType = reader.read(BYTE.self)
             alternativeFaceNameLength = reader.read(WORD.self)
-            alternativeFaceName = reader.read(WCHAR.self, Int(alternativeFaceNameLength!)).string
+            alternativeFaceName = reader.read(WCHAR.self, alternativeFaceNameLength!).string
         }
         if hasInfo {
             faceTypeInfo = reader.readBytes(10).bytes
         }
         if hasDefault {
             defaultFaceNameLength = reader.read(WORD.self)
-            defaultFaceName = reader.read(WCHAR.self, Int(defaultFaceNameLength!)).string
+            defaultFaceName = reader.read(WCHAR.self, defaultFaceNameLength!).string
         }
     }
 }

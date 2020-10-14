@@ -50,13 +50,13 @@ public struct HwpBinData: HwpFromData {
 
         if type == HwpBinDataType.link {
             absolutePathLength = reader.read(WORD.self)
-            absolutePath = reader.read(WCHAR.self, Int(absolutePathLength!))
+            absolutePath = reader.read(WCHAR.self, absolutePathLength!)
             relativePathLength = reader.read(WORD.self)
-            relativePath = reader.read(WCHAR.self, Int(relativePathLength!))
+            relativePath = reader.read(WCHAR.self, relativePathLength!)
         } else {
             streamId = reader.read(UInt16.self)
             extensionLength = reader.read(WORD.self)
-            extensionName = reader.read(WCHAR.self, Int(extensionLength!))
+            extensionName = reader.read(WCHAR.self, extensionLength!)
         }
     }
 }
