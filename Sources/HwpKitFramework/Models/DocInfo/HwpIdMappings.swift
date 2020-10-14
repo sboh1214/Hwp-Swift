@@ -94,15 +94,29 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
 
         tabDefArray = [HwpTabDef(property: 0), HwpTabDef(property: 1), HwpTabDef(property: 2)]
 
-        numberingArray = [HwpNumbering(formatArray: [HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^1."), HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^2."), HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^3)"), HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^4)"), HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 4, format: "(^5)"), HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 4, format: "(^6)"), HwpNumberingFormat(property: [44, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 2, format: "^7")], startingIndex: 0, startingIndexArray: Optional([1, 1, 1, 1, 1, 1, 1]), extendedFormatArray: Optional([HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: ""), HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: ""), HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: "")]), extendedStartingIndexArray: Optional([1, 1, 1]))]
+        numberingArray = [
+            HwpNumbering(formatArray: [
+                            HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^1."),
+                            HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^2."),
+                            HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^3)"),
+                            HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^4)"),
+                            HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 4, format: "(^5)"),
+                            HwpNumberingFormat(property: [12, 1, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 4, format: "(^6)"),
+                            HwpNumberingFormat(property: [44, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 2, format: "^7")],
+                         startingIndex: 0,
+                         startingIndexArray: [1, 1, 1, 1, 1, 1, 1],
+                         extendedFormatArray: [HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: ""),
+                                               HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: ""),
+                                               HwpNumberingFormat(property: [8, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 0, format: "")],
+                         extendedStartingIndexArray: [1, 1, 1]
+            )
+        ]
 
         bulletArray = [HwpBullet]()
 
-        let paraShape1 = HwpParaShape(property1: 384, marginLeft: 0, paragraphSpacingBottom: 0, tabDefId: 0)
-        let paraShape2 = HwpParaShape(property1: 384, marginLeft: 3000, paragraphSpacingBottom: 0, tabDefId: 0)
         paraShapeArray = [
-            paraShape1,
-            paraShape2,
+            HwpParaShape(property1: 384, marginLeft: 0, paragraphSpacingBottom: 0, tabDefId: 0),
+            HwpParaShape(property1: 384, marginLeft: 3000, paragraphSpacingBottom: 0, tabDefId: 0),
             HwpParaShape(property1: 8399232, marginLeft: 2000, paragraphSpacingBottom: 0, tabDefId: 1),
             HwpParaShape(property1: 41953664, marginLeft: 4000, paragraphSpacingBottom: 0, tabDefId: 1),
             HwpParaShape(property1: 75508096, marginLeft: 6000, paragraphSpacingBottom: 0, tabDefId: 1),
@@ -175,40 +189,39 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             changeTraceUserCount = reader.read(Int32.self)
         }
 
-        binDataArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.binData}
-            .map {try HwpBinData($0.payload)}
+        binDataArray = [HwpBinData]()
+        faceNameArray = [HwpFaceName]()
+        borderFillArray = [HwpBorderFill]()
+        charShapeArray = [HwpCharShape]()
+        tabDefArray = [HwpTabDef]()
+        numberingArray = [HwpNumbering]()
+        bulletArray = [HwpBullet]()
+        paraShapeArray = [HwpParaShape]()
+        styleArray = [HwpStyle]()
 
-        faceNameArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.faceName}
-            .map {try HwpFaceName($0.payload)}
-
-        borderFillArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.borderFill}
-            .map {try HwpBorderFill($0.payload)}
-
-        charShapeArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.charShape}
-            .map {try HwpCharShape($0.payload, version)}
-
-        tabDefArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.tabDef}
-            .map {try HwpTabDef($0.payload)}
-
-        numberingArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.numbering}
-            .map {try HwpNumbering($0.payload, version)}
-
-        bulletArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.bullet}
-            .map {try HwpBullet($0.payload)}
-
-        paraShapeArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.paraShape}
-            .map {try HwpParaShape($0.payload, version)}
-
-        styleArray = try record.children
-            .filter {$0.tagId == HwpDocInfoTag.style}
-            .map {try HwpStyle($0.payload)}
+        for child in record.children {
+            switch child.tagId {
+            case HwpDocInfoTag.binData:
+                binDataArray.append(try HwpBinData(child.payload))
+            case HwpDocInfoTag.faceName:
+                faceNameArray.append(try HwpFaceName(child.payload))
+            case HwpDocInfoTag.borderFill:
+                borderFillArray.append(try HwpBorderFill(child.payload))
+            case HwpDocInfoTag.charShape:
+                charShapeArray.append(try HwpCharShape(child.payload, version))
+            case HwpDocInfoTag.tabDef:
+                tabDefArray.append(try HwpTabDef(child.payload))
+            case HwpDocInfoTag.numbering:
+                numberingArray.append(try HwpNumbering(child.payload, version))
+            case HwpDocInfoTag.bullet:
+                bulletArray.append(try HwpBullet(child.payload))
+            case HwpDocInfoTag.paraShape:
+                paraShapeArray.append(try HwpParaShape(child.payload, version))
+            case HwpDocInfoTag.style:
+                styleArray.append(try HwpStyle(child.payload))
+            default:
+                print(child.tagId)
+            }
+        }
     }
 }
