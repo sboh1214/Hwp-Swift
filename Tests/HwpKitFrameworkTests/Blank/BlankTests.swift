@@ -13,10 +13,7 @@ final class BlankTests: XCTestCase {
     }
 
     func testHwpVersion() throws {
-        XCTAssertEqual(hwp.fileHeader.version.major, 5)
-        XCTAssertEqual(hwp.fileHeader.version.minor, 1)
-        XCTAssertEqual(hwp.fileHeader.version.build, 0)
-        XCTAssertEqual(hwp.fileHeader.version.revision, 1)
+        XCTAssertEqual(hwp.fileHeader.version, HwpVersion(5, 1, 0, 1))
     }
 
     func testEncryptVersion() throws {

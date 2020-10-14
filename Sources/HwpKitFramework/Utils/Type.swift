@@ -38,12 +38,6 @@ extension Data {
     }
 }
 
-extension Array where Element == Data {
-    func toBits() -> [Bool] {
-        reduce([Bool]()) { $0 + $1.bits }
-    }
-}
-
 extension Array where Element == WCHAR {
     @available(*, deprecated, renamed: "string")
     public func toString() -> String {
