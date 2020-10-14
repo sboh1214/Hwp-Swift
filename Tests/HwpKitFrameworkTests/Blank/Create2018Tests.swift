@@ -25,12 +25,16 @@ class Create2018Tests: XCTestCase {
     func testDocInfo() throws {
         XCTAssertEqual(expected.docInfo.documentProperties, actual.docInfo.documentProperties)
         XCTAssertEqual(expected.docInfo.compatibleDocument, actual.docInfo.compatibleDocument)
+
         let expectedMappings = expected.docInfo.idMappings
         let actualMappings = actual.docInfo.idMappings
         XCTAssertEqual(expectedMappings.faceNameArray, actualMappings.faceNameArray)
         XCTAssertEqual(expectedMappings.borderFillArray, actualMappings.borderFillArray)
         XCTAssertEqual(expectedMappings.charShapeArray, actualMappings.charShapeArray)
+        XCTAssertEqual(expectedMappings.tabDefArray, actualMappings.tabDefArray)
+        XCTAssertEqual(expectedMappings.numberingArray, actualMappings.numberingArray)
         XCTAssertEqual(expectedMappings.paraShapeArray, actualMappings.paraShapeArray)
+        XCTAssertEqual(expectedMappings.styleArray, actualMappings.styleArray)
 
         XCTAssertEqual(expected.docInfo, actual.docInfo)
     }

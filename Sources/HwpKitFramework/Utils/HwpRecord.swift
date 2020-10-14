@@ -47,7 +47,7 @@ func parseTreeRecord(data: Data) -> HwpRecord {
         if size == 0xFFF {
             size = reader.read(UInt32.self)
         }
-        let payload = reader.readBytes(Int(size))
+        let payload = reader.readBytes(size)
 
         var parent = root
 

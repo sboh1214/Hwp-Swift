@@ -3,7 +3,7 @@ repos:
     hooks:
       - id: lint
         name: swiftlint
-        entry: swiftlint autocorrect && swiftlint
+        entry: swiftlint
         language: system
         files: '\.swift$'
         pass_filenames: false
