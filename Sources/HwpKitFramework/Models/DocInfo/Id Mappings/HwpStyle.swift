@@ -4,6 +4,8 @@ import Foundation
  스타일(문단 스타일)
  
  Tag ID : HWPTAG_STYLE
+ 
+ TODO: 끝에 문서화되지 않은 2바이트가 붙어 있음
  */
 public struct HwpStyle {
     /**길이 (len1)*/
@@ -32,6 +34,8 @@ public struct HwpStyle {
      스타일의 종류가 글자인 경우 반드시 지정해야 한다.
      */
     public let charShapeId: UInt16
+    /**문서화되어있지 않음*/
+    public let unknown: [BYTE]
 }
 
 extension HwpStyle: HwpFromData {
@@ -49,5 +53,21 @@ extension HwpStyle: HwpFromData {
         languageId = reader.read(Int16.self)
         paraShapeId = reader.read(UInt16.self)
         charShapeId = reader.read(UInt16.self)
+        unknown =  reader.readBytes(2).bytes
+    }
+}
+
+extension HwpStyle {
+    internal init(styleLocalName: String, styelEnglishName: String, property: BYTE, nextId: BYTE, paraShapeId: UInt16, charShapeId: UInt16) {
+        self.length1 = WORD(styleLocalName.count)
+        self.styleLocalName = styleLocalName
+        self.length2 = WORD(styelEnglishName.count)
+        self.styelEnglishName = styelEnglishName
+        self.property = property
+        self.nextId = nextId
+        self.languageId = 1042
+        self.paraShapeId = paraShapeId
+        self.charShapeId = charShapeId
+        self.unknown = [0, 0]
     }
 }
