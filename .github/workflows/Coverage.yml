@@ -8,15 +8,15 @@ on:
     branches:
       - main
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_12.app/Contents/Developer
+
 jobs:
   coverage:
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
-    - uses: fwal/setup-swift@v1
-      with:
-        swift-version: "5.3"
     - name: Run tests
       run: xcodebuild -scheme HwpKit-Package -resolvePackageDependencies -resultBundlePath HwpKit-Package.xcresult test
     - name: Make Report
@@ -26,4 +26,4 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
-        coverageLocations: ${{github.workspace}}/*.lcov:lcov
+        coverageLocations: ${{github.workspace}}/report.json:json
