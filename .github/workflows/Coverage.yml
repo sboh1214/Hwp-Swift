@@ -8,22 +8,26 @@ on:
     branches:
       - main
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_12.app/Contents/Developer
+
 jobs:
   coverage:
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
-    - uses: fwal/setup-swift@v1
-      with:
-        swift-version: "5.3"
     - name: Run tests
       run: swift test -v --enable-code-coverage
     - name: Prepare Codecov
-      run: xcrun llvm-cov export -format="lcov" .build/debug/HwpKitPackageTests.xctest/Contents/MacOS/HwpKitPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
+      run: xcrun llvm-cov export -format="lcov" .build/debug/HwpKitPackageTests.xctest/Contents/MacOS/HwpKitPackageTests -instr-profile .build/debug/codecov/default.profdata > raw.lcov
+    - name: Install lcov
+      run: brew install lcov
+    - name: Extract
+      run: lcov -e raw.lcov "*HwpKit/Sources*" -o info.lcov
     - name: Code Climate Coverage Action
       uses: paambaati/codeclimate-action@v2.7.4
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
-        coverageLocations: ${{github.workspace}}/*.lcov:lcov
+        coverageLocations: ${{github.workspace}}/info.lcov:lcov
