@@ -7,42 +7,52 @@ import Foundation
  */
 public struct HwpIdMappings {
     /**바이너리 데이터*/
-    private let binaryDataCount: Int32
+    public let binaryDataCount: Int32
+    /**한글 글꼴*/
+    public let faceNameKoreanCount: Int32
     /**영어 글꼴*/
-    private let englishFaceCount: Int32
+    public let faceNameEnglishCount: Int32
     /**한자 글꼴*/
-    private let chineseFaceCount: Int32
+    public let faceNameChineseCount: Int32
     /**일어 글꼴*/
-    private let japaneseFaceCount: Int32
+    public let faceNameJapaneseCount: Int32
     /**기타 글꼴*/
-    private let etcFaceCount: Int32
+    public let faceNameEtcCount: Int32
     /**기호 글꼴*/
-    private let symbolFaceCount: Int32
+    public let faceNameSymbolCount: Int32
     /**사용자 글꼴*/
-    private let userFaceCount: Int32
+    public let faceNameUserCount: Int32
     /**테두리/배경*/
-    private let borderFillCount: Int32
+    public let borderFillCount: Int32
     /**글자 모양*/
-    private let charShapeCount: Int32
+    public let charShapeCount: Int32
     /**탭 정의*/
-    private let tabDefCount: Int32
+    public let tabDefCount: Int32
     /**문단 번호*/
-    private let paraNumberingCount: Int32
+    public let numberingCount: Int32
     /**글머리표*/
-    private let paraHeadCount: Int32
+    public let bulletCount: Int32
     /**문단 모양*/
-    private let paraShapeCount: Int32
+    public let paraShapeCount: Int32
     /**스타일*/
-    private let styleCount: Int32
+    public let styleCount: Int32
     /**메모 모양 (5.0.2.1 이상)*/
-    private var memoShapeCount: Int32?
+    public var memoShapeCount: Int32?
     /**변경추적 (5.0.3.2 이상)*/
-    private var changeTraceCount: Int32?
+    public var changeTraceCount: Int32?
     /**변경추적 사용자 (5.0.3.2 이상)*/
-    private var changeTraceUserCount: Int32?
-
+    public var changeTraceUserCount: Int32?
+    
     public var binDataArray: [HwpBinData]
-    public var faceNameArray: [HwpFaceName]
+    
+    public var faceNameKoreanArray: [HwpFaceName]
+    public var faceNameEnglishArray: [HwpFaceName]
+    public var faceNameChineseArray: [HwpFaceName]
+    public var faceNameJapaneseArray: [HwpFaceName]
+    public var faceNameEtcArray: [HwpFaceName]
+    public var faceNameSymbolArray: [HwpFaceName]
+    public var faceNameUserArray: [HwpFaceName]
+    
     public var borderFillArray: [HwpBorderFill]
     public var charShapeArray: [HwpCharShape]
     public var tabDefArray: [HwpTabDef]
@@ -54,36 +64,50 @@ public struct HwpIdMappings {
 
 extension HwpIdMappings: HwpFromRecordWithVersion {
     init() {
-        englishFaceCount = 2
-        chineseFaceCount = 2
-        japaneseFaceCount = 2
-        etcFaceCount = 2
-        symbolFaceCount = 2
-        userFaceCount = 2
         charShapeCount = 2
         tabDefCount = 7
-        paraNumberingCount = 3
-        paraHeadCount = 1
+        numberingCount = 3
+        bulletCount = 1
         paraShapeCount = 0
         styleCount = 19
         memoShapeCount = 21
         changeTraceCount = 0
         changeTraceUserCount = 0
-
+        
         binDataArray = [HwpBinData]()
         binaryDataCount = Int32(binDataArray.count)
-
-        // swiftlint:disable line_length
+        
         let dotum = HwpFaceName("함초롬돋움", [2, 11, 6, 4, 0, 1, 1, 1, 1, 1], "HCR Dotum")
         let batang = HwpFaceName("함초롬바탕", [2, 3, 6, 4, 0, 1, 1, 1, 1, 1], "HCR Batang")
-        faceNameArray = [dotum, batang, dotum, batang, dotum, batang, dotum, batang, dotum, batang, dotum, batang, dotum, batang]
-
+        
+        faceNameKoreanArray = [dotum, batang]
+        faceNameKoreanCount = Int32(faceNameKoreanArray.count)
+        
+        faceNameEnglishArray = [dotum, batang]
+        faceNameEnglishCount = Int32(faceNameEnglishArray.count)
+        
+        faceNameChineseArray = [dotum, batang]
+        faceNameChineseCount = Int32(faceNameChineseArray.count)
+        
+        faceNameJapaneseArray = [dotum, batang]
+        faceNameJapaneseCount = Int32(faceNameJapaneseArray.count)
+        
+        faceNameEtcArray = [dotum, batang]
+        faceNameEtcCount = Int32(faceNameEtcArray.count)
+        
+        faceNameSymbolArray = [dotum, batang]
+        faceNameSymbolCount = Int32(faceNameSymbolArray.count)
+        
+        faceNameUserArray = [dotum, batang]
+        faceNameUserCount = Int32(faceNameUserArray.count)
+        
+        // swiftlint:disable line_length
         borderFillArray = [
             HwpBorderFill(fillInfo: [0, 0, 0, 0, 0, 0, 0, 0]),
             HwpBorderFill(fillInfo: [1, 0, 0, 0, 255, 255, 255, 255, 153, 153, 153, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0])
         ]
         borderFillCount = Int32(borderFillArray.count)
-
+        
         charShapeArray = [
             HwpCharShape(faceId: [1, 1, 1, 1, 1, 1, 1], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1000, faceColor: HwpColor()),
             HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1000, faceColor: HwpColor()),
@@ -93,9 +117,9 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1600, faceColor: HwpColor(46, 46, 46)),
             HwpCharShape(faceId: [0, 0, 0, 0, 0, 0, 0], faceSpacing: [0, 0, 0, 0, 0, 0, 0], baseSize: 1100, faceColor: HwpColor())
         ]
-
+        
         tabDefArray = [HwpTabDef(property: 0), HwpTabDef(property: 1), HwpTabDef(property: 2)]
-
+        
         numberingArray = [
             HwpNumbering(formatArray: [
                             HwpNumberingFormat(property: [12, 0, 0, 0, 0, 0, 50, 0, 255, 255, 255, 255], formatLength: 3, format: "^1."),
@@ -115,9 +139,9 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
                          extendedStartingIndexArray: [1, 1, 1]
             )
         ]
-
+        
         bulletArray = [HwpBullet]()
-
+        
         paraShapeArray = [
             HwpParaShape(property1: 384, marginLeft: 0, tabDefId: 0),
             HwpParaShape(property1: 384, marginLeft: 3000, tabDefId: 0),
@@ -139,7 +163,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             HwpParaShape(property1: 209715584, marginLeft: 20000, tabDefId: 1),
             HwpParaShape(property1: 209715584, marginLeft: 16000, tabDefId: 1)
         ]
-
+        
         styleArray = [
             HwpStyle("바탕글", "Normal", nextId: 0, paraShapeId: 0, charShapeId: 0),
             HwpStyle("본문", "Body", nextId: 1, paraShapeId: 1, charShapeId: 0),
@@ -165,24 +189,25 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         ]
         // swiftlint:enable line_length
     }
-
+    
     init(_ record: HwpRecord, _ version: HwpVersion) throws {
         var reader = DataReader(record.payload)
         defer {
             // precondition(reader.isEOF())
         }
         binaryDataCount = reader.read(Int32.self)
-        englishFaceCount = reader.read(Int32.self)
-        chineseFaceCount = reader.read(Int32.self)
-        japaneseFaceCount = reader.read(Int32.self)
-        etcFaceCount = reader.read(Int32.self)
-        symbolFaceCount = reader.read(Int32.self)
-        userFaceCount = reader.read(Int32.self)
+        faceNameKoreanCount = reader.read(Int32.self)
+        faceNameEnglishCount = reader.read(Int32.self)
+        faceNameChineseCount = reader.read(Int32.self)
+        faceNameJapaneseCount = reader.read(Int32.self)
+        faceNameEtcCount = reader.read(Int32.self)
+        faceNameSymbolCount = reader.read(Int32.self)
+        faceNameUserCount = reader.read(Int32.self)
         borderFillCount = reader.read(Int32.self)
         charShapeCount = reader.read(Int32.self)
         tabDefCount = reader.read(Int32.self)
-        paraNumberingCount = reader.read(Int32.self)
-        paraHeadCount = reader.read(Int32.self)
+        numberingCount = reader.read(Int32.self)
+        bulletCount = reader.read(Int32.self)
         paraShapeCount = reader.read(Int32.self)
         styleCount = reader.read(Int32.self)
         if version >= HwpVersion(5, 0, 2, 1) {
@@ -192,23 +217,52 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             changeTraceCount = reader.read(Int32.self)
             changeTraceUserCount = reader.read(Int32.self)
         }
+        
+        binDataArray = try (0..<binaryDataCount)
+            .map {_ in try HwpBinData(record.children.remove(at: 0).payload)}
 
-        binDataArray = [HwpBinData]()
-        faceNameArray = [HwpFaceName]()
-        borderFillArray = [HwpBorderFill]()
-        charShapeArray = [HwpCharShape]()
-        tabDefArray = [HwpTabDef]()
-        numberingArray = [HwpNumbering]()
-        bulletArray = [HwpBullet]()
-        paraShapeArray = [HwpParaShape]()
-        styleArray = [HwpStyle]()
-
+        faceNameKoreanArray = try (0..<faceNameKoreanCount)
+            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
+        faceNameEnglishArray = try (0..<faceNameEnglishCount)
+            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
+        faceNameChineseArray = try (0..<faceNameChineseCount)
+            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
+        faceNameJapaneseArray = try (0..<faceNameJapaneseCount)
+            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
+        faceNameEtcArray = try (0..<faceNameEtcCount)
+            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
+        faceNameSymbolArray = try (0..<faceNameSymbolCount)
+            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
+        faceNameUserArray = try (0..<faceNameUserCount)
+            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
+        
+        borderFillArray = try (0..<borderFillCount)
+            .map {_ in try HwpBorderFill(record.children.remove(at: 0).payload)}
+        charShapeArray = try (0..<charShapeCount)
+            .map {_ in try HwpCharShape(record.children.remove(at: 0).payload, version)}
+        tabDefArray = try (0..<tabDefCount)
+            .map {_ in try HwpTabDef(record.children.remove(at: 0).payload)}
+        numberingArray = try (0..<numberingCount)
+            .map {_ in try HwpNumbering(record.children.remove(at: 0).payload, version)}
+        bulletArray = try (0..<bulletCount)
+            .map {_ in try HwpBullet(record.children.remove(at: 0).payload)}
+        paraShapeArray = try (0..<paraShapeCount)
+            .map {_ in try HwpParaShape(record.children.remove(at: 0).payload, version)}
+        styleArray = try (0..<styleCount)
+            .map {_ in try HwpStyle(record.children.remove(at: 0).payload)}
+        
+        if record.children.isEmpty {
+            return
+        } else {
+            print("HKFWarning : Unordered IdMappings Detected")
+        }
         for child in record.children {
+            print(child.tagId)
             switch child.tagId {
             case HwpDocInfoTag.binData:
                 binDataArray.append(try HwpBinData(child.payload))
             case HwpDocInfoTag.faceName:
-                faceNameArray.append(try HwpFaceName(child.payload))
+                print("HKFWarning: Failed to parse IdMappings FaceName")
             case HwpDocInfoTag.borderFill:
                 borderFillArray.append(try HwpBorderFill(child.payload))
             case HwpDocInfoTag.charShape:
@@ -224,7 +278,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             case HwpDocInfoTag.style:
                 styleArray.append(try HwpStyle(child.payload))
             default:
-                print(child.tagId)
+                print("HKFWarning : Unidentified Tag \(child.tagId)")
             }
         }
     }

@@ -34,18 +34,19 @@ final class NooriDocInfoTests: XCTestCase {
     }
 
     func testFaceName() throws {
-        let face = hwp.docInfo.idMappings.faceNameArray
-        XCTAssertEqual(face[0].faceName, "굴림")
-        XCTAssertEqual(face[0].alternativeFaceName, nil)
-        XCTAssertEqual(face[0].defaultFaceName!, "Gulim")
+        let korean = hwp.docInfo.idMappings.faceNameKoreanArray
+        XCTAssertEqual(korean[0].faceName, "굴림")
+        XCTAssertEqual(korean[0].alternativeFaceName, nil)
+        XCTAssertEqual(korean[0].defaultFaceName!, "Gulim")
 
-        XCTAssertEqual(face[1].faceName, "굴림체")
-        XCTAssertEqual(face[1].alternativeFaceName, nil)
-        XCTAssertEqual(face[1].defaultFaceName!, "GulimChe")
+        XCTAssertEqual(korean[1].faceName, "굴림체")
+        XCTAssertEqual(korean[1].alternativeFaceName, nil)
+        XCTAssertEqual(korean[1].defaultFaceName!, "GulimChe")
 
-        XCTAssertEqual(face[72].faceName, "Myeongjo")
-        XCTAssertEqual(face[72].alternativeFaceName!, "명조")
-        XCTAssertEqual(face[72].defaultFaceName, nil)
+        let user = hwp.docInfo.idMappings.faceNameUserArray
+        XCTAssertEqual(user[10].faceName, "Myeongjo")
+        XCTAssertEqual(user[10].alternativeFaceName!, "명조")
+        XCTAssertEqual(user[10].defaultFaceName, nil)
     }
 
     func testBorderFill() throws {
