@@ -18,9 +18,9 @@ jobs:
       with:
         swift-version: "5.3"
     - name: Run tests
-      run: swift test -v --enable-code-coverage
-    - name: Prepare Codecov
-      run: xcrun llvm-cov export -format="lcov" .build/debug/HwpKitPackageTests.xctest/Contents/MacOS/HwpKitPackageTests -instr-profile .build/debug/codecov/default.profdata > info.lcov
+      run: xcodebuild -scheme HwpKit-Package -resultBundlePath HwpKit-Package.xcresult test
+    - name: Make Report
+      run: xcrun xccov view --report --json HwpKit-Package.xcresult > report.json
     - name: Code Climate Coverage Action
       uses: paambaati/codeclimate-action@v2.7.4
       env:

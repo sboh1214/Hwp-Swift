@@ -69,15 +69,17 @@ final class NooriDocInfoTests: XCTestCase {
 
         XCTAssertEqual(char[58].property, 2)
     }
-
+    
     func testTabDef() throws {
         let shape = hwp.docInfo.idMappings.paraShapeArray
         XCTAssertEqual(shape[0].property1, 128)
         XCTAssertEqual(shape[46].property1, 268)
     }
-
-    func testCtrlHeader() throws {
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].ctrlId, 1885826672)
+    
+    func testNumbering() throws {
+        XCTAssertEqual(hwp.docInfo.idMappings.numberingArray.count, 2)
+        let numbering = hwp.docInfo.idMappings.numberingArray[0]
+        XCTAssertEqual(numbering.formatArray[0].format, "^1.")
     }
 
     func testCompatibleDocument() throws {
