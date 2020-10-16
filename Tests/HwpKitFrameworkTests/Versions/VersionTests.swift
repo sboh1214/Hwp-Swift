@@ -11,9 +11,4 @@ final class VersionTests: XCTestCase {
         let hwp = openHwp(#file, "2014VP")
         XCTAssertEqual(hwp.fileHeader.version, HwpVersion(5, 0, 5, 0))
     }
-
-    static var allTests = [
-        ("test2007", test2007),
-        ("test2014VP", test2014VP)
-    ]
 }
