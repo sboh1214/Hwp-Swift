@@ -28,7 +28,7 @@ class Create2018Tests: XCTestCase {
 
         let expectedMappings = expected.docInfo.idMappings
         let actualMappings = actual.docInfo.idMappings
-        
+
         XCTAssertEqual(expectedMappings.faceNameKoreanArray, actualMappings.faceNameKoreanArray)
         XCTAssertEqual(expectedMappings.faceNameEnglishArray, actualMappings.faceNameEnglishArray)
         XCTAssertEqual(expectedMappings.faceNameChineseArray, actualMappings.faceNameChineseArray)
@@ -36,7 +36,7 @@ class Create2018Tests: XCTestCase {
         XCTAssertEqual(expectedMappings.faceNameEtcArray, actualMappings.faceNameEtcArray)
         XCTAssertEqual(expectedMappings.faceNameSymbolArray, actualMappings.faceNameSymbolArray)
         XCTAssertEqual(expectedMappings.faceNameUserArray, actualMappings.faceNameUserArray)
-        
+
         XCTAssertEqual(expectedMappings.borderFillArray, actualMappings.borderFillArray)
         XCTAssertEqual(expectedMappings.charShapeArray, actualMappings.charShapeArray)
         XCTAssertEqual(expectedMappings.tabDefArray, actualMappings.tabDefArray)
