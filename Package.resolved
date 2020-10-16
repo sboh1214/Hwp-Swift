@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Commandant",
+        "repositoryURL": "https://github.com/Carthage/Commandant.git",
+        "state": {
+          "branch": null,
+          "revision": "ab68611013dec67413628ac87c1f29e8427bc8e4",
+          "version": "0.17.0"
+        }
+      },
+      {
+        "package": "DataCompression",
+        "repositoryURL": "https://github.com/mw99/DataCompression.git",
+        "state": {
+          "branch": null,
+          "revision": "6abb8f3cd0e4b2a33b4927a7a92b6764528f2440",
+          "version": "3.6.0"
+        }
+      },
+      {
+        "package": "Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble.git",
+        "state": {
+          "branch": null,
+          "revision": "7a46a5fc86cb917f69e3daf79fcb045283d8f008",
+          "version": "8.1.2"
+        }
+      },
+      {
+        "package": "OLEKit",
+        "repositoryURL": "https://github.com/CoreOffice/OLEKit.git",
+        "state": {
+          "branch": null,
+          "revision": "59b18787edbb010152d5c0a31ecb8527b966ab4f",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "Quick",
+        "repositoryURL": "https://github.com/Quick/Quick.git",
+        "state": {
+          "branch": null,
+          "revision": "09b3becb37cb2163919a3842a4c5fa6ec7130792",
+          "version": "2.2.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
