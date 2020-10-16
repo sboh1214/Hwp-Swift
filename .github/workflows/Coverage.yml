@@ -17,6 +17,8 @@ jobs:
     - uses: fwal/setup-swift@v1
       with:
         swift-version: "5.3"
+    - name: Resolve Dependencies
+      run: swift package resolve
     - name: Run tests
       run: xcodebuild -scheme HwpKit-Package -resultBundlePath HwpKit-Package.xcresult test
     - name: Make Report
