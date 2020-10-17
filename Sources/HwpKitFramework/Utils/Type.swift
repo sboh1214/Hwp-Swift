@@ -38,28 +38,6 @@ extension Data {
     }
 }
 
-extension Array where Element == WCHAR {
-    @available(*, deprecated, renamed: "string")
-    public func toString() -> String {
-        reduce("") {result, current in result + String(Character(UnicodeScalar(current)!))}
-    }
-
-    public var string: String {
-        reduce("") {result, current in result + String(Character(UnicodeScalar(current)!))}
-    }
-
-    public init(_ string: String) {
-        self = string.utf16.map {$0}
-    }
-}
-
-// [bytes] to Data
-extension Array where Element == UInt8 {
-    var data: Data {
-        Data(self)
-    }
-}
-
 extension UInt8 {
     var bits: [Bool] {
         var byte = self

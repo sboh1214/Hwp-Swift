@@ -93,7 +93,9 @@ extension HwpParaShape: HwpFromDataWithVersion {
 }
 
 extension HwpParaShape {
-    init(property1: UInt32, marginLeft: Int32, indent: Int32 = 0, paragraphSpacingTop: Int32 = 0, paragraphSpacingBottom: Int32, lineSpacing: Int32 = 160, tabDefId: UInt16, lineSpacing2: UInt32? = 160) {
+    init(property1: UInt32, marginLeft: Int32, indent: Int32 = 0,
+         paragraphSpacingTop: Int32 = 0, paragraphSpacingBottom: Int32 = 0,
+         lineSpacing: Int32 = 160, tabDefId: UInt16, lineSpacing2: UInt32? = 160) {
         self.property1 = property1
         self.marginLeft = marginLeft
         self.marginRight = 0

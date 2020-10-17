@@ -58,7 +58,8 @@ extension HwpStyle: HwpFromData {
 }
 
 extension HwpStyle {
-    internal init(styleLocalName: String, styelEnglishName: String, property: BYTE, nextId: BYTE, paraShapeId: UInt16, charShapeId: UInt16) {
+    internal init(_ styleLocalName: String, _ styelEnglishName: String, property: BYTE = 0,
+                  nextId: BYTE, paraShapeId: UInt16, charShapeId: UInt16) {
         self.length1 = WORD(styleLocalName.count)
         self.styleLocalName = styleLocalName
         self.length2 = WORD(styelEnglishName.count)
