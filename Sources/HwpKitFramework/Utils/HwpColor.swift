@@ -4,7 +4,9 @@ public struct HwpColor: HwpPrimitive {
     public let red: Int
     public let green: Int
     public let blue: Int
+}
 
+extension HwpColor {
     init() {
         red = 0
         green = 0

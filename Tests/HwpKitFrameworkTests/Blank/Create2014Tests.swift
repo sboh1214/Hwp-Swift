@@ -6,33 +6,34 @@ import XCTest
  program version : 10.30.3(2478)
  */
 final class Create2014Tests: XCTestCase {
-    let (expected, actual) = createHwp(#file, "blank-mac2014vp")
+    let (official, this) = createHwp(#file, "blank-mac2014vp")
 
     func testCreate() throws {
         // XCTAssertEqual(expected, actual)
     }
 
     func testfileHeader() throws {
-        XCTAssertEqual(expected.fileHeader, actual.fileHeader)
+        XCTAssertEqual(official.fileHeader, this.fileHeader)
     }
 
     func testDocInfo() throws {
-        XCTAssertEqual(expected.docInfo.documentProperties, actual.docInfo.documentProperties)
-        XCTAssertEqual(expected.docInfo.compatibleDocument, actual.docInfo.compatibleDocument)
-        let expectedMappings = expected.docInfo.idMappings
-        let actualMappings = actual.docInfo.idMappings
+        XCTAssertEqual(official.docInfo.documentProperties, this.docInfo.documentProperties)
+        XCTAssertEqual(official.docInfo.compatibleDocument, this.docInfo.compatibleDocument)
+        let officialMappings = official.docInfo.idMappings
+        let thisMappings = this.docInfo.idMappings
         // XCTAssertEqual(expectedMappings.faceNameArray, actualMappings.faceNameArray)
-        XCTAssertEqual(expectedMappings.borderFillArray, actualMappings.borderFillArray)
-        // XCTAssertEqual(expectedMappings.charShapeArray, actualMappings.charShapeArray)
-        XCTAssertEqual(expectedMappings.paraShapeArray, actualMappings.paraShapeArray)
-        XCTAssertEqual(expectedMappings.forbiddenCharArray, actualMappings.forbiddenCharArray)
+        XCTAssertEqual(officialMappings.borderFillArray, thisMappings.borderFillArray)
+        // XCTAssertEqual(officialMappings.charShapeArray, thisMappings.charShapeArray)
+        XCTAssertEqual(officialMappings.paraShapeArray, thisMappings.paraShapeArray)
+        XCTAssertEqual(officialMappings.forbiddenCharArray, thisMappings.forbiddenCharArray)
+        print(officialMappings.charShapeArray)
 
         // XCTAssertEqual(expected.docInfo, actual.docInfo)
     }
 
     func testSectionArray() throws {
-        XCTAssertEqual(expected.sectionArray.count, actual.sectionArray.count)
+        XCTAssertEqual(official.sectionArray.count, this.sectionArray.count)
 
-        XCTAssertEqual(expected.sectionArray, actual.sectionArray)
+        XCTAssertEqual(official.sectionArray, this.sectionArray)
     }
 }
