@@ -60,6 +60,12 @@ public struct HwpIdMappings {
     public var bulletArray: [HwpBullet]
     public var paraShapeArray: [HwpParaShape]
     public var styleArray: [HwpStyle]
+    /**
+     금칙처리문자
+     
+     NOTE : 문서화되어있지 않음
+     */
+    public var forbiddenCharArray: [HwpForbiddenChar]
 }
 
 extension HwpIdMappings: HwpFromRecordWithVersion {
@@ -187,6 +193,8 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             HwpStyle("차례 2", "TOC 2", nextId: 19, paraShapeId: 14, charShapeId: 6),
             HwpStyle("차례 3", "TOC 3", nextId: 20, paraShapeId: 15, charShapeId: 6)
         ]
+
+        forbiddenCharArray  = [HwpForbiddenChar(data: Data(repeating: 0, count: 16))]
         // swiftlint:enable line_length
     }
 
@@ -218,65 +226,47 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             changeTraceUserCount = reader.read(Int32.self)
         }
 
-        binDataArray = try (0..<binaryDataCount)
-            .map {_ in try HwpBinData(record.children.remove(at: 0).payload)}
+        binDataArray = try record.children.pop(binaryDataCount)
+            .map {try HwpBinData($0.payload)}
+        faceNameKoreanArray = try record.children.pop(faceNameKoreanCount)
+            .map {try HwpFaceName($0.payload)}
+        faceNameEnglishArray = try record.children.pop(faceNameEnglishCount)
+            .map {try HwpFaceName($0.payload)}
+        faceNameChineseArray = try record.children.pop(faceNameChineseCount)
+            .map {try HwpFaceName($0.payload)}
+        faceNameJapaneseArray = try record.children.pop(faceNameJapaneseCount)
+            .map {try HwpFaceName($0.payload)}
+        faceNameEtcArray = try record.children.pop(faceNameEtcCount)
+            .map {try HwpFaceName($0.payload)}
+        faceNameSymbolArray = try record.children.pop(faceNameSymbolCount)
+            .map {try HwpFaceName($0.payload)}
+        faceNameUserArray = try record.children.pop(faceNameUserCount)
+            .map {try HwpFaceName($0.payload)}
 
-        faceNameKoreanArray = try (0..<faceNameKoreanCount)
-            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
-        faceNameEnglishArray = try (0..<faceNameEnglishCount)
-            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
-        faceNameChineseArray = try (0..<faceNameChineseCount)
-            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
-        faceNameJapaneseArray = try (0..<faceNameJapaneseCount)
-            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
-        faceNameEtcArray = try (0..<faceNameEtcCount)
-            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
-        faceNameSymbolArray = try (0..<faceNameSymbolCount)
-            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
-        faceNameUserArray = try (0..<faceNameUserCount)
-            .map {_ in try HwpFaceName(record.children.remove(at: 0).payload)}
+        borderFillArray = try record.children.pop(borderFillCount)
+            .map {try HwpBorderFill($0.payload)}
+        charShapeArray = try record.children.pop(charShapeCount)
+            .map {try HwpCharShape($0.payload, version)}
+        tabDefArray = try record.children.pop(tabDefCount)
+            .map {try HwpTabDef($0.payload)}
+        numberingArray = try record.children.pop(numberingCount)
+            .map {try HwpNumbering($0.payload, version)}
+        bulletArray = try record.children.pop(bulletCount)
+            .map {try HwpBullet($0.payload)}
+        paraShapeArray = try record.children.pop(paraShapeCount)
+            .map {try HwpParaShape($0.payload, version)}
+        styleArray = try record.children.pop(styleCount)
+            .map {try HwpStyle($0.payload)}
 
-        borderFillArray = try (0..<borderFillCount)
-            .map {_ in try HwpBorderFill(record.children.remove(at: 0).payload)}
-        charShapeArray = try (0..<charShapeCount)
-            .map {_ in try HwpCharShape(record.children.remove(at: 0).payload, version)}
-        tabDefArray = try (0..<tabDefCount)
-            .map {_ in try HwpTabDef(record.children.remove(at: 0).payload)}
-        numberingArray = try (0..<numberingCount)
-            .map {_ in try HwpNumbering(record.children.remove(at: 0).payload, version)}
-        bulletArray = try (0..<bulletCount)
-            .map {_ in try HwpBullet(record.children.remove(at: 0).payload)}
-        paraShapeArray = try (0..<paraShapeCount)
-            .map {_ in try HwpParaShape(record.children.remove(at: 0).payload, version)}
-        styleArray = try (0..<styleCount)
-            .map {_ in try HwpStyle(record.children.remove(at: 0).payload)}
+        forbiddenCharArray = [HwpForbiddenChar]()
 
         if record.children.isEmpty {
             return
-        } else {
-            print("HKFWarning : Unordered IdMappings Detected")
         }
         for child in record.children {
-            print(child.tagId)
             switch child.tagId {
-            case HwpDocInfoTag.binData:
-                binDataArray.append(try HwpBinData(child.payload))
-            case HwpDocInfoTag.faceName:
-                print("HKFWarning: Failed to parse IdMappings FaceName")
-            case HwpDocInfoTag.borderFill:
-                borderFillArray.append(try HwpBorderFill(child.payload))
-            case HwpDocInfoTag.charShape:
-                charShapeArray.append(try HwpCharShape(child.payload, version))
-            case HwpDocInfoTag.tabDef:
-                tabDefArray.append(try HwpTabDef(child.payload))
-            case HwpDocInfoTag.numbering:
-                numberingArray.append(try HwpNumbering(child.payload, version))
-            case HwpDocInfoTag.bullet:
-                bulletArray.append(try HwpBullet(child.payload))
-            case HwpDocInfoTag.paraShape:
-                paraShapeArray.append(try HwpParaShape(child.payload, version))
-            case HwpDocInfoTag.style:
-                styleArray.append(try HwpStyle(child.payload))
+            case HwpDocInfoTag.forbiddenChar:
+                forbiddenCharArray.append(try HwpForbiddenChar(child.payload))
             default:
                 print("HKFWarning : Unidentified Tag \(child.tagId)")
             }
