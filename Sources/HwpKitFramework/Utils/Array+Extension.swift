@@ -15,11 +15,6 @@ extension Array {
 }
 
 extension Array where Element == WCHAR {
-    @available(*, deprecated, renamed: "string")
-    public func toString() -> String {
-        reduce("") {result, current in result + String(Character(UnicodeScalar(current)!))}
-    }
-
     public var string: String {
         reduce("") {result, current in result + String(Character(UnicodeScalar(current)!))}
     }
