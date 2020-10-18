@@ -13,6 +13,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.2.0")),
         .package(url: "https://github.com/mw99/DataCompression.git", .exact("3.6.0")),
+        .package(url:"https://github.com/fourplusone/swift-package-zlib", .exact("1.2.11")),
         .package(url: "https://github.com/Carthage/Commandant.git", .exact("0.17.0"))
     ],
     targets: [
@@ -22,7 +23,11 @@ let package = Package(
         ),
         .target(
             name: "HwpKitFramework",
-            dependencies: ["OLEKit", "DataCompression"]
+            dependencies: [
+                "OLEKit",
+                "DataCompression",
+                .product(name: "Z", package:"swift-package-zlib")
+            ]
         ),
         .testTarget(
             name: "HwpKitFrameworkTests",

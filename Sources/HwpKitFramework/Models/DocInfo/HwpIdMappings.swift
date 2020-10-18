@@ -69,6 +69,7 @@ public struct HwpIdMappings {
 }
 
 extension HwpIdMappings: HwpFromRecordWithVersion {
+    // swiftlint:disable function_body_length
     init() {
         charShapeCount = 2
         tabDefCount = 7

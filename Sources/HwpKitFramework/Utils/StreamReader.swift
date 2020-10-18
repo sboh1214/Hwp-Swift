@@ -1,6 +1,7 @@
 import Foundation
 import OLEKit
 import DataCompression
+import Z
 
 struct StreamReader {
     private let ole: OLEFile
@@ -29,10 +30,25 @@ struct StreamReader {
         let reader = try ole.stream(stream)
         let data =  reader.readDataToEnd()
         if isCompressed {
-            guard let decompressedData = data.decompress(withAlgorithm: .zlib) else {
+            guard let decompressed = data.decompress(withAlgorithm: .zlib) else {
                 throw HwpError.streamDecompressFailed(name: HwpStreamName(rawValue: stream.name)!)
             }
-            return decompressedData
+
+            let destLen = 2000
+            let dest = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: destLen)
+
+            let uncompressed = try data.withUnsafeBytes { (source) throws -> Data in
+                let ptr = UnsafeMutablePointer<UInt>.allocate(capacity: 1)
+                defer { ptr.deallocate() }
+                ptr.pointee = UInt(dest.count)
+                let bound = source.bindMemory(to: UInt8.self)
+
+                uncompress(dest.baseAddress, ptr, bound.baseAddress, uLong(bound.count))
+                return Data(bytes: dest.baseAddress!, count: Int(ptr.pointee))
+            }
+
+            precondition(decompressed != uncompressed)
+            return decompressed
         } else {
             return data
         }
