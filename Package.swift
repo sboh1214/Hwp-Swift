@@ -5,7 +5,6 @@ import PackageDescription
 
 let package = Package(
     name: "HwpKit",
-    platforms: [.macOS(.v10_11), .iOS(.v9), .tvOS(.v9), .watchOS(.v2)],
     products: [
         .executable(name: "hwpkit", targets: ["hwpkit"]),
         .library(name: "HwpKitFramework", targets: ["HwpKitFramework"])
