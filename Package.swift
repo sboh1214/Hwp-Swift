@@ -5,14 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "HwpKit",
-    platforms: [.macOS(.v10_11), .iOS(.v9), .tvOS(.v9), .watchOS(.v2)],
     products: [
         .executable(name: "hwpkit", targets: ["hwpkit"]),
         .library(name: "HwpKitFramework", targets: ["HwpKitFramework"])
     ],
     dependencies: [
         .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.2.0")),
-        .package(url: "https://github.com/mw99/DataCompression.git", .exact("3.6.0")),
+        .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.5.7")),
         .package(url: "https://github.com/Carthage/Commandant.git", .exact("0.17.0"))
     ],
     targets: [
@@ -22,7 +21,10 @@ let package = Package(
         ),
         .target(
             name: "HwpKitFramework",
-            dependencies: ["OLEKit", "DataCompression"]
+            dependencies: [
+                "OLEKit",
+                "SWCompression"
+            ]
         ),
         .testTarget(
             name: "HwpKitFrameworkTests",

@@ -10,17 +10,20 @@ on:
 
 jobs:
   test:
-    name: Test on Swift 5.3
-    runs-on: macos-latest
+    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+        swift: ["5.3"]
 
     steps:
     - uses: actions/checkout@v2
     - uses: fwal/setup-swift@v1
       with:
-        swift-version: "5.3"
-    - name: Get Swift version
-      run:  swift --version
+        swift-version: ${{ matrix.swift }}
     - name: Build
-      run: swift build -v
+      run: swift build -c release -v
     - name: Run tests
       run: swift test -v

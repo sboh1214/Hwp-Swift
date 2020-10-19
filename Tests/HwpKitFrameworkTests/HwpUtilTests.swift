@@ -1,5 +1,6 @@
-@testable import HwpKitFramework
 import XCTest
+@testable import HwpKitFramework
+import SWCompression
 
 final class HwpUtilTests: XCTestCase {
     func testBitsFromInt8() {
@@ -7,4 +8,15 @@ final class HwpUtilTests: XCTestCase {
         let bits = [false, true, false, false, true, false, true, false].reversed() as [Bool]
         XCTAssertEqual(bits, byte.bits)
     }
+
+    func testCompressUncompress() throws {
+        let testData = "Hello World".data(using: .utf16LittleEndian)!
+
+        let compressed = Deflate.compress(data: testData)
+        let decompressed = try Deflate.decompress(data: compressed)
+
+        XCTAssertEqual(testData, decompressed)
+
+    }
+
 }

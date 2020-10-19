@@ -1,6 +1,6 @@
 import Foundation
 import OLEKit
-import DataCompression
+import SWCompression
 
 struct StreamReader {
     private let ole: OLEFile
@@ -29,10 +29,8 @@ struct StreamReader {
         let reader = try ole.stream(stream)
         let data =  reader.readDataToEnd()
         if isCompressed {
-            guard let decompressedData = data.decompress(withAlgorithm: .zlib) else {
-                throw HwpError.streamDecompressFailed(name: HwpStreamName(rawValue: stream.name)!)
-            }
-            return decompressedData
+            let decompressed = try Deflate.decompress(data: data)
+            return decompressed
         } else {
             return data
         }
