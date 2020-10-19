@@ -23,6 +23,8 @@ jobs:
     - uses: fwal/setup-swift@v1
       with:
         swift-version: ${{ matrix.swift }}
+    - name: Create LinuxMain
+      run: swift test --generate-linuxmain
     - name: Get Swift version
       run:  swift --version
     - name: Build
