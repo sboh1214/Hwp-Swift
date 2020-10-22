@@ -26,7 +26,6 @@ final class Create2014Tests: XCTestCase {
         // XCTAssertEqual(officialMappings.charShapeArray, thisMappings.charShapeArray)
         XCTAssertEqual(officialMappings.paraShapeArray, thisMappings.paraShapeArray)
         XCTAssertEqual(officialMappings.forbiddenCharArray, thisMappings.forbiddenCharArray)
-        print(officialMappings.charShapeArray)
 
         // XCTAssertEqual(expected.docInfo, actual.docInfo)
     }

@@ -63,3 +63,17 @@ final class HwpSectionTag {
     static let videoData: UInt32 = begin + 82
     static let shapeComponentUnknown: UInt32 = begin + 99
 }
+
+fileprivate func makeCtrlId(_ string: String) -> UInt32 {
+    precondition(string.count == 4)
+    let array = string.asciiValues.map{UInt32($0)}
+    return array[0] << 24 + array[1] << 16 + array[2] << 8 + array[3]
+}
+
+final class HwpCtrlId {
+    static let table = makeCtrlId("tbl ")
+    static let line = makeCtrlId("$lin")
+    static let rectangle = makeCtrlId("$lec")
+    static let ellipse = makeCtrlId("$ell")
+    static let arc = makeCtrlId("$arc")
+}
