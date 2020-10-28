@@ -7,7 +7,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
 
     public var paraLineSegArray: [HwpParaLineSeg]?
     public var paraRangeTagArray: [HwpParaRangeTag]?
-    //public var ctrlHeaderArray: Array<HwpFromRecord>?
+    public var ctrlHeaderArray: [HwpCtrlHeader]?
     public var listHeaderArray: [HwpListHeader]?
 
     init() {
@@ -16,7 +16,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
         paraCharShape =  HwpParaCharShape()
         paraLineSegArray =  [HwpParaLineSeg()]
         paraRangeTagArray =  [HwpParaRangeTag]()
-        //ctrlHeaderArray =  Array<HwpFromRecord>()
+        ctrlHeaderArray =  [HwpCtrlHeader]()
         listHeaderArray =  [HwpListHeader]()
     }
 
@@ -41,19 +41,9 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
             .filter {$0.tagId == HwpSectionTag.paraRangeTag}
             .map {try HwpParaRangeTag($0.payload)}
 
-//        ctrlHeaderArray = try record.children
-//            .filter {$0.tagId == HwpSectionTag.ctrlHeader}
-//            .map { ctrlheader in
-//                if (ctrlheader.children.count == 0) {
-//                    return try HwpCtrlNoChildren(ctrlheader)
-//                }
-//                switch (ctrlheader.children[0].tagId){
-//                case HwpSectionTag.table:
-//                    return try HwpTable(ctrlheader)
-//                default:
-//                    print(ctrlheader.tagId)
-//                }
-//            }
+        ctrlHeaderArray = try record.children
+            .filter {$0.tagId == HwpSectionTag.ctrlHeader}
+            .map {try HwpCtrlHeader($0)}
 
         listHeaderArray = try record.children
             .filter {$0.tagId == HwpSectionTag.listHeader}

@@ -64,9 +64,9 @@ final class HwpSectionTag {
     static let shapeComponentUnknown: UInt32 = begin + 99
 }
 
-fileprivate func makeCtrlId(_ string: String) -> UInt32 {
+private func makeCtrlId(_ string: String) -> UInt32 {
     precondition(string.count == 4)
-    let array = string.asciiValues.map{UInt32($0)}
+    let array = string.asciiValues.map {UInt32($0)}
     return array[0] << 24 + array[1] << 16 + array[2] << 8 + array[3]
 }
 
