@@ -1,0 +1,36 @@
+enum HwpFieldCtrlId: UInt32 {
+  case Unknown = 628452971
+  case Date = 610563173
+  case DocDate = 627336308
+  case Path = 628121972
+  case Bookmark = 627207531
+  case MailMerge = 627928423
+  case CrossRef = 628650598
+  case Formula = 627469685
+  case ClickHere = 627272811
+  case Summary = 628321650
+  case UserInfo = 628454258
+  case HyperLink = 627600491
+  case RevisionSign = 628320615
+  case RevisionDelete = 623192676
+  case RevisionAttach = 623192673
+  case RevisionClipping = 623192643
+  case RevisionSawtooth = 623192659
+  case RevisionThinking = 623192660
+  case RevisionPraise = 623192656
+  case RevisionLine = 623192652
+  case RevisionSimpleChange = 623192675
+  case RevisionHyperLink = 623192680
+  case RevisionLineAttach = 623192641
+  case RevisionLineLink = 623192681
+  case RevisionLineRansfer = 623192692
+  case RevisionRightMove = 623192690
+  case RevisionLeftMove = 623191660
+  case RevisionTransfer = 623192686
+  case RevisionSimpleInsert = 623192677
+  case RevisionSplit = 628322412
+  case RevisionChange = 623209842
+  case Memo = 623209829
+  case PrivateInfoSecurity = 627273842
+  case TableOfContents = 628387683
+}

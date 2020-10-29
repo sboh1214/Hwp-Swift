@@ -43,7 +43,10 @@ extension HwpUtilTests {
     // to regenerate.
     static let __allTests__HwpUtilTests = [
         ("testBitsFromInt8", testBitsFromInt8),
+        ("testCommonCtrlId", testCommonCtrlId),
         ("testCompressUncompress", testCompressUncompress),
+        ("testFieldCtrlId", testFieldCtrlId),
+        ("testOtherCtrlID", testOtherCtrlID),
     ]
 }
 
