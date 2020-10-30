@@ -1,3 +1,0 @@
-import Commandant
-
-print("hello")

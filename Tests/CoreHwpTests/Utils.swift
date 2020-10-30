@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-import HwpKitFramework
+import CoreHwp
 
 //swiftlint:disable force_try
 func openHwp(_ location: String, _ name: String) -> HwpFile {

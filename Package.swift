@@ -1,34 +1,27 @@
 // swift-tools-version:5.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "HwpKit",
+    name: "Hwp-Swift",
     products: [
-        .executable(name: "hwpkit", targets: ["hwpkit"]),
-        .library(name: "HwpKitFramework", targets: ["HwpKitFramework"])
+        .library(name: "Core Hwp", targets: ["CoreHwp"])
     ],
     dependencies: [
         .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.2.0")),
-        .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.5.7")),
-        .package(url: "https://github.com/Carthage/Commandant.git", .exact("0.17.0"))
+        .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.5.7"))
     ],
     targets: [
         .target(
-            name: "hwpkit",
-            dependencies: ["HwpKitFramework", "Commandant"]
-        ),
-        .target(
-            name: "HwpKitFramework",
+            name: "CoreHwp",
             dependencies: [
                 "OLEKit",
                 "SWCompression"
             ]
         ),
         .testTarget(
-            name: "HwpKitFrameworkTests",
-            dependencies: ["HwpKitFramework"],
+            name: "CoreHwpTests",
+            dependencies: ["CoreHwp"],
             resources: [
                 .copy("Blank/blank-mac2014vp.hwp"),
                 .copy("Blank/blank-win2018.hwp"),
