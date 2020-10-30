@@ -1,33 +1,6 @@
 let begin: UInt32 = 0x10
 
 /**
- ’문서 정보’의 데이터 레코드
- */
-final class HwpDocInfoTag {
-    static let documentProperties: UInt32 = begin
-    static let idMappings: UInt32 = begin + 1
-    static let binData: UInt32 = begin + 2
-    static let faceName: UInt32 = begin + 3
-    static let borderFill: UInt32 = begin + 4
-    static let charShape: UInt32 = begin + 5
-    static let tabDef: UInt32 = begin + 6
-    static let numbering: UInt32 = begin + 7
-    static let bullet: UInt32 = begin + 8
-    static let paraShape: UInt32 = begin + 9
-    static let style: UInt32 = begin + 10
-    static let docData: UInt32 = begin + 11
-    static let distributeDocData: UInt32 = begin + 12
-    static let reserved: UInt32 = begin + 13
-    static let compatibleDocument: UInt32 = begin + 14
-    static let layoutCompatibility: UInt32 = begin + 15
-    static let trackChange: UInt32 = begin + 16
-    static let memoShape: UInt32 = begin + 76
-    static let forbiddenChar: UInt32 = begin + 78
-    static let trackChangeContent: UInt32 = begin + 80
-    static let trackChangeAuthor: UInt32 = begin + 81
-}
-
-/**
  ‘본문’의 데이터 레코드
  */
 final class HwpSectionTag {

@@ -55,3 +55,7 @@ extension UInt8 {
         return bits
     }
 }
+
+extension StringProtocol {
+    var asciiValues: [UInt8] { compactMap(\.asciiValue) }
+}

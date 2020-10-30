@@ -23,7 +23,7 @@ public struct HwpCompatibleDocument: HwpFromRecord {
         targetDocument = reader.read(UInt32.self)
 
         if let layoutCompatibility = record.children
-            .first(where: {$0.tagId == HwpDocInfoTag.layoutCompatibility}) {
+            .first(where: {$0.tagId == HwpDocInfoTag.layoutCompatibility.rawValue}) {
             self.layoutCompatibility = try HwpLayoutCompatibility(layoutCompatibility.payload)
         } else {
             layoutCompatibility = nil

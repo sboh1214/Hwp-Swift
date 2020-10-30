@@ -266,7 +266,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         }
         for child in record.children {
             switch child.tagId {
-            case HwpDocInfoTag.forbiddenChar:
+            case HwpDocInfoTag.forbiddenChar.rawValue:
                 forbiddenCharArray.append(try HwpForbiddenChar(child.payload))
             default:
                 print("HKFWarning : Unidentified Tag \(child.tagId)")

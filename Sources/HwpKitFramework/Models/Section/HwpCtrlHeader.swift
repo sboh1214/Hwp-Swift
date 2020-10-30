@@ -1,24 +1,13 @@
 import Foundation
 
-/**
- 컨트롤 헤더
- 
- 컨트롤 문자가 존재하면 컨트롤 문자로부터 존재하는 컨트롤 정보를 생성한다.
- Tag ID : HWPTAG_CTRL_HEADER
- */
-public struct HwpCtrlHeader: HwpFromData {
-    public let ctrlId: UInt32
+public struct HwpCtrlHeader {
+    public var ctrlId: UInt32
+}
 
-    init() {
-        ctrlId = 0
-    }
-
-    init(_ ctrlId: UInt32) {
-        self.ctrlId = ctrlId
-    }
-
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
+extension HwpCtrlHeader: HwpFromRecord {
+    init(_ record: HwpRecord) throws {
+        var reader = DataReader(record.payload)
         ctrlId = reader.read(UInt32.self)
+
     }
 }

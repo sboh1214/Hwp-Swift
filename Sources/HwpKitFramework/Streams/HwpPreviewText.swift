@@ -6,7 +6,7 @@ import Foundation
  PrvText 스트림에는 미리보기 텍스트가 유니코드 문자열로 저장된다.
  */
 public struct HwpPreviewText: HwpFromData {
-    let text: String
+    public let text: String
 
     init() {
         text = ""
