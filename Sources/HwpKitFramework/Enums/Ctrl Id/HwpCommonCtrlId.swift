@@ -1,4 +1,4 @@
-enum HwpCommonCtrlId: UInt32 {
+enum HwpCommonCtrlId: UInt32, HwpPrimitive {
     /**tbl */
     case table = 1952607264
 

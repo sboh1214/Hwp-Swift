@@ -8,6 +8,7 @@ public enum HwpError: Error {
     case recordDoesNotExist(tag: UInt32)
     case invalidFileHeaderSignature(signature: String)
     case unidentifiedTag(tagId: UInt32)
+    case invalidCtrlId(ctrlId: UInt32)
 }
 
 extension HwpError: CustomStringConvertible {
@@ -32,6 +33,8 @@ extension HwpError: CustomStringConvertible {
             return "Invalid signature in FileHeader stream : get'\(signature)'"
         case let .unidentifiedTag(tagId):
             return "Cannot Read HwpRecord Tag : '\(tagId)'"
+        case let .invalidCtrlId(ctrlId):
+            return "Invalid Ctrl Id in HwpParagraph : '\(ctrlId)'"
         }
     }
 }

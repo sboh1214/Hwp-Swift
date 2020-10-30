@@ -10,21 +10,26 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
     public var ctrlHeaderArray: [HwpCtrlHeader]?
     public var listHeaderArray: [HwpListHeader]?
 
+    private enum CodingKeys: String, CodingKey {
+        case paraHeader, paraText, paraCharShape
+        case paraLineSegArray, paraRangeTagArray
+    }
+
     init() {
         paraHeader =  HwpParaHeader()
         paraText =  HwpParaText()
         paraCharShape =  HwpParaCharShape()
         paraLineSegArray =  [HwpParaLineSeg()]
         paraRangeTagArray =  [HwpParaRangeTag]()
-        ctrlHeaderArray =  [HwpCtrlHeader]()
         listHeaderArray =  [HwpListHeader]()
+        ctrlHeaderArray =  [HwpCtrlHeader]()
     }
 
     init(_ record: HwpRecord, _ version: HwpVersion) throws {
         paraHeader = try HwpParaHeader(record.payload, version)
 
         if let paraText = record.children
-                .first(where: {$0.tagId == HwpSectionTag.paraText}) {
+            .first(where: {$0.tagId == HwpSectionTag.paraText}) {
             self.paraText = try HwpParaText(paraText.payload)
         }
 
@@ -43,7 +48,22 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
 
         ctrlHeaderArray = try record.children
             .filter {$0.tagId == HwpSectionTag.ctrlHeader}
-            .map {try HwpCtrlHeader($0)}
+            .map {
+                var reader = DataReader($0.payload)
+                let ctrlId = reader.read(UInt32.self)
+                if let _ = HwpCommonCtrlId.init(rawValue: ctrlId) {
+//                    if common == .table {
+//                        return try HwpTable($0)
+//                    }
+                    return try HwpCtrlHeader($0)
+                } else if let _ = HwpOtherCtrlId.init(rawValue: ctrlId) {
+                    return try HwpCtrlHeader($0)
+                } else if let _ = HwpFieldCtrlId.init(rawValue: ctrlId) {
+                    return try HwpCtrlHeader($0)
+                } else {
+                    throw HwpError.invalidCtrlId(ctrlId: 0)
+                }
+            }
 
         listHeaderArray = try record.children
             .filter {$0.tagId == HwpSectionTag.listHeader}
