@@ -65,9 +65,7 @@ extension HwpParaShape: HwpFromDataWithVersion {
 
     init(_ data: Data, _ version: HwpVersion) throws {
         var reader = DataReader(data)
-        defer {
-            // precondition(reader.isEOF())
-        }
+
         property1 = reader.read(UInt32.self)
         marginLeft = reader.read(Int32.self)
         marginRight = reader.read(Int32.self)
@@ -89,6 +87,10 @@ extension HwpParaShape: HwpFromDataWithVersion {
             property3 = reader.read(UInt32.self)
             lineSpacing2 = reader.read(UInt32.self)
         }
+
+//        if !reader.isEOF {
+//            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+//        }
     }
 }
 

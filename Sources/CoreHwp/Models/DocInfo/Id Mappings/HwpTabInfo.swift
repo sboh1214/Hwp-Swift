@@ -32,7 +32,7 @@ extension HwpTabInfo: HwpFromData {
         reserved = reader.read(UInt16.self)
 
         if !reader.isEOF {
-                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-                }
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }

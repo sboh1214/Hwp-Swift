@@ -33,7 +33,7 @@ extension HwpTabDef: HwpFromData {
         }
 
         if !reader.isEOF {
-                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-                }
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }

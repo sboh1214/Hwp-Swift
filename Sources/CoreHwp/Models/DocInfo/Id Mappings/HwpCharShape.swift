@@ -82,8 +82,8 @@ extension HwpCharShape: HwpFromDataWithVersion {
         }
 
         if !reader.isEOF {
-                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-                }
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }
 

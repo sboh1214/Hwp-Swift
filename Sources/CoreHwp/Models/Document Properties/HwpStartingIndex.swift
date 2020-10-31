@@ -17,13 +17,18 @@ public struct HwpStartingIndex: HwpFromData {
         equation = 1
     }
 
-    init(_ data: Data) {
+    init(_ data: Data) throws {
         var reader = DataReader(data)
+
         page = reader.read(UInt16.self)
         footnote = reader.read(UInt16.self)
         endnote = reader.read(UInt16.self)
         picture = reader.read(UInt16.self)
         table = reader.read(UInt16.self)
         equation = reader.read(UInt16.self)
+
+        if !reader.isEOF {
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }

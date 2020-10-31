@@ -17,10 +17,15 @@ public struct HwpCaratLocation: HwpFromData {
         charIndex = 16
     }
 
-    init(_ data: Data) {
+    init(_ data: Data) throws {
         var reader = DataReader(data)
+
         listId = reader.read(UInt32.self)
         paragraphId = reader.read(UInt32.self)
         charIndex = reader.read(UInt32.self)
+
+        if !reader.isEOF {
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }

@@ -5,7 +5,7 @@ import Foundation
  
  Tag ID : HWPTAG_NUMBERING
  
-  * 잘못된 문서화
+ * 잘못된 문서화
  */
 public struct HwpNumbering {
     /**
@@ -60,8 +60,8 @@ extension HwpNumbering: HwpFromDataWithVersion {
             }
         }
 
-        if !reader.isEOF {
-                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-                }
+//        if !reader.isEOF {
+//            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+//        }
     }
 }

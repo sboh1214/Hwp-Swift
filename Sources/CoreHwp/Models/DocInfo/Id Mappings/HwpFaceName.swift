@@ -48,6 +48,10 @@ extension HwpFaceName: HwpFromData {
             defaultFaceNameLength = reader.read(WORD.self)
             defaultFaceName = reader.read(WCHAR.self, defaultFaceNameLength!).string
         }
+
+        if !reader.isEOF {
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }
 

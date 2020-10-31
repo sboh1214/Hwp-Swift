@@ -35,7 +35,7 @@ public struct HwpLayoutCompatibility: HwpFromData {
         field = reader.read(UInt32.self)
 
         if !reader.isEOF {
-                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-                }
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }

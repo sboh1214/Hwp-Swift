@@ -28,7 +28,7 @@ public struct HwpCompatibleDocument: HwpFromRecord {
         }
 
         if !reader.isEOF {
-                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-                }
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }
