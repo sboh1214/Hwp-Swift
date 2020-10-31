@@ -54,6 +54,8 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
                 if let common = HwpCommonCtrlId.init(rawValue: ctrlId) {
                     if common == .table {
                         return try .table(HwpTable($0))
+                    } else if common == .genShapeObject {
+                        return try .genShapeObject(HwpGenShapeObject($0))
                     }
                     return try .notImplemented(HwpCtrlHeader($0))
                 } else if let other = HwpOtherCtrlId.init(rawValue: ctrlId) {

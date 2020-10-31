@@ -1,6 +1,7 @@
 public enum HwpCtrlId {
     // common
     case table(HwpTable)
+    case genShapeObject(HwpGenShapeObject)
     // other
     case column(HwpColumn)
     // field
@@ -10,7 +11,7 @@ public enum HwpCtrlId {
 
 extension HwpCtrlId: HwpPrimitive {
     enum CodingKeys: CodingKey {
-        case table
+        case table, genShapeObject
         case column
         case notImplemented
     }
@@ -23,6 +24,11 @@ extension HwpCtrlId: HwpPrimitive {
         case .table:
             let hwpTable = try container.decode(HwpTable.self, forKey: .table)
             self = .table(hwpTable)
+        case .genShapeObject:
+            let hwpGenShapeObject = try container.decode(
+                HwpGenShapeObject.self, forKey: .genShapeObject
+            )
+            self = .genShapeObject(hwpGenShapeObject)
         case .column:
             let hwpColumn = try container.decode(HwpColumn.self, forKey: .column)
             self = .column(hwpColumn)
@@ -30,6 +36,13 @@ extension HwpCtrlId: HwpPrimitive {
             let hwpCtrlHeader = try container.decode(HwpCtrlHeader.self, forKey: .notImplemented)
             self = .notImplemented(hwpCtrlHeader)
         case .none:
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: container.codingPath,
+                    debugDescription: "Unabled to decode enum."
+                )
+            )
+        @unknown default:
             throw DecodingError.dataCorrupted(
                 DecodingError.Context(
                     codingPath: container.codingPath,
@@ -45,6 +58,8 @@ extension HwpCtrlId: HwpPrimitive {
         switch self {
         case .table(let hwpTable):
             try container.encode(hwpTable, forKey: .table)
+        case .genShapeObject(let hwpGenShapeObject):
+            try container.encode(hwpGenShapeObject, forKey: .genShapeObject)
         case .column(let hwpColumn):
             try container.encode(hwpColumn, forKey: .column)
         case .notImplemented(let hwpCtrlHeader):

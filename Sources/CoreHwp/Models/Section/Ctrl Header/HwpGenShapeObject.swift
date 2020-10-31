@@ -1,8 +1,9 @@
-public struct HwpTable {
+public struct HwpGenShapeObject {
+    /**ctrl id*/
     public var commonCtrlProperty: HwpCommonCtrlProperty
 }
 
-extension HwpTable: HwpFromRecord {
+extension HwpGenShapeObject: HwpFromRecord {
     init(_ record: HwpRecord) throws {
         var reader = DataReader(record.payload)
 

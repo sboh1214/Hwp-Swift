@@ -57,4 +57,26 @@ final class NooriSectionTests: XCTestCase {
             XCTFail("Ctrl is not Table")
         }
     }
+
+    func testGenShapeObject() throws {
+        switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![2] {
+        case .genShapeObject(let hwpGenShapeObject):
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.verticalOffset, 0)
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.horizontalOffset, 0)
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.width, 48104)
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.height, 6134)
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.zOrder, 8)
+        default:
+            XCTFail("Ctrl is not GenShapeObject")
+        }
+    }
+
+    func testColumn() throws {
+        switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![1] {
+        case .column(let hwpColumn):
+            XCTAssertEqual(hwpColumn.widthArray.count, 1)
+        default:
+            XCTFail("Ctrl is not Column")
+        }
+    }
 }
