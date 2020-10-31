@@ -14,5 +14,5 @@ SwiftLint also run on CI for every PR.
 
 ## Code Quality
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/6950359f807606deb022/maintainability)](https://codeclimate.com/github/sboh1214/HwpKit/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/6950359f807606deb022/test_coverage)](https://codeclimate.com/github/sboh1214/HwpKit/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b920b09bdee71fdc8208/maintainability)](https://codeclimate.com/github/sboh1214/Hwp-Swift/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b920b09bdee71fdc8208/test_coverage)](https://codeclimate.com/github/sboh1214/Hwp-Swift/test_coverage)
