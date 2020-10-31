@@ -1,11 +1,18 @@
 public enum HwpCtrlId {
+    // common
     case table(HwpTable)
-    case other(HwpCtrlHeader)
+    // other
+    case column(HwpColumn)
+    // field
+    // not implemented
+    case notImplemented(HwpCtrlHeader)
 }
 
 extension HwpCtrlId: HwpPrimitive {
     enum CodingKeys: CodingKey {
-        case table, other
+        case table
+        case column
+        case notImplemented
     }
 
     public init(from decoder: Decoder) throws {
@@ -14,18 +21,15 @@ extension HwpCtrlId: HwpPrimitive {
 
         switch key {
         case .table:
-            let hwpTable = try container.decode(
-                HwpTable.self,
-                forKey: .table
-            )
+            let hwpTable = try container.decode(HwpTable.self, forKey: .table)
             self = .table(hwpTable)
-        case .other:
-            let hwpCtrlHeader = try container.decode(
-                HwpCtrlHeader.self,
-                forKey: .other
-            )
-            self = .other(hwpCtrlHeader)
-        default:
+        case .column:
+            let hwpColumn = try container.decode(HwpColumn.self, forKey: .column)
+            self = .column(hwpColumn)
+        case .notImplemented:
+            let hwpCtrlHeader = try container.decode(HwpCtrlHeader.self, forKey: .notImplemented)
+            self = .notImplemented(hwpCtrlHeader)
+        case .none:
             throw DecodingError.dataCorrupted(
                 DecodingError.Context(
                     codingPath: container.codingPath,
@@ -41,8 +45,10 @@ extension HwpCtrlId: HwpPrimitive {
         switch self {
         case .table(let hwpTable):
             try container.encode(hwpTable, forKey: .table)
-        case .other(let hwpCtrlHeader):
-            try container.encode(hwpCtrlHeader, forKey: .other)
+        case .column(let hwpColumn):
+            try container.encode(hwpColumn, forKey: .column)
+        case .notImplemented(let hwpCtrlHeader):
+            try container.encode(hwpCtrlHeader, forKey: .notImplemented)
         }
     }
 }

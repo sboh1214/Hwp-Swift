@@ -55,11 +55,14 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
                     if common == .table {
                         return try .table(HwpTable($0))
                     }
-                    return try .other(HwpCtrlHeader($0))
-                } else if HwpOtherCtrlId.init(rawValue: ctrlId) != nil {
-                    return try .other(HwpCtrlHeader($0))
+                    return try .notImplemented(HwpCtrlHeader($0))
+                } else if let other = HwpOtherCtrlId.init(rawValue: ctrlId) {
+                    if other == .column {
+                        return try .column(HwpColumn($0.payload))
+                    }
+                    return try .notImplemented(HwpCtrlHeader($0))
                 } else if HwpFieldCtrlId.init(rawValue: ctrlId) != nil {
-                    return try .other(HwpCtrlHeader($0))
+                    return try .notImplemented(HwpCtrlHeader($0))
                 } else {
                     throw HwpError.invalidCtrlId(ctrlId: 0)
                 }
