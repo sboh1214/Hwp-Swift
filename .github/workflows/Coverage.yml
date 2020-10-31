@@ -20,7 +20,7 @@ jobs:
     - name: Run tests
       run: swift test -v --enable-code-coverage
     - name: Prepare Codecov
-      run: xcrun llvm-cov export -format="lcov" .build/debug/HwpKitPackageTests.xctest/Contents/MacOS/HwpKitPackageTests -instr-profile .build/debug/codecov/default.profdata > raw.lcov
+      run: xcrun llvm-cov export -format="lcov" .build/debug/Hwp-SwiftPackageTests.xctest/Contents/MacOS/Hwp-SwiftPackageTests -instr-profile .build/debug/codecov/default.profdata > raw.lcov
     - name: Install lcov
       run: brew install lcov
     - name: Extract
