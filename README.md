@@ -20,9 +20,13 @@ Go to ```File``` > ```Swift Packages``` > ```Add Package Dependency...``` in Xco
 Or add dependency manually.
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sboh1214/HwpKit.git", .branch("main")),
+    .package(url: "https://github.com/sboh1214/Hwp-Swift.git", .branch("main")),
 ],
 ```
+
+## Structure
+
+![Structure](https://github.com/sboh1214/HwpKit/blob/main/.github/structure/Structure.png)
 
 ## Contribute
 

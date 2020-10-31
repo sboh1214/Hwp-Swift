@@ -1,4 +1,4 @@
-import HwpKitFramework
+import CoreHwp
 import XCTest
 
 final class NooriDocInfoTests: XCTestCase {

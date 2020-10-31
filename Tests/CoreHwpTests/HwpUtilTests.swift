@@ -1,5 +1,5 @@
 import XCTest
-@testable import HwpKitFramework
+@testable import CoreHwp
 import SWCompression
 
 final class HwpUtilTests: XCTestCase {

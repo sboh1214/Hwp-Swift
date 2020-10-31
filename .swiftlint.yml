@@ -7,7 +7,7 @@ excluded:
   - Carthage
   - Pods
   - .build
-  - Tests/HwpKitFrameworkTests/XCTestManifests.swift
+  - Tests/CoreHwpTests/XCTestManifests.swift
 
 line_length: 100
 
