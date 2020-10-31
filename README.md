@@ -24,6 +24,10 @@ dependencies: [
 ],
 ```
 
+## Structure
+
+![Structure](https://github.com/sboh1214/HwpKit/blob/main/.github/structure/Structure.png)
+
 ## Contribute
 
 Visit [CONTRIBUTING.md](https://github.com/sboh1214/HwpKit/blob/main/CONTRIBUTING.md)
