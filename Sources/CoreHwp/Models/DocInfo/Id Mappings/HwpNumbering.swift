@@ -31,9 +31,7 @@ public struct HwpNumbering {
 extension HwpNumbering: HwpFromDataWithVersion {
     init(_ data: Data, _ version: HwpVersion) throws {
         var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
+
         formatArray = [HwpNumberingFormat]()
         for _ in 1...7 {
             let bytes = reader.readBytes(12).bytes
@@ -61,5 +59,9 @@ extension HwpNumbering: HwpFromDataWithVersion {
                 extendedStartingIndexArray?.append(reader.read(UInt32.self))
             }
         }
+
+        if !reader.isEOF {
+                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+                }
     }
 }

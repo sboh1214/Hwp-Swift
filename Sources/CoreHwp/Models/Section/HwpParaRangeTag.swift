@@ -27,12 +27,13 @@ public struct HwpParaRangeTag: HwpFromData {
 
     init(_ data: Data) throws {
         var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
 
         start = reader.read(UInt32.self)
         end = reader.read(UInt32.self)
         tag = reader.read(UInt32.self)
+
+        if !reader.isEOF {
+                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+                }
     }
 }

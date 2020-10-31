@@ -27,13 +27,15 @@ public struct HwpLayoutCompatibility: HwpFromData {
 
     init(_ data: Data) throws {
         var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
+
         char = reader.read(UInt32.self)
         paragraph = reader.read(UInt32.self)
         section = reader.read(UInt32.self)
         object = reader.read(UInt32.self)
         field = reader.read(UInt32.self)
+
+        if !reader.isEOF {
+                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+                }
     }
 }

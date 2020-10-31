@@ -25,12 +25,14 @@ public struct HwpTabInfo {
 extension HwpTabInfo: HwpFromData {
     init(_ data: Data) throws {
         var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
+
         location = reader.read(HWPUNIT.self)
         type = reader.read(UInt8.self)
         fillType = reader.read(UInt8.self)
         reserved = reader.read(UInt16.self)
+
+        if !reader.isEOF {
+                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+                }
     }
 }

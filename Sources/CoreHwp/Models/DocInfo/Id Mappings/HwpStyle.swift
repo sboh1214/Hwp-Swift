@@ -41,9 +41,7 @@ public struct HwpStyle {
 extension HwpStyle: HwpFromData {
     init(_ data: Data) throws {
         var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
+
         length1 = reader.read(WORD.self)
         styleLocalName = reader.read(WCHAR.self, Int(length1)).string
         length2 = reader.read(WORD.self)
@@ -54,6 +52,10 @@ extension HwpStyle: HwpFromData {
         paraShapeId = reader.read(UInt16.self)
         charShapeId = reader.read(UInt16.self)
         unknown =  reader.readBytes(2).bytes
+
+        if !reader.isEOF {
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }
 

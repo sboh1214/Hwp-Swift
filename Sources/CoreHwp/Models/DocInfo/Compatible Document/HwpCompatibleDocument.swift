@@ -17,9 +17,7 @@ public struct HwpCompatibleDocument: HwpFromRecord {
 
     init(_ record: HwpRecord) throws {
         var reader = DataReader(record.payload)
-        defer {
-            precondition(reader.isEOF())
-        }
+
         targetDocument = reader.read(UInt32.self)
 
         if let layoutCompatibility = record.children
@@ -28,5 +26,9 @@ public struct HwpCompatibleDocument: HwpFromRecord {
         } else {
             layoutCompatibility = nil
         }
+
+        if !reader.isEOF {
+                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+                }
     }
 }

@@ -8,8 +8,12 @@ struct DataReader {
         self.data = data
     }
 
-    func isEOF() -> Bool {
-        return offset == data.count
+    var isEOF: Bool {
+        offset == data.count
+    }
+
+    var remainBytes: Int {
+        data.count - offset
     }
 
     @discardableResult mutating func readBytes<T: BinaryInteger>(_ length: T ) -> Data {

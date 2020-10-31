@@ -41,9 +41,6 @@ public struct HwpFileHeader: HwpFromData {
 
     init(_ data: Data) throws {
         var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
 
         guard let signature = reader.readBytes(32).stringASCII else {
             throw HwpError.invalidDataForString(data: data[0 ..< 32], name: "signature")
@@ -65,6 +62,10 @@ public struct HwpFileHeader: HwpFromData {
         encryptVersion = reader.read(UInt32.self)
         koreaOpenLicense = reader.read(UInt8.self)
 
-        _ = reader.readBytes(207)
+        reader.readBytes(207)
+
+        if !reader.isEOF {
+                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+                }
     }
 }

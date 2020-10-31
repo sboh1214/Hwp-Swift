@@ -60,9 +60,7 @@ extension HwpCharShape: HwpFromDataWithVersion {
 
     init(_ data: Data, _ version: HwpVersion) throws {
         var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
+
         faceId = reader.read(WORD.self, 7)
         faceScaleX = reader.readBytes(7).bytes
         faceSpacing = reader.read(Int8.self, 7)
@@ -82,6 +80,10 @@ extension HwpCharShape: HwpFromDataWithVersion {
         if version >= HwpVersion(5, 0, 3, 0) {
             strikethroughColor = HwpColor(reader.read(UInt32.self))
         }
+
+        if !reader.isEOF {
+                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+                }
     }
 }
 

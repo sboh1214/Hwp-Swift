@@ -7,7 +7,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
 
     public var paraLineSegArray: [HwpParaLineSeg]?
     public var paraRangeTagArray: [HwpParaRangeTag]?
-    public var ctrlHeaderArray: [HwpCtrlHeader]?
+    public var ctrlHeaderArray: [HwpCtrlId]?
     public var listHeaderArray: [HwpListHeader]?
 
     private enum CodingKeys: String, CodingKey {
@@ -22,7 +22,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
         paraLineSegArray =  [HwpParaLineSeg()]
         paraRangeTagArray =  [HwpParaRangeTag]()
         listHeaderArray =  [HwpListHeader]()
-        ctrlHeaderArray =  [HwpCtrlHeader]()
+        ctrlHeaderArray =  [HwpCtrlId]()
     }
 
     init(_ record: HwpRecord, _ version: HwpVersion) throws {
@@ -51,15 +51,15 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
             .map {
                 var reader = DataReader($0.payload)
                 let ctrlId = reader.read(UInt32.self)
-                if let _ = HwpCommonCtrlId.init(rawValue: ctrlId) {
-//                    if common == .table {
-//                        return try HwpTable($0)
-//                    }
-                    return try HwpCtrlHeader($0)
-                } else if let _ = HwpOtherCtrlId.init(rawValue: ctrlId) {
-                    return try HwpCtrlHeader($0)
-                } else if let _ = HwpFieldCtrlId.init(rawValue: ctrlId) {
-                    return try HwpCtrlHeader($0)
+                if let common = HwpCommonCtrlId.init(rawValue: ctrlId) {
+                    if common == .table {
+                        return try .table(HwpTable($0))
+                    }
+                    return try .other(HwpCtrlHeader($0))
+                } else if HwpOtherCtrlId.init(rawValue: ctrlId) != nil {
+                    return try .other(HwpCtrlHeader($0))
+                } else if HwpFieldCtrlId.init(rawValue: ctrlId) != nil {
+                    return try .other(HwpCtrlHeader($0))
                 } else {
                     throw HwpError.invalidCtrlId(ctrlId: 0)
                 }

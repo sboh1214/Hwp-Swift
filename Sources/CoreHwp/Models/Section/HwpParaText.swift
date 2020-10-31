@@ -21,7 +21,7 @@ public struct HwpParaText: HwpFromData {
     init(_ data: Data) throws {
         var reader = DataReader(data)
         var array = [HwpChar]()
-        while !reader.isEOF() {
+        while !reader.isEOF {
             let char = reader.read(WCHAR.self)
             switch char {
             case 0, 1, 13:

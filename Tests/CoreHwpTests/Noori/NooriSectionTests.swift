@@ -44,4 +44,17 @@ final class NooriSectionTests: XCTestCase {
 
         XCTAssertNotNil(hwp.sectionArray[0].paragraph[20].paraLineSegArray![0])
     }
+
+    func testTable() throws {
+        switch hwp.sectionArray[0].paragraph[1].ctrlHeaderArray![0] {
+        case .table(let hwpTable):
+            XCTAssertEqual(hwpTable.commonCtrlProperty.verticalOffset, 0)
+            XCTAssertEqual(hwpTable.commonCtrlProperty.horizontalOffset, 0)
+            XCTAssertEqual(hwpTable.commonCtrlProperty.width, 48230)
+            XCTAssertEqual(hwpTable.commonCtrlProperty.height, 6869)
+            XCTAssertEqual(hwpTable.commonCtrlProperty.zOrder, 0)
+        default:
+            XCTFail("Ctrl is not Table")
+        }
+    }
 }

@@ -21,11 +21,12 @@ public struct HwpListHeader: HwpFromData {
 
     init(_ data: Data) throws {
         var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
 
         paragraphCount = reader.read(Int32.self)
         property = reader.read(UInt32.self)
+
+        if !reader.isEOF {
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }
