@@ -1,4 +1,4 @@
-# CoreHWP
+# Hwp-Swift
 
 > This software is developed using Hancom's HANGEUL DOCUMENT FILE FORMAT.
 >
