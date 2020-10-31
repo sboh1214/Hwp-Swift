@@ -1,11 +1,13 @@
-# HwpKit
+# CoreHWP
 
+> This software is developed using Hancom's HANGEUL DOCUMENT FILE FORMAT.
+>
 > 본 제품은 한글과컴퓨터의 한글 문서 파일(.hwp) 공개 문서를 참고하여 개발하였습니다.
 
-![Test](https://github.com/sboh1214/HwpKit/workflows/Test/badge.svg)
-![Coverage](https://github.com/sboh1214/HwpKit/workflows/Coverage/badge.svg)
-![Documentation](https://github.com/sboh1214/HwpKit/workflows/Documentation/badge.svg)
-![Lint](https://github.com/sboh1214/HwpKit/workflows/Lint/badge.svg)
+![Test](https://github.com/sboh1214/Hwp-Swift/workflows/Test/badge.svg)
+![Coverage](https://github.com/sboh1214/Hwp-Swift/workflows/Coverage/badge.svg)
+![Documentation](https://github.com/sboh1214/Hwp-Swift/workflows/Documentation/badge.svg)
+![Lint](https://github.com/sboh1214/Hwp-Swift/workflows/Lint/badge.svg)
 
 [![Discord](https://img.shields.io/discord/761775951012692018?label=Discord)](https://discord.gg/rV6d5JX)
 
@@ -26,12 +28,12 @@ dependencies: [
 
 ## Structure
 
-![Structure](https://github.com/sboh1214/HwpKit/blob/main/.github/structure/Structure.png)
+![Structure](https://github.com/sboh1214/Hwp-Swift/blob/main/.github/structure/Structure.png)
 
 ## Contribute
 
-Visit [CONTRIBUTING.md](https://github.com/sboh1214/HwpKit/blob/main/CONTRIBUTING.md)
+Visit [CONTRIBUTING.md](https://github.com/sboh1214/Hwp-Swift/blob/main/CONTRIBUTING.md)
 
 ## License
 
-![GitHub](https://img.shields.io/github/license/sboh1214/HwpKit)
+![GitHub](https://img.shields.io/github/license/sboh1214/Hwp-Swift)
