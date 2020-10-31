@@ -32,7 +32,7 @@ final class NooriSectionTests: XCTestCase {
     }
 
     func testParaLineSeg() throws {
-        let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSegArray![0]
+        let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSegArray![0].paraLineSegInternalArray[0]
         XCTAssertEqual(seg0.textStartingIndex, 0)
         XCTAssertEqual(seg0.lineLocation, 0)
         XCTAssertEqual(seg0.lineHeight, 6134)

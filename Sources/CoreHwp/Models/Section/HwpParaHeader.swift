@@ -52,6 +52,7 @@ public struct HwpParaHeader: HwpFromDataWithVersion {
 
         init(_ data: Data, _ version: HwpVersion) throws {
             var reader = DataReader(data)
+
             let value = reader.read(UInt32.self)
             if (value & 0x80000000) == 0x80000000 {
                 isLastInList = true
@@ -70,6 +71,10 @@ public struct HwpParaHeader: HwpFromDataWithVersion {
             paraId = reader.read(UInt32.self)
             if version >= HwpVersion(5, 0, 3, 2) {
                 isTraceChange = reader.read(UInt16.self)
+            }
+
+            if !reader.isEOF {
+                throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
             }
         }
     }

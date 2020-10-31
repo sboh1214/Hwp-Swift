@@ -33,7 +33,7 @@ public struct HwpParaRangeTag: HwpFromData {
         tag = reader.read(UInt32.self)
 
         if !reader.isEOF {
-                    throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-                }
+            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+        }
     }
 }

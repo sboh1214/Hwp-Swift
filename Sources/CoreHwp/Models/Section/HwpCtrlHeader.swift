@@ -8,6 +8,5 @@ extension HwpCtrlHeader: HwpFromRecord {
     init(_ record: HwpRecord) throws {
         var reader = DataReader(record.payload)
         ctrlId = reader.read(UInt32.self)
-
     }
 }
