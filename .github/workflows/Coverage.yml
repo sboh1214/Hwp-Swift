@@ -24,7 +24,7 @@ jobs:
     - name: Install lcov
       run: brew install lcov
     - name: Extract
-      run: lcov -e raw.lcov "*HwpKit/Sources*" -o info.lcov
+      run: lcov -e raw.lcov "*Hwp-Swift/Sources*" -o info.lcov
     - name: Code Climate Coverage Action
       uses: paambaati/codeclimate-action@v2.7.4
       env:
