@@ -29,25 +29,25 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
         paraHeader = try HwpParaHeader(record.payload, version)
 
         if let paraText = record.children
-            .first(where: {$0.tagId == HwpSectionTag.paraText}) {
+            .first(where: {$0.tagId == HwpSectionTag.paraText.rawValue}) {
             self.paraText = try HwpParaText(paraText.payload)
         }
 
         if let paraCharShape = record.children
-            .first(where: {$0.tagId == HwpSectionTag.paraCharShape}) {
+            .first(where: {$0.tagId == HwpSectionTag.paraCharShape.rawValue}) {
             self.paraCharShape = try HwpParaCharShape(paraCharShape.payload)
         }
 
         paraLineSegArray = try record.children
-            .filter {$0.tagId == HwpSectionTag.paraLineSeg}
+            .filter {$0.tagId == HwpSectionTag.paraLineSeg.rawValue}
             .map {try HwpParaLineSeg($0.payload)}
 
         paraRangeTagArray = try record.children
-            .filter {$0.tagId == HwpSectionTag.paraRangeTag}
+            .filter {$0.tagId == HwpSectionTag.paraRangeTag.rawValue}
             .map {try HwpParaRangeTag($0.payload)}
 
         ctrlHeaderArray = try record.children
-            .filter {$0.tagId == HwpSectionTag.ctrlHeader}
+            .filter {$0.tagId == HwpSectionTag.ctrlHeader.rawValue}
             .map {
                 var reader = DataReader($0.payload)
                 let ctrlId = reader.read(UInt32.self)
@@ -71,7 +71,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
             }
 
         listHeaderArray = try record.children
-            .filter {$0.tagId == HwpSectionTag.listHeader}
+            .filter {$0.tagId == HwpSectionTag.listHeader.rawValue}
             .map { try HwpListHeader($0.payload)}
     }
 }

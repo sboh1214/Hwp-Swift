@@ -13,7 +13,7 @@ public struct HwpSection: HwpFromDataWithVersion {
     init(_ data: Data, _ version: HwpVersion) throws {
         let records = parseTreeRecord(data: data)
         paragraph = try records.children.map {record in
-            precondition(record.tagId == HwpSectionTag.paraHeader)
+            precondition(record.tagId == HwpSectionTag.paraHeader.rawValue)
             return try HwpParagraph(record, version)
         }
     }
