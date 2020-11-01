@@ -22,18 +22,12 @@ extension HwpTabDef {
 }
 
 extension HwpTabDef: HwpFromData {
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader) throws {
         property = reader.read(UInt32.self)
         count = reader.read(Int32.self)
         tabInfoArray = [HwpTabInfo]()
         for _ in 0..<count {
-            tabInfoArray.append(try HwpTabInfo(reader.readBytes(8)))
-        }
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+            tabInfoArray.append(try HwpTabInfo.load(reader.readBytes(8)))
         }
     }
 }

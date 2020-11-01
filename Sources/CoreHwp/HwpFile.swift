@@ -24,7 +24,7 @@ public struct HwpFile: HwpPrimitive {
         let streams = Dictionary(uniqueKeysWithValues: ole.root.children.map { ($0.name, $0 ) })
         let reader = StreamReader(ole, streams)
 
-        let fileHeader = try HwpFileHeader(reader.getDataFromStream(.fileHeader, false))
+        let fileHeader = try HwpFileHeader.load(reader.getDataFromStream(.fileHeader, false))
         self.fileHeader = fileHeader
 
         let docInfoData = try reader.getDataFromStream(.docInfo, fileHeader.isCompressed)
@@ -37,7 +37,7 @@ public struct HwpFile: HwpPrimitive {
             throw HwpError.streamDoesNotExist(name: HwpStreamName.previewText)
         }
         let previewTextReader = try ole.stream(previewTextStream)
-        previewText = try HwpPreviewText(previewTextReader.readDataToEnd())
+        previewText = try HwpPreviewText.load(previewTextReader.readDataToEnd())
     }
 
 }

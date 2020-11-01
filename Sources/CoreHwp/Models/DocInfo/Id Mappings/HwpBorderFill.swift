@@ -36,9 +36,7 @@ extension HwpBorderFill: HwpFromData {
         fillInfo = [BYTE]()
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader) throws {
         property = reader.read(UInt16.self)
         borderType = reader.readBytes(4).bytes
         borderThickness = reader.readBytes(4).bytes
@@ -47,10 +45,6 @@ extension HwpBorderFill: HwpFromData {
         diagonalThickness = reader.read(UInt8.self)
         diagonalColor = HwpColor(reader.read(UInt32.self))
         fillInfo = reader.readToEnd().bytes
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-        }
     }
 }
 

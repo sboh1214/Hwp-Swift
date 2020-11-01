@@ -17,15 +17,9 @@ public struct HwpDocumentProperties: HwpFromData {
         caratLocation = HwpCaratLocation()
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader) throws {
         sectionSize = reader.read(UInt16.self)
-        startingIndex = try HwpStartingIndex(reader.readBytes(12))
-        caratLocation = try HwpCaratLocation(reader.readBytes(12))
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-        }
+        startingIndex = try HwpStartingIndex.load(reader.readBytes(12))
+        caratLocation = try HwpCaratLocation.load(reader.readBytes(12))
     }
 }

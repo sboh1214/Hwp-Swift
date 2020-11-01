@@ -30,21 +30,21 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
 
         if let paraText = record.children
             .first(where: {$0.tagId == HwpSectionTag.paraText.rawValue}) {
-            self.paraText = try HwpParaText(paraText.payload)
+            self.paraText = try HwpParaText.load(paraText.payload)
         }
 
         if let paraCharShape = record.children
             .first(where: {$0.tagId == HwpSectionTag.paraCharShape.rawValue}) {
-            self.paraCharShape = try HwpParaCharShape(paraCharShape.payload)
+            self.paraCharShape = try HwpParaCharShape.load(paraCharShape.payload)
         }
 
         paraLineSegArray = try record.children
             .filter {$0.tagId == HwpSectionTag.paraLineSeg.rawValue}
-            .map {try HwpParaLineSeg($0.payload)}
+            .map {try HwpParaLineSeg.load($0.payload)}
 
         paraRangeTagArray = try record.children
             .filter {$0.tagId == HwpSectionTag.paraRangeTag.rawValue}
-            .map {try HwpParaRangeTag($0.payload)}
+            .map {try HwpParaRangeTag.load($0.payload)}
 
         ctrlHeaderArray = try record.children
             .filter {$0.tagId == HwpSectionTag.ctrlHeader.rawValue}
@@ -60,7 +60,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
                     return try .notImplemented(HwpCtrlHeader($0))
                 } else if let other = HwpOtherCtrlId.init(rawValue: ctrlId) {
                     if other == .column {
-                        return try .column(HwpColumn($0.payload))
+                        return try .column(HwpColumn.load($0.payload))
                     }
                     return try .notImplemented(HwpCtrlHeader($0))
                 } else if HwpFieldCtrlId.init(rawValue: ctrlId) != nil {
@@ -72,6 +72,6 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
 
         listHeaderArray = try record.children
             .filter {$0.tagId == HwpSectionTag.listHeader.rawValue}
-            .map { try HwpListHeader($0.payload)}
+            .map { try HwpListHeader.load($0.payload)}
     }
 }

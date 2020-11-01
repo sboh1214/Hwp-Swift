@@ -8,7 +8,8 @@ public typealias WORD = UInt16
 /** 16비트 컴파일러에서 ‘unsigned long’에 해당 */
 public typealias DWORD = UInt32
 /**
- WCHAR는 한글의 내부 코드로 표현된 문자 한 글자를 표현하는 자료형이다.
+ 한글의 내부 코드로 표현된 문자 한 글자를 표현하는 자료형
+ 
  한글의 내부 코드는 한글, 영문, 한자를 비롯해 모든 문자가 2 바이트의 일정한 길이를 가진다.
  */
 public typealias WCHAR = UInt16

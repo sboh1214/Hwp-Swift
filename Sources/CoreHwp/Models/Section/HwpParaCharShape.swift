@@ -16,9 +16,7 @@ public struct HwpParaCharShape: HwpFromData {
         shapeId = [6]
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader) throws {
         var startingIndex = [UInt32]()
         var shapeId = [UInt32]()
         while !reader.isEOF {
@@ -27,9 +25,5 @@ public struct HwpParaCharShape: HwpFromData {
         }
         self.startingIndex = startingIndex
         self.shapeId = shapeId
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-        }
     }
 }

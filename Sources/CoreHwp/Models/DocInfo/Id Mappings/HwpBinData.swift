@@ -43,9 +43,7 @@ public struct HwpBinData: HwpFromData {
         extensionName = nil
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader) throws {
         let property = reader.read(UInt16.self)
         type = HwpBinDataType(rawValue: getBitValue(Int(property), 0, 3))!
 
@@ -58,10 +56,6 @@ public struct HwpBinData: HwpFromData {
             streamId = reader.read(UInt16.self)
             extensionLength = reader.read(WORD.self)
             extensionName = reader.read(WCHAR.self, extensionLength!)
-        }
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
         }
     }
 }

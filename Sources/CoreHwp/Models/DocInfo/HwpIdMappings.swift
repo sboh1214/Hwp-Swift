@@ -228,36 +228,36 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         }
 
         binDataArray = try record.children.pop(binaryDataCount)
-            .map {try HwpBinData($0.payload)}
+            .map {try HwpBinData.load($0.payload)}
         faceNameKoreanArray = try record.children.pop(faceNameKoreanCount)
-            .map {try HwpFaceName($0.payload)}
+            .map {try HwpFaceName.load($0.payload)}
         faceNameEnglishArray = try record.children.pop(faceNameEnglishCount)
-            .map {try HwpFaceName($0.payload)}
+            .map {try HwpFaceName.load($0.payload)}
         faceNameChineseArray = try record.children.pop(faceNameChineseCount)
-            .map {try HwpFaceName($0.payload)}
+            .map {try HwpFaceName.load($0.payload)}
         faceNameJapaneseArray = try record.children.pop(faceNameJapaneseCount)
-            .map {try HwpFaceName($0.payload)}
+            .map {try HwpFaceName.load($0.payload)}
         faceNameEtcArray = try record.children.pop(faceNameEtcCount)
-            .map {try HwpFaceName($0.payload)}
+            .map {try HwpFaceName.load($0.payload)}
         faceNameSymbolArray = try record.children.pop(faceNameSymbolCount)
-            .map {try HwpFaceName($0.payload)}
+            .map {try HwpFaceName.load($0.payload)}
         faceNameUserArray = try record.children.pop(faceNameUserCount)
-            .map {try HwpFaceName($0.payload)}
+            .map {try HwpFaceName.load($0.payload)}
 
         borderFillArray = try record.children.pop(borderFillCount)
-            .map {try HwpBorderFill($0.payload)}
+            .map {try HwpBorderFill.load($0.payload)}
         charShapeArray = try record.children.pop(charShapeCount)
             .map {try HwpCharShape($0.payload, version)}
         tabDefArray = try record.children.pop(tabDefCount)
-            .map {try HwpTabDef($0.payload)}
+            .map {try HwpTabDef.load($0.payload)}
         numberingArray = try record.children.pop(numberingCount)
             .map {try HwpNumbering($0.payload, version)}
         bulletArray = try record.children.pop(bulletCount)
-            .map {try HwpBullet($0.payload)}
+            .map {try HwpBullet.load($0.payload)}
         paraShapeArray = try record.children.pop(paraShapeCount)
             .map {try HwpParaShape($0.payload, version)}
         styleArray = try record.children.pop(styleCount)
-            .map {try HwpStyle($0.payload)}
+            .map {try HwpStyle.load($0.payload)}
 
         forbiddenCharArray = [HwpForbiddenChar]()
 
@@ -267,7 +267,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         for child in record.children {
             switch child.tagId {
             case HwpDocInfoTag.forbiddenChar.rawValue:
-                forbiddenCharArray.append(try HwpForbiddenChar(child.payload))
+                forbiddenCharArray.append(try HwpForbiddenChar.load(child.payload))
             default:
                 print("HKFWarning : Unidentified Tag \(child.tagId)")
             }

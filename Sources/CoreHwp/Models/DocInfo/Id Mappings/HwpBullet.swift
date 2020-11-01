@@ -21,15 +21,12 @@ public struct HwpBullet {
 }
 
 extension HwpBullet: HwpFromData {
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-        defer {
-            // precondition(reader.isEOF())
-        }
+    init(_ reader: inout DataReader) throws {
         info = reader.readBytes(8).bytes
         char = [reader.read(WCHAR.self)].string
         imageId = reader.read(Int32.self)
         imageProperty = reader.readBytes(4).bytes
         checkChar = [reader.read(WCHAR.self)].string
+        reader.readBytes(5)
     }
 }

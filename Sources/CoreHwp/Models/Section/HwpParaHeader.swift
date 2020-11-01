@@ -74,7 +74,7 @@ public struct HwpParaHeader: HwpFromDataWithVersion {
             }
 
             if !reader.isEOF {
-                throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+                throw HwpError.dataIsNotEOF(model: self, remain: reader.remainBytes)
             }
         }
     }

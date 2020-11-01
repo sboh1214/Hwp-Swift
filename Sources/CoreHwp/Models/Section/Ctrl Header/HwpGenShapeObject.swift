@@ -10,7 +10,7 @@ extension HwpGenShapeObject: HwpFromRecord {
         commonCtrlProperty = try HwpCommonCtrlProperty(&reader)
 
         if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+            throw HwpError.dataIsNotEOF(model: self, remain: reader.remainBytes)
         }
     }
 }

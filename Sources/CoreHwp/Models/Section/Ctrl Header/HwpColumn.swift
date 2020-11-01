@@ -20,9 +20,7 @@ public struct HwpColumn {
 }
 
 extension HwpColumn: HwpFromData {
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader) throws {
         let ctrlId = reader.read(UInt32.self)
         if let otherCtrlId = HwpOtherCtrlId.init(rawValue: ctrlId) {
             self.otherCtrlId = otherCtrlId
@@ -38,9 +36,5 @@ extension HwpColumn: HwpFromData {
         dividerType = reader.read(UInt8.self)
         dividerThickness = reader.read(UInt8.self)
         dividerColor = HwpColor(reader.read(COLORREF.self))
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
-        }
     }
 }

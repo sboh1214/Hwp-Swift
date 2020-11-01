@@ -12,7 +12,7 @@ struct HwpPreviewImage: HwpFromData {
         image = Data()
     }
 
-    init(_ data: Data) throws {
-        image = data
+    init(_ reader: inout DataReader) throws {
+        image = reader.readToEnd()
     }
 }

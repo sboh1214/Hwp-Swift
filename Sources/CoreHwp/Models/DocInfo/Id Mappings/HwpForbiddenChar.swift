@@ -5,7 +5,7 @@ public struct HwpForbiddenChar {
 }
 
 extension HwpForbiddenChar: HwpFromData {
-    init(_ data: Data) throws {
-        self.data = data
+    init(_ reader: inout DataReader) throws {
+        data = reader.readToEnd()
     }
 }

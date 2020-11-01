@@ -25,9 +25,7 @@ extension HwpFaceName: HwpFromData {
         defaultFaceName = nil
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader) throws {
         property = reader.read(BYTE.self)
         let hasAlternative = property.bits[7]
         let hasInfo = property.bits[6]
@@ -47,10 +45,6 @@ extension HwpFaceName: HwpFromData {
         if hasDefault {
             defaultFaceNameLength = reader.read(WORD.self)
             defaultFaceName = reader.read(WCHAR.self, defaultFaceNameLength!).string
-        }
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
         }
     }
 }

@@ -22,13 +22,13 @@ public struct HwpCompatibleDocument: HwpFromRecord {
 
         if let layoutCompatibility = record.children
             .first(where: {$0.tagId == HwpDocInfoTag.layoutCompatibility.rawValue}) {
-            self.layoutCompatibility = try HwpLayoutCompatibility(layoutCompatibility.payload)
+            self.layoutCompatibility = try HwpLayoutCompatibility.load(layoutCompatibility.payload)
         } else {
             layoutCompatibility = nil
         }
 
         if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(remain: reader.remainBytes)
+            throw HwpError.dataIsNotEOF(model: self, remain: reader.remainBytes)
         }
     }
 }

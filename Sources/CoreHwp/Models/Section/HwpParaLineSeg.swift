@@ -13,9 +13,7 @@ public struct HwpParaLineSeg: HwpFromData {
         paraLineSegInternalArray = [HwpParaLineSegInternal()]
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader) throws {
         paraLineSegInternalArray = [HwpParaLineSegInternal]()
         while !reader.isEOF {
             paraLineSegInternalArray.append(HwpParaLineSegInternal(&reader))

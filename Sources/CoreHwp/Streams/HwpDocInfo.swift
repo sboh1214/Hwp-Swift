@@ -29,7 +29,7 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.documentProperties.rawValue)
         }
-        self.documentProperties = try HwpDocumentProperties(documentProperties.payload)
+        self.documentProperties = try HwpDocumentProperties.load(documentProperties.payload)
 
         guard let idMappings = record.children
                 .first(where: {$0.tagId == HwpDocInfoTag.idMappings.rawValue})
