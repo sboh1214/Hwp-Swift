@@ -21,8 +21,8 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
         compatibleDocument = HwpCompatibleDocument()
     }
 
-    init(_ data: Data, _ version: HwpVersion) throws {
-        let record = parseTreeRecord(data: data)
+    init(_ reader: inout DataReader, _ version: HwpVersion) throws {
+        let record = parseTreeRecord(data: reader.readToEnd())
 
         guard let documentProperties = record.children
                 .first(where: {$0.tagId == HwpDocInfoTag.documentProperties.rawValue})

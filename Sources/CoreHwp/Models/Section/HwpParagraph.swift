@@ -26,7 +26,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
     }
 
     init(_ record: HwpRecord, _ version: HwpVersion) throws {
-        paraHeader = try HwpParaHeader(record.payload, version)
+        paraHeader = try HwpParaHeader.load(record.payload, version)
 
         if let paraText = record.children
             .first(where: {$0.tagId == HwpSectionTag.paraText.rawValue}) {

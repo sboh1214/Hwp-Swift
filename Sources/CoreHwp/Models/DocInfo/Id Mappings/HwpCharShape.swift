@@ -39,28 +39,7 @@ public struct HwpCharShape {
 }
 
 extension HwpCharShape: HwpFromDataWithVersion {
-    @available(*, deprecated)
-    init() {
-        faceId = [0]
-        faceScaleX = [0]
-        faceSpacing = [0]
-        faceRelativeSize = [0]
-        faceLocation = [0]
-        baseSize = 0
-        property = 0
-        shadowInterval = 0
-        shadowInterval2 = 0
-        faceColor = HwpColor()
-        underlineColor = HwpColor()
-        shadeColor = HwpColor()
-        shadowColor = HwpColor()
-        borderFillId = nil
-        strikethroughColor = nil
-    }
-
-    init(_ data: Data, _ version: HwpVersion) throws {
-        var reader = DataReader(data)
-
+    init(_ reader: inout DataReader, _ version: HwpVersion) throws {
         faceId = reader.read(WORD.self, 7)
         faceScaleX = reader.readBytes(7).bytes
         faceSpacing = reader.read(Int8.self, 7)
@@ -79,10 +58,6 @@ extension HwpCharShape: HwpFromDataWithVersion {
         }
         if version >= HwpVersion(5, 0, 3, 0) {
             strikethroughColor = HwpColor(reader.read(UInt32.self))
-        }
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(model: self, remain: reader.remainBytes)
         }
     }
 }

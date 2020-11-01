@@ -50,31 +50,25 @@ public struct HwpParaHeader: HwpFromDataWithVersion {
         isTraceChange = 0
     }
 
-        init(_ data: Data, _ version: HwpVersion) throws {
-            var reader = DataReader(data)
-
-            let value = reader.read(UInt32.self)
-            if (value & 0x80000000) == 0x80000000 {
-                isLastInList = true
-                charCount = (value & 0x7fffffff)
-            } else {
-                isLastInList = false
-                charCount = value
-            }
-            controlMask = reader.read(UInt32.self)
-            paraShapeId = reader.read(UInt16.self)
-            paraStyleId = reader.read(UInt8.self)
-            columnType = reader.read(UInt8.self)
-            charShapeInfoCount = reader.read(UInt16.self)
-            rangeTagInfoCount = reader.read(UInt16.self)
-            alignInfoCount = reader.read(UInt16.self)
-            paraId = reader.read(UInt32.self)
-            if version >= HwpVersion(5, 0, 3, 2) {
-                isTraceChange = reader.read(UInt16.self)
-            }
-
-            if !reader.isEOF {
-                throw HwpError.dataIsNotEOF(model: self, remain: reader.remainBytes)
-            }
+    init(_ reader: inout DataReader, _ version: HwpVersion) throws {
+        let value = reader.read(UInt32.self)
+        if (value & 0x80000000) == 0x80000000 {
+            isLastInList = true
+            charCount = (value & 0x7fffffff)
+        } else {
+            isLastInList = false
+            charCount = value
+        }
+        controlMask = reader.read(UInt32.self)
+        paraShapeId = reader.read(UInt16.self)
+        paraStyleId = reader.read(UInt8.self)
+        columnType = reader.read(UInt8.self)
+        charShapeInfoCount = reader.read(UInt16.self)
+        rangeTagInfoCount = reader.read(UInt16.self)
+        alignInfoCount = reader.read(UInt16.self)
+        paraId = reader.read(UInt32.self)
+        if version >= HwpVersion(5, 0, 3, 2) {
+            isTraceChange = reader.read(UInt16.self)
         }
     }
+}
