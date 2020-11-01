@@ -53,7 +53,7 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
                 let ctrlId = reader.read(UInt32.self)
                 if let common = HwpCommonCtrlId.init(rawValue: ctrlId) {
                     if common == .table {
-                        return try .table(HwpTable($0))
+                        return try .table(HwpTable($0, version))
                     } else if common == .genShapeObject {
                         return try .genShapeObject(HwpGenShapeObject($0))
                     }
