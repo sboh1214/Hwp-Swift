@@ -25,14 +25,14 @@ final class NooriSectionTests: XCTestCase {
     }
 
     func testParaCharShape() throws {
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape?.startingIndex[0], 0)
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape?.shapeId[0], 19)
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape?.startingIndex[0], 0)
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape?.shapeId[0], 30)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape.startingIndex[0], 0)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape.shapeId[0], 19)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape.startingIndex[0], 0)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape.shapeId[0], 30)
     }
 
     func testParaLineSeg() throws {
-        let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSegArray![0].paraLineSegInternalArray[0]
+        let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSeg.paraLineSegInternalArray[0]
         XCTAssertEqual(seg0.textStartingIndex, 0)
         XCTAssertEqual(seg0.lineLocation, 0)
         XCTAssertEqual(seg0.lineHeight, 6134)
@@ -42,7 +42,7 @@ final class NooriSectionTests: XCTestCase {
         XCTAssertEqual(seg0.startingLocation, 0)
         XCTAssertEqual(seg0.width, 48188)
 
-        XCTAssertNotNil(hwp.sectionArray[0].paragraph[20].paraLineSegArray![0])
+        XCTAssertNotNil(hwp.sectionArray[0].paragraph[20].paraLineSeg)
     }
 
     func testTable() throws {

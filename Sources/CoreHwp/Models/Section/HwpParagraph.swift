@@ -2,24 +2,19 @@ import Foundation
 
 public struct HwpParagraph: HwpFromRecordWithVersion {
     public let paraHeader: HwpParaHeader
+
     public var paraText: HwpParaText?
-    public var paraCharShape: HwpParaCharShape?
-
-    public var paraLineSegArray: [HwpParaLineSeg]?
-    public var paraRangeTagArray: [HwpParaRangeTag]?
+    public var paraCharShape: HwpParaCharShape
+    public var paraLineSeg: HwpParaLineSeg
     public var ctrlHeaderArray: [HwpCtrlId]?
+    public var paraRangeTagArray: [HwpParaRangeTag]?
     public var listHeaderArray: [HwpListHeader]?
-
-    private enum CodingKeys: String, CodingKey {
-        case paraHeader, paraText, paraCharShape
-        case paraLineSegArray, paraRangeTagArray
-    }
 
     init() {
         paraHeader =  HwpParaHeader()
         paraText =  HwpParaText()
         paraCharShape =  HwpParaCharShape()
-        paraLineSegArray =  [HwpParaLineSeg()]
+        paraLineSeg =  HwpParaLineSeg()
         paraRangeTagArray =  [HwpParaRangeTag]()
         listHeaderArray =  [HwpListHeader]()
         ctrlHeaderArray =  [HwpCtrlId]()
@@ -33,14 +28,17 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
             self.paraText = try HwpParaText.load(paraText.payload)
         }
 
-        if let paraCharShape = children
-            .first(where: {$0.tagId == HwpSectionTag.paraCharShape.rawValue}) {
-            self.paraCharShape = try HwpParaCharShape.load(paraCharShape.payload)
+        guard let paraCharShape = children
+            .first(where: {$0.tagId == HwpSectionTag.paraCharShape.rawValue}) else {
+            throw HwpError.recordDoesNotExist(tag: HwpSectionTag.paraCharShape.rawValue)
         }
+        self.paraCharShape = try HwpParaCharShape.load(paraCharShape.payload)
 
-        paraLineSegArray = try children
-            .filter {$0.tagId == HwpSectionTag.paraLineSeg.rawValue}
-            .map {try HwpParaLineSeg.load($0.payload)}
+        guard let paraLineSeg = children
+            .first(where: {$0.tagId == HwpSectionTag.paraLineSeg.rawValue}) else {
+            throw HwpError.recordDoesNotExist(tag: HwpSectionTag.paraLineSeg.rawValue)
+        }
+        self.paraLineSeg = try HwpParaLineSeg.load(paraLineSeg.payload)
 
         paraRangeTagArray = try children
             .filter {$0.tagId == HwpSectionTag.paraRangeTag.rawValue}
