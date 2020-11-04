@@ -1,4 +1,4 @@
-enum HwpOtherCtrlId: UInt32 {
+public enum HwpOtherCtrlId: UInt32, HwpPrimitive {
     case section = 1936024420
     case column = 1668246628
     case header = 1751474532

@@ -23,11 +23,7 @@ public struct HwpTabInfo {
 }
 
 extension HwpTabInfo: HwpFromData {
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
+    init(_ reader: inout DataReader) throws {
         location = reader.read(HWPUNIT.self)
         type = reader.read(UInt8.self)
         fillType = reader.read(UInt8.self)

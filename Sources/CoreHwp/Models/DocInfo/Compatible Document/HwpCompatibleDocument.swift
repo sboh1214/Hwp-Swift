@@ -15,16 +15,12 @@ public struct HwpCompatibleDocument: HwpFromRecord {
         layoutCompatibility = HwpLayoutCompatibility()
     }
 
-    init(_ record: HwpRecord) throws {
-        var reader = DataReader(record.payload)
-        defer {
-            precondition(reader.isEOF())
-        }
+    init(_ reader: inout DataReader, _ children: [HwpRecord]) throws {
         targetDocument = reader.read(UInt32.self)
 
-        if let layoutCompatibility = record.children
+        if let layoutCompatibility = children
             .first(where: {$0.tagId == HwpDocInfoTag.layoutCompatibility.rawValue}) {
-            self.layoutCompatibility = try HwpLayoutCompatibility(layoutCompatibility.payload)
+            self.layoutCompatibility = try HwpLayoutCompatibility.load(layoutCompatibility.payload)
         } else {
             layoutCompatibility = nil
         }

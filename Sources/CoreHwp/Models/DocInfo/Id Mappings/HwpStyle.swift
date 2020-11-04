@@ -39,11 +39,7 @@ public struct HwpStyle {
 }
 
 extension HwpStyle: HwpFromData {
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
+    init(_ reader: inout DataReader) throws {
         length1 = reader.read(WORD.self)
         styleLocalName = reader.read(WCHAR.self, Int(length1)).string
         length2 = reader.read(WORD.self)

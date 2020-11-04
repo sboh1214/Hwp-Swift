@@ -25,6 +25,7 @@ let package = Package(
             resources: [
                 .copy("Blank/blank-mac2014vp.hwp"),
                 .copy("Blank/blank-win2018.hwp"),
+                .copy("Blank/blank-win2020.hwp"),
                 .copy("Noori/noori.hwp"),
                 .copy("Versions/2007.hwp"),
                 .copy("Versions/2014VP.hwp")

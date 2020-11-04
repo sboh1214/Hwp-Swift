@@ -25,11 +25,7 @@ public struct HwpLayoutCompatibility: HwpFromData {
         field = 0
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
+    init(_ reader: inout DataReader) throws {
         char = reader.read(UInt32.self)
         paragraph = reader.read(UInt32.self)
         section = reader.read(UInt32.self)

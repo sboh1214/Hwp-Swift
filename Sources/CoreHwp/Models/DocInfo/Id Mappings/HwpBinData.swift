@@ -43,8 +43,7 @@ public struct HwpBinData: HwpFromData {
         extensionName = nil
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
+    init(_ reader: inout DataReader) throws {
         let property = reader.read(UInt16.self)
         type = HwpBinDataType(rawValue: getBitValue(Int(property), 0, 3))!
 

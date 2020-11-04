@@ -39,21 +39,17 @@ public struct HwpFileHeader: HwpFromData {
         koreaOpenLicense = 0
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
-
-        guard let signature = reader.readBytes(32).stringASCII else {
-            throw HwpError.invalidDataForString(data: data[0 ..< 32], name: "signature")
+    init(_ reader: inout DataReader) throws {
+        let signatureData = reader.readBytes(32)
+        guard let signature = signatureData.stringASCII else {
+            throw HwpError.invalidDataForString(data: signatureData, name: "signature")
         }
         self.signature = signature
         if signature != "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0" {
             throw HwpError.invalidFileHeaderSignature(signature: signature)
         }
 
-        version = HwpVersion(reader.readBytes(4))
+        version = try HwpVersion.load(reader.readBytes(4))
 
         let bits1 = reader.readBytes(4).bits
         isCompressed = bits1[0]
@@ -65,6 +61,6 @@ public struct HwpFileHeader: HwpFromData {
         encryptVersion = reader.read(UInt32.self)
         koreaOpenLicense = reader.read(UInt8.self)
 
-        _ = reader.readBytes(207)
+        reader.readBytes(207)
     }
 }

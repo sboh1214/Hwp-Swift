@@ -150,25 +150,25 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         bulletArray = [HwpBullet]()
 
         paraShapeArray = [
-            HwpParaShape(property1: 384, marginLeft: 0, tabDefId: 0),
-            HwpParaShape(property1: 384, marginLeft: 3000, tabDefId: 0),
-            HwpParaShape(property1: 8399232, marginLeft: 2000, tabDefId: 1),
-            HwpParaShape(property1: 41953664, marginLeft: 4000, tabDefId: 1),
-            HwpParaShape(property1: 75508096, marginLeft: 6000, tabDefId: 1),
-            HwpParaShape(property1: 109062528, marginLeft: 8000, tabDefId: 1),
-            HwpParaShape(property1: 142616960, marginLeft: 10000, tabDefId: 1),
-            HwpParaShape(property1: 176171392, marginLeft: 12000, tabDefId: 1),
-            HwpParaShape(property1: 209725824, marginLeft: 14000, tabDefId: 1),
-            HwpParaShape(property1: 256, marginLeft: 0, lineSpacing: 150, tabDefId: 0, lineSpacing2: Optional(150)),
-            HwpParaShape(property1: 384, marginLeft: 0, indent: -2620, lineSpacing: 130, tabDefId: 0, lineSpacing2: Optional(130)),
-            HwpParaShape(property1: 260, marginLeft: 0, lineSpacing: 130, tabDefId: 0, lineSpacing2: Optional(130)),
-            HwpParaShape(property1: 10500, marginLeft: 0, paragraphSpacingTop: 2400, paragraphSpacingBottom: 600, tabDefId: 1),
-            HwpParaShape(property1: 260, marginLeft: 0, paragraphSpacingBottom: 1400, tabDefId: 2),
-            HwpParaShape(property1: 260, marginLeft: 2200, paragraphSpacingBottom: 1400, tabDefId: 2),
-            HwpParaShape(property1: 260, marginLeft: 4400, paragraphSpacingBottom: 1400, tabDefId: 2),
-            HwpParaShape(property1: 209715584, marginLeft: 18000, tabDefId: 1),
-            HwpParaShape(property1: 209715584, marginLeft: 20000, tabDefId: 1),
-            HwpParaShape(property1: 209715584, marginLeft: 16000, tabDefId: 1)
+            HwpParaShape(property1: 384, marginLeft: 0, tabDefId: 0, unknown: 0),
+            HwpParaShape(property1: 384, marginLeft: 3000, tabDefId: 0, unknown: 0),
+            HwpParaShape(property1: 8399232, marginLeft: 2000, tabDefId: 1, unknown: 0),
+            HwpParaShape(property1: 41953664, marginLeft: 4000, tabDefId: 1, unknown: 1),
+            HwpParaShape(property1: 75508096, marginLeft: 6000, tabDefId: 1, unknown: 2),
+            HwpParaShape(property1: 109062528, marginLeft: 8000, tabDefId: 1, unknown: 3),
+            HwpParaShape(property1: 142616960, marginLeft: 10000, tabDefId: 1, unknown: 4),
+            HwpParaShape(property1: 176171392, marginLeft: 12000, tabDefId: 1, unknown: 5),
+            HwpParaShape(property1: 209725824, marginLeft: 14000, tabDefId: 1, unknown: 6),
+            HwpParaShape(property1: 256, marginLeft: 0, lineSpacing: 150, tabDefId: 0, lineSpacing2: 150, unknown: 0),
+            HwpParaShape(property1: 384, marginLeft: 0, indent: -2620, lineSpacing: 130, tabDefId: 0, lineSpacing2: 130, unknown: 0),
+            HwpParaShape(property1: 260, marginLeft: 0, lineSpacing: 130, tabDefId: 0, lineSpacing2: 130, unknown: 0),
+            HwpParaShape(property1: 10500, marginLeft: 0, paragraphSpacingTop: 2400, paragraphSpacingBottom: 600, tabDefId: 1, unknown: 0),
+            HwpParaShape(property1: 260, marginLeft: 0, paragraphSpacingBottom: 1400, tabDefId: 2, unknown: 0),
+            HwpParaShape(property1: 260, marginLeft: 2200, paragraphSpacingBottom: 1400, tabDefId: 2, unknown: 0),
+            HwpParaShape(property1: 260, marginLeft: 4400, paragraphSpacingBottom: 1400, tabDefId: 2, unknown: 0),
+            HwpParaShape(property1: 209715584, marginLeft: 18000, tabDefId: 1, unknown: 8),
+            HwpParaShape(property1: 209715584, marginLeft: 20000, tabDefId: 1, unknown: 9),
+            HwpParaShape(property1: 209715584, marginLeft: 16000, tabDefId: 1, unknown: 7)
         ]
 
         styleArray = [
@@ -199,11 +199,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         // swiftlint:enable line_length
     }
 
-    init(_ record: HwpRecord, _ version: HwpVersion) throws {
-        var reader = DataReader(record.payload)
-        defer {
-            // precondition(reader.isEOF())
-        }
+    init(_ reader: inout DataReader, _ children: [HwpRecord], _ version: HwpVersion) throws {
         binaryDataCount = reader.read(Int32.self)
         faceNameKoreanCount = reader.read(Int32.self)
         faceNameEnglishCount = reader.read(Int32.self)
@@ -227,47 +223,49 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             changeTraceUserCount = reader.read(Int32.self)
         }
 
-        binDataArray = try record.children.pop(binaryDataCount)
-            .map {try HwpBinData($0.payload)}
-        faceNameKoreanArray = try record.children.pop(faceNameKoreanCount)
-            .map {try HwpFaceName($0.payload)}
-        faceNameEnglishArray = try record.children.pop(faceNameEnglishCount)
-            .map {try HwpFaceName($0.payload)}
-        faceNameChineseArray = try record.children.pop(faceNameChineseCount)
-            .map {try HwpFaceName($0.payload)}
-        faceNameJapaneseArray = try record.children.pop(faceNameJapaneseCount)
-            .map {try HwpFaceName($0.payload)}
-        faceNameEtcArray = try record.children.pop(faceNameEtcCount)
-            .map {try HwpFaceName($0.payload)}
-        faceNameSymbolArray = try record.children.pop(faceNameSymbolCount)
-            .map {try HwpFaceName($0.payload)}
-        faceNameUserArray = try record.children.pop(faceNameUserCount)
-            .map {try HwpFaceName($0.payload)}
+        var childrenArray = children
 
-        borderFillArray = try record.children.pop(borderFillCount)
-            .map {try HwpBorderFill($0.payload)}
-        charShapeArray = try record.children.pop(charShapeCount)
-            .map {try HwpCharShape($0.payload, version)}
-        tabDefArray = try record.children.pop(tabDefCount)
-            .map {try HwpTabDef($0.payload)}
-        numberingArray = try record.children.pop(numberingCount)
-            .map {try HwpNumbering($0.payload, version)}
-        bulletArray = try record.children.pop(bulletCount)
-            .map {try HwpBullet($0.payload)}
-        paraShapeArray = try record.children.pop(paraShapeCount)
-            .map {try HwpParaShape($0.payload, version)}
-        styleArray = try record.children.pop(styleCount)
-            .map {try HwpStyle($0.payload)}
+        binDataArray = try childrenArray.pop(binaryDataCount)
+            .map {try HwpBinData.load($0.payload)}
+        faceNameKoreanArray = try childrenArray.pop(faceNameKoreanCount)
+            .map {try HwpFaceName.load($0.payload)}
+        faceNameEnglishArray = try childrenArray.pop(faceNameEnglishCount)
+            .map {try HwpFaceName.load($0.payload)}
+        faceNameChineseArray = try childrenArray.pop(faceNameChineseCount)
+            .map {try HwpFaceName.load($0.payload)}
+        faceNameJapaneseArray = try childrenArray.pop(faceNameJapaneseCount)
+            .map {try HwpFaceName.load($0.payload)}
+        faceNameEtcArray = try childrenArray.pop(faceNameEtcCount)
+            .map {try HwpFaceName.load($0.payload)}
+        faceNameSymbolArray = try childrenArray.pop(faceNameSymbolCount)
+            .map {try HwpFaceName.load($0.payload)}
+        faceNameUserArray = try childrenArray.pop(faceNameUserCount)
+            .map {try HwpFaceName.load($0.payload)}
+
+        borderFillArray = try childrenArray.pop(borderFillCount)
+            .map {try HwpBorderFill.load($0.payload)}
+        charShapeArray = try childrenArray.pop(charShapeCount)
+            .map {try HwpCharShape.load($0.payload, version)}
+        tabDefArray = try childrenArray.pop(tabDefCount)
+            .map {try HwpTabDef.load($0.payload)}
+        numberingArray = try childrenArray.pop(numberingCount)
+            .map {try HwpNumbering.load($0.payload, version)}
+        bulletArray = try childrenArray.pop(bulletCount)
+            .map {try HwpBullet.load($0.payload)}
+        paraShapeArray = try childrenArray.pop(paraShapeCount)
+            .map {try HwpParaShape.load($0.payload, version)}
+        styleArray = try childrenArray.pop(styleCount)
+            .map {try HwpStyle.load($0.payload)}
 
         forbiddenCharArray = [HwpForbiddenChar]()
 
-        if record.children.isEmpty {
+        if childrenArray.isEmpty {
             return
         }
-        for child in record.children {
+        for child in childrenArray {
             switch child.tagId {
             case HwpDocInfoTag.forbiddenChar.rawValue:
-                forbiddenCharArray.append(try HwpForbiddenChar(child.payload))
+                forbiddenCharArray.append(try HwpForbiddenChar.load(child.payload))
             default:
                 print("HKFWarning : Unidentified Tag \(child.tagId)")
             }

@@ -82,10 +82,13 @@ extension NooriSectionTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__NooriSectionTests = [
+        ("testColumn", testColumn),
+        ("testGenShapeObject", testGenShapeObject),
         ("testParaCharShape", testParaCharShape),
         ("testParagraph", testParagraph),
         ("testParaLineSeg", testParaLineSeg),
         ("testParaText", testParaText),
+        ("testTable", testTable),
     ]
 }
 

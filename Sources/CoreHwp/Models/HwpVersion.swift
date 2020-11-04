@@ -25,8 +25,7 @@ public struct HwpVersion: HwpFromData {
         revision = 1
     }
 
-    init(_ data: Data) {
-        var reader = DataReader(data)
+    init(_ reader: inout DataReader) throws {
         revision = reader.read(UInt8.self)
         build = reader.read(UInt8.self)
         minor = reader.read(UInt8.self)

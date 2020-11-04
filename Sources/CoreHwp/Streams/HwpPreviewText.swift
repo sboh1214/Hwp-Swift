@@ -12,9 +12,9 @@ public struct HwpPreviewText: HwpFromData {
         text = ""
     }
 
-    init(_ data: Data) throws {
-        guard let text = String(data: data, encoding: .utf16LittleEndian) else {
-            throw HwpError.invalidDataForString(data: data, name: "PreviewText")
+    init(_ reader: inout DataReader) throws {
+        guard let text = String(data: reader.readToEnd(), encoding: .utf16LittleEndian) else {
+            throw HwpError.invalidDataForString(data: reader.readToEnd(), name: "PreviewText")
         }
         self.text = text
     }

@@ -39,7 +39,7 @@ func parseTreeRecord(data: Data) -> HwpRecord {
     var reader = DataReader(data)
     let root = HwpRecord(tagId: 0, level: 0, payload: Data())
 
-    while !reader.isEOF() {
+    while !reader.isEOF {
         let value = reader.read(UInt32.self)
         let tagId = value & 0x3FF
         let level = (value >> 10) & 0x3FF

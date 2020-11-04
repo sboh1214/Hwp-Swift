@@ -13,7 +13,7 @@ extension HwpColor {
         blue = 0
     }
 
-    public init(_ data: UInt32) {
+    public init(_ data: COLORREF) {
         red = getBitValue(Int(data), 0, 7)
         green = getBitValue(Int(data), 0, 7)
         blue = getBitValue(Int(data), 0, 7)

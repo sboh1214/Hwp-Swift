@@ -21,26 +21,26 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
         compatibleDocument = HwpCompatibleDocument()
     }
 
-    init(_ data: Data, _ version: HwpVersion) throws {
-        let record = parseTreeRecord(data: data)
+    init(_ reader: inout DataReader, _ version: HwpVersion) throws {
+        let record = parseTreeRecord(data: reader.readToEnd())
 
         guard let documentProperties = record.children
                 .first(where: {$0.tagId == HwpDocInfoTag.documentProperties.rawValue})
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.documentProperties.rawValue)
         }
-        self.documentProperties = HwpDocumentProperties(documentProperties.payload)
+        self.documentProperties = try HwpDocumentProperties.load(documentProperties.payload)
 
         guard let idMappings = record.children
                 .first(where: {$0.tagId == HwpDocInfoTag.idMappings.rawValue})
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.idMappings.rawValue)
         }
-        self.idMappings = try HwpIdMappings(idMappings, version)
+        self.idMappings = try HwpIdMappings.load(idMappings, version)
 
         if let compatibleDocument = record.children
             .first(where: {$0.tagId == HwpDocInfoTag.compatibleDocument.rawValue}) {
-            self.compatibleDocument = try HwpCompatibleDocument(compatibleDocument)
+            self.compatibleDocument = try HwpCompatibleDocument.load(compatibleDocument)
         }
     }
 }

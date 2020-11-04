@@ -17,8 +17,7 @@ public struct HwpStartingIndex: HwpFromData {
         equation = 1
     }
 
-    init(_ data: Data) {
-        var reader = DataReader(data)
+    init(_ reader: inout DataReader) throws {
         page = reader.read(UInt16.self)
         footnote = reader.read(UInt16.self)
         endnote = reader.read(UInt16.self)

@@ -2,9 +2,9 @@
 
 ## Known Issues
 
- - < 0.4.1
+- < 0.4.1
  HwpFile > docInfo > idMappings > faceNameKorean(Count/Array) 누락
- 
+
 ```
 Below is Template
 ```

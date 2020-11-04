@@ -40,34 +40,13 @@ public struct HwpParaShape {
     public var property3: UInt32?
     /**줄 간격(5.0.2.5 버전 이상)*/
     public var lineSpacing2: UInt32?
+    /**Unknown*/
+    public var unknown: UInt32?
 }
 
 extension HwpParaShape: HwpFromDataWithVersion {
-    init() {
-        property1 = 0
-        marginLeft = 0
-        marginRight = 0
-        indent = 0
-        paragraphSpacingTop = 0
-        paragraphSpacingBottom = 0
-        lineSpacing = 0
-        tabDefId = 0
-        numberingOrBulletId = 0
-        borderFillId = 0
-        borderSpacingLeft = 0
-        borderSpacingRight = 0
-        borderSpacingTop = 0
-        borderSpacingBottom = 0
-        property2 = nil
-        property3 = nil
-        lineSpacing2 = nil
-    }
 
-    init(_ data: Data, _ version: HwpVersion) throws {
-        var reader = DataReader(data)
-        defer {
-            // precondition(reader.isEOF())
-        }
+    init(_ reader: inout DataReader, _ version: HwpVersion) throws {
         property1 = reader.read(UInt32.self)
         marginLeft = reader.read(Int32.self)
         marginRight = reader.read(Int32.self)
@@ -89,13 +68,17 @@ extension HwpParaShape: HwpFromDataWithVersion {
             property3 = reader.read(UInt32.self)
             lineSpacing2 = reader.read(UInt32.self)
         }
+        if !reader.isEOF {
+            unknown = reader.read(UInt32.self)
+        }
     }
 }
 
 extension HwpParaShape {
     init(property1: UInt32, marginLeft: Int32, indent: Int32 = 0,
          paragraphSpacingTop: Int32 = 0, paragraphSpacingBottom: Int32 = 0,
-         lineSpacing: Int32 = 160, tabDefId: UInt16, lineSpacing2: UInt32? = 160) {
+         lineSpacing: Int32 = 160, tabDefId: UInt16, lineSpacing2: UInt32 = 160,
+         unknown: UInt32 = 0) {
         self.property1 = property1
         self.marginLeft = marginLeft
         self.marginRight = 0
@@ -113,5 +96,6 @@ extension HwpParaShape {
         self.property2 = 0
         self.property3 = 0
         self.lineSpacing2 = lineSpacing2
+        self.unknown = unknown
     }
 }

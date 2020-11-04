@@ -25,14 +25,14 @@ final class NooriSectionTests: XCTestCase {
     }
 
     func testParaCharShape() throws {
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape?.startingIndex[0], 0)
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape?.shapeId[0], 19)
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape?.startingIndex[0], 0)
-        XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape?.shapeId[0], 30)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape.startingIndex[0], 0)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape.shapeId[0], 19)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape.startingIndex[0], 0)
+        XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape.shapeId[0], 30)
     }
 
     func testParaLineSeg() throws {
-        let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSegArray![0]
+        let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSeg.paraLineSegInternalArray[0]
         XCTAssertEqual(seg0.textStartingIndex, 0)
         XCTAssertEqual(seg0.lineLocation, 0)
         XCTAssertEqual(seg0.lineHeight, 6134)
@@ -42,6 +42,41 @@ final class NooriSectionTests: XCTestCase {
         XCTAssertEqual(seg0.startingLocation, 0)
         XCTAssertEqual(seg0.width, 48188)
 
-        XCTAssertNotNil(hwp.sectionArray[0].paragraph[20].paraLineSegArray![0])
+        XCTAssertNotNil(hwp.sectionArray[0].paragraph[20].paraLineSeg)
+    }
+
+    func testTable() throws {
+        switch hwp.sectionArray[0].paragraph[1].ctrlHeaderArray![0] {
+        case .table(let hwpTable):
+            XCTAssertEqual(hwpTable.commonCtrlProperty.verticalOffset, 0)
+            XCTAssertEqual(hwpTable.commonCtrlProperty.horizontalOffset, 0)
+            XCTAssertEqual(hwpTable.commonCtrlProperty.width, 48230)
+            XCTAssertEqual(hwpTable.commonCtrlProperty.height, 6869)
+            XCTAssertEqual(hwpTable.commonCtrlProperty.zOrder, 0)
+        default:
+            XCTFail("Ctrl is not Table")
+        }
+    }
+
+    func testGenShapeObject() throws {
+        switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![2] {
+        case .genShapeObject(let hwpGenShapeObject):
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.verticalOffset, 0)
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.horizontalOffset, 0)
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.width, 48104)
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.height, 6134)
+            XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.zOrder, 8)
+        default:
+            XCTFail("Ctrl is not GenShapeObject")
+        }
+    }
+
+    func testColumn() throws {
+        switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![1] {
+        case .column(let hwpColumn):
+            XCTAssertEqual(hwpColumn.widthArray.count, 1)
+        default:
+            XCTFail("Ctrl is not Column")
+        }
     }
 }

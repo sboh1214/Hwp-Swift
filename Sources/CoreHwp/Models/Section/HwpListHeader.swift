@@ -19,12 +19,7 @@ public struct HwpListHeader: HwpFromData {
         property = 0
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
-
+    init(_ reader: inout DataReader) throws {
         paragraphCount = reader.read(Int32.self)
         property = reader.read(UInt32.self)
     }

@@ -16,15 +16,10 @@ public struct HwpParaCharShape: HwpFromData {
         shapeId = [6]
     }
 
-    init(_ data: Data) throws {
-        var reader = DataReader(data)
-        defer {
-            precondition(reader.isEOF())
-        }
-
+    init(_ reader: inout DataReader) throws {
         var startingIndex = [UInt32]()
         var shapeId = [UInt32]()
-        while !reader.isEOF() {
+        while !reader.isEOF {
             startingIndex.append(reader.read(UInt32.self))
             shapeId.append(reader.read(UInt32.self))
         }
