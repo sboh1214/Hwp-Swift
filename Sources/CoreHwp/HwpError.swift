@@ -37,7 +37,8 @@ extension HwpError: CustomStringConvertible {
         case let .invalidCtrlId(ctrlId):
             return "Invalid Ctrl Id in HwpParagraph : '\(ctrlId)'"
         case let .dataIsNotEOF(model, remain):
-            return "Data is not EOF : \(remain) bytes remain in \(String(describing: type(of: model)))"
+            let typeOfModel = String(describing: type(of: model))
+            return "Data is not EOF : \(remain) bytes remain in \(typeOfModel)"
         }
     }
 }

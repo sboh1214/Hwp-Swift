@@ -2,12 +2,14 @@
 
 ## Coding Style
 
-This project uses [SwiftLint](https://github.com/realm/SwiftLint) and [pre-commit](https://pre-commit.com/) to
-enforce formatting and coding style.
+This project uses [SwiftLint](https://github.com/realm/SwiftLint) 
+and [pre-commit](https://pre-commit.com/) 
+to enforce formatting and coding style.
+
 ```
 brew install swiftlint
 brew install pre-commit
-pre-commit install 
+pre-commit install
 ```
 
 SwiftLint also run on CI for every PR.
