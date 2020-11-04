@@ -2,12 +2,14 @@
 
 ## Coding Style
 
-This project uses [SwiftLint](https://github.com/realm/SwiftLint) 
-and [pre-commit](https://pre-commit.com/) 
+This project uses [SwiftLint](https://github.com/realm/SwiftLint),
+[markdownlint](https://github.com/markdownlint/markdownlint),
+and [pre-commit](https://pre-commit.com/)
 to enforce formatting and coding style.
 
 ```
 brew install swiftlint
+gem install mdl
 brew install pre-commit
 pre-commit install
 ```

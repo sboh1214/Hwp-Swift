@@ -11,7 +11,7 @@ assignees: sboh1214
 
 ## Motivation & Related Problem
 
-A clear and concise description of what the problem is. 
+A clear and concise description of what the problem is.
 Ex. I'm always frustrated when [...]
 
 ## Solution & Feature
