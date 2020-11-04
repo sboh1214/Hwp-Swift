@@ -35,9 +35,33 @@ extension HwpFromDataWithVersion {
 }
 
 protocol HwpFromRecord: HwpPrimitive {
-    init(_ record: HwpRecord) throws
+    init(_ reader: inout DataReader, _ children: [HwpRecord]) throws
+    static func load(_ record: HwpRecord) throws -> Self
+}
+
+extension HwpFromRecord {
+    static func load(_ record: HwpRecord) throws -> Self {
+        var reader = DataReader(record.payload)
+        let hwpFromRecord = try self.init(&reader, record.children)
+        if !reader.isEOF {
+            throw HwpError.dataIsNotEOF(model: Self.self, remain: reader.remainBytes)
+        }
+        return hwpFromRecord
+    }
 }
 
 protocol HwpFromRecordWithVersion: HwpPrimitive {
-    init(_ record: HwpRecord, _ version: HwpVersion) throws
+    init(_ reader: inout DataReader, _ children: [HwpRecord], _ version: HwpVersion) throws
+    static func load(_ record: HwpRecord, _ version: HwpVersion) throws -> Self
+}
+
+extension HwpFromRecordWithVersion {
+    static func load(_ record: HwpRecord, _ version: HwpVersion) throws -> Self {
+        var reader = DataReader(record.payload)
+        let hwpFromRecordWithVersion = try self.init(&reader, record.children, version)
+        if !reader.isEOF {
+            throw HwpError.dataIsNotEOF(model: Self.self, remain: reader.remainBytes)
+        }
+        return hwpFromRecordWithVersion
+    }
 }

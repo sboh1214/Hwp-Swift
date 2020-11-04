@@ -36,11 +36,11 @@ public struct HwpDocInfo: HwpFromDataWithVersion {
         else {
             throw HwpError.recordDoesNotExist(tag: HwpDocInfoTag.idMappings.rawValue)
         }
-        self.idMappings = try HwpIdMappings(idMappings, version)
+        self.idMappings = try HwpIdMappings.load(idMappings, version)
 
         if let compatibleDocument = record.children
             .first(where: {$0.tagId == HwpDocInfoTag.compatibleDocument.rawValue}) {
-            self.compatibleDocument = try HwpCompatibleDocument(compatibleDocument)
+            self.compatibleDocument = try HwpCompatibleDocument.load(compatibleDocument)
         }
     }
 }

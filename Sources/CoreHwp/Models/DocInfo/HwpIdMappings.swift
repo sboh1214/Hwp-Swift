@@ -199,11 +199,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         // swiftlint:enable line_length
     }
 
-    init(_ record: HwpRecord, _ version: HwpVersion) throws {
-        var reader = DataReader(record.payload)
-        defer {
-            // precondition(reader.isEOF())
-        }
+    init(_ reader: inout DataReader, _ children: [HwpRecord], _ version: HwpVersion) throws {
         binaryDataCount = reader.read(Int32.self)
         faceNameKoreanCount = reader.read(Int32.self)
         faceNameEnglishCount = reader.read(Int32.self)
@@ -227,44 +223,46 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             changeTraceUserCount = reader.read(Int32.self)
         }
 
-        binDataArray = try record.children.pop(binaryDataCount)
+        var childrenArray = children
+
+        binDataArray = try childrenArray.pop(binaryDataCount)
             .map {try HwpBinData.load($0.payload)}
-        faceNameKoreanArray = try record.children.pop(faceNameKoreanCount)
+        faceNameKoreanArray = try childrenArray.pop(faceNameKoreanCount)
             .map {try HwpFaceName.load($0.payload)}
-        faceNameEnglishArray = try record.children.pop(faceNameEnglishCount)
+        faceNameEnglishArray = try childrenArray.pop(faceNameEnglishCount)
             .map {try HwpFaceName.load($0.payload)}
-        faceNameChineseArray = try record.children.pop(faceNameChineseCount)
+        faceNameChineseArray = try childrenArray.pop(faceNameChineseCount)
             .map {try HwpFaceName.load($0.payload)}
-        faceNameJapaneseArray = try record.children.pop(faceNameJapaneseCount)
+        faceNameJapaneseArray = try childrenArray.pop(faceNameJapaneseCount)
             .map {try HwpFaceName.load($0.payload)}
-        faceNameEtcArray = try record.children.pop(faceNameEtcCount)
+        faceNameEtcArray = try childrenArray.pop(faceNameEtcCount)
             .map {try HwpFaceName.load($0.payload)}
-        faceNameSymbolArray = try record.children.pop(faceNameSymbolCount)
+        faceNameSymbolArray = try childrenArray.pop(faceNameSymbolCount)
             .map {try HwpFaceName.load($0.payload)}
-        faceNameUserArray = try record.children.pop(faceNameUserCount)
+        faceNameUserArray = try childrenArray.pop(faceNameUserCount)
             .map {try HwpFaceName.load($0.payload)}
 
-        borderFillArray = try record.children.pop(borderFillCount)
+        borderFillArray = try childrenArray.pop(borderFillCount)
             .map {try HwpBorderFill.load($0.payload)}
-        charShapeArray = try record.children.pop(charShapeCount)
+        charShapeArray = try childrenArray.pop(charShapeCount)
             .map {try HwpCharShape.load($0.payload, version)}
-        tabDefArray = try record.children.pop(tabDefCount)
+        tabDefArray = try childrenArray.pop(tabDefCount)
             .map {try HwpTabDef.load($0.payload)}
-        numberingArray = try record.children.pop(numberingCount)
+        numberingArray = try childrenArray.pop(numberingCount)
             .map {try HwpNumbering.load($0.payload, version)}
-        bulletArray = try record.children.pop(bulletCount)
+        bulletArray = try childrenArray.pop(bulletCount)
             .map {try HwpBullet.load($0.payload)}
-        paraShapeArray = try record.children.pop(paraShapeCount)
+        paraShapeArray = try childrenArray.pop(paraShapeCount)
             .map {try HwpParaShape.load($0.payload, version)}
-        styleArray = try record.children.pop(styleCount)
+        styleArray = try childrenArray.pop(styleCount)
             .map {try HwpStyle.load($0.payload)}
 
         forbiddenCharArray = [HwpForbiddenChar]()
 
-        if record.children.isEmpty {
+        if childrenArray.isEmpty {
             return
         }
-        for child in record.children {
+        for child in childrenArray {
             switch child.tagId {
             case HwpDocInfoTag.forbiddenChar.rawValue:
                 forbiddenCharArray.append(try HwpForbiddenChar.load(child.payload))

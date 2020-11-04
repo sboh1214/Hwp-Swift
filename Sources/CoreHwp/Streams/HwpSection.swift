@@ -14,7 +14,7 @@ public struct HwpSection: HwpFromDataWithVersion {
         let records = parseTreeRecord(data: reader.readToEnd())
         paragraph = try records.children.map {record in
             precondition(record.tagId == HwpSectionTag.paraHeader.rawValue)
-            return try HwpParagraph(record, version)
+            return try HwpParagraph.load(record, version)
         }
     }
 }

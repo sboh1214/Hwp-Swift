@@ -4,13 +4,7 @@ public struct HwpGenShapeObject {
 }
 
 extension HwpGenShapeObject: HwpFromRecord {
-    init(_ record: HwpRecord) throws {
-        var reader = DataReader(record.payload)
-
+    init(_ reader: inout DataReader, _ children: [HwpRecord]) throws {
         commonCtrlProperty = try HwpCommonCtrlProperty(&reader)
-
-        if !reader.isEOF {
-            throw HwpError.dataIsNotEOF(model: self, remain: reader.remainBytes)
-        }
     }
 }

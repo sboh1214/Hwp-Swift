@@ -25,52 +25,52 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
         ctrlHeaderArray =  [HwpCtrlId]()
     }
 
-    init(_ record: HwpRecord, _ version: HwpVersion) throws {
-        paraHeader = try HwpParaHeader.load(record.payload, version)
+    init(_ reader: inout DataReader, _ children: [HwpRecord], _ version: HwpVersion) throws {
+        paraHeader = try HwpParaHeader.load(reader.readToEnd(), version)
 
-        if let paraText = record.children
+        if let paraText = children
             .first(where: {$0.tagId == HwpSectionTag.paraText.rawValue}) {
             self.paraText = try HwpParaText.load(paraText.payload)
         }
 
-        if let paraCharShape = record.children
+        if let paraCharShape = children
             .first(where: {$0.tagId == HwpSectionTag.paraCharShape.rawValue}) {
             self.paraCharShape = try HwpParaCharShape.load(paraCharShape.payload)
         }
 
-        paraLineSegArray = try record.children
+        paraLineSegArray = try children
             .filter {$0.tagId == HwpSectionTag.paraLineSeg.rawValue}
             .map {try HwpParaLineSeg.load($0.payload)}
 
-        paraRangeTagArray = try record.children
+        paraRangeTagArray = try children
             .filter {$0.tagId == HwpSectionTag.paraRangeTag.rawValue}
             .map {try HwpParaRangeTag.load($0.payload)}
 
-        ctrlHeaderArray = try record.children
+        ctrlHeaderArray = try children
             .filter {$0.tagId == HwpSectionTag.ctrlHeader.rawValue}
             .map {
                 var reader = DataReader($0.payload)
                 let ctrlId = reader.read(UInt32.self)
                 if let common = HwpCommonCtrlId.init(rawValue: ctrlId) {
                     if common == .table {
-                        return try .table(HwpTable($0, version))
+                        return try .table(HwpTable.load($0, version))
                     } else if common == .genShapeObject {
-                        return try .genShapeObject(HwpGenShapeObject($0))
+                        return try .genShapeObject(HwpGenShapeObject.load($0))
                     }
-                    return try .notImplemented(HwpCtrlHeader($0))
+                    return try .notImplemented(HwpCtrlHeader.load($0))
                 } else if let other = HwpOtherCtrlId.init(rawValue: ctrlId) {
                     if other == .column {
                         return try .column(HwpColumn.load($0.payload))
                     }
-                    return try .notImplemented(HwpCtrlHeader($0))
+                    return try .notImplemented(HwpCtrlHeader.load($0))
                 } else if HwpFieldCtrlId.init(rawValue: ctrlId) != nil {
-                    return try .notImplemented(HwpCtrlHeader($0))
+                    return try .notImplemented(HwpCtrlHeader.load($0))
                 } else {
                     throw HwpError.invalidCtrlId(ctrlId: 0)
                 }
             }
 
-        listHeaderArray = try record.children
+        listHeaderArray = try children
             .filter {$0.tagId == HwpSectionTag.listHeader.rawValue}
             .map { try HwpListHeader.load($0.payload)}
     }
