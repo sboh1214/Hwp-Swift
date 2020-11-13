@@ -20,6 +20,8 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
         ctrlHeaderArray =  [HwpCtrlId]()
     }
 
+    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable function_body_length
     init(_ reader: inout DataReader, _ children: [HwpRecord], _ version: HwpVersion) throws {
         paraHeader = try HwpParaHeader.load(reader.readToEnd(), version)
 
@@ -59,7 +61,12 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
                 } else if let other = HwpOtherCtrlId.init(rawValue: ctrlId) {
                     if other == .column {
                         return try .column(HwpColumn.load($0.payload))
+                    } else if other == .section {
+                        return try .section(HwpSectionDef.load($0, version))
+                    } else if other == .pageNumberPosition {
+                        return try .pageNumberPosition(HwpPageNumberPosition.load($0.payload))
                     }
+                    print(other)
                     return try .notImplemented(HwpCtrlHeader.load($0))
                 } else if HwpFieldCtrlId.init(rawValue: ctrlId) != nil {
                     return try .notImplemented(HwpCtrlHeader.load($0))

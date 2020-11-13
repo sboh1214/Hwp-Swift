@@ -68,6 +68,10 @@ extension StringProtocol {
     var asciiValues: [UInt8] { compactMap(\.asciiValue) }
 }
 
+extension WCHAR {
+    var character: Character { Character(UnicodeScalar(self)!) }
+}
+
 func getBitValue<T: BinaryInteger>(mask: T, start: Int, end: Int) -> T {
     let target = mask >> start
 
