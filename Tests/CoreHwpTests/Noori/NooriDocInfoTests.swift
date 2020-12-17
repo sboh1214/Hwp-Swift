@@ -2,13 +2,16 @@ import CoreHwp
 import XCTest
 
 final class NooriDocInfoTests: XCTestCase {
-    let hwp = openHwp(#file, "noori")
 
     func testSectionSize() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         XCTAssertEqual(hwp.docInfo.documentProperties.sectionSize, 1)
     }
 
     func testStartingIndex() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         let index = hwp.docInfo.documentProperties.startingIndex
         XCTAssertEqual(index.page, 1)
         XCTAssertEqual(index.footnote, 1)
@@ -19,6 +22,8 @@ final class NooriDocInfoTests: XCTestCase {
     }
 
     func testCaratLocation() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         let location = hwp.docInfo.documentProperties.caratLocation
         XCTAssertEqual(location.listId, 11)
         XCTAssertEqual(location.paragraphId, 2)
@@ -26,6 +31,8 @@ final class NooriDocInfoTests: XCTestCase {
     }
 
     func testBinData() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         let bin = hwp.docInfo.idMappings.binDataArray
         XCTAssertEqual(bin[0].extensionName!.string, "jpg")
         XCTAssertEqual(bin[1].extensionName!.string, "bmp")
@@ -34,6 +41,8 @@ final class NooriDocInfoTests: XCTestCase {
     }
 
     func testFaceName() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         let korean = hwp.docInfo.idMappings.faceNameKoreanArray
         XCTAssertEqual(korean[0].faceName, "굴림")
         XCTAssertEqual(korean[0].alternativeFaceName, nil)
@@ -50,11 +59,15 @@ final class NooriDocInfoTests: XCTestCase {
     }
 
     func testBorderFill() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         let border = hwp.docInfo.idMappings.borderFillArray
         XCTAssertEqual(border[0].borderColor[0], HwpColor(0, 0, 0))
     }
 
     func testCharShape() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         let char = hwp.docInfo.idMappings.charShapeArray
         XCTAssertEqual(char[0].property, 0)
         XCTAssertEqual(char[0].faceColor, HwpColor(0, 0, 0))
@@ -72,6 +85,8 @@ final class NooriDocInfoTests: XCTestCase {
     }
 
     func testTabDef() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         let shape = hwp.docInfo.idMappings.paraShapeArray
         XCTAssertEqual(shape[0].property1, 128)
         XCTAssertEqual(shape[46].property1, 268)
@@ -82,6 +97,8 @@ final class NooriDocInfoTests: XCTestCase {
     }
 
     func testCompatibleDocument() throws {
+        let hwp = try openHwp(#file, "noori")
+        
         let compatible = hwp.docInfo.compatibleDocument
         XCTAssertEqual(compatible!.targetDocument, 0)
         XCTAssertEqual(compatible!.layoutCompatibility!.char, 0)

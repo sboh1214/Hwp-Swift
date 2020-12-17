@@ -32,38 +32,6 @@ public typealias HWPUNIT16 = Int16
  */
 public typealias COLORREF = UInt32
 
-// Data to [bytes]
-extension Data {
-    var bytes: [UInt8] {
-        [UInt8](self)
-    }
-
-    var bits: [Bool] {
-        reduce([Bool]()) { $0 + $1.bits }
-    }
-
-    var stringASCII: String? {
-        String(data: self, encoding: .ascii)
-    }
-}
-
-extension UInt8 {
-    var bits: [Bool] {
-        var byte = self
-        var bits = [Bool](repeating: false, count: 8)
-        for index in 0 ..< 8 {
-            let currentBit = byte & 0x01
-            if currentBit != 0 {
-                bits[index] = true
-            }
-
-            byte >>= 1
-        }
-
-        return bits
-    }
-}
-
 extension StringProtocol {
     var asciiValues: [UInt8] { compactMap(\.asciiValue) }
 }

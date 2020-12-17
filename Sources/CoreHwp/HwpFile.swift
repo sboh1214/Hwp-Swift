@@ -27,10 +27,10 @@ public struct HwpFile: HwpPrimitive {
         let fileHeader = try HwpFileHeader.load(reader.getDataFromStream(.fileHeader, false))
         self.fileHeader = fileHeader
 
-        let docInfoData = try reader.getDataFromStream(.docInfo, fileHeader.isCompressed)
+        let docInfoData = try reader.getDataFromStream(.docInfo, fileHeader.fileProperty.isCompressed)
         docInfo = try HwpDocInfo.load(docInfoData, fileHeader.version)
 
-        sectionArray = try reader.getDataFromStorage(.bodyText, fileHeader.isCompressed)
+        sectionArray = try reader.getDataFromStorage(.bodyText, fileHeader.fileProperty.isCompressed)
             .map {try HwpSection.load($0, fileHeader.version)}
 
         guard let previewTextStream = streams[HwpStreamName.previewText.rawValue] else {

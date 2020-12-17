@@ -26,9 +26,19 @@ let package = Package(
                 .copy("Blank/blank-mac2014vp.hwp"),
                 .copy("Blank/blank-win2018.hwp"),
                 .copy("Blank/blank-win2020.hwp"),
+
                 .copy("Noori/noori.hwp"),
+
                 .copy("Versions/2007.hwp"),
-                .copy("Versions/2014VP.hwp")
+                .copy("Versions/2014VP.hwp"),
+                
+                .copy("FileHeader/변경내용추적.hwp"),
+                .copy("FileHeader/문서암호설정-보안수준보통.hwp"),
+                .copy("FileHeader/문서암호설정-보안수준높음.hwp"),
+                .copy("FileHeader/공공누리.hwp"),
+                .copy("FileHeader/문서이력관리.hwp"),
+                .copy("FileHeader/배포용문서.hwp"),
+                .copy("FileHeader/CCL.hwp"),
             ]
         )
     ]
