@@ -9,6 +9,17 @@ final class HwpUtilTests: XCTestCase {
         XCTAssertEqual(bits, byte.bits)
     }
 
+    func testUInt32ToBits() {
+        let uint32 = UInt32(1)
+        let bits = [true] + Array(repeating: false, count: 31)
+        XCTAssertEqual(uint32.bits, bits)
+    }
+
+    func testGetBitValue() {
+        XCTAssertEqual(2, getBitValue(1024, 9, 10))
+        XCTAssertEqual(4, getBitValue(1024, 8, 10))
+    }
+
     func testCompressUncompress() throws {
         let testData = "Hello World".data(using: .utf16LittleEndian)!
 

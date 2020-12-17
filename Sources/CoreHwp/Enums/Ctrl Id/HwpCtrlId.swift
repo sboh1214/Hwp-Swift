@@ -3,7 +3,9 @@ public enum HwpCtrlId {
     case table(HwpTable)
     case genShapeObject(HwpGenShapeObject)
     // other
+    case section(HwpSectionDef)
     case column(HwpColumn)
+    case pageNumberPosition(HwpPageNumberPosition)
     // field
     // not implemented
     case notImplemented(HwpCtrlHeader)
@@ -12,7 +14,7 @@ public enum HwpCtrlId {
 extension HwpCtrlId: HwpPrimitive {
     enum CodingKeys: CodingKey {
         case table, genShapeObject
-        case column
+        case section, column, pageNumberPosition
         case notImplemented
     }
 
@@ -29,20 +31,19 @@ extension HwpCtrlId: HwpPrimitive {
                 HwpGenShapeObject.self, forKey: .genShapeObject
             )
             self = .genShapeObject(hwpGenShapeObject)
+        case .section:
+            let hwpCtrlSection = try container.decode(HwpSectionDef.self, forKey: .section)
+            self = .section(hwpCtrlSection)
         case .column:
             let hwpColumn = try container.decode(HwpColumn.self, forKey: .column)
             self = .column(hwpColumn)
+        case .pageNumberPosition:
+            let hwp = try container.decode(HwpPageNumberPosition.self, forKey: .pageNumberPosition)
+            self = .pageNumberPosition(hwp)
         case .notImplemented:
             let hwpCtrlHeader = try container.decode(HwpCtrlHeader.self, forKey: .notImplemented)
             self = .notImplemented(hwpCtrlHeader)
         case .none:
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(
-                    codingPath: container.codingPath,
-                    debugDescription: "Unabled to decode enum."
-                )
-            )
-        @unknown default:
             throw DecodingError.dataCorrupted(
                 DecodingError.Context(
                     codingPath: container.codingPath,
@@ -60,8 +61,12 @@ extension HwpCtrlId: HwpPrimitive {
             try container.encode(hwpTable, forKey: .table)
         case .genShapeObject(let hwpGenShapeObject):
             try container.encode(hwpGenShapeObject, forKey: .genShapeObject)
+        case .section(let hwpCtrlSection):
+            try container.encode(hwpCtrlSection, forKey: .section)
         case .column(let hwpColumn):
             try container.encode(hwpColumn, forKey: .column)
+        case .pageNumberPosition(let hwp):
+            try container.encode(hwp, forKey: .pageNumberPosition)
         case .notImplemented(let hwpCtrlHeader):
             try container.encode(hwpCtrlHeader, forKey: .notImplemented)
         }

@@ -9,7 +9,8 @@ public enum HwpError: Error {
     case invalidFileHeaderSignature(signature: String)
     case unidentifiedTag(tagId: UInt32)
     case invalidCtrlId(ctrlId: UInt32)
-    case dataIsNotEOF(model: Any, remain: Int)
+    case bytesAreNotEOF(model: Any, remain: Int)
+    case bitsAreNotEOF(model: Any, remain: Int)
 }
 
 extension HwpError: CustomStringConvertible {
@@ -36,9 +37,12 @@ extension HwpError: CustomStringConvertible {
             return "Cannot Read HwpRecord Tag : '\(tagId)'"
         case let .invalidCtrlId(ctrlId):
             return "Invalid Ctrl Id in HwpParagraph : '\(ctrlId)'"
-        case let .dataIsNotEOF(model, remain):
+        case let .bytesAreNotEOF(model, remain):
             let typeOfModel = String(describing: type(of: model))
-            return "Data is not EOF : \(remain) bytes remain in \(typeOfModel)"
+            return "Bytes are not EOF : \(remain) bytes remain in \(typeOfModel)"
+        case let .bitsAreNotEOF(model, remain):
+            let typeOfModel = String(describing: type(of: model))
+            return "Bits are not EOF : \(remain) bits remain in \(typeOfModel)"
         }
     }
 }
