@@ -1,13 +1,6 @@
 repos:
   - repo: local
     hooks:
-      - id: swift-lint
-        name: swift-lint
-        entry: swiftlint
-        language: system
-        files: '\.swift$'
-        pass_filenames: false
-
       - id: markdown-lint
         name: markdown-lint
         entry: mdl
@@ -15,13 +8,12 @@ repos:
         files: '\.md$'
         pass_filenames: false
 
-      # - id: generate
-      #   name: swift-generate
-      #   entry: swift test --generate-linuxmain
-      #   language: system
-      #   files: '\.swift$'
-      #   pass_filenames: false
-      #   modifiable: true
+      - id: swift-lint
+        name: swift-lint
+        entry: swiftlint
+        language: system
+        files: '\.swift$'
+        pass_filenames: false
 
       - id: swift-test
         name: swift-test
