@@ -19,13 +19,13 @@ class Create2018Tests: XCTestCase {
 
     func testfileHeader() throws {
         let (official, this) = try createHwp(#file, "blank-win2018")
-        
+
         XCTAssertEqual(official.fileHeader, this.fileHeader)
     }
 
     func testDocInfo() throws {
         let (official, this) = try createHwp(#file, "blank-win2018")
-        
+
         XCTAssertEqual(official.docInfo.documentProperties, this.docInfo.documentProperties)
         XCTAssertEqual(official.docInfo.compatibleDocument, this.docInfo.compatibleDocument)
 
@@ -52,7 +52,7 @@ class Create2018Tests: XCTestCase {
 
     func testSectionArray() throws {
         let (official, this) = try createHwp(#file, "blank-win2018")
-        
+
         XCTAssertEqual(official.sectionArray.count, this.sectionArray.count)
 
         // XCTAssertEqual(expected.sectionArray, actual.sectionArray)

@@ -13,13 +13,13 @@ final class Create2014Tests: XCTestCase {
 
     func testfileHeader() throws {
         let (official, this) = try createHwp(#file, "blank-mac2014vp")
-        
+
         XCTAssertEqual(official.fileHeader, this.fileHeader)
     }
 
     func testDocInfo() throws {
         let (official, this) = try createHwp(#file, "blank-mac2014vp")
-        
+
         XCTAssertEqual(official.docInfo.documentProperties, this.docInfo.documentProperties)
         XCTAssertEqual(official.docInfo.compatibleDocument, this.docInfo.compatibleDocument)
         let officialMappings = official.docInfo.idMappings
@@ -35,7 +35,7 @@ final class Create2014Tests: XCTestCase {
 
     func testSectionArray() throws {
         let (official, this) = try createHwp(#file, "blank-mac2014vp")
-        
+
         XCTAssertEqual(official.sectionArray.count, this.sectionArray.count)
 
         //XCTAssertEqual(official.sectionArray, this.sectionArray)

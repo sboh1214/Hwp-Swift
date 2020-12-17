@@ -1,8 +1,6 @@
 import Foundation
-import XCTest
 import CoreHwp
 
-//swiftlint:disable force_try
 func openHwp(_ location: String, _ name: String) throws -> HwpFile {
     let url = URL(fileURLWithPath: location)
         .deletingLastPathComponent()
@@ -18,4 +16,3 @@ func createHwp(_ location: String, _ name: String) throws -> (HwpFile, HwpFile) 
     let this = HwpFile()
     return (official, this)
 }
-//swiftlint:enable force_try

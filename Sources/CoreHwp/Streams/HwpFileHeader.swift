@@ -13,11 +13,11 @@ public struct HwpFileHeader: HwpFromData {
      */
     public var signature: String
     public var version: HwpVersion
-    
+
     public var fileProperty: HwpFileProperty
-    
+
     public var fileLicense: HwpFileLicense
-    
+
     /**
      EncryptVersion
      - 0 : None
@@ -29,7 +29,7 @@ public struct HwpFileHeader: HwpFromData {
     public var encryptVersion: UInt32
     /**공공누리 Korea Open Government License*/
     public var koreaOpenLicense: UInt8
-    
+
     init(_ reader: inout DataReader) throws {
         let signatureData = reader.readBytes(32)
         guard let signature = signatureData.stringASCII else {
@@ -39,15 +39,15 @@ public struct HwpFileHeader: HwpFromData {
         if signature != "HWP Document File\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0" {
             throw HwpError.invalidFileHeaderSignature(signature: signature)
         }
-        
+
         version = try HwpVersion.load(reader.readBytes(4))
-        
+
         fileProperty = try HwpFileProperty.load(reader.read(DWORD.self))
         fileLicense = try HwpFileLicense.load(reader.read(DWORD.self))
-        
+
         encryptVersion = reader.read(UInt32.self)
         koreaOpenLicense = reader.read(UInt8.self)
-        
+
         reader.readBytes(207)
     }
 }
@@ -59,7 +59,7 @@ extension HwpFileHeader {
 
         fileProperty = HwpFileProperty()
         fileLicense = HwpFileLicense()
-        
+
         encryptVersion = 4
         koreaOpenLicense = 0
     }

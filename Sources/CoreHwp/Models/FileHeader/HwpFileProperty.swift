@@ -37,7 +37,7 @@ public struct HwpFileProperty {
     public var doesHaveVideoControl: Bool
     /**차례 필드 컨트롤 포함 여부*/
     public var doesHaveTOCFieldControl: Bool
-    
+
     var unused: [Bool]
 }
 
@@ -61,7 +61,7 @@ extension HwpFileProperty: HwpFromUInt32 {
         isKOGLDocument = reader.readBit()
         doesHaveVideoControl = reader.readBit()
         doesHaveTOCFieldControl = reader.readBit()
-        
+
         unused = reader.readBits(14)
     }
 }
@@ -86,7 +86,7 @@ extension HwpFileProperty {
         isKOGLDocument = false
         doesHaveVideoControl = false
         doesHaveTOCFieldControl = false
-        
+
         unused = Array(repeating: false, count: 14)
     }
 }

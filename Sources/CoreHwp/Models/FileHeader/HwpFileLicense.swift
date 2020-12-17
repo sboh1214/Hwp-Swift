@@ -11,7 +11,7 @@ public struct HwpFileLicense {
      복제 제한인 경우 무시
      */
     public var doesHavePermission: Bool
-    
+
     var unused: [Bool]
 }
 
@@ -20,7 +20,7 @@ extension HwpFileLicense: HwpFromUInt32 {
         doesHaveKoreaOpenLicense = reader.readBit()
         doesLimitReplication = reader.readBit()
         doesHavePermission = reader.readBit()
-        
+
         unused = reader.readBits(29)
     }
 }
@@ -30,7 +30,7 @@ extension HwpFileLicense {
         doesHaveKoreaOpenLicense = false
         doesLimitReplication = false
         doesHavePermission = false
-        
+
         unused = Array(repeating: false, count: 29)
     }
 }

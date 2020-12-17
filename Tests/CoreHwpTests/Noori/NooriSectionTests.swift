@@ -5,7 +5,7 @@ final class NooriSectionTests: XCTestCase {
 
     func testParagraph() throws {
         let hwp = try openHwp(#file, "noori")
-        
+
         for index in 0...20 {
             XCTAssertNotNil(hwp.sectionArray[0].paragraph[index])
         }
@@ -13,7 +13,7 @@ final class NooriSectionTests: XCTestCase {
 
     func testParaText() throws {
         let hwp = try openHwp(#file, "noori")
-        
+
         let text = hwp.sectionArray[0].paragraph[0].paraText
         XCTAssertEqual(text!.charArray[0].type, .extended)
         XCTAssertEqual(text!.charArray[3].type, .char)
@@ -29,7 +29,7 @@ final class NooriSectionTests: XCTestCase {
 
     func testParaCharShape() throws {
         let hwp = try openHwp(#file, "noori")
-        
+
         XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape.startingIndex[0], 0)
         XCTAssertEqual(hwp.sectionArray[0].paragraph[0].paraCharShape.shapeId[0], 19)
         XCTAssertEqual(hwp.sectionArray[0].paragraph[20].paraCharShape.startingIndex[0], 0)
@@ -38,7 +38,7 @@ final class NooriSectionTests: XCTestCase {
 
     func testParaLineSeg() throws {
         let hwp = try openHwp(#file, "noori")
-        
+
         let seg0 = hwp.sectionArray[0].paragraph[0].paraLineSeg.paraLineSegInternalArray[0]
         XCTAssertEqual(seg0.textStartingIndex, 0)
         XCTAssertEqual(seg0.lineLocation, 0)
@@ -54,7 +54,7 @@ final class NooriSectionTests: XCTestCase {
 
     func testTable() throws {
         let hwp = try openHwp(#file, "noori")
-        
+
         switch hwp.sectionArray[0].paragraph[1].ctrlHeaderArray![0] {
         case .table(let hwpTable):
             XCTAssertEqual(hwpTable.commonCtrlProperty.verticalOffset, 0)
@@ -69,7 +69,7 @@ final class NooriSectionTests: XCTestCase {
 
     func testGenShapeObject() throws {
         let hwp = try openHwp(#file, "noori")
-        
+
         switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![2] {
         case .genShapeObject(let hwpGenShapeObject):
             XCTAssertEqual(hwpGenShapeObject.commonCtrlProperty.verticalOffset, 0)
@@ -84,7 +84,7 @@ final class NooriSectionTests: XCTestCase {
 
     func testColumn() throws {
         let hwp = try openHwp(#file, "noori")
-        
+
         switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![1] {
         case .column(let hwpColumn):
             XCTAssertEqual(hwpColumn.widthArray.count, 1)
