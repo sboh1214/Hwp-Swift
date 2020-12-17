@@ -26,7 +26,7 @@ public struct HwpFile: HwpPrimitive {
 
         let fileHeader = try HwpFileHeader.load(reader.getDataFromStream(.fileHeader, false))
         self.fileHeader = fileHeader
-        
+
         let isCompressed = fileHeader.fileProperty.isCompressed
 
         let docInfoData = try reader.getDataFromStream(.docInfo, isCompressed)
