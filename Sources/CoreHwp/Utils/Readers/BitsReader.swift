@@ -30,3 +30,15 @@ struct BitsReader {
         return Array(bits[offset..<(offset+count)])
     }
 }
+
+func getBitValue<T: BinaryInteger>(mask: T, start: Int, end: Int) -> T {
+    let target = mask >> start
+
+    var temp: T = 0
+    for _ in 0...(end - start) {
+        temp <<= 1
+        temp += 1
+    }
+
+    return target & temp
+}
