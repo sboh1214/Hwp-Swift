@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Hwp-Swift",
     products: [
-        .library(name: "Core Hwp", targets: ["CoreHwp"])
+        .library(name: "CoreHwp", targets: ["CoreHwp"])
     ],
     dependencies: [
         .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.2.0")),
