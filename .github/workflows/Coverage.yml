@@ -12,9 +12,6 @@ on:
     paths:
       - '**.swift'
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_12.app/Contents/Developer
-
 jobs:
   coverage:
     runs-on: macos-latest
