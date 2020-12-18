@@ -1,11 +1,5 @@
-//
-//  afds.swift
-//  HwpKitFrameworkTests
-//
-//  Created by Seungbin Oh on 2020/10/12.
-//
-
 import XCTest
+import Nimble
 
 /**
  doc  version : 5.1.0.1.1
@@ -14,47 +8,47 @@ import XCTest
 class Create2018Tests: XCTestCase {
 
     func testCreate() throws {
-        // XCTAssertEqual(expected, actual)
+        // expect(expected, actual)
     }
 
     func testfileHeader() throws {
         let (official, this) = try createHwp(#file, "blank-win2018")
 
-        XCTAssertEqual(official.fileHeader, this.fileHeader)
+        expect(official.fileHeader) == this.fileHeader
     }
 
     func testDocInfo() throws {
         let (official, this) = try createHwp(#file, "blank-win2018")
 
-        XCTAssertEqual(official.docInfo.documentProperties, this.docInfo.documentProperties)
-        XCTAssertEqual(official.docInfo.compatibleDocument, this.docInfo.compatibleDocument)
+        expect(official.docInfo.documentProperties) == this.docInfo.documentProperties
+        expect(official.docInfo.compatibleDocument) == this.docInfo.compatibleDocument
 
         let expectedMappings = official.docInfo.idMappings
         let actualMappings = this.docInfo.idMappings
 
-        XCTAssertEqual(expectedMappings.faceNameKoreanArray, actualMappings.faceNameKoreanArray)
-        XCTAssertEqual(expectedMappings.faceNameEnglishArray, actualMappings.faceNameEnglishArray)
-        XCTAssertEqual(expectedMappings.faceNameChineseArray, actualMappings.faceNameChineseArray)
-        XCTAssertEqual(expectedMappings.faceNameJapaneseArray, actualMappings.faceNameJapaneseArray)
-        XCTAssertEqual(expectedMappings.faceNameEtcArray, actualMappings.faceNameEtcArray)
-        XCTAssertEqual(expectedMappings.faceNameSymbolArray, actualMappings.faceNameSymbolArray)
-        XCTAssertEqual(expectedMappings.faceNameUserArray, actualMappings.faceNameUserArray)
+        expect(expectedMappings.faceNameKoreanArray) == actualMappings.faceNameKoreanArray
+        expect(expectedMappings.faceNameEnglishArray) == actualMappings.faceNameEnglishArray
+        expect(expectedMappings.faceNameChineseArray) == actualMappings.faceNameChineseArray
+        expect(expectedMappings.faceNameJapaneseArray) == actualMappings.faceNameJapaneseArray
+        expect(expectedMappings.faceNameEtcArray) == actualMappings.faceNameEtcArray
+        expect(expectedMappings.faceNameSymbolArray) == actualMappings.faceNameSymbolArray
+        expect(expectedMappings.faceNameUserArray) == actualMappings.faceNameUserArray
 
-        XCTAssertEqual(expectedMappings.borderFillArray, actualMappings.borderFillArray)
-        XCTAssertEqual(expectedMappings.charShapeArray, actualMappings.charShapeArray)
-        XCTAssertEqual(expectedMappings.tabDefArray, actualMappings.tabDefArray)
-        XCTAssertEqual(expectedMappings.numberingArray, actualMappings.numberingArray)
-        XCTAssertEqual(expectedMappings.paraShapeArray, actualMappings.paraShapeArray)
-        XCTAssertEqual(expectedMappings.styleArray, actualMappings.styleArray)
+        expect(expectedMappings.borderFillArray) == actualMappings.borderFillArray
+        expect(expectedMappings.charShapeArray) == actualMappings.charShapeArray
+        expect(expectedMappings.tabDefArray) == actualMappings.tabDefArray
+        expect(expectedMappings.numberingArray) == actualMappings.numberingArray
+        expect(expectedMappings.paraShapeArray) == actualMappings.paraShapeArray
+        expect(expectedMappings.styleArray) == actualMappings.styleArray
 
-        //XCTAssertEqual(expected.docInfo, actual.docInfo)
+        // expect(expected.docInfo, actual.docInfo)
     }
 
     func testSectionArray() throws {
         let (official, this) = try createHwp(#file, "blank-win2018")
 
-        XCTAssertEqual(official.sectionArray.count, this.sectionArray.count)
+        expect(official.sectionArray.count) == this.sectionArray.count
 
-        // XCTAssertEqual(expected.sectionArray, actual.sectionArray)
+        // expect(expected.sectionArray, actual.sectionArray)
     }
 }

@@ -1,110 +1,112 @@
-import CoreHwp
 import XCTest
+import Nimble
+
+import CoreHwp
 
 final class NooriDocInfoTests: XCTestCase {
 
     func testSectionSize() throws {
         let hwp = try openHwp(#file, "noori")
 
-        XCTAssertEqual(hwp.docInfo.documentProperties.sectionSize, 1)
+        expect(hwp.docInfo.documentProperties.sectionSize) == 1
     }
 
     func testStartingIndex() throws {
         let hwp = try openHwp(#file, "noori")
 
         let index = hwp.docInfo.documentProperties.startingIndex
-        XCTAssertEqual(index.page, 1)
-        XCTAssertEqual(index.footnote, 1)
-        XCTAssertEqual(index.endnote, 1)
-        XCTAssertEqual(index.picture, 1)
-        XCTAssertEqual(index.table, 1)
-        XCTAssertEqual(index.equation, 1)
+        expect(index.page) == 1
+        expect(index.footnote) == 1
+        expect(index.endnote) == 1
+        expect(index.picture) == 1
+        expect(index.table) == 1
+        expect(index.equation) == 1
     }
 
     func testCaratLocation() throws {
         let hwp = try openHwp(#file, "noori")
 
         let location = hwp.docInfo.documentProperties.caratLocation
-        XCTAssertEqual(location.listId, 11)
-        XCTAssertEqual(location.paragraphId, 2)
-        XCTAssertEqual(location.charIndex, 14)
+        expect(location.listId) == 11
+        expect(location.paragraphId) == 2
+        expect(location.charIndex) == 14
     }
 
     func testBinData() throws {
         let hwp = try openHwp(#file, "noori")
 
         let bin = hwp.docInfo.idMappings.binDataArray
-        XCTAssertEqual(bin[0].extensionName!.string, "jpg")
-        XCTAssertEqual(bin[1].extensionName!.string, "bmp")
-        XCTAssertEqual(bin[2].extensionName!.string, "bmp")
-        XCTAssertEqual(bin[3].extensionName!.string, "jpg")
+        expect(bin[0].extensionName!.string) == "jpg"
+        expect(bin[1].extensionName!.string) == "bmp"
+        expect(bin[2].extensionName!.string) == "bmp"
+        expect(bin[3].extensionName!.string) == "jpg"
     }
 
     func testFaceName() throws {
         let hwp = try openHwp(#file, "noori")
 
         let korean = hwp.docInfo.idMappings.faceNameKoreanArray
-        XCTAssertEqual(korean[0].faceName, "굴림")
-        XCTAssertEqual(korean[0].alternativeFaceName, nil)
-        XCTAssertEqual(korean[0].defaultFaceName!, "Gulim")
+        expect(korean[0].faceName) == "굴림"
+        expect(korean[0].alternativeFaceName).to(beNil())
+        expect(korean[0].defaultFaceName!) == "Gulim"
 
-        XCTAssertEqual(korean[1].faceName, "굴림체")
-        XCTAssertEqual(korean[1].alternativeFaceName, nil)
-        XCTAssertEqual(korean[1].defaultFaceName!, "GulimChe")
+        expect(korean[1].faceName) == "굴림체"
+        expect(korean[1].alternativeFaceName).to(beNil())
+        expect(korean[1].defaultFaceName!) == "GulimChe"
 
         let user = hwp.docInfo.idMappings.faceNameUserArray
-        XCTAssertEqual(user[10].faceName, "Myeongjo")
-        XCTAssertEqual(user[10].alternativeFaceName!, "명조")
-        XCTAssertEqual(user[10].defaultFaceName, nil)
+        expect(user[10].faceName) == "Myeongjo"
+        expect(user[10].alternativeFaceName!) == "명조"
+        expect(user[10].defaultFaceName).to(beNil())
     }
 
     func testBorderFill() throws {
         let hwp = try openHwp(#file, "noori")
 
         let border = hwp.docInfo.idMappings.borderFillArray
-        XCTAssertEqual(border[0].borderColor[0], HwpColor(0, 0, 0))
+        expect(border[0].borderColor[0]) == HwpColor(0, 0, 0)
     }
 
     func testCharShape() throws {
         let hwp = try openHwp(#file, "noori")
 
         let char = hwp.docInfo.idMappings.charShapeArray
-        XCTAssertEqual(char[0].property, 0)
-        XCTAssertEqual(char[0].faceColor, HwpColor(0, 0, 0))
-        XCTAssertEqual(char[0].borderFillId, 2)
-        XCTAssertEqual(char[0].faceId, [5, 5, 5, 5, 5, 5, 5])
-        XCTAssertEqual(char[0].faceLocation, [0, 0, 0, 0, 0, 0, 0])
-        XCTAssertEqual(char[0].faceRelativeSize, Array(repeating: 100, count: 7))
-        XCTAssertEqual(char[0].faceScaleX, Array(repeating: 100, count: 7))
-        XCTAssertEqual(char[0].shadeColor, HwpColor(255, 255, 255))
-        XCTAssertEqual(char[0].shadowColor, HwpColor(178, 178, 178))
-        XCTAssertEqual(char[0].underlineColor, HwpColor(0, 0, 0))
-        XCTAssertEqual(char[0].strikethroughColor!, HwpColor(0, 0, 0))
+        expect(char[0].property) == 0
+        expect(char[0].faceColor) == HwpColor(0, 0, 0)
+        expect(char[0].borderFillId) == 2
+        expect(char[0].faceId) == [5, 5, 5, 5, 5, 5, 5]
+        expect(char[0].faceLocation) == [0, 0, 0, 0, 0, 0, 0]
+        expect(char[0].faceRelativeSize) == Array(repeating: 100, count: 7)
+        expect(char[0].faceScaleX) == Array(repeating: 100, count: 7)
+        expect(char[0].shadeColor) == HwpColor(255, 255, 255)
+        expect(char[0].shadowColor) == HwpColor(178, 178, 178)
+        expect(char[0].underlineColor) == HwpColor(0, 0, 0)
+        expect(char[0].strikethroughColor!) == HwpColor(0, 0, 0)
 
-        XCTAssertEqual(char[58].property, 2)
+        expect(char[58].property) == 2
     }
 
     func testTabDef() throws {
         let hwp = try openHwp(#file, "noori")
 
         let shape = hwp.docInfo.idMappings.paraShapeArray
-        XCTAssertEqual(shape[0].property1, 128)
-        XCTAssertEqual(shape[46].property1, 268)
+        expect(shape[0].property1) == 128
+        expect(shape[46].property1) == 268
     }
 
     func testCtrlHeader() throws {
-        // XCTAssertEqual(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].ctrlId, 1885826672)
+        // expect(hwp.sectionArray[0].paragraph[2].ctrlHeaderArray![0].ctrlId) == 1885826672)
     }
 
     func testCompatibleDocument() throws {
         let hwp = try openHwp(#file, "noori")
 
         let compatible = hwp.docInfo.compatibleDocument
-        XCTAssertEqual(compatible!.targetDocument, 0)
-        XCTAssertEqual(compatible!.layoutCompatibility!.char, 0)
-        XCTAssertEqual(compatible!.layoutCompatibility!.paragraph, 0)
-        XCTAssertEqual(compatible!.layoutCompatibility!.section, 0)
-        XCTAssertEqual(compatible!.layoutCompatibility!.object, 0)
-        XCTAssertEqual(compatible!.layoutCompatibility!.field, 0)
+        expect(compatible!.targetDocument) == 0
+        expect(compatible!.layoutCompatibility!.char) == 0
+        expect(compatible!.layoutCompatibility!.paragraph) == 0
+        expect(compatible!.layoutCompatibility!.section) == 0
+        expect(compatible!.layoutCompatibility!.object) == 0
+        expect(compatible!.layoutCompatibility!.field) == 0
     }
 }

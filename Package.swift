@@ -9,7 +9,9 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.2.0")),
-        .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.5.7"))
+        .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.5.7")),
+
+        .package(url: "https://github.com/Quick/Nimble", .exact("9.0.0"))
     ],
     targets: [
         .target(
@@ -21,7 +23,10 @@ let package = Package(
         ),
         .testTarget(
             name: "CoreHwpTests",
-            dependencies: ["CoreHwp"],
+            dependencies: [
+                "CoreHwp",
+                "Nimble"
+            ],
             resources: [
                 .copy("Blank/blank-mac2014vp.hwp"),
                 .copy("Blank/blank-win2018.hwp"),
