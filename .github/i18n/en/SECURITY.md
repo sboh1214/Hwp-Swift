@@ -1,6 +1,8 @@
-# 보안 정책
+# Security Policy
 
-## 알려진 이슈
+> This document might be outdated. Please make a Issue.
+
+## Known Issues
 
 - < 0.4.1
  HwpFile > docInfo > idMappings > faceNameKorean(Count/Array) 누락
@@ -9,7 +11,7 @@
 Below is Template
 ```
 
-## 지원 버전
+## Supported Versions
 
 Use this section to tell people about which versions of your project are
 currently being supported with security updates.
@@ -21,7 +23,7 @@ currently being supported with security updates.
 | 4.0.x   | :white_check_mark: |
 | < 4.0   | :x:                |
 
-## 취약점 제보
+## Reporting a Vulnerability
 
 Use this section to tell people how to report a vulnerability.
 
