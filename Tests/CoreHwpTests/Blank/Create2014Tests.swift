@@ -1,5 +1,5 @@
-import CoreHwp
 import XCTest
+import Nimble
 
 /**
  doc version : unknown
@@ -8,36 +8,37 @@ import XCTest
 final class Create2014Tests: XCTestCase {
 
     func testCreate() throws {
-        // XCTAssertEqual(expected, actual)
+        // expect(expected, actual)
     }
 
     func testfileHeader() throws {
         let (official, this) = try createHwp(#file, "blank-mac2014vp")
 
-        XCTAssertEqual(official.fileHeader, this.fileHeader)
+        expect(this.fileHeader) == official.fileHeader
     }
 
     func testDocInfo() throws {
         let (official, this) = try createHwp(#file, "blank-mac2014vp")
 
-        XCTAssertEqual(official.docInfo.documentProperties, this.docInfo.documentProperties)
-        XCTAssertEqual(official.docInfo.compatibleDocument, this.docInfo.compatibleDocument)
+        expect(official.docInfo.documentProperties) == this.docInfo.documentProperties
+        expect(official.docInfo.compatibleDocument) == this.docInfo.compatibleDocument
+
         let officialMappings = official.docInfo.idMappings
         let thisMappings = this.docInfo.idMappings
-        // XCTAssertEqual(expectedMappings.faceNameArray, actualMappings.faceNameArray)
-        XCTAssertEqual(officialMappings.borderFillArray, thisMappings.borderFillArray)
-        // XCTAssertEqual(officialMappings.charShapeArray, thisMappings.charShapeArray)
-        XCTAssertEqual(officialMappings.paraShapeArray, thisMappings.paraShapeArray)
-        XCTAssertEqual(officialMappings.forbiddenCharArray, thisMappings.forbiddenCharArray)
+        // expect(expectedMappings.faceNameArray) == actualMappings.faceNameArray
+        expect(officialMappings.borderFillArray) == thisMappings.borderFillArray
+        // expect(officialMappings.charShapeArray) == thisMappings.charShapeArray
+        expect(officialMappings.paraShapeArray) == thisMappings.paraShapeArray
+        expect(officialMappings.forbiddenCharArray) == thisMappings.forbiddenCharArray
 
-        // XCTAssertEqual(expected.docInfo, actual.docInfo)
+        // expect(expected.docInfo, actual.docInfo)
     }
 
     func testSectionArray() throws {
         let (official, this) = try createHwp(#file, "blank-mac2014vp")
 
-        XCTAssertEqual(official.sectionArray.count, this.sectionArray.count)
+        expect(official.sectionArray.count) == this.sectionArray.count
 
-        //XCTAssertEqual(official.sectionArray, this.sectionArray)
+        // expect(official.sectionArray, this.sectionArray)
     }
 }

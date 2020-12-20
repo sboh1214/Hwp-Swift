@@ -1,4 +1,6 @@
 import XCTest
+import Nimble
+
 @testable import CoreHwp
 import SWCompression
 
@@ -6,18 +8,18 @@ final class HwpUtilTests: XCTestCase {
     func testBitsFromInt8() {
         let byte = UInt8(0x4A)
         let bits = [false, true, false, false, true, false, true, false].reversed() as [Bool]
-        XCTAssertEqual(bits, byte.bits)
+        expect(bits) == byte.bits
     }
 
     func testUInt32ToBits() {
         let uint32 = UInt32(1)
         let bits = [true] + Array(repeating: false, count: 31)
-        XCTAssertEqual(uint32.bits, bits)
+        expect(uint32.bits) == bits
     }
 
     func testGetBitValue() {
-        XCTAssertEqual(2, getBitValue(1024, 9, 10))
-        XCTAssertEqual(4, getBitValue(1024, 8, 10))
+        expect(2) == getBitValue(1024, 9, 10)
+        expect(4) == getBitValue(1024, 8, 10)
     }
 
     func testCompressUncompress() throws {
@@ -26,7 +28,7 @@ final class HwpUtilTests: XCTestCase {
         let compressed = Deflate.compress(data: testData)
         let decompressed = try Deflate.decompress(data: compressed)
 
-        XCTAssertEqual(testData, decompressed)
+        expect(testData) == decompressed
 
     }
 
@@ -37,78 +39,78 @@ final class HwpUtilTests: XCTestCase {
     }
 
     func testCommonCtrlId() throws {
-        XCTAssertEqual(HwpCommonCtrlId.table.rawValue, makeCtrlId("tbl "))
+        expect(HwpCommonCtrlId.table.rawValue) == makeCtrlId("tbl ")
 
-        XCTAssertEqual(HwpCommonCtrlId.line.rawValue, makeCtrlId("$lin"))
-        XCTAssertEqual(HwpCommonCtrlId.rectangle.rawValue, makeCtrlId("$rec"))
-        XCTAssertEqual(HwpCommonCtrlId.ellipse.rawValue, makeCtrlId("$ell"))
-        XCTAssertEqual(HwpCommonCtrlId.arc.rawValue, makeCtrlId("$arc"))
-        XCTAssertEqual(HwpCommonCtrlId.polygon.rawValue, makeCtrlId("$pol"))
-        XCTAssertEqual(HwpCommonCtrlId.curve.rawValue, makeCtrlId("$cur"))
+        expect(HwpCommonCtrlId.line.rawValue) == makeCtrlId("$lin")
+        expect(HwpCommonCtrlId.rectangle.rawValue) == makeCtrlId("$rec")
+        expect(HwpCommonCtrlId.ellipse.rawValue) == makeCtrlId("$ell")
+        expect(HwpCommonCtrlId.arc.rawValue) == makeCtrlId("$arc")
+        expect(HwpCommonCtrlId.polygon.rawValue) == makeCtrlId("$pol")
+        expect(HwpCommonCtrlId.curve.rawValue) == makeCtrlId("$cur")
 
-        XCTAssertEqual(HwpCommonCtrlId.equation.rawValue, makeCtrlId("equd"))
-        XCTAssertEqual(HwpCommonCtrlId.picture.rawValue, makeCtrlId("$pic"))
-        XCTAssertEqual(HwpCommonCtrlId.ole.rawValue, makeCtrlId("$ole"))
-        XCTAssertEqual(HwpCommonCtrlId.container.rawValue, makeCtrlId("$con"))
+        expect(HwpCommonCtrlId.equation.rawValue) == makeCtrlId("equd")
+        expect(HwpCommonCtrlId.picture.rawValue) == makeCtrlId("$pic")
+        expect(HwpCommonCtrlId.ole.rawValue) == makeCtrlId("$ole")
+        expect(HwpCommonCtrlId.container.rawValue) == makeCtrlId("$con")
 
-        XCTAssertEqual(HwpCommonCtrlId.genShapeObject.rawValue, makeCtrlId("gso "))
+        expect(HwpCommonCtrlId.genShapeObject.rawValue) == makeCtrlId("gso ")
     }
 
     func testOtherCtrlID() throws {
-        XCTAssertEqual(HwpOtherCtrlId.section.rawValue, makeCtrlId("secd"))
-        XCTAssertEqual(HwpOtherCtrlId.column.rawValue, makeCtrlId("cold"))
-        XCTAssertEqual(HwpOtherCtrlId.header.rawValue, makeCtrlId("head"))
-        XCTAssertEqual(HwpOtherCtrlId.footer.rawValue, makeCtrlId("foot"))
-        XCTAssertEqual(HwpOtherCtrlId.footnote.rawValue, makeCtrlId("fn  "))
-        XCTAssertEqual(HwpOtherCtrlId.endnote.rawValue, makeCtrlId("en  "))
-        XCTAssertEqual(HwpOtherCtrlId.autoNumber.rawValue, makeCtrlId("atno"))
-        XCTAssertEqual(HwpOtherCtrlId.newNumber.rawValue, makeCtrlId("nwno"))
-        XCTAssertEqual(HwpOtherCtrlId.pageHide.rawValue, makeCtrlId("pghd"))
-        XCTAssertEqual(HwpOtherCtrlId.pageCT.rawValue, makeCtrlId("pgct"))
-        XCTAssertEqual(HwpOtherCtrlId.pageNumberPosition.rawValue, makeCtrlId("pgnp"))
-        XCTAssertEqual(HwpOtherCtrlId.indexmark.rawValue, makeCtrlId("idxm"))
-        XCTAssertEqual(HwpOtherCtrlId.bookmark.rawValue, makeCtrlId("bokm"))
-        XCTAssertEqual(HwpOtherCtrlId.overlapping.rawValue, makeCtrlId("tcps"))
-        XCTAssertEqual(HwpOtherCtrlId.comment.rawValue, makeCtrlId("tdut"))
-        XCTAssertEqual(HwpOtherCtrlId.hiddenComment.rawValue, makeCtrlId("tcmt"))
+        expect(HwpOtherCtrlId.section.rawValue) == makeCtrlId("secd")
+        expect(HwpOtherCtrlId.column.rawValue) == makeCtrlId("cold")
+        expect(HwpOtherCtrlId.header.rawValue) == makeCtrlId("head")
+        expect(HwpOtherCtrlId.footer.rawValue) == makeCtrlId("foot")
+        expect(HwpOtherCtrlId.footnote.rawValue) == makeCtrlId("fn  ")
+        expect(HwpOtherCtrlId.endnote.rawValue) == makeCtrlId("en  ")
+        expect(HwpOtherCtrlId.autoNumber.rawValue) == makeCtrlId("atno")
+        expect(HwpOtherCtrlId.newNumber.rawValue) == makeCtrlId("nwno")
+        expect(HwpOtherCtrlId.pageHide.rawValue) == makeCtrlId("pghd")
+        expect(HwpOtherCtrlId.pageCT.rawValue) == makeCtrlId("pgct")
+        expect(HwpOtherCtrlId.pageNumberPosition.rawValue) == makeCtrlId("pgnp")
+        expect(HwpOtherCtrlId.indexmark.rawValue) == makeCtrlId("idxm")
+        expect(HwpOtherCtrlId.bookmark.rawValue) == makeCtrlId("bokm")
+        expect(HwpOtherCtrlId.overlapping.rawValue) == makeCtrlId("tcps")
+        expect(HwpOtherCtrlId.comment.rawValue) == makeCtrlId("tdut")
+        expect(HwpOtherCtrlId.hiddenComment.rawValue) == makeCtrlId("tcmt")
     }
 
     func testFieldCtrlId() throws {
-        XCTAssertEqual(HwpFieldCtrlId.unknown.rawValue, makeCtrlId("%unk"))
-        XCTAssertEqual(HwpFieldCtrlId.date.rawValue, makeCtrlId("$dte"))
-        XCTAssertEqual(HwpFieldCtrlId.docDate.rawValue, makeCtrlId("%ddt"))
-        XCTAssertEqual(HwpFieldCtrlId.path.rawValue, makeCtrlId("%pat"))
-        XCTAssertEqual(HwpFieldCtrlId.bookmark.rawValue, makeCtrlId("%bmk"))
-        XCTAssertEqual(HwpFieldCtrlId.mailMerge.rawValue, makeCtrlId("%mmg"))
-        XCTAssertEqual(HwpFieldCtrlId.crossRef.rawValue, makeCtrlId("%xrf"))
-        XCTAssertEqual(HwpFieldCtrlId.formula.rawValue, makeCtrlId("%fmu"))
-        XCTAssertEqual(HwpFieldCtrlId.clickHere.rawValue, makeCtrlId("%clk"))
-        XCTAssertEqual(HwpFieldCtrlId.summary.rawValue, makeCtrlId("%smr"))
-        XCTAssertEqual(HwpFieldCtrlId.userInfo.rawValue, makeCtrlId("%usr"))
-        XCTAssertEqual(HwpFieldCtrlId.hyperLink.rawValue, makeCtrlId("%hlk"))
+        expect(HwpFieldCtrlId.unknown.rawValue) == makeCtrlId("%unk")
+        expect(HwpFieldCtrlId.date.rawValue) == makeCtrlId("$dte")
+        expect(HwpFieldCtrlId.docDate.rawValue) == makeCtrlId("%ddt")
+        expect(HwpFieldCtrlId.path.rawValue) == makeCtrlId("%pat")
+        expect(HwpFieldCtrlId.bookmark.rawValue) == makeCtrlId("%bmk")
+        expect(HwpFieldCtrlId.mailMerge.rawValue) == makeCtrlId("%mmg")
+        expect(HwpFieldCtrlId.crossRef.rawValue) == makeCtrlId("%xrf")
+        expect(HwpFieldCtrlId.formula.rawValue) == makeCtrlId("%fmu")
+        expect(HwpFieldCtrlId.clickHere.rawValue) == makeCtrlId("%clk")
+        expect(HwpFieldCtrlId.summary.rawValue) == makeCtrlId("%smr")
+        expect(HwpFieldCtrlId.userInfo.rawValue) == makeCtrlId("%usr")
+        expect(HwpFieldCtrlId.hyperLink.rawValue) == makeCtrlId("%hlk")
 
-        XCTAssertEqual(HwpFieldCtrlId.revisionSign.rawValue, makeCtrlId("%sig"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionDelete.rawValue, makeCtrlId("%%*d"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionAttach.rawValue, makeCtrlId("%%*a"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionClipping.rawValue, makeCtrlId("%%*C"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionSawtooth.rawValue, makeCtrlId("%%*S"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionThinking.rawValue, makeCtrlId("%%*T"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionPraise.rawValue, makeCtrlId("%%*P"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionLine.rawValue, makeCtrlId("%%*L"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionSimpleChange.rawValue, makeCtrlId("%%*c"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionHyperLink.rawValue, makeCtrlId("%%*h"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionLineAttach.rawValue, makeCtrlId("%%*A"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionLineLink.rawValue, makeCtrlId("%%*i"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionLineRansfer.rawValue, makeCtrlId("%%*t"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionRightMove.rawValue, makeCtrlId("%%*r"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionLeftMove.rawValue, makeCtrlId("%%&l"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionTransfer.rawValue, makeCtrlId("%%*n"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionSimpleInsert.rawValue, makeCtrlId("%%*e"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionSplit.rawValue, makeCtrlId("%spl"))
-        XCTAssertEqual(HwpFieldCtrlId.revisionChange.rawValue, makeCtrlId("%%mr"))
+        expect(HwpFieldCtrlId.revisionSign.rawValue) == makeCtrlId("%sig")
+        expect(HwpFieldCtrlId.revisionDelete.rawValue) == makeCtrlId("%%*d")
+        expect(HwpFieldCtrlId.revisionAttach.rawValue) == makeCtrlId("%%*a")
+        expect(HwpFieldCtrlId.revisionClipping.rawValue) == makeCtrlId("%%*C")
+        expect(HwpFieldCtrlId.revisionSawtooth.rawValue) == makeCtrlId("%%*S")
+        expect(HwpFieldCtrlId.revisionThinking.rawValue) == makeCtrlId("%%*T")
+        expect(HwpFieldCtrlId.revisionPraise.rawValue) == makeCtrlId("%%*P")
+        expect(HwpFieldCtrlId.revisionLine.rawValue) == makeCtrlId("%%*L")
+        expect(HwpFieldCtrlId.revisionSimpleChange.rawValue) == makeCtrlId("%%*c")
+        expect(HwpFieldCtrlId.revisionHyperLink.rawValue) == makeCtrlId("%%*h")
+        expect(HwpFieldCtrlId.revisionLineAttach.rawValue) == makeCtrlId("%%*A")
+        expect(HwpFieldCtrlId.revisionLineLink.rawValue) == makeCtrlId("%%*i")
+        expect(HwpFieldCtrlId.revisionLineRansfer.rawValue) == makeCtrlId("%%*t")
+        expect(HwpFieldCtrlId.revisionRightMove.rawValue) == makeCtrlId("%%*r")
+        expect(HwpFieldCtrlId.revisionLeftMove.rawValue) == makeCtrlId("%%&l")
+        expect(HwpFieldCtrlId.revisionTransfer.rawValue) == makeCtrlId("%%*n")
+        expect(HwpFieldCtrlId.revisionSimpleInsert.rawValue) == makeCtrlId("%%*e")
+        expect(HwpFieldCtrlId.revisionSplit.rawValue) == makeCtrlId("%spl")
+        expect(HwpFieldCtrlId.revisionChange.rawValue) == makeCtrlId("%%mr")
 
-        XCTAssertEqual(HwpFieldCtrlId.memo.rawValue, makeCtrlId("%%me"))
-        XCTAssertEqual(HwpFieldCtrlId.privateInfoSecurity.rawValue, makeCtrlId("%cpr"))
-        XCTAssertEqual(HwpFieldCtrlId.tableOfContents.rawValue, makeCtrlId("%toc"))
+        expect(HwpFieldCtrlId.memo.rawValue) == makeCtrlId("%%me")
+        expect(HwpFieldCtrlId.privateInfoSecurity.rawValue) == makeCtrlId("%cpr")
+        expect(HwpFieldCtrlId.tableOfContents.rawValue) == makeCtrlId("%toc")
     }
 }

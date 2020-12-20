@@ -2,7 +2,7 @@
 
 [English](https://github.com/sboh1214/Hwp-Swift/blob/main/.github/i18n/en/README.md)
 
-> This software is developed using Hancom's HANGEUL DOCUMENT FILE FORMAT.
+> 본 제품은 한글과컴퓨터의 글 문서 파일(.hwp) 공개 문서를 참고하여 개발하였습니다.
 
 ![Test](https://github.com/sboh1214/Hwp-Swift/workflows/Test/badge.svg)
 ![Coverage](https://github.com/sboh1214/Hwp-Swift/workflows/Coverage/badge.svg)
@@ -15,11 +15,11 @@
 
 ## 설치
 
-### Swift Package Manager
+### 스위프트 패키지 관리자
 
 Xcode에서 ```File``` > ```Swift Packages``` > ```Add Package Dependency...``` 메뉴를 선택하세요.
 
-또는 Dependency를 아래와 같이 수동으로 추가합니다.
+또는 의존성을 아래와 같이 수동으로 추가합니다.
 
 ```swift
 dependencies: [
@@ -33,7 +33,7 @@ dependencies: [
 
 ## 기여
 
-Visit [CONTRIBUTING.md](https://github.com/sboh1214/Hwp-Swift/blob/main/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/sboh1214/Hwp-Swift/blob/main/CONTRIBUTING.md)를 방문하세요.
 
 ## 라이센스
 

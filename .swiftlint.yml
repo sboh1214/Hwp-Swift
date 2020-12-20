@@ -22,4 +22,15 @@ file_length:
   warning: 500
   error: 700
 
-reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown, github-actions-logging)
+custom_rules:
+  no_xctassert:
+    name: "No XCTAssert"
+    regex: "(XCTAssert)"
+    match_kinds:
+      - comment
+      - identifier
+    message: "Use Nimble expect ~ to be ~ pattern"
+    severity: error
+
+# reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown, github-actions-logging)
+reporter: "xcode"
