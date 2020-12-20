@@ -1,6 +1,6 @@
 # Hwp-Swift
 
-[English](https://github.com/sboh1214/Hwp-Swift/blob/main/.github/i18n/en/README.md)
+> This document might be outdated. Please make a Issue.
 
 > This software is developed using Hancom's HANGEUL DOCUMENT FILE FORMAT.
 
@@ -11,15 +11,15 @@
 
 [![Discord](https://img.shields.io/discord/761775951012692018?label=Discord)](https://discord.gg/rV6d5JX)
 
-한글 파일을 읽고 쓰기 위한 스위프트 패키지
+Swift Package for Reading & Writing HWP File
 
-## 설치
+## Install
 
 ### Swift Package Manager
 
-Xcode에서 ```File``` > ```Swift Packages``` > ```Add Package Dependency...``` 메뉴를 선택하세요.
+Go to ```File``` > ```Swift Packages``` > ```Add Package Dependency...``` in Xcode.
 
-또는 Dependency를 아래와 같이 수동으로 추가합니다.
+Or add dependency manually.
 
 ```swift
 dependencies: [
@@ -27,20 +27,14 @@ dependencies: [
 ],
 ```
 
-## 라이브러리 구조
+## Structure
 
 ![Structure](https://github.com/sboh1214/Hwp-Swift/blob/main/.github/structure/Structure.png)
 
-## 기여
+## Contribute
 
 Visit [CONTRIBUTING.md](https://github.com/sboh1214/Hwp-Swift/blob/main/CONTRIBUTING.md)
 
-## 라이센스
-
-본 라이브러리는 LGPL 라이센스를 따릅니다.
-
-본 라이브러리의 이름, 주소, 그리고 저작자를 표기하여 주십시오.
-
-스위프트 패키지 매니저와 같이 본 라이브러리를 일체의 변경 없이 의존성으로서 사용한다면 코드 공개의 의무가 없습니다.
+## License
 
 ![GitHub](https://img.shields.io/github/license/sboh1214/Hwp-Swift)
