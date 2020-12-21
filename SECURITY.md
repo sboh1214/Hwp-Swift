@@ -1,14 +1,12 @@
 # 보안 정책
 
-## 알려진 이슈
+[English](https://github.com/sboh1214/Hwp-Swift/blob/main/.github/i18n/en/SECURITY.md)
 
-- < 0.4.1
- HwpFile > docInfo > idMappings > faceNameKorean(Count/Array) 누락
+## 알려진 문제
+
+-  < 0.4.1 : HwpFile > docInfo > idMappings > faceNameKorean(Count/Array) 누락
 
 ## 지원 버전
-
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -17,8 +15,8 @@ currently being supported with security updates.
 
 ## 취약점 제보
 
-Use this section to tell people how to report a vulnerability.
+For minor vulnerability(unsupported version or user accessibility issue), please report using Github issues.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+For major/urgent vulnerability, please email the maintainer (Seungbin Oh @sboh1214) directly. We will try to respond ASAP regardless of accept/decline.
+If you haven't heard back from us in 30 days, please email us again. If we still don't respond after one business week, you may feel free to publish the vulnerability.
+
