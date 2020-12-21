@@ -1,16 +1,19 @@
-# Security Policy
-## Known Issues
+# 보안 정책
 
-Version < 0.4.1 lacks HwpFile > docInfo > idMappings > faceNameKorean(Count/Array)
+[English](https://github.com/sboh1214/Hwp-Swift/blob/main/.github/i18n/en/SECURITY.md)
 
-## Supported Versions
+## 알려진 문제
+
+-  < 0.4.1 : HwpFile > docInfo > idMappings > faceNameKorean(Count/Array) 누락
+
+## 지원 버전
 
 | Version | Supported          |
 | ------- | ------------------ |
 | < 0.9.0 | :x:                |
 | 0.9.x   | :white_check_mark: |
 
-## Vulnerability Report
+## 취약점 제보
 
 For minor vulnerability(unsupported version or user accessibility issue), please report using Github issues.
 
