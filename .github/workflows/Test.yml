@@ -2,16 +2,10 @@ name: Test
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '**.swift'
+    branches: [main]
 
   pull_request:
-    branches:
-      - main
-    paths:
-      - '**.swift'
+    branches: [main]
 
 jobs:
   test:
