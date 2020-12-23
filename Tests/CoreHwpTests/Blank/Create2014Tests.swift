@@ -12,13 +12,13 @@ final class Create2014Tests: XCTestCase {
     }
 
     func testfileHeader() throws {
-        let (official, this) = try createHwp(#file, "blank-mac2014vp")
+        let (this, official) = try createHwp(#file, "blank-mac2014vp")
 
         expect(this.fileHeader) == official.fileHeader
     }
 
     func testDocInfo() throws {
-        let (official, this) = try createHwp(#file, "blank-mac2014vp")
+        let (this, official) = try createHwp(#file, "blank-mac2014vp")
 
         expect(official.docInfo.documentProperties) == this.docInfo.documentProperties
         expect(official.docInfo.compatibleDocument) == this.docInfo.compatibleDocument
@@ -35,7 +35,7 @@ final class Create2014Tests: XCTestCase {
     }
 
     func testSectionArray() throws {
-        let (official, this) = try createHwp(#file, "blank-mac2014vp")
+        let (this, official) = try createHwp(#file, "blank-mac2014vp")
 
         expect(official.sectionArray.count) == this.sectionArray.count
 

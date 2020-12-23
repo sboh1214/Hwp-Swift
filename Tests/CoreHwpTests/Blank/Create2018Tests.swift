@@ -12,40 +12,40 @@ class Create2018Tests: XCTestCase {
     }
 
     func testfileHeader() throws {
-        let (official, this) = try createHwp(#file, "blank-win2018")
+        let (this, official) = try createHwp(#file, "blank-win2018")
 
         expect(official.fileHeader) == this.fileHeader
     }
 
     func testDocInfo() throws {
-        let (official, this) = try createHwp(#file, "blank-win2018")
+        let (this, official) = try createHwp(#file, "blank-win2018")
 
-        expect(official.docInfo.documentProperties) == this.docInfo.documentProperties
-        expect(official.docInfo.compatibleDocument) == this.docInfo.compatibleDocument
+        expect(this.docInfo.documentProperties) == official.docInfo.documentProperties
+        expect(this.docInfo.compatibleDocument) == official.docInfo.compatibleDocument
 
-        let expectedMappings = official.docInfo.idMappings
-        let actualMappings = this.docInfo.idMappings
+        let thisMappings = this.docInfo.idMappings
+        let officialMappings = official.docInfo.idMappings
 
-        expect(expectedMappings.faceNameKoreanArray) == actualMappings.faceNameKoreanArray
-        expect(expectedMappings.faceNameEnglishArray) == actualMappings.faceNameEnglishArray
-        expect(expectedMappings.faceNameChineseArray) == actualMappings.faceNameChineseArray
-        expect(expectedMappings.faceNameJapaneseArray) == actualMappings.faceNameJapaneseArray
-        expect(expectedMappings.faceNameEtcArray) == actualMappings.faceNameEtcArray
-        expect(expectedMappings.faceNameSymbolArray) == actualMappings.faceNameSymbolArray
-        expect(expectedMappings.faceNameUserArray) == actualMappings.faceNameUserArray
+        expect(thisMappings.faceNameKoreanArray) == officialMappings.faceNameKoreanArray
+        expect(thisMappings.faceNameEnglishArray) == officialMappings.faceNameEnglishArray
+        expect(thisMappings.faceNameChineseArray) == officialMappings.faceNameChineseArray
+        expect(thisMappings.faceNameJapaneseArray) == officialMappings.faceNameJapaneseArray
+        expect(thisMappings.faceNameEtcArray) == officialMappings.faceNameEtcArray
+        expect(thisMappings.faceNameSymbolArray) == officialMappings.faceNameSymbolArray
+        expect(thisMappings.faceNameUserArray) == officialMappings.faceNameUserArray
 
-        expect(expectedMappings.borderFillArray) == actualMappings.borderFillArray
-        expect(expectedMappings.charShapeArray) == actualMappings.charShapeArray
-        expect(expectedMappings.tabDefArray) == actualMappings.tabDefArray
-        expect(expectedMappings.numberingArray) == actualMappings.numberingArray
-        expect(expectedMappings.paraShapeArray) == actualMappings.paraShapeArray
-        expect(expectedMappings.styleArray) == actualMappings.styleArray
+        expect(thisMappings.borderFillArray) == officialMappings.borderFillArray
+        expect(thisMappings.charShapeArray) == officialMappings.charShapeArray
+        expect(thisMappings.tabDefArray) == officialMappings.tabDefArray
+        expect(thisMappings.numberingArray) == officialMappings.numberingArray
+        expect(thisMappings.paraShapeArray) == officialMappings.paraShapeArray
+        expect(thisMappings.styleArray) == officialMappings.styleArray
 
-        // expect(expected.docInfo, actual.docInfo)
+        // expect(this.docInfo) == official.docInfo
     }
 
     func testSectionArray() throws {
-        let (official, this) = try createHwp(#file, "blank-win2018")
+        let (this, official) = try createHwp(#file, "blank-win2018")
 
         expect(official.sectionArray.count) == this.sectionArray.count
 
