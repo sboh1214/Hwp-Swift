@@ -2,16 +2,9 @@ name: Test
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '**.swift'
-
+    branches: [main]
   pull_request:
-    branches:
-      - main
-    paths:
-      - '**.swift'
+    branches: [main]
 
 jobs:
   test:
@@ -25,7 +18,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: fwal/setup-swift@v1
+    - uses: fwal/setup-swift@v1.5.0
       with:
         swift-version: ${{ matrix.swift }}
     - name: Build

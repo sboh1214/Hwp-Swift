@@ -2,15 +2,9 @@ name: Coverage
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '**.swift'
+    branches: [main]
   pull_request:
-    branches:
-      - main
-    paths:
-      - '**.swift'
+    branches: [main]
 
 jobs:
   coverage:
@@ -27,7 +21,7 @@ jobs:
     - name: Extract
       run: lcov -e raw.lcov "*Hwp-Swift/Sources*" -o info.lcov
     - name: Code Climate Coverage Action
-      uses: paambaati/codeclimate-action@v2.7.4
+      uses: paambaati/codeclimate-action@v2.7.5
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:

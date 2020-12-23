@@ -16,6 +16,11 @@ pre-commit install
 
 SwiftLint는 또한 모든 PR에서 CI로 확인됩니다.
 
+## 명명법
+
+파일 및 폴더명은 파스칼표기법을 따릅니다.
+스위프트 코드는 일반적인 명명법을 따릅니다.
+
 ## 코드 퀄리티
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/b920b09bdee71fdc8208/maintainability)](https://codeclimate.com/github/sboh1214/Hwp-Swift/maintainability)
