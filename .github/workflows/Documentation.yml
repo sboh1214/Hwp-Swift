@@ -2,10 +2,7 @@ name: Documentation
 
 on:
   push:
-    branches:
-    - main
-    paths:
-    - '**.swift'
+    branches: [main]
 
 jobs:
   documentation:
