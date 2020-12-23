@@ -35,7 +35,7 @@ final class NooriDocInfoTests: XCTestCase {
     func testBinData() throws {
         let hwp = try openHwp(#file, "noori")
 
-        let bin = hwp.docInfo.idMappings.binDataArray
+        let bin = hwp.docInfo.idMappings.binaryDataArray
         expect(bin[0].extensionName!.string) == "jpg"
         expect(bin[1].extensionName!.string) == "bmp"
         expect(bin[2].extensionName!.string) == "bmp"
