@@ -56,7 +56,7 @@ public struct HwpIdMappings {
 extension HwpIdMappings: HwpFromRecordWithVersion {
     // swiftlint:disable function_body_length
     init() {
-        memoShapeCount = 21
+        memoShapeCount = 0
         changeTraceCount = 0
         changeTraceUserCount = 0
 

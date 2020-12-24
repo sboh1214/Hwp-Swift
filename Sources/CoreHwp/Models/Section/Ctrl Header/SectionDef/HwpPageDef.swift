@@ -40,3 +40,18 @@ extension HwpPageDef: HwpFromData {
         property = reader.read(UInt32.self)
     }
 }
+
+extension HwpPageDef {
+    init() {
+        width = 59528
+        height = 84186
+        marginLeft = 8504
+        marginRight = 8504
+        marginTop = 5668
+        marginBottom = 4252
+        marginHeader = 4252
+        marginFootnote = 4252
+        marginGutter = 0
+        property = 0
+    }
+}

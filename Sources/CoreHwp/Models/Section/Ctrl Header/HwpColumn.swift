@@ -38,3 +38,15 @@ extension HwpColumn: HwpFromData {
         dividerColor = HwpColor(reader.read(COLORREF.self))
     }
 }
+
+extension HwpColumn {
+    init() {
+        otherCtrlId = .column
+        property = 4100
+        spacing = 0
+        widthArray = [0]
+        dividerType = 0
+        dividerThickness = 0
+        dividerColor = HwpColor(0, 0, 0)
+    }
+}

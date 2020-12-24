@@ -63,3 +63,22 @@ extension HwpFootnoteShape: HwpFromData {
         unknown = reader.readBytes(2)
     }
 }
+
+extension HwpFootnoteShape {
+    init(dividerLength: HWPUNIT16, dividerMarginTop: HWPUNIT16,
+         dividerType: UInt8, dividerThickness: UInt8) {
+        property = 0
+        userSymbol = "\0"
+        decorationHead = "\0"
+        decorationTail = ")"
+        startingNumber = 1
+        self.dividerLength = dividerLength
+        self.dividerMarginTop = dividerMarginTop
+        dividerMarginBottom = 850
+        marginComment = 567
+        self.dividerType = dividerType
+        self.dividerThickness = dividerThickness
+        dividerColor = HwpColor(red: 1, green: 1, blue: 1)
+        unknown = Data(Array(repeating: 0, count: 2))
+    }
+}
