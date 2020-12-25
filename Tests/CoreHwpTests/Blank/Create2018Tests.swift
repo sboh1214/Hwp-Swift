@@ -1,6 +1,8 @@
 import XCTest
 import Nimble
 
+import CoreHwp
+
 /**
  doc  version : 5.1.0.1.1
  program version : 10.0.0.5060
@@ -8,47 +10,80 @@ import Nimble
 class Create2018Tests: XCTestCase {
 
     func testCreate() throws {
-        // expect(expected, actual)
+        let (this, official) = try createHwp(#file, "blank-win2018")
+
+        expect(this) == official
     }
 
     func testfileHeader() throws {
-        let (official, this) = try createHwp(#file, "blank-win2018")
+        let (this, official) = try createHwp(#file, "blank-win2018")
 
-        expect(official.fileHeader) == this.fileHeader
+        expect(this.fileHeader) == official.fileHeader
     }
 
     func testDocInfo() throws {
-        let (official, this) = try createHwp(#file, "blank-win2018")
+        let (this, official) = try createHwp(#file, "blank-win2018")
 
-        expect(official.docInfo.documentProperties) == this.docInfo.documentProperties
-        expect(official.docInfo.compatibleDocument) == this.docInfo.compatibleDocument
+        expect(this.docInfo.documentProperties) == official.docInfo.documentProperties
+        expect(this.docInfo.compatibleDocument) == official.docInfo.compatibleDocument
 
-        let expectedMappings = official.docInfo.idMappings
-        let actualMappings = this.docInfo.idMappings
+        let thisMappings = this.docInfo.idMappings
+        let officialMappings = official.docInfo.idMappings
 
-        expect(expectedMappings.faceNameKoreanArray) == actualMappings.faceNameKoreanArray
-        expect(expectedMappings.faceNameEnglishArray) == actualMappings.faceNameEnglishArray
-        expect(expectedMappings.faceNameChineseArray) == actualMappings.faceNameChineseArray
-        expect(expectedMappings.faceNameJapaneseArray) == actualMappings.faceNameJapaneseArray
-        expect(expectedMappings.faceNameEtcArray) == actualMappings.faceNameEtcArray
-        expect(expectedMappings.faceNameSymbolArray) == actualMappings.faceNameSymbolArray
-        expect(expectedMappings.faceNameUserArray) == actualMappings.faceNameUserArray
+        expect(thisMappings.faceNameKoreanArray) == officialMappings.faceNameKoreanArray
+        expect(thisMappings.faceNameEnglishArray) == officialMappings.faceNameEnglishArray
+        expect(thisMappings.faceNameChineseArray) == officialMappings.faceNameChineseArray
+        expect(thisMappings.faceNameJapaneseArray) == officialMappings.faceNameJapaneseArray
+        expect(thisMappings.faceNameEtcArray) == officialMappings.faceNameEtcArray
+        expect(thisMappings.faceNameSymbolArray) == officialMappings.faceNameSymbolArray
+        expect(thisMappings.faceNameUserArray) == officialMappings.faceNameUserArray
 
-        expect(expectedMappings.borderFillArray) == actualMappings.borderFillArray
-        expect(expectedMappings.charShapeArray) == actualMappings.charShapeArray
-        expect(expectedMappings.tabDefArray) == actualMappings.tabDefArray
-        expect(expectedMappings.numberingArray) == actualMappings.numberingArray
-        expect(expectedMappings.paraShapeArray) == actualMappings.paraShapeArray
-        expect(expectedMappings.styleArray) == actualMappings.styleArray
+        expect(thisMappings.borderFillArray) == officialMappings.borderFillArray
+        expect(thisMappings.charShapeArray) == officialMappings.charShapeArray
+        expect(thisMappings.tabDefArray) == officialMappings.tabDefArray
+        expect(thisMappings.numberingArray) == officialMappings.numberingArray
+        expect(thisMappings.paraShapeArray) == officialMappings.paraShapeArray
+        expect(thisMappings.styleArray) == officialMappings.styleArray
 
-        // expect(expected.docInfo, actual.docInfo)
+        expect(this.docInfo) == official.docInfo
     }
 
     func testSectionArray() throws {
-        let (official, this) = try createHwp(#file, "blank-win2018")
+        let (this, official) = try createHwp(#file, "blank-win2018")
 
-        expect(official.sectionArray.count) == this.sectionArray.count
+        expect(this.sectionArray.count) == official.sectionArray.count
+        expect(this.sectionArray[0].paragraph.count) == official.sectionArray[0].paragraph.count
 
-        // expect(expected.sectionArray, actual.sectionArray)
+        let thisParagraph = this.sectionArray[0].paragraph[0]
+        let officialParagraph = official.sectionArray[0].paragraph[0]
+
+        expect(thisParagraph.paraHeader) == officialParagraph.paraHeader
+        expect(thisParagraph.paraText) == officialParagraph.paraText
+        expect(thisParagraph.paraCharShape) == officialParagraph.paraCharShape
+        expect(thisParagraph.paraLineSeg) == officialParagraph.paraLineSeg
+        expect(thisParagraph.paraRangeTagArray) == officialParagraph.paraRangeTagArray
+        expect(thisParagraph.listHeaderArray) == officialParagraph.listHeaderArray
+
+        expect(thisParagraph.ctrlHeaderArray![0]) == officialParagraph.ctrlHeaderArray![0]
+        expect(thisParagraph.ctrlHeaderArray![1]) == officialParagraph.ctrlHeaderArray![1]
+
+        for officialCtrlId in officialParagraph.ctrlHeaderArray! {
+            switch officialCtrlId {
+            case .section(let hwpSectionDef):
+                dump(hwpSectionDef.footNoteShape.unknown)
+                dump(hwpSectionDef.endNoteShape.unknown)
+                dump(hwpSectionDef.unknown)
+            default:
+                break
+            }
+        }
+
+        expect(this.sectionArray) == official.sectionArray
+    }
+
+    func testPreviewText() throws {
+        let (this, official) = try createHwp(#file, "blank-win2018")
+
+        expect(this.previewText) == official.previewText
     }
 }

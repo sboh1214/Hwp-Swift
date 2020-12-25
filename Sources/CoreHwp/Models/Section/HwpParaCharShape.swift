@@ -13,7 +13,7 @@ public struct HwpParaCharShape: HwpFromData {
 
     init() {
         startingIndex = [0]
-        shapeId = [6]
+        shapeId = [0]
     }
 
     init(_ reader: inout DataReader) throws {

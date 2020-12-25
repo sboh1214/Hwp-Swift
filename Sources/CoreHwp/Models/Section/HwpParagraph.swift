@@ -17,7 +17,10 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
         paraLineSeg =  HwpParaLineSeg()
         paraRangeTagArray =  [HwpParaRangeTag]()
         listHeaderArray =  [HwpListHeader]()
-        ctrlHeaderArray =  [HwpCtrlId]()
+        ctrlHeaderArray =  [
+            .section(HwpSectionDef()),
+            .column(HwpColumn())
+        ]
     }
 
     // swiftlint:disable cyclomatic_complexity

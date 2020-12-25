@@ -30,3 +30,14 @@ extension HwpPageBorderFill: HwpFromData {
         borderFillId = reader.read(UInt16.self)
     }
 }
+
+extension HwpPageBorderFill {
+    init(property: UInt32) {
+        self.property = property
+        spacingLeft = 1417
+        spacingRight = 1417
+        spacingTop = 1417
+        spacingBottom = 1417
+        borderFillId = 1
+    }
+}

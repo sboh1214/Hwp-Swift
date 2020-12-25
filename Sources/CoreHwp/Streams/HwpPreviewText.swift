@@ -9,7 +9,7 @@ public struct HwpPreviewText: HwpFromData {
     public let text: String
 
     init() {
-        text = ""
+        text = "\r\n"
     }
 
     init(_ reader: inout DataReader) throws {

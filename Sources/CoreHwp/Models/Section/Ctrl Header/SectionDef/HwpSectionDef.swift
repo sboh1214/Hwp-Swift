@@ -98,3 +98,32 @@ extension HwpSectionDef: HwpFromRecordWithVersion {
         unknown = reader.readToEnd()
     }
 }
+
+extension HwpSectionDef {
+    init() {
+        pageDef = HwpPageDef()
+        footNoteShape = HwpFootnoteShape(
+            dividerLength: -1, dividerMarginTop: -1, dividerType: 27, dividerThickness: 1
+        )
+        endNoteShape = HwpFootnoteShape(
+            dividerLength: 12280, dividerMarginTop: 224, dividerType: 0, dividerThickness: 0
+        )
+        pageBorderFillBoth = HwpPageBorderFill(property: 158923201)
+        pageBorderFillEven = HwpPageBorderFill(property: 656083841)
+        pageBorderFillOdd = HwpPageBorderFill(property: 1)
+
+        property = 1936024420
+        columnSpacing = 0
+        verticalLineAlign = 0
+        horizontalLineAlign = 1134
+        defaultTabSpacing = 0
+        numberParaShapeId = 8000
+        pageStartNumber = 0
+        pictureStartNumber = 1
+        tableStartNumber = 0
+        equationNumber = 0
+
+        defaultLanguage = 0
+        unknown = Data(Array(repeating: 0, count: 21))
+    }
+}
