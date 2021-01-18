@@ -8,7 +8,7 @@ let package = Package(
         .library(name: "CoreHwp", targets: ["CoreHwp"])
     ],
     dependencies: [
-        .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.2.0")),
+        .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.3.0")),
         .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.5.7")),
 
         .package(url: "https://github.com/Quick/Nimble", .exact("9.0.0"))

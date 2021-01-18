@@ -14,13 +14,27 @@ public struct HwpFile: HwpPrimitive {
         previewText = HwpPreviewText()
     }
 
-    public init(filePath: String) throws {
-        let ole: OLEFile
+    public init(fromPath filePath: String) throws {
         do {
-            ole = try OLEFile(filePath)
+            let ole = try OLEFile(filePath)
+            try self.init(fromOLE: ole)
         } catch {
-            throw HwpError.invalidFilePath(path: filePath)
+            throw HwpError.invalidFile(path: filePath)
         }
+    }
+
+    #if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
+    public init(fromWrapper fileWrapper: FileWrapper) throws {
+        do {
+            let ole = try OLEFile(fileWrapper)
+            try self.init(fromOLE: ole)
+        } catch {
+            throw HwpError.invalidFile(path: fileWrapper.filename ?? "")
+        }
+    }
+    #endif
+
+    private init(fromOLE ole: OLEFile) throws {
         let streams = Dictionary(uniqueKeysWithValues: ole.root.children.map { ($0.name, $0 ) })
         let reader = StreamReader(ole, streams)
 
@@ -41,5 +55,4 @@ public struct HwpFile: HwpPrimitive {
         let previewTextReader = try ole.stream(previewTextStream)
         previewText = try HwpPreviewText.load(previewTextReader.readDataToEnd())
     }
-
 }
