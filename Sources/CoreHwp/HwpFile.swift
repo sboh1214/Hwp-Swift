@@ -23,6 +23,7 @@ public struct HwpFile: HwpPrimitive {
         }
     }
 
+    #if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
     public init(fromWrapper fileWrapper: FileWrapper) throws {
         do {
             let ole = try OLEFile(fileWrapper)
@@ -31,6 +32,7 @@ public struct HwpFile: HwpPrimitive {
             throw HwpError.invalidFile(path: fileWrapper.filename ?? "")
         }
     }
+    #endif
 
     private init(fromOLE ole: OLEFile) throws {
         let streams = Dictionary(uniqueKeysWithValues: ole.root.children.map { ($0.name, $0 ) })
