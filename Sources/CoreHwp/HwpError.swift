@@ -1,7 +1,7 @@
 import Foundation
 
 public enum HwpError: Error {
-    case invalidFilePath(path: String)
+    case invalidFile(path: String)
     case streamDoesNotExist(name: HwpStreamName)
     case streamDecompressFailed(name: HwpStreamName)
     case invalidDataForString(data: Data, name: String)
@@ -16,7 +16,7 @@ public enum HwpError: Error {
 extension HwpError: CustomStringConvertible {
     public var description: String {
         switch self {
-        case let .invalidFilePath(path):
+        case let .invalidFile(path):
             return "Invalid File Path '\(path)'"
         case let .streamDoesNotExist(name):
             return "Stream '\(name)' does not exist"
