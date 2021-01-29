@@ -11,6 +11,7 @@ public enum HwpError: Error {
     case invalidCtrlId(ctrlId: UInt32)
     case bytesAreNotEOF(model: Any, remain: Int)
     case bitsAreNotEOF(model: Any, remain: Int)
+    case invalidRawValueForEnum(model: Any)
 }
 
 extension HwpError: CustomStringConvertible {
@@ -43,6 +44,9 @@ extension HwpError: CustomStringConvertible {
         case let .bitsAreNotEOF(model, remain):
             let typeOfModel = String(describing: type(of: model))
             return "Bits are not EOF : \(remain) bits remain in \(typeOfModel)"
+        case let .invalidRawValueForEnum(model):
+            let typeOfModel = String(describing: type(of: model))
+            return "Invalid rawValue for initiating enum : \(typeOfModel)"
         }
     }
 }

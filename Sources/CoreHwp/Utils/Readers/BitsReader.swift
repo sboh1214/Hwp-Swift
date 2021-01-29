@@ -29,6 +29,24 @@ struct BitsReader {
         }
         return Array(bits[offset..<(offset+count)])
     }
+
+    mutating func readInt(_ count: Int) -> Int {
+        let array = readBits(count)
+        return array
+            .map { $0 ? 1 : 0 }
+            .enumerated().reversed()
+            .reduce(0) { (accumulate, current) in
+                let index = current.0
+                let element = current.1
+                return accumulate + element * 2 ^^ index
+            }
+    }
+}
+
+precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
+infix operator ^^ : PowerPrecedence
+func ^^ (radix: Int, power: Int) -> Int {
+    return Int(pow(Double(radix), Double(power)))
 }
 
 func getBitValue<T: BinaryInteger>(mask: T, start: Int, end: Int) -> T {
