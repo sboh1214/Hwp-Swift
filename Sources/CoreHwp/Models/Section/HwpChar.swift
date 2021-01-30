@@ -9,3 +9,9 @@ public struct HwpChar: HwpPrimitive {
         self.value = value
     }
 }
+
+public enum HwpCharType: String, Codable {
+    case char
+    case inline
+    case extended
+}
