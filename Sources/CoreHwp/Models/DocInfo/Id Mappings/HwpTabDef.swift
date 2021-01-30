@@ -2,13 +2,13 @@ import Foundation
 
 /**
  탭 정의
- 
+
  Tag ID : HWPTAG_TAB_DEF
  */
 public struct HwpTabDef {
-    /**속성*/
+    /** 속성 */
     public let property: UInt32
-    /**count*/
+    /** count */
     public let count: Int32
     public var tabInfoArray: [HwpTabInfo]
 }
@@ -16,8 +16,8 @@ public struct HwpTabDef {
 extension HwpTabDef {
     init(property: UInt32) {
         self.property = property
-        self.count = 0
-        self.tabInfoArray = [HwpTabInfo]()
+        count = 0
+        tabInfoArray = [HwpTabInfo]()
     }
 }
 
@@ -26,7 +26,7 @@ extension HwpTabDef: HwpFromData {
         property = reader.read(UInt32.self)
         count = reader.read(Int32.self)
         tabInfoArray = [HwpTabInfo]()
-        for _ in 0..<count {
+        for _ in 0 ..< count {
             tabInfoArray.append(try HwpTabInfo.load(reader.readBytes(8)))
         }
     }

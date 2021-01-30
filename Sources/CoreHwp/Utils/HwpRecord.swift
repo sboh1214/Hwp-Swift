@@ -2,7 +2,7 @@ import Foundation
 
 /**
  데이터 레코드 구조
- 
+
  논리적으로 연관된 데이터들을 헤더 정보와 함께 저장하는 방식을 데이터 레코드라고 한다.
  레코드 구조를 가지는 스트림은 연속된 여러 개의 레코드로 구성된다. 데이터 레코드는 헤더와 데이터로 구성되며 각 헤더 정보를 활용하여 전체 논리적 구조를 생성하게 된다.
  레코드의 헤더에는 데이터 확장에 대비한 정보를 가지고 있다.
@@ -18,7 +18,7 @@ class HwpRecord {
     let tagId: UInt32
     /**
      연관된 레코드의 논리적인 묶음을 표현하기 위한 정보
-     
+
      대부분 하나의 오브젝트는 여러 개의 레코드로 구성되는 것이 일반적이기 때문에
      하나의 레코드가 아닌 "논리적으로 연관된 연속된 레코드"라는 개념이 필요하다.
      스트림을 구성하는 모든 레코드는 계층 구조로 표현할 수 있는데, 레벨은 바로 이 계층 구조에서의 depth를 나타낸다.
@@ -31,7 +31,7 @@ class HwpRecord {
         self.tagId = tagId
         self.level = level
         self.payload = payload
-        self.children = [HwpRecord]()
+        children = [HwpRecord]()
     }
 }
 
@@ -51,7 +51,7 @@ func parseTreeRecord(data: Data) -> HwpRecord {
 
         var parent = root
 
-        for _ in 0..<level {
+        for _ in 0 ..< level {
             parent = parent.children.last!
         }
         parent.children.append(HwpRecord(tagId: tagId, level: level, payload: payload))

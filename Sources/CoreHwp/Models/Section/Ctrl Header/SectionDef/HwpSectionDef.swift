@@ -1,75 +1,75 @@
 import Foundation
 
-/**구역 정의*/
+/** 구역 정의 */
 public struct HwpSectionDef {
     public var pageDef: HwpPageDef
-    /**각주 모양 정보*/
+    /** 각주 모양 정보 */
     public var footNoteShape: HwpFootnoteShape
-    /**미주 모양 정보*/
+    /** 미주 모양 정보 */
     public var endNoteShape: HwpFootnoteShape
-    /**양쪽 테두리/배경 정보*/
+    /** 양쪽 테두리/배경 정보 */
     public var pageBorderFillBoth: HwpPageBorderFill
-    /**짝수쪽 테두리/배경 정보*/
+    /** 짝수쪽 테두리/배경 정보 */
     public var pageBorderFillEven: HwpPageBorderFill
-    /**홀수쪽 테두리/배경 정보*/
+    /** 홀수쪽 테두리/배경 정보 */
     public var pageBorderFillOdd: HwpPageBorderFill
 
-    /**속성*/
+    /** 속성 */
     public var property: UInt32
-    /**동일한 페이지에서 서로 다른 단 사이의 간격*/
+    /** 동일한 페이지에서 서로 다른 단 사이의 간격 */
     public var columnSpacing: HWPUNIT16
     /**
      세로로 줄맞춤을 할지 여부
-     
+
      0 = off, 1 - n = 간격을 HWPUNIT 단위로 지정
      */
     public var verticalLineAlign: HWPUNIT16
     /**
      가로로 줄맞춤을 할지 여부
-     
+
      0 = off, 1 - n = 간격을 HWPUNIT 단위로 지정
      */
     public var horizontalLineAlign: HWPUNIT16
     /**
      기본 탭 간격
-     
+
      hwpunit 또는 relative characters
      */
     public var defaultTabSpacing: HWPUNIT
-    /**번호 문단 모양 ID*/
+    /** 번호 문단 모양 ID */
     public var numberParaShapeId: UInt16
     /**
      쪽 번호
-     
+
      (0 = 앞 구역에 이어, n = 임의의 번호로 시작)
      */
     public var pageStartNumber: UInt16
     /**
      그림 번호
-     
+
      (0 = 앞 구역에 이어, n = 임의의 번호로 시작)
      */
     public var pictureStartNumber: UInt16
     /**
      표 번호
-     
+
      (0 = 앞 구역에 이어, n = 임의의 번호로 시작)
      */
     public var tableStartNumber: UInt16
     /**
      수식 번호
-     
+
      (0 = 앞 구역에 이어, n = 임의의 번호로 시작)
      */
     public var equationNumber: UInt16
     /**
      대표Language
-     
+
      (Language값이 없으면(==0), Application에 지정된 Language)
      5.0.1.5 이상
      */
     public var defaultLanguage: UInt16?
-    /**unknown 12, 21bytes*/
+    /** unknown 12, 21bytes */
     public var unknown: Data
 }
 
@@ -108,11 +108,11 @@ extension HwpSectionDef {
         endNoteShape = HwpFootnoteShape(
             dividerLength: 12280, dividerMarginTop: 224, dividerType: 0, dividerThickness: 0
         )
-        pageBorderFillBoth = HwpPageBorderFill(property: 158923201)
-        pageBorderFillEven = HwpPageBorderFill(property: 656083841)
+        pageBorderFillBoth = HwpPageBorderFill(property: 158_923_201)
+        pageBorderFillEven = HwpPageBorderFill(property: 656_083_841)
         pageBorderFillOdd = HwpPageBorderFill(property: 1)
 
-        property = 1936024420
+        property = 1_936_024_420
         columnSpacing = 0
         verticalLineAlign = 0
         horizontalLineAlign = 1134

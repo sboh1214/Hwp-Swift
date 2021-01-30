@@ -5,7 +5,7 @@ struct BitsReader {
     private var offset: Int = 0
 
     init(from uint32: UInt32) {
-        self.bits = uint32.bits
+        bits = uint32.bits
     }
 
     var isEOF: Bool {
@@ -27,7 +27,7 @@ struct BitsReader {
         defer {
             offset += count
         }
-        return Array(bits[offset..<(offset+count)])
+        return Array(bits[offset ..< (offset + count)])
     }
 
     mutating func readInt(_ count: Int) -> Int {
@@ -35,7 +35,7 @@ struct BitsReader {
         return array
             .map { $0 ? 1 : 0 }
             .enumerated().reversed()
-            .reduce(0) { (accumulate, current) in
+            .reduce(0) { accumulate, current in
                 let index = current.0
                 let element = current.1
                 return accumulate + element * 2 ^^ index
@@ -44,16 +44,16 @@ struct BitsReader {
 }
 
 precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
-infix operator ^^ : PowerPrecedence
+infix operator ^^: PowerPrecedence
 func ^^ (radix: Int, power: Int) -> Int {
-    return Int(pow(Double(radix), Double(power)))
+    Int(pow(Double(radix), Double(power)))
 }
 
 func getBitValue<T: BinaryInteger>(mask: T, start: Int, end: Int) -> T {
     let target = mask >> start
 
     var temp: T = 0
-    for _ in 0...(end - start) {
+    for _ in 0 ... (end - start) {
         temp <<= 1
         temp += 1
     }

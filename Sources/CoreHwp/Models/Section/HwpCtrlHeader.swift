@@ -5,7 +5,7 @@ public struct HwpCtrlHeader {
 }
 
 extension HwpCtrlHeader: HwpPrimitive {
-    init(_ reader: inout DataReader, _ children: [HwpRecord]) throws {
+    init(_ reader: inout DataReader, _: [HwpRecord]) throws {
         ctrlId = reader.read(UInt32.self)
     }
 

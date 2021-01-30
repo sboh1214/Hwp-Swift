@@ -16,14 +16,14 @@ struct DataReader {
         data.count - offset
     }
 
-    @discardableResult mutating func readBytes<T: BinaryInteger>(_ length: T ) -> Data {
+    @discardableResult mutating func readBytes<T: BinaryInteger>(_ length: T) -> Data {
         precondition(offset + Int(length) < data.count + 1)
         defer {
             offset += Int(length)
         }
         // The indices of a Data value are not necessarily zero-based.
         // A slice shares the indices with the originating data.
-        return data[(offset+data.startIndex) ..< (offset+data.startIndex) + Int(length)]
+        return data[(offset + data.startIndex) ..< (offset + data.startIndex) + Int(length)]
     }
 
     mutating func readToEnd() -> Data {
@@ -51,9 +51,9 @@ struct DataReader {
         }
     }
 
-    mutating func read<T, U: BinaryInteger>(_ type: T.Type, _ length: U) -> [T] {
+    mutating func read<T, U: BinaryInteger>(_: T.Type, _ length: U) -> [T] {
         var array = [T]()
-        for _ in 0..<Int(length) {
+        for _ in 0 ..< Int(length) {
             array.append(read(T.self))
         }
         return array

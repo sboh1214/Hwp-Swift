@@ -1,5 +1,5 @@
-import XCTest
 import Nimble
+import XCTest
 
 @testable import CoreHwp
 import SWCompression
@@ -29,12 +29,11 @@ final class HwpUtilTests: XCTestCase {
         let decompressed = try Deflate.decompress(data: compressed)
 
         expect(testData) == decompressed
-
     }
 
     private func makeCtrlId(_ string: String) -> UInt32 {
         precondition(string.count == 4)
-        let array = string.asciiValues.map {UInt32($0)}
+        let array = string.asciiValues.map { UInt32($0) }
         return array[0] << 24 + array[1] << 16 + array[2] << 8 + array[3]
     }
 

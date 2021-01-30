@@ -57,17 +57,17 @@ extension HwpCtrlId: HwpPrimitive {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         switch self {
-        case .table(let hwpTable):
+        case let .table(hwpTable):
             try container.encode(hwpTable, forKey: .table)
-        case .genShapeObject(let hwpGenShapeObject):
+        case let .genShapeObject(hwpGenShapeObject):
             try container.encode(hwpGenShapeObject, forKey: .genShapeObject)
-        case .section(let hwpCtrlSection):
+        case let .section(hwpCtrlSection):
             try container.encode(hwpCtrlSection, forKey: .section)
-        case .column(let hwpColumn):
+        case let .column(hwpColumn):
             try container.encode(hwpColumn, forKey: .column)
-        case .pageNumberPosition(let hwp):
+        case let .pageNumberPosition(hwp):
             try container.encode(hwp, forKey: .pageNumberPosition)
-        case .notImplemented(let hwpCtrlHeader):
+        case let .notImplemented(hwpCtrlHeader):
             try container.encode(hwpCtrlHeader, forKey: .notImplemented)
         }
     }

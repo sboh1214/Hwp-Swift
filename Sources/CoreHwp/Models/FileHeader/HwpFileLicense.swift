@@ -3,11 +3,11 @@ import Foundation
 public struct HwpFileLicense {
     /** CCL, 공공누리 라이선스 정보 */
     public var doesHaveKoreaOpenLicense: Bool
-    /**복제 제한 여부*/
+    /** 복제 제한 여부 */
     public var doesLimitReplication: Bool
     /**
      동일 조건 하에 복제 허가 여부
-     
+
      복제 제한인 경우 무시
      */
     public var doesHavePermission: Bool

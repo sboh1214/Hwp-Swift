@@ -2,39 +2,39 @@ import Foundation
 
 /**
  글자 모양
- 
+
  Tag ID : HWPTAG_CHAR_SHAPE
  */
 public struct HwpCharShape {
-    /**언어별 글꼴 ID(FaceID) 참조 값*/
+    /** 언어별 글꼴 ID(FaceID) 참조 값 */
     public let faceId: [WORD]
-    /**언어별 장평, 50%~200%(*/
+    /** 언어별 장평, 50%~200%( */
     public let faceScaleX: [UInt8]
-    /**언어별 자간, -50%~50%*/
+    /** 언어별 자간, -50%~50% */
     public let faceSpacing: [Int8]
-    /**언어별 상대 크기, 10%~250%*/
+    /** 언어별 상대 크기, 10%~250% */
     public let faceRelativeSize: [UInt8]
-    /**언어별 글자 위치, -100%~100%*/
+    /** 언어별 글자 위치, -100%~100% */
     public let faceLocation: [Int8]
-    /**기준 크기, 0pt~4096pt*/
+    /** 기준 크기, 0pt~4096pt */
     public let baseSize: Int32
-    /**속성*/
+    /** 속성 */
     public let property: HwpCharShapeProperty
-    /**그림자 간격 X, -100%~100%*/
+    /** 그림자 간격 X, -100%~100% */
     public let shadowIntervalX: Int8
-    /**그림자 간격 Y, -100%~100%*/
+    /** 그림자 간격 Y, -100%~100% */
     public let shadowIntervalY: Int8
-    /**글자 색*/
+    /** 글자 색 */
     public let faceColor: HwpColor
-    /**밑줄 색*/
+    /** 밑줄 색 */
     public let underlineColor: HwpColor
-    /**음영 색*/
+    /** 음영 색 */
     public let shadeColor: HwpColor
-    /**그림자 색*/
+    /** 그림자 색 */
     public let shadowColor: HwpColor
-    /**글자 테두리/배경 ID(CharShapeBorderFill ID) 참조 값 (5.0.2.1 이상)*/
+    /** 글자 테두리/배경 ID(CharShapeBorderFill ID) 참조 값 (5.0.2.1 이상) */
     public var borderFillId: UInt16?
-    /**취소선 색 (5.0.3.0 이상)*/
+    /** 취소선 색 (5.0.3.0 이상) */
     public var strikethroughColor: HwpColor?
 }
 
@@ -65,19 +65,19 @@ extension HwpCharShape: HwpFromDataWithVersion {
 extension HwpCharShape {
     init(faceId: [WORD], faceSpacing: [Int8], baseSize: Int32, faceColor: HwpColor) {
         self.faceId = faceId
-        self.faceScaleX = [100, 100, 100, 100, 100, 100, 100]
+        faceScaleX = [100, 100, 100, 100, 100, 100, 100]
         self.faceSpacing = faceSpacing
-        self.faceRelativeSize = [100, 100, 100, 100, 100, 100, 100]
-        self.faceLocation = [0, 0, 0, 0, 0, 0, 0]
+        faceRelativeSize = [100, 100, 100, 100, 100, 100, 100]
+        faceLocation = [0, 0, 0, 0, 0, 0, 0]
         self.baseSize = baseSize
-        self.property = HwpCharShapeProperty()
-        self.shadowIntervalX = 10
-        self.shadowIntervalY = 10
+        property = HwpCharShapeProperty()
+        shadowIntervalX = 10
+        shadowIntervalY = 10
         self.faceColor = faceColor
-        self.underlineColor = HwpColor()
-        self.shadeColor = HwpColor(255, 255, 255)
-        self.shadowColor = HwpColor(192, 192, 192)
-        self.borderFillId = 2
-        self.strikethroughColor = HwpColor()
+        underlineColor = HwpColor()
+        shadeColor = HwpColor(255, 255, 255)
+        shadowColor = HwpColor(192, 192, 192)
+        borderFillId = 2
+        strikethroughColor = HwpColor()
     }
 }

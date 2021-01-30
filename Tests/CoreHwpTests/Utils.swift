@@ -1,5 +1,5 @@
-import Foundation
 import CoreHwp
+import Foundation
 
 func openHwp(_ location: String, _ name: String) throws -> HwpFile {
     let url = URL(fileURLWithPath: location)
@@ -13,6 +13,6 @@ func createHwp(_ location: String, _ name: String) throws -> (HwpFile, HwpFile) 
         .deletingLastPathComponent()
         .appendingPathComponent(name + ".hwp")
     let this = HwpFile()
-    let official =  try HwpFile(fromPath: url.path)
+    let official = try HwpFile(fromPath: url.path)
     return (this, official)
 }

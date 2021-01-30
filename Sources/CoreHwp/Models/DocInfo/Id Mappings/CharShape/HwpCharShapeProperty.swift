@@ -1,48 +1,47 @@
 import Foundation
 
 public struct HwpCharShapeProperty {
-    /**기울임 여부*/
+    /** 기울임 여부 */
     public var isItalic: Bool
-    /**진하게 여부*/
+    /** 진하게 여부 */
     public var isBold: Bool
-    /**밑줄 종류*/
+    /** 밑줄 종류 */
     public var underlineType: HwpUnderlineType
-    /**밑줄 모양*/
+    /** 밑줄 모양 */
     public var underlineShape: Int
-    /**외곽선 종류*/
+    /** 외곽선 종류 */
     public var borderlineType: HwpBorderLineType
-    /**그림자 종류*/
+    /** 그림자 종류 */
     public var shadowType: HwpShadowType
-    /**양각 여부*/
+    /** 양각 여부 */
     public var isRelief: Bool
-    /**음각 여부*/
+    /** 음각 여부 */
     public var isCounterRelief: Bool
-    /**위 첨자 여부*/
+    /** 위 첨자 여부 */
     public var isSuperscript: Bool
-    /**아래 첨자 여부*/
+    /** 아래 첨자 여부 */
     public var isSubscript: Bool
-    /**Reserved*/
+    /** Reserved */
     public var reserved: Bool
-    /**취소선 여부*/
+    /** 취소선 여부 */
     public var strikethrough: Int
-    /**강조점 종류*/
+    /** 강조점 종류 */
     public var emphasisType: HwpEmphasisType
-    /**글꼴에 어울리는 빈칸 사용 여부*/
+    /** 글꼴에 어울리는 빈칸 사용 여부 */
     public var doesAdjustBlank: Bool
-    /**취소선 모양*/
+    /** 취소선 모양 */
     public var strikethroughShape: Int
-    /**Kerning 여부*/
+    /** Kerning 여부 */
     public var isKerning: Bool
 }
 
 extension HwpCharShapeProperty: HwpFromUInt32 {
-
     init(_ reader: inout BitsReader) throws {
         isItalic = reader.readBit()
         isBold = reader.readBit()
 
         let underlineTypeLawValue = reader.readInt(2)
-        guard let underlineType = HwpUnderlineType.init(rawValue: underlineTypeLawValue) else {
+        guard let underlineType = HwpUnderlineType(rawValue: underlineTypeLawValue) else {
             throw HwpError.invalidRawValueForEnum(model: HwpUnderlineType.self, rawValue: underlineTypeLawValue)
         }
         self.underlineType = underlineType
@@ -50,13 +49,13 @@ extension HwpCharShapeProperty: HwpFromUInt32 {
         underlineShape = reader.readInt(4)
 
         let borderlineTypeLawValue = reader.readInt(3)
-        guard let borderlineType = HwpBorderLineType.init(rawValue: borderlineTypeLawValue) else {
+        guard let borderlineType = HwpBorderLineType(rawValue: borderlineTypeLawValue) else {
             throw HwpError.invalidRawValueForEnum(model: HwpBorderLineType.self, rawValue: borderlineTypeLawValue)
         }
         self.borderlineType = borderlineType
 
         let shadowTypeLawValue = reader.readInt(2)
-        guard let shadowType = HwpShadowType.init(rawValue: shadowTypeLawValue) else {
+        guard let shadowType = HwpShadowType(rawValue: shadowTypeLawValue) else {
             throw HwpError.invalidRawValueForEnum(model: HwpShadowType.self, rawValue: shadowTypeLawValue)
         }
         self.shadowType = shadowType
@@ -69,7 +68,7 @@ extension HwpCharShapeProperty: HwpFromUInt32 {
         strikethrough = reader.readInt(3)
 
         let emphasisTypeLawValue = reader.readInt(4)
-        guard let emphasisType = HwpEmphasisType.init(rawValue: emphasisTypeLawValue) else {
+        guard let emphasisType = HwpEmphasisType(rawValue: emphasisTypeLawValue) else {
             throw HwpError.invalidRawValueForEnum(model: HwpEmphasisType.self, rawValue: emphasisTypeLawValue)
         }
         self.emphasisType = emphasisType
@@ -104,53 +103,53 @@ extension HwpCharShapeProperty {
 }
 
 public enum HwpUnderlineType: Int, HwpPrimitive {
-    /**0: 없음*/
+    /** 0: 없음 */
     case none = 0
-    /**1: 글자 아래*/
+    /** 1: 글자 아래 */
     case under = 1
-    /**3: 글자 위*/
+    /** 3: 글자 위 */
     case above = 2
 }
 
 public enum HwpBorderLineType: Int, HwpPrimitive {
-    /**0: 없음*/
+    /** 0: 없음 */
     case none = 0
-    /**1: 실선*/
+    /** 1: 실선 */
     case line = 1
-    /**2: 점선*/
+    /** 2: 점선 */
     case dot = 2
-    /**3: 굵은 실선(두꺼운 선)*/
+    /** 3: 굵은 실선(두꺼운 선) */
     case thickLine = 3
-    /**4: 파선(긴 점선)*/
+    /** 4: 파선(긴 점선) */
     case loneDot = 4
-    /**5: 일점쇄선 (-.-.-.-.)*/
+    /** 5: 일점쇄선 (-.-.-.-.) */
     case oneDotOneLine = 5
-    /**6: 이점쇄선 (-..-..-..)*/
+    /** 6: 이점쇄선 (-..-..-..) */
     case twoDotsOneLine = 6
 }
 
 public enum HwpShadowType: Int, HwpPrimitive {
-    /**0: 없음*/
+    /** 0: 없음 */
     case none = 0
-    /**1: 비연속*/
+    /** 1: 비연속 */
     case discontinuous = 1
-    /**2: 연속*/
+    /** 2: 연속 */
     case continuous = 2
 }
 
 public enum HwpEmphasisType: Int, HwpPrimitive {
-    /**0: 없음*/
+    /** 0: 없음 */
     case none = 0
-    /**1: 검정 동그라미 강조점*/
+    /** 1: 검정 동그라미 강조점 */
     case filledCircle = 1
-    /**2: 속 빈 동그라미 강조점*/
+    /** 2: 속 빈 동그라미 강조점 */
     case outlinedCircle = 2
-    /**3: ˇ(반대 곡절 부호)*/
+    /** 3: ˇ(반대 곡절 부호) */
     case caron = 3
-    /**4:  ̃ (틸드)*/
+    /** 4:  ̃ (틸드) */
     case tilde = 4
-    /**5: ・ (가운뎃점)*/
+    /** 5: ・ (가운뎃점) */
     case interpunct = 5
-    /**6: : (쌍점)*/
+    /** 6: : (쌍점) */
     case colon = 6
 }

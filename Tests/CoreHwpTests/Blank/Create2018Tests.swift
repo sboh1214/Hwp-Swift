@@ -1,5 +1,5 @@
-import XCTest
 import Nimble
+import XCTest
 
 import CoreHwp
 
@@ -8,7 +8,6 @@ import CoreHwp
  program version : 10.0.0.5060
  */
 class Create2018Tests: XCTestCase {
-
     func testCreate() throws {
         let (this, official) = try createHwp(#file, "blank-win2018")
 
@@ -69,7 +68,7 @@ class Create2018Tests: XCTestCase {
 
         for officialCtrlId in officialParagraph.ctrlHeaderArray! {
             switch officialCtrlId {
-            case .section(let hwpSectionDef):
+            case let .section(hwpSectionDef):
                 dump(hwpSectionDef.footNoteShape.unknown)
                 dump(hwpSectionDef.endNoteShape.unknown)
                 dump(hwpSectionDef.unknown)

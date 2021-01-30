@@ -8,7 +8,7 @@ public struct ExcludeEquatable<Value: HwpPrimitive>: HwpPrimitive {
         self.wrappedValue = wrappedValue
     }
 
-    public static func == (lhs: ExcludeEquatable<Value>, rhs: ExcludeEquatable<Value>) -> Bool {
+    public static func == (_: ExcludeEquatable<Value>, _: ExcludeEquatable<Value>) -> Bool {
         true
     }
 }

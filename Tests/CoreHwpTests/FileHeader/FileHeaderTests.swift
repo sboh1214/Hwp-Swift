@@ -1,8 +1,7 @@
-import XCTest
 import Nimble
+import XCTest
 
 final class FileHeaderTests: XCTestCase {
-
 //    func testIsDepolymentDocument() throws {
 //        let hwp = try openHwp(#file, "배포용문서")
 //        expect(hwp.fileHeader.fileProperty.isDeploymentDocument) == true
@@ -13,7 +12,7 @@ final class FileHeaderTests: XCTestCase {
         expect(hwp.fileHeader.fileProperty.doesHaveDocumentHistory) == true
     }
 
-    // TODO : Investigate why false
+    // TODO: Investigate why false
     func testIsTracingChange() throws {
         let hwp = try openHwp(#file, "변경내용추적")
         expect(hwp.fileHeader.fileProperty.isTracingChange) != true
@@ -24,7 +23,7 @@ final class FileHeaderTests: XCTestCase {
         expect(hwp.fileHeader.fileProperty.isKOGLDocument) == true
     }
 
-    // TODO : Investigate why false
+    // TODO: Investigate why false
     func testCCL() throws {
         let hwp = try openHwp(#file, "CCL")
         expect(hwp.fileHeader.fileLicense.doesHaveKoreaOpenLicense) != true
