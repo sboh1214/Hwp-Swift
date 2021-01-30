@@ -18,8 +18,8 @@ final class HwpUtilTests: XCTestCase {
     }
 
     func testGetBitValue() {
-        expect(2) == getBitValue(1024, 9, 10)
-        expect(4) == getBitValue(1024, 8, 10)
+        expect(2) == getBitValue(mask: 1024, start: 9, end: 10)
+        expect(4) == getBitValue(mask: 1024, start: 8, end: 10)
     }
 
     func testCompressUncompress() throws {

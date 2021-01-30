@@ -1,7 +1,6 @@
 import Foundation
 
 public enum HwpError: Error {
-    case invalidFile(path: String)
     case streamDoesNotExist(name: HwpStreamName)
     case streamDecompressFailed(name: HwpStreamName)
     case invalidDataForString(data: Data, name: String)
@@ -11,13 +10,12 @@ public enum HwpError: Error {
     case invalidCtrlId(ctrlId: UInt32)
     case bytesAreNotEOF(model: Any, remain: Int)
     case bitsAreNotEOF(model: Any, remain: Int)
+    case invalidRawValueForEnum(model: Any, rawValue: Int)
 }
 
 extension HwpError: CustomStringConvertible {
     public var description: String {
         switch self {
-        case let .invalidFile(path):
-            return "Invalid File Path '\(path)'"
         case let .streamDoesNotExist(name):
             return "Stream '\(name)' does not exist"
         case let .streamDecompressFailed(name):
@@ -43,6 +41,9 @@ extension HwpError: CustomStringConvertible {
         case let .bitsAreNotEOF(model, remain):
             let typeOfModel = String(describing: type(of: model))
             return "Bits are not EOF : \(remain) bits remain in \(typeOfModel)"
+        case let .invalidRawValueForEnum(model, rawValue):
+            let typeOfModel = String(describing: type(of: model))
+            return "Invalid rawValue : \(rawValue) for initiating enum : \(typeOfModel)"
         }
     }
 }

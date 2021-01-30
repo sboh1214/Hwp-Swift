@@ -43,7 +43,10 @@ let package = Package(
                 .copy("FileHeader/공공누리.hwp"),
                 .copy("FileHeader/문서이력관리.hwp"),
                 .copy("FileHeader/배포용문서.hwp"),
-                .copy("FileHeader/CCL.hwp")
+                .copy("FileHeader/CCL.hwp"),
+
+                .copy("DocInfo/CharShape.hwp"),
+                .copy("DocInfo/CharShapeProperty.hwp")
             ]
         )
     ]

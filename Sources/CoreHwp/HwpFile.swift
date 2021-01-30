@@ -15,22 +15,14 @@ public struct HwpFile: HwpPrimitive {
     }
 
     public init(fromPath filePath: String) throws {
-        do {
-            let ole = try OLEFile(filePath)
-            try self.init(fromOLE: ole)
-        } catch {
-            throw HwpError.invalidFile(path: filePath)
-        }
+        let ole = try OLEFile(filePath)
+        try self.init(fromOLE: ole)
     }
 
     #if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
     public init(fromWrapper fileWrapper: FileWrapper) throws {
-        do {
-            let ole = try OLEFile(fileWrapper)
-            try self.init(fromOLE: ole)
-        } catch {
-            throw HwpError.invalidFile(path: fileWrapper.filename ?? "")
-        }
+        let ole = try OLEFile(fileWrapper)
+        try self.init(fromOLE: ole)
     }
     #endif
 

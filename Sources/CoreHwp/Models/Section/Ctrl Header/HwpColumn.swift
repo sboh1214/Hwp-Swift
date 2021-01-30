@@ -30,7 +30,7 @@ extension HwpColumn: HwpFromData {
 
         property = reader.read(UInt16.self)
         spacing = reader.read(HWPUNIT16.self)
-        let count = getBitValue(Int(property), 2, 9)
+        let count = getBitValue(mask: Int(property), start: 2, end: 9)
         widthArray = (0..<count).map { _ in reader.read(WORD.self)}
         // property2 = reader.read(UInt16.self)
         dividerType = reader.read(UInt8.self)

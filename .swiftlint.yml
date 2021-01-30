@@ -9,7 +9,9 @@ excluded:
   - .build
   - Tests/CoreHwpTests/XCTestManifests.swift
 
-line_length: 100
+line_length:
+  warning: 100
+  error: 120
 
 disabled_rules:
   - todo
