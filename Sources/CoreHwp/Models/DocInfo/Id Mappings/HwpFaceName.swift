@@ -51,14 +51,14 @@ extension HwpFaceName: HwpFromData {
 
 extension HwpFaceName {
     init(_ faceName: String, _ faceTypeInfo: [BYTE], _ defaultFaceName: String) {
-        self.property = 97
-        self.faceNameLength = WORD(faceName.count)
+        property = 97
+        faceNameLength = WORD(faceName.count)
         self.faceName = faceName
-        self.alternativeFaceType = nil
-        self.alternativeFaceNameLength = nil
-        self.alternativeFaceName = nil
+        alternativeFaceType = nil
+        alternativeFaceNameLength = nil
+        alternativeFaceName = nil
         self.faceTypeInfo = faceTypeInfo
-        self.defaultFaceNameLength = WORD(defaultFaceName.count)
+        defaultFaceNameLength = WORD(defaultFaceName.count)
         self.defaultFaceName = defaultFaceName
     }
 }

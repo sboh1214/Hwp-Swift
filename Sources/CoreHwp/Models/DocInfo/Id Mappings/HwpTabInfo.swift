@@ -4,11 +4,11 @@ import Foundation
  탭 정보 (count 개수)
  */
 public struct HwpTabInfo {
-    /**탭의 위치*/
+    /** 탭의 위치 */
     public let location: HWPUNIT
     /**
      탭의 종류
-     
+
      값 설명
      0 왼쪽
      1 오른쪽
@@ -16,9 +16,9 @@ public struct HwpTabInfo {
      3 소수점
      */
     public let type: UInt8
-    /**채움 종류*/
+    /** 채움 종류 */
     public let fillType: UInt8
-    /**8 바이트를 맞추기 위한 예약*/
+    /** 8 바이트를 맞추기 위한 예약 */
     public let reserved: UInt16
 }
 

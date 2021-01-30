@@ -1,9 +1,8 @@
-import XCTest
-import Nimble
 import CoreHwp
+import Nimble
+import XCTest
 
 final class CharShapeTests: XCTestCase {
-
     func testCharShape() throws {
         let hwp = try openHwp(#file, "CharShape")
         let array = hwp.docInfo.idMappings.charShapeArray
@@ -36,7 +35,7 @@ final class CharShapeTests: XCTestCase {
         expect(array[14].property.isCounterRelief) == true
         expect(array[15].property.isSuperscript) == true
         expect(array[16].property.isSubscript) == true
-        // TODO : 문서화 필요
+        // TODO: 문서화 필요
         expect(array[18].property.strikethrough) == 1
         expect(array[19].property.emphasisType) == .filledCircle
         expect(array[20].property.doesAdjustBlank) == true

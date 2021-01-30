@@ -1,10 +1,9 @@
-import XCTest
 import Nimble
+import XCTest
 
 import CoreHwp
 
 final class NooriDocInfoTests: XCTestCase {
-
     func testSectionSize() throws {
         let hwp = try openHwp(#file, "noori")
 

@@ -5,27 +5,27 @@ import PackageDescription
 let package = Package(
     name: "Hwp-Swift",
     products: [
-        .library(name: "CoreHwp", targets: ["CoreHwp"])
+        .library(name: "CoreHwp", targets: ["CoreHwp"]),
     ],
     dependencies: [
         .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.3.1")),
         .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.5.7")),
 
-        .package(url: "https://github.com/Quick/Nimble", .exact("9.0.0"))
+        .package(url: "https://github.com/Quick/Nimble", .exact("9.0.0")),
     ],
     targets: [
         .target(
             name: "CoreHwp",
             dependencies: [
                 "OLEKit",
-                "SWCompression"
+                "SWCompression",
             ]
         ),
         .testTarget(
             name: "CoreHwpTests",
             dependencies: [
                 "CoreHwp",
-                "Nimble"
+                "Nimble",
             ],
             resources: [
                 .copy("Blank/blank-mac2014vp.hwp"),
@@ -46,8 +46,8 @@ let package = Package(
                 .copy("FileHeader/CCL.hwp"),
 
                 .copy("DocInfo/CharShape.hwp"),
-                .copy("DocInfo/CharShapeProperty.hwp")
+                .copy("DocInfo/CharShapeProperty.hwp"),
             ]
-        )
+        ),
     ]
 )

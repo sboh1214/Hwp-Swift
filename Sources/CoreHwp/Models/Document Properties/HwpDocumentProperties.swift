@@ -2,11 +2,11 @@ import Foundation
 
 /**
  문서 속성
- 
+
  Tag ID : HWPTAG_DOCUMENT_PROPERTIES
  */
 public struct HwpDocumentProperties: HwpFromData {
-    /**구역 개수*/
+    /** 구역 개수 */
     public var sectionSize: UInt16
     public let startingIndex: HwpStartingIndex
     public let caratLocation: HwpCaratLocation

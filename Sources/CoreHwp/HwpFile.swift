@@ -20,14 +20,14 @@ public struct HwpFile: HwpPrimitive {
     }
 
     #if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
-    public init(fromWrapper fileWrapper: FileWrapper) throws {
-        let ole = try OLEFile(fileWrapper)
-        try self.init(fromOLE: ole)
-    }
+        public init(fromWrapper fileWrapper: FileWrapper) throws {
+            let ole = try OLEFile(fileWrapper)
+            try self.init(fromOLE: ole)
+        }
     #endif
 
     private init(fromOLE ole: OLEFile) throws {
-        let streams = Dictionary(uniqueKeysWithValues: ole.root.children.map { ($0.name, $0 ) })
+        let streams = Dictionary(uniqueKeysWithValues: ole.root.children.map { ($0.name, $0) })
         let reader = StreamReader(ole, streams)
 
         let fileHeader = try HwpFileHeader.load(reader.getDataFromStream(.fileHeader, false))
@@ -39,7 +39,7 @@ public struct HwpFile: HwpPrimitive {
         docInfo = try HwpDocInfo.load(docInfoData, fileHeader.version)
 
         sectionArray = try reader.getDataFromStorage(.bodyText, isCompressed)
-            .map {try HwpSection.load($0, fileHeader.version)}
+            .map { try HwpSection.load($0, fileHeader.version) }
 
         guard let previewTextStream = streams[HwpStreamName.previewText.rawValue] else {
             throw HwpError.streamDoesNotExist(name: HwpStreamName.previewText)

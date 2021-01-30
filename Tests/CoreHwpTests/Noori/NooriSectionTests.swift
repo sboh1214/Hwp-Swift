@@ -1,12 +1,11 @@
-import XCTest
 import Nimble
+import XCTest
 
 final class NooriSectionTests: XCTestCase {
-
     func testParagraph() throws {
         let hwp = try openHwp(#file, "noori")
 
-        for index in 0...20 {
+        for index in 0 ... 20 {
             expect(hwp.sectionArray[0].paragraph[index]).notTo(beNil())
         }
     }
@@ -56,7 +55,7 @@ final class NooriSectionTests: XCTestCase {
         let hwp = try openHwp(#file, "noori")
 
         switch hwp.sectionArray[0].paragraph[1].ctrlHeaderArray![0] {
-        case .table(let hwpTable):
+        case let .table(hwpTable):
             expect(hwpTable.commonCtrlProperty.verticalOffset) == 0
             expect(hwpTable.commonCtrlProperty.horizontalOffset) == 0
             expect(hwpTable.commonCtrlProperty.width) == 48230
@@ -71,7 +70,7 @@ final class NooriSectionTests: XCTestCase {
         let hwp = try openHwp(#file, "noori")
 
         switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![2] {
-        case .genShapeObject(let hwpGenShapeObject):
+        case let .genShapeObject(hwpGenShapeObject):
             expect(hwpGenShapeObject.commonCtrlProperty.verticalOffset) == 0
             expect(hwpGenShapeObject.commonCtrlProperty.horizontalOffset) == 0
             expect(hwpGenShapeObject.commonCtrlProperty.width) == 48104
@@ -86,7 +85,7 @@ final class NooriSectionTests: XCTestCase {
         let hwp = try openHwp(#file, "noori")
 
         switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![1] {
-        case .column(let hwpColumn):
+        case let .column(hwpColumn):
             expect(hwpColumn.widthArray.count) == 1
         default:
             XCTFail("Ctrl is not Column")

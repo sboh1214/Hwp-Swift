@@ -1,19 +1,19 @@
 public struct HwpParaLineSegInternal: HwpPrimitive {
-    /**텍스트 시작 위치*/
+    /** 텍스트 시작 위치 */
     public let textStartingIndex: UInt32
-    /**줄의 세로 위치*/
+    /** 줄의 세로 위치 */
     public let lineLocation: Int32
-    /**줄의 높이*/
+    /** 줄의 높이 */
     public let lineHeight: Int32
-    /**텍스트 부분의 높이*/
+    /** 텍스트 부분의 높이 */
     public let textHeight: Int32
-    /**줄의 세로 위치에서 베이스라인까지 거리*/
+    /** 줄의 세로 위치에서 베이스라인까지 거리 */
     public let baselineDistance: Int32
-    /**줄간격*/
+    /** 줄간격 */
     public let lineSpacing: Int32
-    /**컬럼에서의 시작 위치*/
+    /** 컬럼에서의 시작 위치 */
     public let startingLocation: Int32
-    /**세그먼트의 폭*/
+    /** 세그먼트의 폭 */
     public let width: Int32
     /**
      태그
@@ -38,7 +38,7 @@ public struct HwpParaLineSegInternal: HwpPrimitive {
         lineSpacing = 600
         startingLocation = 0
         width = 42520
-        property = 393216
+        property = 393_216
     }
 
     init(_ reader: inout DataReader) {

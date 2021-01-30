@@ -16,6 +16,7 @@ extension Character: Codable {
         }
         self = string[string.startIndex]
     }
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(String(self))

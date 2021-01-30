@@ -9,12 +9,14 @@ excluded:
   - .build
   - Tests/CoreHwpTests/XCTestManifests.swift
 
+disabled_rules:
+  - todo
+  - trailing_comma
+  - opening_brace
+
 line_length:
   warning: 100
   error: 120
-
-disabled_rules:
-  - todo
 
 type_body_length:
   warning: 300

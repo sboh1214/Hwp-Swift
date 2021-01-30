@@ -2,13 +2,13 @@ import Foundation
 
 /**
  3.2.1. 파일 인식 정보
- 
+
  한글의 문서 파일이라는 것을 나타내기 위해 ‘파일 인식 정보’가 저장된다.
  */
 public struct HwpFileHeader: HwpFromData {
     /**
      signature
-     
+
      문서 파일은 "HWP Document File"
      */
     public var signature: String
@@ -27,7 +27,7 @@ public struct HwpFileHeader: HwpFromData {
      - 4 : (한글 7.0 버전 이후)
      */
     public var encryptVersion: UInt32
-    /**공공누리 Korea Open Government License*/
+    /** 공공누리 Korea Open Government License */
     public var koreaOpenLicense: UInt8
 
     init(_ reader: inout DataReader) throws {

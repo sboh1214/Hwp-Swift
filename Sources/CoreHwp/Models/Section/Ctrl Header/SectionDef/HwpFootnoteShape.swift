@@ -2,47 +2,47 @@ import Foundation
 
 /**
  4.3.10.1.2. 각주/미주 모양
- 
+
  Tag ID : HWPTAG_FOOTNOTE_SHAPE
  */
 public struct HwpFootnoteShape {
-    /**속성*/
+    /** 속성 */
     public var property: UInt32
-    /**사용자 기호*/
+    /** 사용자 기호 */
     public var userSymbol: Character
-    /**앞 장식 문자*/
+    /** 앞 장식 문자 */
     public var decorationHead: Character
-    /**뒤 장식 문자*/
+    /** 뒤 장식 문자 */
     public var decorationTail: Character
-    /**시작 번호*/
+    /** 시작 번호 */
     public var startingNumber: UInt16
-    /**구분선 길이*/
+    /** 구분선 길이 */
     public var dividerLength: HWPUNIT16
-    /**구분선 위 여백*/
+    /** 구분선 위 여백 */
     public var dividerMarginTop: HWPUNIT16
-    /**구분선 아래 여백*/
+    /** 구분선 아래 여백 */
     public var dividerMarginBottom: HWPUNIT16
-    /**주석 사이 여백*/
+    /** 주석 사이 여백 */
     public var marginComment: HWPUNIT16
     /**
      구분선 종류
-     
+
      (테두리/배경의 테두리 선 종류 참조)
      */
     public var dividerType: UInt8
     /**
      구분선 굵기
-     
+
      (테두리/배경의 테두리 선 굵기 참조)
      */
     public var dividerThickness: UInt8
     /**
      구분선 색상
-     
+
      (테두리/배경의 테두리 선 색상 참조)
      */
     public var dividerColor: HwpColor
-    /**unknown 2bytes*/
+    /** unknown 2bytes */
     public var unknown: Data
 }
 
@@ -66,7 +66,8 @@ extension HwpFootnoteShape: HwpFromData {
 
 extension HwpFootnoteShape {
     init(dividerLength: HWPUNIT16, dividerMarginTop: HWPUNIT16,
-         dividerType: UInt8, dividerThickness: UInt8) {
+         dividerType: UInt8, dividerThickness: UInt8)
+    {
         property = 0
         userSymbol = "\0"
         decorationHead = "\0"

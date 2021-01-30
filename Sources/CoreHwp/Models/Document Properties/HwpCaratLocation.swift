@@ -4,11 +4,11 @@ import Foundation
  문서 내 캐럿의 위치 정보
  */
 public struct HwpCaratLocation: HwpFromData {
-    /**리스트 아이디*/
+    /** 리스트 아이디 */
     public var listId: UInt32
-    /**문단 아이디*/
+    /** 문단 아이디 */
     public var paragraphId: UInt32
-    /**문단 내에서의 글자 단위 위치*/
+    /** 문단 내에서의 글자 단위 위치 */
     public var charIndex: UInt32
 
     init() {

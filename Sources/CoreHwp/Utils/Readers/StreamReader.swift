@@ -27,7 +27,7 @@ struct StreamReader {
 
     private func readData(_ stream: DirectoryEntry, _ isCompressed: Bool) throws -> Data {
         let reader = try ole.stream(stream)
-        let data =  reader.readDataToEnd()
+        let data = reader.readDataToEnd()
         if isCompressed {
             let decompressed = try Deflate.decompress(data: data)
             return decompressed
