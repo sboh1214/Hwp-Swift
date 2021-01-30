@@ -237,7 +237,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
             case HwpDocInfoTag.forbiddenChar.rawValue:
                 forbiddenCharArray.append(try HwpForbiddenChar.load(child.payload))
             default:
-                print("HKFWarning : Unidentified Tag \(child.tagId)")
+                throw HwpError.unidentifiedTag(tagId: child.tagId)
             }
         }
     }

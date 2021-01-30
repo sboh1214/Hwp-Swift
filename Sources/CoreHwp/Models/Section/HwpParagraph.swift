@@ -69,7 +69,6 @@ public struct HwpParagraph: HwpFromRecordWithVersion {
                     } else if other == .pageNumberPosition {
                         return try .pageNumberPosition(HwpPageNumberPosition.load($0.payload))
                     }
-                    print(other)
                     return try .notImplemented(HwpCtrlHeader.load($0))
                 } else if HwpFieldCtrlId.init(rawValue: ctrlId) != nil {
                     return try .notImplemented(HwpCtrlHeader.load($0))

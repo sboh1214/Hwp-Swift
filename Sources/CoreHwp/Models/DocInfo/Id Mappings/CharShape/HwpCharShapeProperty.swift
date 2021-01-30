@@ -41,20 +41,23 @@ extension HwpCharShapeProperty: HwpFromUInt32 {
         isItalic = reader.readBit()
         isBold = reader.readBit()
 
-        guard let underlineType = HwpUnderlineType.init(rawValue: reader.readInt(2)) else {
-            throw HwpError.invalidRawValueForEnum(model: HwpUnderlineType.self)
+        let underlineTypeLawValue = reader.readInt(2)
+        guard let underlineType = HwpUnderlineType.init(rawValue: underlineTypeLawValue) else {
+            throw HwpError.invalidRawValueForEnum(model: HwpUnderlineType.self, rawValue: underlineTypeLawValue)
         }
         self.underlineType = underlineType
 
         underlineShape = reader.readInt(4)
 
-        guard let borderlineType = HwpBorderLineType.init(rawValue: reader.readInt(3)) else {
-            throw HwpError.invalidRawValueForEnum(model: HwpBorderLineType.self)
+        let borderlineTypeLawValue = reader.readInt(3)
+        guard let borderlineType = HwpBorderLineType.init(rawValue: borderlineTypeLawValue) else {
+            throw HwpError.invalidRawValueForEnum(model: HwpBorderLineType.self, rawValue: borderlineTypeLawValue)
         }
         self.borderlineType = borderlineType
 
-        guard let shadowType = HwpShadowType.init(rawValue: reader.readInt(2)) else {
-            throw HwpError.invalidRawValueForEnum(model: HwpShadowType.self)
+        let shadowTypeLawValue = reader.readInt(2)
+        guard let shadowType = HwpShadowType.init(rawValue: shadowTypeLawValue) else {
+            throw HwpError.invalidRawValueForEnum(model: HwpShadowType.self, rawValue: shadowTypeLawValue)
         }
         self.shadowType = shadowType
 
@@ -64,10 +67,13 @@ extension HwpCharShapeProperty: HwpFromUInt32 {
         isSubscript = reader.readBit()
         reserved = reader.readBit()
         strikethrough = reader.readInt(3)
-        guard let emphasisType = HwpEmphasisType.init(rawValue: reader.readInt(4)) else {
-            throw HwpError.invalidRawValueForEnum(model: HwpEmphasisType.self)
+
+        let emphasisTypeLawValue = reader.readInt(4)
+        guard let emphasisType = HwpEmphasisType.init(rawValue: emphasisTypeLawValue) else {
+            throw HwpError.invalidRawValueForEnum(model: HwpEmphasisType.self, rawValue: emphasisTypeLawValue)
         }
         self.emphasisType = emphasisType
+
         doesAdjustBlank = reader.readBit()
         strikethroughShape = reader.readInt(4)
         isKerning = reader.readBit()
@@ -103,7 +109,7 @@ public enum HwpUnderlineType: Int, HwpPrimitive {
     /**1: 글자 아래*/
     case under = 1
     /**3: 글자 위*/
-    case above = 3
+    case above = 2
 }
 
 public enum HwpBorderLineType: Int, HwpPrimitive {
