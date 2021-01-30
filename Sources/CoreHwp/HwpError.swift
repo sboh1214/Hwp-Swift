@@ -1,7 +1,6 @@
 import Foundation
 
 public enum HwpError: Error {
-    case atOLEKit(description: String)
     case streamDoesNotExist(name: HwpStreamName)
     case streamDecompressFailed(name: HwpStreamName)
     case invalidDataForString(data: Data, name: String)
@@ -17,8 +16,6 @@ public enum HwpError: Error {
 extension HwpError: CustomStringConvertible {
     public var description: String {
         switch self {
-        case let .atOLEKit(description):
-            return "Error while initiate OLEFile : \(description)"
         case let .streamDoesNotExist(name):
             return "Stream '\(name)' does not exist"
         case let .streamDecompressFailed(name):
