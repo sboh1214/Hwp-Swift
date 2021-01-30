@@ -45,7 +45,7 @@ public struct HwpBinData: HwpFromData {
 
     init(_ reader: inout DataReader) throws {
         let property = reader.read(UInt16.self)
-        type = HwpBinDataType(rawValue: getBitValue(Int(property), 0, 3))!
+        type = HwpBinDataType(rawValue: getBitValue(mask: Int(property), start: 0, end: 3))!
 
         if type == HwpBinDataType.link {
             absolutePathLength = reader.read(WORD.self)

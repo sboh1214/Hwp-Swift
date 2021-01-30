@@ -14,9 +14,11 @@ extension HwpColor {
     }
 
     public init(_ data: COLORREF) {
-        red = getBitValue(Int(data), 0, 7)
-        green = getBitValue(Int(data), 0, 7)
-        blue = getBitValue(Int(data), 0, 7)
+        var reader = BitsReader(from: data)
+        // reader.readBits(8)
+        red = reader.readInt(8)
+        green = reader.readInt(8)
+        blue = reader.readInt(8)
     }
 
     public init(_ red: Int, _ green: Int, _ blue: Int) {
@@ -24,16 +26,4 @@ extension HwpColor {
         self.green = green
         self.blue = blue
     }
-}
-
-func getBitValue(_ mask: Int, _ start: Int, _ end: Int) -> Int {
-    let target: Int = mask >> start
-
-    var temp = 0
-    for _ in  0...(end - start) {
-        temp <<= 1
-        temp += 1
-    }
-
-    return target & temp
 }

@@ -20,10 +20,10 @@ public struct HwpCharShape {
     public let baseSize: Int32
     /**속성*/
     public let property: HwpCharShapeProperty
-    /**그림자 간격, -100%~100%*/
-    public let shadowInterval: Int8
-    /**그림자 간격, -100%~100%*/
-    public let shadowInterval2: Int8
+    /**그림자 간격 X, -100%~100%*/
+    public let shadowIntervalX: Int8
+    /**그림자 간격 Y, -100%~100%*/
+    public let shadowIntervalY: Int8
     /**글자 색*/
     public let faceColor: HwpColor
     /**밑줄 색*/
@@ -47,8 +47,8 @@ extension HwpCharShape: HwpFromDataWithVersion {
         faceLocation = reader.read(Int8.self, 7)
         baseSize = reader.read(Int32.self)
         property = try HwpCharShapeProperty.load(reader.read(UInt32.self))
-        shadowInterval = reader.read(Int8.self)
-        shadowInterval2 = reader.read(Int8.self)
+        shadowIntervalX = reader.read(Int8.self)
+        shadowIntervalY = reader.read(Int8.self)
         faceColor = HwpColor(reader.read(UInt32.self))
         underlineColor = HwpColor(reader.read(UInt32.self))
         shadeColor = HwpColor(reader.read(UInt32.self))
@@ -71,8 +71,8 @@ extension HwpCharShape {
         self.faceLocation = [0, 0, 0, 0, 0, 0, 0]
         self.baseSize = baseSize
         self.property = HwpCharShapeProperty()
-        self.shadowInterval = 10
-        self.shadowInterval2 = 10
+        self.shadowIntervalX = 10
+        self.shadowIntervalY = 10
         self.faceColor = faceColor
         self.underlineColor = HwpColor()
         self.shadeColor = HwpColor(255, 255, 255)
