@@ -12,4 +12,4 @@ jobs:
         with:
           mode: minimum
           count: 1
-          labels: "enhancement, bug, documentation"
+          labels: "enhancement, bug, maintenance"
