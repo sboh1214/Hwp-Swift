@@ -1,4 +1,13 @@
 import Foundation
+#if canImport(UIKit)
+    import UIKit
+#endif
+#if canImport(AppKit)
+    import AppKit
+#endif
+#if canImport(SwiftUI)
+    import SwiftUI
+#endif
 
 public struct HwpColor: HwpPrimitive {
     public let red: Int
@@ -26,4 +35,44 @@ public extension HwpColor {
         self.green = green
         self.blue = blue
     }
+}
+
+extension HwpColor {
+    #if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
+        @available(iOS 13.0, *)
+        var cgColor: CGColor {
+            let red = CGFloat(self.red) / CGFloat(255)
+            let green = CGFloat(self.green) / CGFloat(255)
+            let blue = CGFloat(self.blue) / CGFloat(255)
+            let alpha = CGFloat(1)
+            return CGColor(red: red, green: green, blue: blue, alpha: alpha)
+        }
+    #endif
+
+    #if canImport(UIKit)
+        var uiColor: UIColor {
+            let red = CGFloat(self.red) / CGFloat(255)
+            let green = CGFloat(self.green) / CGFloat(255)
+            let blue = CGFloat(self.blue) / CGFloat(255)
+            let alpha = CGFloat(1)
+            return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        }
+    #endif
+
+    #if canImport(AppKit)
+        var nsColor: NSColor {
+            NSColor(cgColor: cgColor)!
+        }
+    #endif
+
+    #if canImport(SwiftUI)
+        @available(iOS 13.0, OSX 10.15, *)
+        func color(colorSpace: Color.RGBColorSpace = .sRGB) -> Color {
+            let red = Double(self.red) / Double(255)
+            let green = Double(self.green) / Double(255)
+            let blue = Double(self.blue) / Double(255)
+            let opacity = Double(1)
+            return Color(colorSpace, red: red, green: green, blue: blue, opacity: opacity)
+        }
+    #endif
 }
