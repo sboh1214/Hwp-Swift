@@ -7,7 +7,6 @@ excluded:
   - Carthage
   - Pods
   - .build
-  - Tests/CoreHwpTests/XCTestManifests.swift
 
 disabled_rules:
   - todo

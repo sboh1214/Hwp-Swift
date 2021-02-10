@@ -1,8 +1,1 @@
-import XCTest
-
-import CoreHwpTests
-
-var tests = [XCTestCaseEntry]()
-tests += CoreHwpTests.__allTests()
-
-XCTMain(tests)
+fatalError("Please run the tests with `swift test --enable-test-discovery`.")
