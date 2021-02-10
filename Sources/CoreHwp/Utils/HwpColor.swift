@@ -38,14 +38,16 @@ public extension HwpColor {
 }
 
 extension HwpColor {
-    @available(iOS 13.0, *)
-    var cgColor: CGColor {
-        let red = CGFloat(self.red) / CGFloat(255)
-        let green = CGFloat(self.green) / CGFloat(255)
-        let blue = CGFloat(self.blue) / CGFloat(255)
-        let alpha = CGFloat(1)
-        return CGColor(red: red, green: green, blue: blue, alpha: alpha)
-    }
+    #if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
+        @available(iOS 13.0, *)
+        var cgColor: CGColor {
+            let red = CGFloat(self.red) / CGFloat(255)
+            let green = CGFloat(self.green) / CGFloat(255)
+            let blue = CGFloat(self.blue) / CGFloat(255)
+            let alpha = CGFloat(1)
+            return CGColor(red: red, green: green, blue: blue, alpha: alpha)
+        }
+    #endif
 
     #if canImport(UIKit)
         var uiColor: UIColor {
