@@ -1,3 +1,1 @@
 --swiftversion 5.3
-
---exclude Tests/CoreHwpTests/XCTestManifests.swift
