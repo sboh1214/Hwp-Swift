@@ -30,13 +30,4 @@ final class HwpUtilTests: XCTestCase {
 
         expect(testData) == decompressed
     }
-
-    #if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
-        func testColorExtension() throws {
-            let black = HwpColor()
-            expect(black.cgColor) != CGColor.black
-            expect(CGColor.black) == CGColor(genericGrayGamma2_2Gray: 0, alpha: 1)
-            expect(black.cgColor) != CGColor(srgbRed: 0, green: 0, blue: 0, alpha: 1)
-        }
-    #endif
 }
