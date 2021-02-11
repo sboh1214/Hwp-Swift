@@ -37,7 +37,7 @@ public extension HwpColor {
     }
 }
 
-extension HwpColor {
+public extension HwpColor {
     #if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
         @available(iOS 13.0, *)
         var cgColor: CGColor {
