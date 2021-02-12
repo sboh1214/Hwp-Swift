@@ -8,19 +8,13 @@ import Foundation
 public struct HwpBinData: HwpFromData {
     public var property: HwpBinDataProperty
 
-    /** Type이 "LINK"일 때, 연결 파일의 절대 경로 길이 */
-    var absolutePathLength: WORD?
     /** Type이 "LINK"일 때, 연결 파일의 절대 경로 */
     public var absolutePath: [WCHAR]?
-    /** Type이 "LINK"일 때, 연결 파일의 상대 경로 길이 */
-    var relativePathLength: WORD?
     /** Type이 "LINK"일 때, 연결 파일의 상대 경로 */
     public var relativePath: [WCHAR]?
 
     /** Type이 "EMBEDDING"이거나 "STORAGE"일 때, BINDATASTORAGE에 저장된 바이너리 데이터의 아이디 */
     public var streamId: UInt16?
-    /** Type이 "EMBEDDING"일 때, 바이너리 데이터의 형식 이름의 길이 */
-    public var extensionLength: WORD?
     /**
      Type이 "EMBEDDING"일 때 extension("." 제외)
 
@@ -31,12 +25,9 @@ public struct HwpBinData: HwpFromData {
 
     init() {
         property = HwpBinDataProperty()
-        absolutePathLength = nil
         absolutePath = nil
-        relativePathLength = nil
         relativePath = nil
         streamId = nil
-        extensionLength = nil
         extensionName = nil
     }
 
@@ -44,14 +35,14 @@ public struct HwpBinData: HwpFromData {
         property = try HwpBinDataProperty.load(reader.read(UInt16.self))
 
         if property.type == .link {
-            absolutePathLength = reader.read(WORD.self)
-            absolutePath = reader.read(WCHAR.self, absolutePathLength!)
-            relativePathLength = reader.read(WORD.self)
-            relativePath = reader.read(WCHAR.self, relativePathLength!)
+            let absolutePathLength = reader.read(WORD.self)
+            absolutePath = reader.read(WCHAR.self, absolutePathLength)
+            let relativePathLength = reader.read(WORD.self)
+            relativePath = reader.read(WCHAR.self, relativePathLength)
         } else {
             streamId = reader.read(UInt16.self)
-            extensionLength = reader.read(WORD.self)
-            extensionName = reader.read(WCHAR.self, extensionLength!)
+            let extensionLength = reader.read(WORD.self)
+            extensionName = reader.read(WCHAR.self, extensionLength)
         }
     }
 }
