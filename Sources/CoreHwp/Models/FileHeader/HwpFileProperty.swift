@@ -41,8 +41,10 @@ public struct HwpFileProperty {
     var unused: [Bool]
 }
 
-extension HwpFileProperty: HwpFromUInt32 {
-    init(_ reader: inout BitsReader) throws {
+extension HwpFileProperty: HwpFromUInt {
+    typealias UIntType = UInt32
+
+    init(_ reader: inout BitsReader<UIntType>) throws {
         isCompressed = reader.readBit()
         isEncrypted = reader.readBit()
         isDeploymentDocument = reader.readBit()

@@ -45,8 +45,10 @@ let package = Package(
                 .copy("FileHeader/배포용문서.hwp"),
                 .copy("FileHeader/CCL.hwp"),
 
-                .copy("DocInfo/CharShape.hwp"),
-                .copy("DocInfo/CharShapeProperty.hwp"),
+                .copy("DocInfo/CharShape/CharShape.hwp"),
+                .copy("DocInfo/CharShape/CharShapeProperty.hwp"),
+
+                .copy("DocInfo/BinData/BinData.hwp"),
             ]
         ),
     ]

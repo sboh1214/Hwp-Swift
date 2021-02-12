@@ -1,11 +1,11 @@
 import Foundation
 
-struct BitsReader {
+struct BitsReader<T: BinaryInteger> {
     private var bits: [Bool]
     private var offset: Int = 0
 
-    init(from uint32: UInt32) {
-        bits = uint32.bits
+    init(from int: T) {
+        bits = int.bits
     }
 
     var isEOF: Bool {

@@ -1,6 +1,3 @@
-import Foundation
-import OLEKit
-
 /** 부호 없는 한 바이트(0~255) */
 public typealias BYTE = UInt8
 /** 16비트 컴파일러에서 ‘unsigned int’에 해당 */
@@ -31,11 +28,3 @@ public typealias HWPUNIT16 = Int16
  (rr : red 1 byte, gg : green 1 byte, bb : blue 1 byte)
  */
 public typealias COLORREF = UInt32
-
-extension StringProtocol {
-    var asciiValues: [UInt8] { compactMap(\.asciiValue) }
-}
-
-extension WCHAR {
-    var character: Character { Character(UnicodeScalar(self)!) }
-}
