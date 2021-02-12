@@ -14,7 +14,7 @@ public struct HwpIdMappings {
     public var changeTraceUserCount: Int32?
 
     /** 바이너리 데이터 */
-    public var binaryDataArray: [HwpBinData]
+    public var binDataArray: [HwpBinData]
 
     /** 한글 글꼴 */
     public var faceNameKoreanArray: [HwpFaceName]
@@ -60,7 +60,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
         changeTraceCount = 0
         changeTraceUserCount = 0
 
-        binaryDataArray = [HwpBinData]()
+        binDataArray = [HwpBinData]()
 
         let dotum = HwpFaceName("함초롬돋움", [2, 11, 6, 4, 0, 1, 1, 1, 1, 1], "HCR Dotum")
         let batang = HwpFaceName("함초롬바탕", [2, 3, 6, 4, 0, 1, 1, 1, 1, 1], "HCR Batang")
@@ -195,7 +195,7 @@ extension HwpIdMappings: HwpFromRecordWithVersion {
 
         var childrenArray = children
 
-        binaryDataArray = try childrenArray.pop(binaryDataCount)
+        binDataArray = try childrenArray.pop(binaryDataCount)
             .map { try HwpBinData.load($0.payload) }
         faceNameKoreanArray = try childrenArray.pop(faceNameKoreanCount)
             .map { try HwpFaceName.load($0.payload) }

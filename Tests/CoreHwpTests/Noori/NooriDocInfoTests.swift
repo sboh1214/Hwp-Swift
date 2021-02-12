@@ -34,11 +34,11 @@ final class NooriDocInfoTests: XCTestCase {
     func testBinData() throws {
         let hwp = try openHwp(#file, "noori")
 
-        let bin = hwp.docInfo.idMappings.binaryDataArray
-        expect(bin[0].extensionName!.string) == "jpg"
-        expect(bin[1].extensionName!.string) == "bmp"
-        expect(bin[2].extensionName!.string) == "bmp"
-        expect(bin[3].extensionName!.string) == "jpg"
+        let bin = hwp.docInfo.idMappings.binDataArray
+        expect(bin[0].extensionName) == "jpg"
+        expect(bin[1].extensionName) == "bmp"
+        expect(bin[2].extensionName) == "bmp"
+        expect(bin[3].extensionName) == "jpg"
     }
 
     func testFaceName() throws {
