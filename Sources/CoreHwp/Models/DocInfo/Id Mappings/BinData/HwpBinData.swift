@@ -6,10 +6,7 @@ import Foundation
  Tag ID : HWPTAG_BIN_DATA
  */
 public struct HwpBinData: HwpFromData {
-    /** 속성 -> type */
-    public let type: HwpBinDataType
-
-    // TODO: 속성 파싱
+    public var property: HwpBinDataProperty
 
     /** Type이 "LINK"일 때, 연결 파일의 절대 경로 길이 */
     var absolutePathLength: WORD?
@@ -33,7 +30,7 @@ public struct HwpBinData: HwpFromData {
     public var extensionName: [WCHAR]?
 
     init() {
-        type = .embedding
+        property = HwpBinDataProperty()
         absolutePathLength = nil
         absolutePath = nil
         relativePathLength = nil
@@ -44,10 +41,9 @@ public struct HwpBinData: HwpFromData {
     }
 
     init(_ reader: inout DataReader) throws {
-        let property = reader.read(UInt16.self)
-        type = HwpBinDataType(rawValue: getBitValue(mask: Int(property), start: 0, end: 3))!
+        property = try HwpBinDataProperty.load(reader.read(UInt16.self))
 
-        if type == HwpBinDataType.link {
+        if property.type == .link {
             absolutePathLength = reader.read(WORD.self)
             absolutePath = reader.read(WCHAR.self, absolutePathLength!)
             relativePathLength = reader.read(WORD.self)
@@ -58,10 +54,4 @@ public struct HwpBinData: HwpFromData {
             extensionName = reader.read(WCHAR.self, extensionLength!)
         }
     }
-}
-
-public enum HwpBinDataType: Int, Codable {
-    case link = 0x0
-    case embedding = 0x1
-    case storage = 0x2
 }

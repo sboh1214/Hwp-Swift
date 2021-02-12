@@ -8,3 +8,12 @@ extension UInt32 {
         return byteArray.flatMap(\.bits)
     }
 }
+
+extension UInt16 {
+    var bits: [Bool] {
+        let byteArray = withUnsafeBytes(of: littleEndian) {
+            Array($0)
+        }
+        return byteArray.flatMap(\.bits)
+    }
+}

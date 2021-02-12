@@ -4,6 +4,10 @@ struct BitsReader {
     private var bits: [Bool]
     private var offset: Int = 0
 
+    init(from uint16: UInt16) {
+        bits = uint16.bits
+    }
+
     init(from uint32: UInt32) {
         bits = uint32.bits
     }
