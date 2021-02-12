@@ -15,8 +15,10 @@ public struct HwpFileLicense {
     var unused: [Bool]
 }
 
-extension HwpFileLicense: HwpFromUInt32 {
-    init(_ reader: inout BitsReader) throws {
+extension HwpFileLicense: HwpFromUInt {
+    typealias UIntType = UInt32
+
+    init(_ reader: inout BitsReader<UIntType>) throws {
         doesHaveKoreaOpenLicense = reader.readBit()
         doesLimitReplication = reader.readBit()
         doesHavePermission = reader.readBit()

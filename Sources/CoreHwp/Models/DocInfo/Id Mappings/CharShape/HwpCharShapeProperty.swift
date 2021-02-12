@@ -35,8 +35,10 @@ public struct HwpCharShapeProperty {
     public var isKerning: Bool
 }
 
-extension HwpCharShapeProperty: HwpFromUInt32 {
-    init(_ reader: inout BitsReader) throws {
+extension HwpCharShapeProperty: HwpFromUInt {
+    typealias UIntType = UInt32
+
+    init(_ reader: inout BitsReader<UIntType>) throws {
         isItalic = reader.readBit()
         isBold = reader.readBit()
 

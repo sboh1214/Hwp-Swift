@@ -9,8 +9,10 @@ public struct HwpBinDataProperty {
     public var state: HwpBinDataState
 }
 
-extension HwpBinDataProperty: HwpFromUInt16 {
-    init(_ reader: inout BitsReader) throws {
+extension HwpBinDataProperty: HwpFromUInt {
+    typealias UIntType = UInt16
+
+    init(_ reader: inout BitsReader<UIntType>) throws {
         let typeRawValue = reader.readInt(4)
         guard let type = HwpBinDataType(rawValue: typeRawValue) else {
             throw HwpError.invalidRawValueForEnum(model: HwpBinDataType.self, rawValue: typeRawValue)
