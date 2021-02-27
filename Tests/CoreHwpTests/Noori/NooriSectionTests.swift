@@ -86,7 +86,7 @@ final class NooriSectionTests: XCTestCase {
 
         switch hwp.sectionArray[0].paragraph[0].ctrlHeaderArray![1] {
         case let .column(hwpColumn):
-            expect(hwpColumn.widthArray.count) == 1
+            expect(hwpColumn.widthArray).to(beNil())
         default:
             XCTFail("Ctrl is not Column")
         }
