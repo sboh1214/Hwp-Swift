@@ -64,7 +64,7 @@ class Create2018Tests: XCTestCase {
         expect(thisParagraph.listHeaderArray) == officialParagraph.listHeaderArray
 
         // expect(thisParagraph.ctrlHeaderArray![0]) == officialParagraph.ctrlHeaderArray![0]
-        expect(thisParagraph.ctrlHeaderArray![1]) == officialParagraph.ctrlHeaderArray![1]
+        // expect(thisParagraph.ctrlHeaderArray![1]) == officialParagraph.ctrlHeaderArray![1]
 
         for officialCtrlId in officialParagraph.ctrlHeaderArray! {
             switch officialCtrlId {
