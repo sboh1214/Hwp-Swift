@@ -8,24 +8,18 @@ on:
 
 jobs:
   test:
-    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    name: Swift ${{ matrix.swift }} on Linux
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    container: swift:${{ matrix.swift }}-slim
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
-        swift: ["5"]
-        include:
-          - os: macos-10.15
-            swift: "5.2"
-          - os: ubuntu-latest
-            swift: "5.2"
+        swift: ["5.2", "5"]
 
     steps:
     - uses: actions/checkout@v2
-    - uses: fwal/setup-swift@v1.6.0
-      with:
-        swift-version: ${{ matrix.swift }}
+    - name: Check version
+      run: swift -version
     - name: Build
       run: swift build -c release -v
     - name: Run tests
