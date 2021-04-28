@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: Install swiftenv
+    - name: Install swiftenv
       run: brew install kylef/formulae/swiftenv
     - name: Install and set swift@${{ matrix.swift }}
       run: |

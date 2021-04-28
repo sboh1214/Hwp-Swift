@@ -11,7 +11,7 @@ jobs:
     name: Test Swift@${{ matrix.swift }} on Linux
 
     runs-on: ubuntu-20.04
-    container: ${{ matrix.swift }}-focal
+    container: swift:${{ matrix.swift }}-focal
     strategy:
       matrix:
         swift: ["5.2", "5.3"]
