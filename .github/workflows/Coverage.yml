@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run tests
-      run: swift test -v --enable-test-discovery --enable-code-coverage
+      run: swift test -v --enable-code-coverage
     - name: Prepare Codecov
       run: xcrun llvm-cov export -format="lcov" .build/debug/Hwp-SwiftPackageTests.xctest/Contents/MacOS/Hwp-SwiftPackageTests -instr-profile .build/debug/codecov/default.profdata > raw.lcov
     - name: Install lcov
