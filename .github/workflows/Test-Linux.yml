@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     container: swift:${{ matrix.swift }}-focal
     strategy:
+      fail-fast: false
       matrix:
         swift: ["5.2", "5.3"]
 
