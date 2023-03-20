@@ -40,7 +40,7 @@ struct DataReader {
         case is UInt32.Type, is Int32.Type:
             length = 4
         default:
-            precondition(false)
+            preconditionFailure()
             length = 4
         }
         let value = [UInt8](readBytes(length))
