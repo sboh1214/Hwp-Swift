@@ -9,9 +9,9 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/CoreOffice/OLEKit.git", .exact("0.3.1")),
-        .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.6.0")),
+        .package(url: "https://github.com/tsolomko/SWCompression.git", .exact("4.8.5")),
 
-        .package(url: "https://github.com/Quick/Nimble", .exact("9.2.1")),
+        .package(url: "https://github.com/Quick/Nimble", .exact("11.2.1")),
     ],
     targets: [
         .target(
